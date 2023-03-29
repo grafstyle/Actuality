@@ -3,6 +3,14 @@
     display: flex;
   }
 
+  .content {
+    display: flex;
+    width: 70%;
+    height: 100vh;
+    margin: auto;
+    justify-content: center;
+  }
+
   nav {
     width: 300px;
     height: 100vh;
@@ -26,6 +34,8 @@
     </ul>
   </nav>
   
-  <app-home></app-home>
-  <router-outlet></router-outlet>
+  <div class="content">
+    <app-home></app-home>
+    <router-outlet></router-outlet>
+  </div>
 </div>
