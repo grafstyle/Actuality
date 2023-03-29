@@ -4,9 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build:ci": "ng build --prod --sourceMap=false --base-href /Actuality/",
+    "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test:ci": "ng test --watch=false --code-coverage --source-map true",
+    "test": "ng test",
     "prepare": "husky install"
   },
   "private": true,
@@ -31,7 +31,7 @@
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.57.0",
     "eslint": "^8.36.0",
-    "husky": "^8.0.0",
+    "husky": "^8.0.3",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
@@ -46,5 +46,4 @@
     "**/*.{js,ts,html,css}": "prettier --write",
     "**/*.{js,ts}": "eslint"
   }
-  
 }
