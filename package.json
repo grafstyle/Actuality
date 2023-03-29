@@ -4,9 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build:ci": "ng build --prod --sourceMap=false --base-href /Actuality/",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "test:ci": "ng test --watch=false --code-coverage --source-map true",
     "prepare": "husky install"
   },
   "private": true,
@@ -46,4 +46,5 @@
     "**/*.{js,ts,html,css}": "prettier --write",
     "**/*.{js,ts}": "eslint"
   }
+  
 }
