@@ -16,6 +16,9 @@ jobs:
     steps:
      - name: Checkout
        uses: action/checkout@v1
+       with: 
+          repository: grafstyle/Actuality
+          ref: Home
      - name: Use Node v12.x
        uses: action/setup-node@v1
        with: 
