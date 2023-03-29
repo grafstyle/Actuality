@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
      - name: Checkout
-       uses: action/checkout@v3
+       uses: action/checkout@v1
      - name: Use Node v12.x
        uses: action/setup-node@v1
        with: 
