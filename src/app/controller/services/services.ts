@@ -5,11 +5,23 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class Service {
-  schema: unknown = this.getSchema();
+  server: string = 'http://localhost:3500/';
 
   constructor(private _http: HttpClient) {}
 
-  getSchema() {
-    return this._http.get('http://localhost:3500/PostsSchema');
+  get(path: string) {
+    return this._http.get(`${this.server}${path}`);
+  }
+
+  post(path: string, data: object) {
+    return this._http.post(`${this.server}${path}`, data);
+  }
+
+  put(path: string, id: number, data: object) {
+    return this._http.put(`${this.server}${path}/${id.toString()}`, data);
+  }
+
+  delete(path: string, id: number) {
+    return this._http.delete(`${this.server}${path}/${id.toString()}`);
   }
 }
