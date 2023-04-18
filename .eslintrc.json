@@ -19,5 +19,8 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "ignoreParameters": true,
+        "ignoreProperties": true,
+        "@typescript-eslint/no-inferrable-types": "error"
     }
 }
