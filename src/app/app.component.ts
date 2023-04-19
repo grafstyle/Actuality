@@ -8,11 +8,3 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Actuality';
 }
-
-class cosas {
-  hoja: string = 'Hola mundo';
-
-  constructor() {
-    console.log(hoja);
-  }
-}
