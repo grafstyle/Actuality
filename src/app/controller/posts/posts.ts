@@ -44,7 +44,8 @@ export class Posts {
 export interface Post {
   id: number;
   id_user: number;
-  body: string;
+  title: string;
+  images: string[];
   date_added: string;
   date_modified: string;
   cant_likes: number;
