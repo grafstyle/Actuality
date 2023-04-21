@@ -3,4 +3,35 @@
   <a routerLink="/">Seguidos</a>
   &nbsp;
   <a routerLink="/">Para ti</a>
+  <div *ngIf="err" class="errorPosts">
+    <p>{{ err }}</p>
+  </div>
+  <div *ngFor="let post of itWorks">
+    <div class="post">
+      <div class="user">
+        <img
+          class="imgCont"
+          src="https://steamuserimages-a.akamaihd.net/ugc/1011528371967367006/BE4764E7DFA1C18E2DD218C27DAB4079ED5D8616/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false"
+          alt=""
+        />
+        <p class="name">Osmaldy</p>
+      </div>
+      <div class="content">
+        <div class="title">{{ post.title }}</div>
+        <div class="media">
+          <div class="imgCont" *ngFor="let imgOrVideo of post.images">
+            <img
+              src="{{ imgOrVideo }}"
+              alt=""
+              *ngIf="!imgOrVideo.includes('.mp4')"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="dateAndLikes">
+        <p>{{ post.cant_likes }} Likes&nbsp;&nbsp;&nbsp;&nbsp;</p>
+        <p>Publicado el {{ post.date_added }}</p>
+      </div>
+    </div>
+  </div>
 </div>
