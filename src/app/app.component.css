@@ -1,0 +1,24 @@
+.all {
+  display: flex;
+
+  --menu-width: 300px;
+}
+
+.content {
+  display: flex;
+  width: 70%;
+  height: 100vh;
+  margin: auto;
+  justify-content: center;
+}
+
+nav {
+  position: fixed;
+  width: var(--menu-width);
+  height: 100vh;
+  border-right: solid 3px #ff8731;
+}
+
+ul {
+  list-style: none;
+}
