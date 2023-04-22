@@ -6,8 +6,9 @@
 
 .content {
   display: flex;
-  width: 70%;
+  width: 70% - var(--menu-width);
   height: 100vh;
+  padding-left: var(--menu-width);
   margin: auto;
   justify-content: center;
 }
