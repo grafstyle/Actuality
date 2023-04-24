@@ -9,13 +9,13 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
   err: string = '';
-  itWorks: Post[] = [];
+  posts: Post[] = [];
 
   constructor(private _apiService: Service) {}
 
   async ngOnInit() {
     try {
-      this.itWorks = await new Posts(this._apiService).get();
+      this.posts = await new Posts(this._apiService).get();
     } catch (e) {
       this.err = 'Something went wrong when get the data.';
     }
