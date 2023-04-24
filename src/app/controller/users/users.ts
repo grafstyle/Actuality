@@ -1,9 +1,11 @@
 import { AuthService } from '@auth0/auth0-angular';
 import { Service } from '../services/services';
+import { Tools } from 'src/app/tools/tools';
 
 export class Users {
   public static auth: AuthService;
   public static apiService: Service;
+  private static tools: Tools = new Tools();
 
   public static login(): void {
     this.auth.loginWithRedirect();
