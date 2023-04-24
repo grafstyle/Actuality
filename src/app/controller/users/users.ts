@@ -35,6 +35,15 @@ export class Users {
     });
   }
 
+  public static getAll(): Promise<User[]> {
+    return new Promise((res, rej) => {
+      Users.apiService.get('users').subscribe({
+        next: (user) => res(user as User[]),
+        error: () => rej('Something went wrong when get the user.'),
+      });
+    });
+  }
+
   public static get(id: number): Promise<User> {
     return new Promise((res, rej) => {
       Users.apiService.get(`users/${id}`).subscribe({
