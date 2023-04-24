@@ -9,6 +9,14 @@ export class Users {
     this.auth.loginWithRedirect();
   }
 
+  public static signup(): void {
+    this.auth.loginWithRedirect({
+      authorizationParams: {
+        screen_hint: 'signup',
+      },
+    });
+  }
+
   public static isActualUserAuth(): Promise<boolean> {
     return new Promise((res, rej) => {
       Users.auth.isAuthenticated$.subscribe({
