@@ -84,7 +84,7 @@ export class Users {
 }
 
 export interface User {
-  id: number;
+  id?: number;
   email: string;
   name: string;
   url_name: string;
