@@ -3,4 +3,8 @@ export class Tools {
     if (textOrUndefined == undefined) return '';
     return textOrUndefined;
   }
+
+  public createURLName(name: string): string {
+    return name.replace(' ', '_').toLowerCase();
+  }
 }
