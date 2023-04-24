@@ -11,6 +11,14 @@ import { Service } from './controller/services/services';
 export class AppComponent {
   title = 'Actuality';
 
+  login() {
+    Users.login();
+  }
+
+  signup() {
+    Users.signup();
+  }
+
   constructor(private auth: AuthService, private apiService: Service) {
     Users.apiService = this.apiService;
     Users.auth = this.auth;
