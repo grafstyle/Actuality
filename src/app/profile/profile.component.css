@@ -1,0 +1,33 @@
+.user {
+  --img-user-padding: -60px;
+}
+
+.portrait {
+  position: relative;
+}
+
+.portrait > .front {
+  height: 300px;
+}
+
+.editProfCont {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.userImg {
+  position: absolute;
+  bottom: var(--img-user-padding);
+  height: 200px;
+  width: 200px;
+}
+
+.info {
+  padding-top: calc(var(--img-user-padding) * -1);
+}
+
+.info > .otherInfo {
+  display: flex;
+  gap: 5px;
+}
