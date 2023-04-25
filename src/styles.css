@@ -1,3 +1,5 @@
+/* All */
+
 * {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -5,6 +7,8 @@
   padding: 0;
   margin: 0;
 }
+
+/* General class "imgCont" for organizate the images. */
 
 .imgCont {
   overflow: hidden;
@@ -16,4 +20,25 @@
   object-fit: cover;
   width: 100%;
   height: 100%;
+}
+
+/*General post "class", to apply global styles*/
+
+.post {
+  width: 100%;
+  background-color: #888;
+}
+
+.post > .user,
+.post > .dateAndLikes {
+  display: flex;
+}
+
+.post > .user > .imgCont {
+  width: 80px;
+  height: 80px;
+}
+
+.post > .content > .media > .imgCont {
+  height: 400px;
 }
