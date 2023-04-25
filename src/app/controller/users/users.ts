@@ -56,11 +56,22 @@ export class Users {
     });
   }
 
-  public static getByAuth(): Promise<any> {
+  public static getByAuth(): Promise<User> {
     return new Promise((res, rej) => {
       Users.auth.user$.subscribe({
-        next: (data) => res(data),
+        next: (data) => res(data as User),
         error: () => rej('error'),
+      });
+    });
+  }
+
+  public static getByEmail(email: string): Promise<User> {
+    return new Promise((res, rej) => {
+      this.getAll().then((data) => {
+        data.forEach((user) => {
+          if (user.email == email) res(user as User);
+          rej("Don't find the user.");
+        });
       });
     });
   }
