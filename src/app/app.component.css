@@ -6,8 +6,8 @@
 
 .content {
   display: flex;
-  width: 70% - var(--menu-width);
-  height: 100vh;
+  flex-direction: column;
+  width: 1000px;
   padding-left: var(--menu-width);
   margin: auto;
   justify-content: center;
