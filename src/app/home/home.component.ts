@@ -3,6 +3,7 @@ import { Post, Posts } from '../controller/posts/posts';
 import { Component } from '@angular/core';
 import { User, Users } from '../controller/users/users';
 import { Comments, Comment } from '../controller/comments/comments';
+import { async } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -14,12 +15,11 @@ export class HomeComponent {
   posts: Post[] = [];
   users: User[] = [];
   comments: Comment[] = [];
-
-  constructor(private _apiService: Service) {}
+  usersComments: User[] = [];
 
   async ngOnInit() {
     try {
-      this.posts = await new Posts(this._apiService).get();
+      this.posts = await Posts.getAll();
       await this.getAll();
     } catch (e) {
       this.err = 'Something went wrong when get the data.';
@@ -27,14 +27,18 @@ export class HomeComponent {
   }
 
   async getAll() {
+    const comments = await Comments.getAll();
+
     this.posts.forEach(async (post) => {
       this.users.push(await Users.get(post.id_user));
 
-      (await new Comments(this._apiService).get()).forEach(
-        (comment: Comment) => {
-          if (post.id == comment.id_post) this.comments.push(comment);
-        }
-      );
+      comments.forEach((comment: Comment) => {
+        if (post.id == comment.id_post) this.comments.push(comment);
+      });
+    });
+
+    comments.forEach(async (comment: Comment) => {
+      this.usersComments.push(await Users.get(comment.id_user));
     });
   }
 }
