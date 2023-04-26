@@ -14,6 +14,7 @@ export class HomeComponent {
   posts: Post[] = [];
   users: User[] = [];
   comments: Comment[] = [];
+  usersComments: User[] = [];
 
   constructor(private _apiService: Service) {}
 
@@ -27,14 +28,18 @@ export class HomeComponent {
   }
 
   async getAll() {
+    const allComments: Comment[] = await new Comments(this._apiService).get();
+
     this.posts.forEach(async (post) => {
       this.users.push(await Users.get(post.id_user));
 
-      (await new Comments(this._apiService).get()).forEach(
-        (comment: Comment) => {
-          if (post.id == comment.id_post) this.comments.push(comment);
-        }
-      );
+      allComments.forEach((comment: Comment) => {
+        if (post.id == comment.id_post) this.comments.push(comment);
+      });
+    });
+
+    allComments.forEach(async (comment: Comment) => {
+      this.usersComments.push(await Users.get(comment.id_user));
     });
   }
 }

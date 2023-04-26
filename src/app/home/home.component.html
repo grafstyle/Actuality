@@ -29,16 +29,13 @@
     </div>
     <div class="comments">
       <h3>Comments</h3>
-      <div class="allComments" *ngFor="let comment of comments">
+      <div class="allComments" *ngFor="let comment of comments; let i = index">
         <div class="comment" *ngIf="comment.id_post == post.id">
           <div class="imgCont user">
-            <img
-              src="https://na.cdn.beatsaver.com/2fddb136bda7f9e29b4cb6621d6d8e0f8a43b126.jpg"
-              alt=""
-            />
+            <img src="{{ usersComments[i].image }}" alt="" />
           </div>
           <div class="userComment">
-            <h4>Un individuo</h4>
+            <h4>{{ usersComments[i].name }}</h4>
             <div class="imgs" *ngFor="let img of comment.images">
               <img *ngIf="img != undefined" src="{{ img }}" alt="" />
             </div>
