@@ -22,7 +22,7 @@
   height: 100%;
 }
 
-/*General post "class", to apply global styles*/
+/*General post and comments "class", to apply global styles*/
 
 .post {
   width: 100%;
@@ -30,7 +30,8 @@
 }
 
 .post > .user,
-.post > .dateAndLikes {
+.post > .dateAndLikes,
+.post > .comments > .allComments > .comment {
   display: flex;
 }
 
@@ -41,4 +42,18 @@
 
 .post > .content > .media > .imgCont {
   height: 400px;
+}
+
+.post > .comments > .allComments > .comment {
+  background-color: #079;
+}
+
+.post > .comments > .allComments > .comment > .user {
+  height: 30px;
+  width: 30px;
+}
+
+.post > .comments > .allComments > .comment > .userComment > .imgs > img {
+  height: 120px;
+  width: auto;
 }
