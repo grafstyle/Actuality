@@ -1,39 +1,48 @@
 import { Service } from '../services/services';
 
 export class Comments {
-  private path: string = 'comments';
-  constructor(private _apiService: Service) {}
+  private static path: string = 'comments';
+  public static apiService: Service;
 
-  get(): Promise<Comment[]> {
+  public static get(id: number): Promise<Comment[]> {
     return new Promise((res, rej) => {
-      this._apiService.get(this.path).subscribe({
+      this.apiService.get(`${this.path}/${id}`).subscribe({
         next: (e: any) => res(e as Comment[]),
         error: () => rej([]),
       });
     });
   }
 
-  post(data: Comment): Promise<string> {
+  public static getAll(): Promise<Comment[]> {
     return new Promise((res, rej) => {
-      this._apiService.post(this.path, data).subscribe({
+      this.apiService.get(this.path).subscribe({
+        next: (e: any) => res(e as Comment[]),
+        error: () => rej([]),
+      });
+    });
+  }
+
+  public static post(data: Comment): Promise<string> {
+    return new Promise((res, rej) => {
+      this.apiService.post(this.path, data).subscribe({
         next: () => res('The data has been posted.'),
         error: () => rej('Something went wrong when post the data.'),
       });
     });
   }
 
-  put(id: number, data: Comment): Promise<string> {
+  public static put(id: number, data: Comment): Promise<string> {
     return new Promise((res, rej) => {
-      this._apiService.put(this.path, id, data).subscribe({
+      this.apiService.put(this.path, id, data).subscribe({
         next: () => res('The data has been updated.'),
         error: () => rej('Something went wrong when update the data.'),
       });
     });
   }
 
-  delete(id: number): Promise<string> {
+  public static delete(id: number): Promise<string> {
     return new Promise((res, rej) => {
-      this._apiService.delete(this.path, id).subscribe({
+      this.apiService.delete(this.path, id).subscribe({
         next: () => res('The data has been deleted.'),
         error: () => rej('Something went wrong when delete the data.'),
       });
