@@ -2,6 +2,7 @@ import { Service } from '../controller/services/services';
 import { Post, Posts } from '../controller/posts/posts';
 import { Component } from '@angular/core';
 import { User, Users } from '../controller/users/users';
+import { Comments, Comment } from '../controller/comments/comments';
 
 @Component({
   selector: 'app-home',
@@ -12,21 +13,28 @@ export class HomeComponent {
   err: string = '';
   posts: Post[] = [];
   users: User[] = [];
+  comments: Comment[] = [];
 
   constructor(private _apiService: Service) {}
 
   async ngOnInit() {
     try {
       this.posts = await new Posts(this._apiService).get();
-      await this.getUserToPosts();
+      await this.getAll();
     } catch (e) {
       this.err = 'Something went wrong when get the data.';
     }
   }
 
-  async getUserToPosts() {
+  async getAll() {
     this.posts.forEach(async (post) => {
       this.users.push(await Users.get(post.id_user));
+
+      (await new Comments(this._apiService).get()).forEach(
+        (comment: Comment) => {
+          if (post.id == comment.id_post) this.comments.push(comment);
+        }
+      );
     });
   }
 }
