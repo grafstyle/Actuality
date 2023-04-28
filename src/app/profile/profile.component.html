@@ -30,16 +30,16 @@
     </div>
   </div>
 </div>
-<div class="allPosts" *ngFor="let post of posts">
+<div class="allPosts" *ngFor="let cpost of cposts">
   <div class="post">
     <div class="user">
       <img class="imgCont" src="{{ user.image }}" alt="" />
       <p class="name">{{ user.name }}</p>
     </div>
     <div class="content">
-      <div class="title">{{ post.title }}</div>
+      <div class="title">{{ cpost.post.title }}</div>
       <div class="media">
-        <div class="imgCont" *ngFor="let imgOrVideo of post.images">
+        <div class="imgCont" *ngFor="let imgOrVideo of cpost.post.images">
           <img
             src="{{ imgOrVideo }}"
             alt=""
@@ -49,8 +49,8 @@
       </div>
     </div>
     <div class="dateAndLikes">
-      <p>{{ post.cant_likes }} Likes&nbsp;&nbsp;&nbsp;&nbsp;</p>
-      <p>Publicado el {{ post.date_added }}</p>
+      <p>{{ cpost.post.cant_likes }} Likes&nbsp;&nbsp;&nbsp;&nbsp;</p>
+      <p>Publicado el {{ cpost.post.date_added }}</p>
     </div>
   </div>
 </div>
