@@ -1,6 +1,7 @@
 import { Service } from '../services/services';
 
 export class Comments {
+  private static getPath: string = 'comments/get?';
   private static path: string = 'comments';
   public static apiService: Service;
 
@@ -17,6 +18,15 @@ export class Comments {
     return new Promise((res, rej) => {
       this.apiService.get(this.path).subscribe({
         next: (e: any) => res(e as Comment[]),
+        error: () => rej([]),
+      });
+    });
+  }
+
+  public static getBy(key: string, data: any): Promise<Comment[]> {
+    return new Promise((res, rej) => {
+      Comments.apiService.get(`${Comments.getPath}${key}=${data}`).subscribe({
+        next: (comment: any) => res(comment as Comment[]),
         error: () => rej([]),
       });
     });
