@@ -1,6 +1,9 @@
+import { Comment, Comments } from '../comments/comments';
 import { Service } from '../services/services';
+import { User, Users } from '../users/users';
 
 export class Posts {
+  private static getPath: string = 'posts/get?';
   private static path: string = 'posts';
   public static apiService: Service;
 
@@ -19,6 +22,40 @@ export class Posts {
         next: (e: any) => res(e as Post[]),
         error: () => rej([]),
       });
+    });
+  }
+
+  public static getBy(key: string, data: any): Promise<Post[]> {
+    return new Promise((res, rej) => {
+      Posts.apiService.get(`${Posts.getPath}${key}=${data}`).subscribe({
+        next: (post: any) => res(post as Post[]),
+        error: () => rej([] as Post[]),
+      });
+    });
+  }
+
+  public static getCPosts(posts: Post[]): Promise<CPost[]> {
+    return new Promise((res) => {
+      const users_of_comments: User[] = [];
+      const cposts: CPost[] = [];
+
+      posts.forEach(async (post) => {
+        const cpost: CPost = {} as CPost;
+
+        cpost.comments = await Comments.getBy('id_post', post.id);
+        cpost.user_of_post = await Users.get(post.id_user);
+
+        cpost.comments.forEach(async (comment: Comment) => {
+          users_of_comments.push(await Users.get(comment.id_user));
+        });
+
+        cpost.post = post;
+        cpost.user_of_comments = users_of_comments;
+
+        cposts.push(cpost);
+      });
+
+      res(cposts);
     });
   }
 
@@ -58,4 +95,11 @@ export interface Post {
   date_added: string;
   date_modified: string;
   cant_likes: number;
+}
+
+export interface CPost {
+  post: Post;
+  user_of_post: User;
+  comments: Comment[];
+  user_of_comments: User[];
 }
