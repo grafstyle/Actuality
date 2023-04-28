@@ -3,6 +3,8 @@ import { Service } from '../services/services';
 import { Tools } from 'src/app/tools/tools';
 
 export class Users {
+  private static path: string = 'users';
+  private static getPath: string = 'users/get?';
   public static auth: AuthService;
   public static apiService: Service;
   private static tools: Tools = new Tools();
@@ -76,10 +78,19 @@ export class Users {
     });
   }
 
+  public static getBy(key: string, data: any): Promise<User[]> {
+    return new Promise((res, rej) => {
+      Users.apiService.get(`${Users.getPath}${key}=${data}`).subscribe({
+        next: (user: any) => res(user as User[]),
+        error: () => rej([]),
+      });
+    });
+  }
+
   public static getAll(): Promise<User[]> {
     return new Promise((res, rej) => {
-      Users.apiService.get('users').subscribe({
-        next: (user) => res(user as User[]),
+      Users.apiService.get(this.path).subscribe({
+        next: (user: any) => res(user as User[]),
         error: () => rej('Something went wrong when get the user.'),
       });
     });
@@ -87,8 +98,8 @@ export class Users {
 
   public static get(id: number): Promise<User> {
     return new Promise((res, rej) => {
-      Users.apiService.get(`users/${id}`).subscribe({
-        next: (user) => res(user as User),
+      Users.apiService.get(`${Users.path}/${id}`).subscribe({
+        next: (user: any) => res(user as User),
         error: () => rej('Something went wrong when get the user.'),
       });
     });
@@ -96,7 +107,7 @@ export class Users {
 
   public static post(data: User): Promise<string> {
     return new Promise((res, rej) => {
-      Users.apiService.post('users', data).subscribe({
+      Users.apiService.post(this.path, data).subscribe({
         next: () => res('The user has been uplodaded.'),
         error: () => rej('Something went wrong when add the user.'),
       });
