@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { User, Users } from '../controller/users/users';
-import { Post, Posts } from '../controller/posts/posts';
-import { Service } from '../controller/services/services';
+import { CPost, Posts } from '../controller/posts/posts';
 
 @Component({
   selector: 'app-profile',
@@ -11,17 +10,16 @@ import { Service } from '../controller/services/services';
 export class ProfileComponent {
   err: string = '';
   user: User = {} as User;
-  posts: Post[] = [];
+  cposts: CPost[] = [];
 
   async ngOnInit() {
     try {
       const userEmail: any = await Users.getByAuth();
 
       this.user = await Users.getByEmail(userEmail?.email);
-
-      (await Posts.getAll()).forEach((e: Post) => {
-        if (e.id == this.user.id) this.posts.push(e);
-      });
+      this.cposts = await Posts.getCPosts(
+        await Posts.getBy('id_user', this.user.id)
+      );
     } catch (e) {
       this.err = 'Something went wrong getting the user.';
     }
