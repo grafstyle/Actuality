@@ -4,6 +4,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import { Service } from './controller/services/services';
 import { Posts } from './controller/posts/posts';
 import { Comments } from './controller/comments/comments';
+import { Likes } from './controller/likes/likes';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,11 @@ export class AppComponent {
   }
 
   constructor(private auth: AuthService, private apiService: Service) {
-    Users.apiService = Posts.apiService = Comments.apiService = this.apiService;
+    Users.apiService =
+      Posts.apiService =
+      Comments.apiService =
+      Likes.apiService =
+        this.apiService;
     Users.auth = this.auth;
   }
 }
