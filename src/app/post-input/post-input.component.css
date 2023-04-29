@@ -1,0 +1,14 @@
+.postInput > .content {
+  height: 100px;
+  background-color: #070;
+}
+
+.postInput > .content > .imgs-vids {
+  border-right-color: #110;
+}
+
+.postInput > .options {
+  display: flex;
+  gap: 5px;
+  background-color: #220;
+}
