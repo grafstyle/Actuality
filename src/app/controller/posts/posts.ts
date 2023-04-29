@@ -1,4 +1,5 @@
 import { Comment, Comments } from '../comments/comments';
+import { Like, Likes } from '../likes/likes';
 import { Service } from '../services/services';
 import { User, Users } from '../users/users';
 
@@ -43,6 +44,7 @@ export class Posts {
         const cpost: CPost = {} as CPost;
 
         cpost.comments = await Comments.getBy('id_post', post.id);
+        cpost.likes = await Likes.getBy('id_post', post.id);
         cpost.user_of_post = await Users.get(post.id_user);
 
         cpost.comments.forEach(async (comment: Comment) => {
@@ -94,12 +96,12 @@ export interface Post {
   images: string[];
   date_added: string;
   date_modified: string;
-  cant_likes: number;
 }
 
 export interface CPost {
   post: Post;
   user_of_post: User;
+  likes: Like[];
   comments: Comment[];
   user_of_comments: User[];
 }
