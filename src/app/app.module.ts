@@ -9,9 +9,15 @@ import { HomeComponent } from './home/home.component';
 
 import { AuthModule } from '@auth0/auth0-angular';
 import { ProfileComponent } from './profile/profile.component';
+import { PostInputComponent } from './post-input/post-input.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ProfileComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    ProfileComponent,
+    PostInputComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
