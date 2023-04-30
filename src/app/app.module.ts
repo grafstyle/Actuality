@@ -11,6 +11,7 @@ import { AuthModule } from '@auth0/auth0-angular';
 import { ProfileComponent } from './profile/profile.component';
 import { PostInputComponent } from './post-input/post-input.component';
 import { FollowedComponent } from './home/followed/followed.component';
+import { LinksComponent } from './home/links/links.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FollowedComponent } from './home/followed/followed.component';
     ProfileComponent,
     PostInputComponent,
     FollowedComponent,
+    LinksComponent,
   ],
   imports: [
     BrowserModule,
