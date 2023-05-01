@@ -14,6 +14,11 @@ import { Likes } from './controller/likes/likes';
 export class AppComponent {
   title = 'Actuality';
 
+  search(e: Event) {
+    const elem = e.target as HTMLInputElement;
+    alert('Buscando: ' + elem.value);
+  }
+
   login() {
     Users.login();
   }

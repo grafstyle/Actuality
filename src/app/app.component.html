@@ -11,7 +11,12 @@
   </nav>
 
   <div class="content">
-    <input type="text" placeholder="Buscar lo que sea" />
+    <input
+      class="search"
+      type="text"
+      placeholder="Search all you want!"
+      (keyup.enter)="search($event)"
+    />
     <router-outlet></router-outlet>
   </div>
 </div>
