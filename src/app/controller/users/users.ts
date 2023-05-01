@@ -40,8 +40,8 @@ export class Users {
                 joined: this.tools.convIfUndefined(registerUser?.updated_at),
                 bio: '',
                 portrait: '',
-                followed: [''],
-                followers: [''],
+                followed: [],
+                followers: [],
               });
             },
           });
@@ -141,7 +141,7 @@ export interface User {
   image: string;
   portrait: string;
   bio: string;
-  followers: string[];
-  followed: string[];
+  followers: number[];
+  followed: number[];
   joined: string;
 }
