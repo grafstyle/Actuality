@@ -9,10 +9,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthModule } from '@auth0/auth0-angular';
 import { ProfileComponent } from './profile/profile.component';
 import { PostInputComponent } from './post-input/post-input.component';
-import { FollowedComponent } from './home/followed/followed.component';
-import { LinksComponent } from './home/links/links.component';
+import { HomeForYouComponent } from './home/home-for-you/home-for-you.component';
+import { HomeFollowedComponent } from './home/home-followed/home-followed.component';
 import { SearchComponent } from './search/search.component';
-import { UsersComponent } from './search/users/users.component';
+import { SearchUsersComponent } from './search/search-users/search-users.component';
 
 @NgModule({
   declarations: [
@@ -20,10 +20,10 @@ import { UsersComponent } from './search/users/users.component';
     HomeComponent,
     ProfileComponent,
     PostInputComponent,
-    FollowedComponent,
-    LinksComponent,
+    HomeForYouComponent,
+    HomeFollowedComponent,
     SearchComponent,
-    UsersComponent,
+    SearchUsersComponent,
   ],
   imports: [
     BrowserModule,
