@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FollowedComponent } from './followed.component';
+import { FollowedComponent } from './home-followed.component';
 
 describe('FollowedComponent', () => {
   let component: FollowedComponent;
