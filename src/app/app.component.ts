@@ -5,6 +5,7 @@ import { Service } from './controller/services/services';
 import { Posts } from './controller/posts/posts';
 import { Comments } from './controller/comments/comments';
 import { Likes } from './controller/likes/likes';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ export class AppComponent {
 
   search(e: Event) {
     const elem = e.target as HTMLInputElement;
-    alert('Buscando: ' + elem.value);
+    this.routerLink.navigateByUrl('/search?by=' + elem.value);
+    elem.value = '';
   }
 
   login() {
@@ -27,7 +29,11 @@ export class AppComponent {
     Users.signup();
   }
 
-  constructor(private auth: AuthService, private apiService: Service) {
+  constructor(
+    private auth: AuthService,
+    private apiService: Service,
+    private routerLink: Router
+  ) {
     Users.apiService =
       Posts.apiService =
       Comments.apiService =
