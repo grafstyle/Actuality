@@ -10,7 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { AuthModule } from '@auth0/auth0-angular';
 import { ProfileComponent } from './profile/profile.component';
 import { PostInputComponent } from './post-input/post-input.component';
-import { SearchFollowedComponent } from './home/home-followed/home-followed.component';
+import { HomeFollowedComponent } from './home/home-followed/home-followed.component';
 import { SearchComponent } from './search/search.component';
 import { SearchUsersComponent } from './search/search-users/search-users.component';
 
@@ -20,7 +20,7 @@ import { SearchUsersComponent } from './search/search-users/search-users.compone
     HomeComponent,
     ProfileComponent,
     PostInputComponent,
-    SearchFollowedComponent,
+    HomeFollowedComponent,
     SearchComponent,
     SearchUsersComponent,
   ],
