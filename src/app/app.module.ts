@@ -12,6 +12,7 @@ import { PostInputComponent } from './post-input/post-input.component';
 import { FollowedComponent } from './home/followed/followed.component';
 import { LinksComponent } from './home/links/links.component';
 import { SearchComponent } from './search/search.component';
+import { UsersComponent } from './search/users/users.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SearchComponent } from './search/search.component';
     FollowedComponent,
     LinksComponent,
     SearchComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,
