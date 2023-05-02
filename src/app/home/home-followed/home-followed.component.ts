@@ -7,7 +7,7 @@ import { Users } from 'src/app/controller/users/users';
   templateUrl: './followed.component.html',
   styleUrls: ['./followed.component.css'],
 })
-export class FollowedComponent {
+export class SearchFollowedComponent {
   err: string = '';
   noFollows: string = '';
   cposts: CPost[][] = [];
