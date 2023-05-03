@@ -78,6 +78,38 @@ export class Users {
     });
   }
 
+  public static getIfContains(dataToGet: UserOfGetBy): Promise<User[]> {
+    return new Promise((res, rej) => {
+      const finalUser: User[] = [];
+      let otherLap: boolean = true;
+
+      Users.getAll()
+        .then((data) => {
+          data.forEach((user) => {
+            let key: keyof typeof user;
+            for (key in user) {
+              let keyGet: keyof typeof dataToGet;
+              for (keyGet in dataToGet) {
+                if (
+                  otherLap &&
+                  key == keyGet &&
+                  (user[key] as string)
+                    .toLowerCase()
+                    .includes(dataToGet[keyGet]?.toLowerCase() as string)
+                ) {
+                  otherLap = false;
+                  finalUser.push(user);
+                }
+              }
+            }
+            otherLap = true;
+          });
+        })
+        .catch(() => rej([]));
+      res(finalUser);
+    });
+  }
+
   public static getBy(key: string, data: any): Promise<User[]> {
     return new Promise((res, rej) => {
       Users.apiService.get(`${Users.getPath}${key}=${data}`).subscribe({
@@ -131,6 +163,11 @@ export class Users {
       });
     });
   }
+}
+
+interface UserOfGetBy {
+  name?: string;
+  url_name?: string;
 }
 
 export interface User {
