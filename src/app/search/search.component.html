@@ -1,6 +1,6 @@
 <div class="links">
-  <a routerLink="/search">All</a>
-  <a routerLink="/search/users">Users</a>
-  <a routerLink="/search/posts">Post</a>
+  <a routerLink="/search" queryParamsHandling="merge">All</a>
+  <a routerLink="/search/users" queryParamsHandling="merge">Users</a>
+  <a routerLink="/search/posts" queryParamsHandling="merge">Post</a>
 </div>
 <router-outlet> </router-outlet>
