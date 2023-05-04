@@ -56,8 +56,27 @@ export class Posts {
 
         cposts.push(cpost);
       });
-
       res(cposts);
+    });
+  }
+
+  public static getIfContains(inTitle: string): Promise<CPost[]> {
+    return new Promise((res, rej) => {
+      const allPosts: Post[] = [];
+      let finalPost: CPost[] = [];
+
+      Posts.getAll()
+        .then((data) => {
+          data.forEach((post) => {
+            if (post.title.toLowerCase().includes(inTitle.toLowerCase()))
+              allPosts.push(post);
+          });
+        })
+        .then(async () => {
+          finalPost = await Posts.getCPosts(allPosts);
+          res(finalPost);
+        })
+        .catch(() => rej([]));
     });
   }
 
