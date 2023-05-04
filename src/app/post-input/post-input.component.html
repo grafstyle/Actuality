@@ -1,10 +1,25 @@
 <div class="postInput">
-  <div class="content" contentEditable="true"></div>
+  <div class="content" ngModel #post_body contentEditable="true"></div>
   <div class="imgs-vids"></div>
   <div class="options">
-    <button>IMG</button>
+    <button class="addImg" (click)="chooseImg(true)">IMG</button>
     <div class="upload">
-      <button>post</button>
+      <button class="postData" (click)="post()">post</button>
+    </div>
+  </div>
+</div>
+
+<div class="addImgCont" ngModel #addImgCont>
+  <div class="display">
+    <div class="showImgs" *ngFor="let img of imgs"></div>
+    <div class="btnsCont">
+      <button>
+        <label>
+          Add
+          <input type="file" id="addBtn" />
+        </label>
+      </button>
+      <button (click)="chooseImg(false)">Ok</button>
     </div>
   </div>
 </div>
