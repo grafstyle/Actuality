@@ -31,7 +31,7 @@ export class PostInputComponent {
   changingImg(e: Event): void {
     const elem: HTMLInputElement = e.target as HTMLInputElement;
     const newImg: Image = {} as Image;
-    if (this.imgs.length < 10) {
+    if (this.imgs.length < 3) {
       newImg.file = elem.files?.item(0) as File;
 
       const reader: FileReader = new FileReader();
@@ -44,7 +44,11 @@ export class PostInputComponent {
       this.imgs.push(newImg);
       return;
     }
-    alert('So many images... STOP!');
+    alert('Sorry only accept three images and/or videos. :(');
+  }
+
+  removeLastImage(): void {
+    this.imgs.pop();
   }
 
   post(): void {

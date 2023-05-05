@@ -28,10 +28,6 @@
   background-color: rgba(0, 0, 0, 0.6);
 }
 
-.imgs-vids {
-  overflow-x: scroll;
-}
-
 .addImgCont > .display {
   background-color: #150;
 }
