@@ -8,7 +8,7 @@ import { Post } from '../controller/posts/posts';
 })
 export class PostInputComponent {
   toPost: Post = {} as Post;
-  imgs: string[] = [];
+  imgs: Image[] = [];
 
   @ViewChild('post_body') postBody!: ElementRef<HTMLDivElement>;
   @ViewChild('addImgCont') addImgCont!: ElementRef<HTMLDivElement>;
@@ -28,9 +28,32 @@ export class PostInputComponent {
     this.addImgCont.nativeElement.style.pointerEvents = 'none';
   }
 
+  changingImg(e: Event): void {
+    const elem: HTMLInputElement = e.target as HTMLInputElement;
+    const newImg: Image = {} as Image;
+    if (this.imgs.length < 10) {
+      newImg.file = elem.files?.item(0) as File;
+
+      const reader: FileReader = new FileReader();
+      reader.onload = () => {
+        newImg.url = reader.result as string;
+      };
+      reader.readAsDataURL(newImg.file);
+
+      newImg.name = newImg.file.name;
+      this.imgs.push(newImg);
+      return;
+    }
+    alert('So many images... STOP!');
+  }
+
   post(): void {
     this.toPost.title = this.getBodyText();
-    this.toPost.images = this.imgs;
-    alert();
   }
+}
+
+interface Image {
+  url: string;
+  name: string;
+  file: File;
 }
