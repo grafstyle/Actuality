@@ -27,3 +27,32 @@
   pointer-events: none;
   background-color: rgba(0, 0, 0, 0.6);
 }
+
+.imgs-vids {
+  overflow-x: scroll;
+}
+
+.addImgCont > .display {
+  background-color: #150;
+}
+
+.allImgs,
+.imgs-vids {
+  display: flex;
+}
+
+.display {
+  width: 450px;
+}
+
+.display > .allImgs {
+  flex-wrap: wrap;
+}
+
+.imgs-vids > .showImgs > img {
+  height: 100px;
+}
+
+.allImgs > .showImgs > img {
+  height: 120px;
+}
