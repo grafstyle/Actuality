@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Post } from '../controller/posts/posts';
+import { Cloudinary } from '../controller/cloudinary/cloudinary';
 
 @Component({
   selector: 'app-post-input',
@@ -47,11 +48,27 @@ export class PostInputComponent {
     alert('Sorry only accept three images and/or videos. :(');
   }
 
+  getImage(file: File): Promise<string> {
+    return new Promise((res, rej) => {
+      const reader: FileReader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => res(reader.result as string);
+      reader.onerror = (err) => rej(err);
+    });
+  }
+
   removeLastImage(): void {
     this.imgs.pop();
   }
 
   post(): void {
+    this.imgs.forEach(async (img) => {
+      await Cloudinary.post({
+        name: img.name,
+        image: await this.getImage(img.file),
+        url: 'posts/image/',
+      });
+    });
     this.toPost.title = this.getBodyText();
   }
 }
