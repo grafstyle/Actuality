@@ -6,6 +6,7 @@ import { Posts } from './controller/posts/posts';
 import { Comments } from './controller/comments/comments';
 import { Likes } from './controller/likes/likes';
 import { Router } from '@angular/router';
+import { Cloudinary } from './controller/cloudinary/cloudinary';
 
 @Component({
   selector: 'app-root',
@@ -38,6 +39,7 @@ export class AppComponent {
       Posts.apiService =
       Comments.apiService =
       Likes.apiService =
+      Cloudinary.apiService =
         this.apiService;
     Users.auth = this.auth;
   }
