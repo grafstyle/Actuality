@@ -7,4 +7,38 @@ export class Tools {
   public createURLName(name: string): string {
     return name.replace(' ', '_').toLowerCase();
   }
+
+  private format12Time(hour24: string): string {
+    if (!hour24.includes(':'))
+      throw EvalError('The time not include semicolon.');
+    const timeSplit: string[] = hour24.split(':');
+    const hour: number = parseInt(timeSplit[0]);
+
+    if (hour > 12) timeSplit[0] = (hour - 12).toString();
+
+    return `${hour}:${timeSplit[1]}`;
+  }
+
+  public getFormattedActualDate(): string {
+    const date: Date = new Date();
+
+    const day: number = date.getDay();
+    const month: number = date.getMonth();
+    const year: number = date.getFullYear();
+
+    const convDay: string = day < 10 ? `0${day}` : `${day}`;
+    const convMonth: string = month < 10 ? `0${month}` : `${month}`;
+
+    const onlyDate: string = `${convDay}/${convMonth}/${year}`;
+
+    const hour: number = date.getHours();
+    const minutes: number = date.getMinutes();
+    const AM_or_PM: string = hour >= 12 ? 'PM' : 'AM';
+
+    const convMins: string = minutes < 10 ? `0${minutes}` : `${minutes}`;
+
+    const finalHour = this.format12Time(`${hour}:${convMins}${AM_or_PM}`);
+
+    return `${onlyDate} ${finalHour}`;
+  }
 }
