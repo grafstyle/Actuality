@@ -1,6 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Post } from '../controller/posts/posts';
+import { Post, Posts } from '../controller/posts/posts';
 import { Cloudinary } from '../controller/cloudinary/cloudinary';
+import { Tools } from '../tools/tools';
+import { Users } from '../controller/users/users';
 
 @Component({
   selector: 'app-post-input',
@@ -9,6 +11,7 @@ import { Cloudinary } from '../controller/cloudinary/cloudinary';
 })
 export class PostInputComponent {
   toPost: Post = {} as Post;
+  tools: Tools = new Tools();
   imgs: Image[] = [];
 
   @ViewChild('post_body') postBody!: ElementRef<HTMLDivElement>;
@@ -58,15 +61,43 @@ export class PostInputComponent {
     if (this.imgs.length == 0) this.addbtn.nativeElement.value = '';
   }
 
-  post(): void {
+  async post(): Promise<void> {
+    const user = await Users.getByAuth();
+    const idUser: number = (await Users.getByEmail(user?.email)).id || 0;
+
+    if (idUser == 0) {
+      alert('Auth first');
+      return;
+    }
+
+    if (this.getBodyText()) {
+      alert('Almost add an title to your post.');
+      return;
+    }
+
+    this.toPost.id_user = idUser;
+
+    const newPostID: number = (await Posts.getLastID()) + 1;
+
+    this.toPost.title = this.getBodyText();
+
+    const urlImages: string[] = [];
+
     this.imgs.forEach(async (img) => {
-      await Cloudinary.post({
+      const uploadImage = await Cloudinary.post({
         name: img.name,
         image: await this.getImage(img.file),
-        url: 'posts/image/',
+        url: `posts/${newPostID}/image/`,
       });
+
+      urlImages.push(JSON.parse(uploadImage)['secure_url']);
     });
-    this.toPost.title = this.getBodyText();
+
+    this.toPost.images = urlImages;
+    this.toPost.date_added = this.tools.getFormattedActualDate();
+    this.toPost.date_modified = this.tools.getFormattedActualDate();
+
+    Posts.post(this.toPost);
   }
 }
 
