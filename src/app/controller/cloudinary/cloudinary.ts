@@ -7,7 +7,7 @@ export class Cloudinary {
   public static post(data: ImageData): Promise<string> {
     return new Promise((res, rej) => {
       this.apiService.post(this.path, data).subscribe({
-        next: () => res('The data has been posted.'),
+        next: (cloudRes: any) => res(JSON.stringify(cloudRes)),
         error: () => rej('Something went wrong when post the data.'),
       });
     });
