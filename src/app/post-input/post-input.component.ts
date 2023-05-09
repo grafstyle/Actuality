@@ -13,6 +13,7 @@ export class PostInputComponent {
 
   @ViewChild('post_body') postBody!: ElementRef<HTMLDivElement>;
   @ViewChild('addImgCont') addImgCont!: ElementRef<HTMLDivElement>;
+  @ViewChild('addBtn') addbtn!: ElementRef<HTMLInputElement>;
 
   getBodyText(): string {
     return this.postBody.nativeElement.innerText;
@@ -29,19 +30,14 @@ export class PostInputComponent {
     this.addImgCont.nativeElement.style.pointerEvents = 'none';
   }
 
-  changingImg(e: Event): void {
+  async changingImg(e: Event): Promise<void> {
     const elem: HTMLInputElement = e.target as HTMLInputElement;
     const newImg: Image = {} as Image;
     if (this.imgs.length < 3) {
       newImg.file = elem.files?.item(0) as File;
-
-      const reader: FileReader = new FileReader();
-      reader.onload = () => {
-        newImg.url = reader.result as string;
-      };
-      reader.readAsDataURL(newImg.file);
-
+      newImg.url = await this.getImage(newImg.file);
       newImg.name = newImg.file.name;
+
       this.imgs.push(newImg);
       return;
     }
@@ -59,6 +55,7 @@ export class PostInputComponent {
 
   removeLastImage(): void {
     this.imgs.pop();
+    if (this.imgs.length == 0) this.addbtn.nativeElement.value = '';
   }
 
   post(): void {
