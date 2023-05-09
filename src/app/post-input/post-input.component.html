@@ -1,5 +1,5 @@
 <div class="postInput">
-  <div class="content" ngModel #post_body contentEditable="true"></div>
+  <div class="content" contentEditable="true" ngModel #post_body></div>
   <div class="imgs-vids">
     <div class="showImgs" *ngFor="let img of imgs; let i = index">
       <img src="{{ img.url }}" alt="" />
@@ -28,7 +28,13 @@
       <button>
         <label>
           Add
-          <input type="file" id="addBtn" (change)="changingImg($event)" />
+          <input
+            type="file"
+            id="addBtn"
+            (change)="changingImg($event)"
+            ngModel
+            #addBtn
+          />
         </label>
       </button>
       <button (click)="removeLastImage()">Delete last</button>
