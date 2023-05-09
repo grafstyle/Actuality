@@ -26,6 +26,18 @@ export class Posts {
     });
   }
 
+  public static getLastID(): Promise<number> {
+    return new Promise((res, rej) => {
+      this.getAll()
+        .then((data) => {
+          res(data[data.length - 1].id);
+        })
+        .catch(() => {
+          rej(0);
+        });
+    });
+  }
+
   public static getBy(key: string, data: any): Promise<Post[]> {
     return new Promise((res, rej) => {
       Posts.apiService.get(`${Posts.getPath}${key}=${data}`).subscribe({
