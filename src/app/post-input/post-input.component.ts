@@ -61,6 +61,13 @@ export class PostInputComponent {
     if (this.imgs.length == 0) this.addbtn.nativeElement.value = '';
   }
 
+  cleanAll(): void {
+    this.postBody.nativeElement.innerText = '';
+    this.postBody.nativeElement.innerHTML = '';
+    this.imgs = [];
+    this.addbtn.nativeElement.value = '';
+  }
+
   async post(): Promise<void> {
     const user = await Users.getByAuth();
     const idUser: number = (await Users.getByEmail(user?.email)).id || 0;
@@ -70,7 +77,7 @@ export class PostInputComponent {
       return;
     }
 
-    if (this.getBodyText()) {
+    if (this.getBodyText() == ('' || undefined)) {
       alert('Almost add an title to your post.');
       return;
     }
@@ -80,24 +87,27 @@ export class PostInputComponent {
     const newPostID: number = (await Posts.getLastID()) + 1;
 
     this.toPost.title = this.getBodyText();
+    this.toPost.images = [];
 
-    const urlImages: string[] = [];
-
-    this.imgs.forEach(async (img) => {
+    for (const img of this.imgs) {
       const uploadImage = await Cloudinary.post({
         name: img.name,
         image: await this.getImage(img.file),
         url: `posts/${newPostID}/image/`,
       });
 
-      urlImages.push(JSON.parse(uploadImage)['secure_url']);
-    });
+      this.toPost.images.push(await JSON.parse(uploadImage)['secure_url']);
+    }
 
-    this.toPost.images = urlImages;
     this.toPost.date_added = this.tools.getFormattedActualDate();
     this.toPost.date_modified = this.tools.getFormattedActualDate();
 
-    Posts.post(this.toPost);
+    this.cleanAll();
+
+    const postResponse: string = await Posts.post(this.toPost);
+
+    alert(postResponse);
+    if (postResponse == 'The data has been posted.') this.cleanAll();
   }
 }
 
