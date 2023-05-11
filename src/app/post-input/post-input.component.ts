@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Post, Posts } from '../controller/posts/posts';
 import { Cloudinary } from '../controller/cloudinary/cloudinary';
 import { Tools } from '../tools/tools';
-import { Users } from '../controller/users/users';
+import { Cookies } from '../cookies/cookies';
 
 @Component({
   selector: 'app-post-input',
@@ -69,8 +69,7 @@ export class PostInputComponent {
   }
 
   async post(): Promise<void> {
-    const user = await Users.getByAuth();
-    const idUser: number = (await Users.getByEmail(user?.email)).id || 0;
+    const idUser: number = Cookies.getUserID();
 
     if (idUser == 0) {
       alert('Auth first');
