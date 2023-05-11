@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { User, Users } from '../controller/users/users';
 import { CPost, Posts } from '../controller/posts/posts';
+import { Cookies } from '../cookies/cookies';
 
 @Component({
   selector: 'app-profile',
@@ -14,11 +15,9 @@ export class ProfileComponent {
 
   async ngOnInit() {
     try {
-      const userEmail: any = await Users.getByAuth();
-
-      this.user = await Users.getByEmail(userEmail?.email);
+      this.user = (await Users.getBy('id', Cookies.getUserID()))[0];
       this.cposts = await Posts.getCPosts(
-        await Posts.getBy('id_user', this.user.id)
+        await Posts.getBy('id_user', Cookies.getUserID())
       );
     } catch (e) {
       this.err = 'Something went wrong getting the user.';
