@@ -3,7 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class Cookies {
   public static cookies: CookieService;
 
-  public static setUser(userID: number) {
+  public static setUserID(userID: number) {
     const nowDate: Date = new Date();
     const expDate: Date = new Date(
       nowDate.getFullYear(),
@@ -13,7 +13,7 @@ export class Cookies {
     this.cookies.set('userID', `${userID}`, { expires: expDate });
   }
 
-  public static getUser(): number {
+  public static getUserID(): number {
     return parseInt(this.cookies.get('userID'));
   }
 }

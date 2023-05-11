@@ -27,9 +27,9 @@ export class AppComponent {
   async setCookies() {
     const emailName = (await Users.getByAuth()).email;
     let idName = (await Users.getByEmail(emailName)).id;
-    if (Cookies.getUser() != ('' || null || undefined)) {
+    if (Cookies.getUserID() != ('' || null || undefined)) {
       if (idName == undefined) idName = 0;
-      Cookies.setUser(idName);
+      Cookies.setUserID(idName);
     }
   }
 
