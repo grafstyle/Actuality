@@ -7,6 +7,8 @@ import { Comments } from './controller/comments/comments';
 import { Likes } from './controller/likes/likes';
 import { Router } from '@angular/router';
 import { Cloudinary } from './controller/cloudinary/cloudinary';
+import { CookieService } from 'ngx-cookie-service';
+import { Cookies } from './cookies/cookies';
 
 @Component({
   selector: 'app-root',
@@ -22,18 +24,30 @@ export class AppComponent {
     elem.value = '';
   }
 
+  async setCookies() {
+    const emailName = (await Users.getByAuth()).email;
+    let idName = (await Users.getByEmail(emailName)).id;
+    if (Cookies.getUser() != ('' || null || undefined)) {
+      if (idName == undefined) idName = 0;
+      Cookies.setUser(idName);
+    }
+  }
+
   login() {
     Users.login();
+    this.setCookies();
   }
 
   signup() {
     Users.signup();
+    this.setCookies();
   }
 
   constructor(
     private auth: AuthService,
     private apiService: Service,
-    private routerLink: Router
+    private routerLink: Router,
+    private cookies: CookieService
   ) {
     Users.apiService =
       Posts.apiService =
@@ -41,6 +55,7 @@ export class AppComponent {
       Likes.apiService =
       Cloudinary.apiService =
         this.apiService;
+    Cookies.cookies = this.cookies;
     Users.auth = this.auth;
   }
 }
