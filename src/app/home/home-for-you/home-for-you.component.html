@@ -19,14 +19,10 @@
         </div>
       </div>
     </div>
-    <div class="dateAndLikes">
-      <p>
-        {{
-          cpost.likes.length + (cpost.likes.length == 1 ? " like" : " likes")
-        }}&nbsp;&nbsp;&nbsp;&nbsp;
-      </p>
-      <p>Publicado el {{ cpost.post.date_added }}</p>
-    </div>
+    <app-likes
+      [cantLikes]="cpost.likes.length"
+      [dateAdded]="cpost.post.date_added"
+    ></app-likes>
     <div class="comments">
       <h3>Comments</h3>
       <div
