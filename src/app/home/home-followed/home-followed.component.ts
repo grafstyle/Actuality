@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CPost, Posts } from 'src/app/controller/posts/posts';
 import { Users } from 'src/app/controller/users/users';
 import { RefreshService } from 'src/app/tools/refresh-service/refresh-service';
+import { Cookies } from 'src/app/cookies/cookies';
 
 @Component({
   selector: 'app-home-followed',
@@ -27,9 +28,8 @@ export class HomeFollowedComponent {
 
   async getCompletePosts(): Promise<void> {
     try {
-      const usersFollowed = (
-        await Users.getByEmail((await Users.getByAuth())?.email)
-      ).followed;
+      const user = (await Users.getBy('id', Cookies.getUserID()))[0];
+      const usersFollowed = user.followed;
       if (usersFollowed.length == 0)
         this.noFollows = "You don't follow people, be more sociable. :)";
       usersFollowed.forEach(async (idUserFollowed: number) => {
