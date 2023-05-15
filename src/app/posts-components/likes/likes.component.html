@@ -1,9 +1,7 @@
 <div class="dateAndLikes">
   <button (click)="setLike()">Like</button>
   <p>
-    {{
-      cantLikes + (cantLikes == 1 ? " like" : " likes")
-    }}&nbsp;&nbsp;&nbsp;&nbsp;
+    {{ cantLikes + (cantLikes == 1 ? " like" : " likes") }}
   </p>
   <p>Publicado el {{ dateAdded }}</p>
 </div>
