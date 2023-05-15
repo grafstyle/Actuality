@@ -30,7 +30,6 @@
 }
 
 .post > .user,
-.post > .dateAndLikes,
 .post > .comments > .allComments > .comment {
   display: flex;
 }
