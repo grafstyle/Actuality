@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CPost, Posts } from 'src/app/controller/posts/posts';
+import { RefreshService } from 'src/app/tools/refresh-service/refresh-service';
 
 @Component({
   selector: 'app-home-for-you',
@@ -10,7 +11,19 @@ export class HomeForYouComponent {
   err: string = '';
   cposts: CPost[] = [];
 
+  constructor(private refresh: RefreshService) {}
+
   async ngOnInit() {
+    await this.getCompletePosts();
+
+    this.refresh.getUpdate().subscribe({
+      next: async () => {
+        await this.getCompletePosts();
+      },
+    });
+  }
+
+  async getCompletePosts(): Promise<void> {
     try {
       this.cposts = await Posts.getCPosts(await Posts.getAll());
     } catch (e) {
