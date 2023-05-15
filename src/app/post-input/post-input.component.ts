@@ -3,6 +3,7 @@ import { Post, Posts } from '../controller/posts/posts';
 import { Cloudinary } from '../controller/cloudinary/cloudinary';
 import { Tools } from '../tools/tools';
 import { Cookies } from '../cookies/cookies';
+import { RefreshService } from '../tools/refresh-service/refresh-service';
 
 @Component({
   selector: 'app-post-input',
@@ -17,6 +18,8 @@ export class PostInputComponent {
   @ViewChild('post_body') postBody!: ElementRef<HTMLDivElement>;
   @ViewChild('addImgCont') addImgCont!: ElementRef<HTMLDivElement>;
   @ViewChild('addBtn') addbtn!: ElementRef<HTMLInputElement>;
+
+  constructor(private refresh: RefreshService) {}
 
   getBodyText(): string {
     return this.postBody.nativeElement.innerText;
@@ -106,7 +109,10 @@ export class PostInputComponent {
     const postResponse: string = await Posts.post(this.toPost);
 
     alert(postResponse);
-    if (postResponse == 'The data has been posted.') this.cleanAll();
+    if (postResponse == 'The data has been posted.') {
+      this.refresh.setUpdate(postResponse);
+      this.cleanAll();
+    }
   }
 }
 
