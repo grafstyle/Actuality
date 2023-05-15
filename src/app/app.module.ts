@@ -16,6 +16,7 @@ import { SearchComponent } from './search/search.component';
 import { SearchUsersComponent } from './search/search-users/search-users.component';
 import { SearchAllComponent } from './search/search-all/search-all.component';
 import { SearchPostsComponent } from './search/search-posts/search-posts.component';
+import { LikesComponent } from './posts-components/likes/likes.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { SearchPostsComponent } from './search/search-posts/search-posts.compone
     SearchAllComponent,
     SearchPostsComponent,
     SearchUsersComponent,
+    LikesComponent,
   ],
   imports: [
     BrowserModule,
