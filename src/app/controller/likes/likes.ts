@@ -8,7 +8,7 @@ export class Likes {
   public static get(id: number): Promise<Like[]> {
     return new Promise((res, rej) => {
       Likes.apiService.get(`${Likes.path}/${id}`).subscribe({
-        next: (e: any) => res(e as Like[]),
+        next: (likes: any) => res(likes as Like[]),
         error: () => rej([]),
       });
     });
@@ -17,7 +17,7 @@ export class Likes {
   public static getAll(): Promise<Like[]> {
     return new Promise((res, rej) => {
       Likes.apiService.get(Likes.path).subscribe({
-        next: (e: any) => res(e as Like[]),
+        next: (likes: any) => res(likes as Like[]),
         error: () => rej([]),
       });
     });
@@ -29,6 +29,17 @@ export class Likes {
         next: (post: any) => res(post as Like[]),
         error: () => rej([] as Like[]),
       });
+    });
+  }
+
+  public static getOf(id_post: number, id_user: number): Promise<Like[]> {
+    return new Promise((res, rej) => {
+      Likes.apiService
+        .get(`${Likes.getPath}id_post=${id_post}&id_user=${id_user}`)
+        .subscribe({
+          next: (like: any) => res(like as Like[]),
+          error: () => rej([] as Like[]),
+        });
     });
   }
 
