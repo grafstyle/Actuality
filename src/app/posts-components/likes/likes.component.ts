@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { Likes } from 'src/app/controller/likes/likes';
+import { Cookies } from 'src/app/cookies/cookies';
 
 @Component({
   selector: 'app-likes',
@@ -23,11 +25,31 @@ export class LikesComponent {
     }
   }
 
-  addLike(): void {
-    // Hi i'm not empty and eslint is stupid >:).
+  async addLike(): Promise<void> {
+    try {
+      const likeID: undefined | number = (
+        await Likes.getOf(this.idPost, Cookies.getUserID())
+      )[0]?.id;
+      if (likeID == undefined) {
+        Likes.post({
+          id_user: Cookies.getUserID(),
+          id_post: this.idPost,
+        });
+        this.cantLikes++;
+      } else this.touchLike++;
+    } catch (err) {
+      console.log('Something went wrong when add like.');
+    }
   }
 
-  quitLike(): void {
-    // Hi i'm not empty and eslint is stupid >:).
+  async quitLike(): Promise<void> {
+    try {
+      const likeID: number =
+        (await Likes.getOf(this.idPost, Cookies.getUserID()))[0].id || 0;
+      Likes.delete(likeID);
+      this.cantLikes--;
+    } catch (err) {
+      console.log('Something went wrong when quit like.');
+    }
   }
 }
