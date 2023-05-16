@@ -52,15 +52,6 @@ export class Likes {
     });
   }
 
-  public static put(id: number, data: Like): Promise<string> {
-    return new Promise((res, rej) => {
-      Likes.apiService.put(Likes.path, id, data).subscribe({
-        next: () => res('The data has been updated.'),
-        error: () => rej('Something went wrong when update the data.'),
-      });
-    });
-  }
-
   public static delete(id: number): Promise<string> {
     return new Promise((res, rej) => {
       Likes.apiService.delete(Likes.path, id).subscribe({
