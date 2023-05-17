@@ -1,1 +1,31 @@
-<p>add-images-input works!</p>
+<button class="addImg" (click)="chooseImgModal(true)">IMG</button>
+
+<div class="addImgCont" ngModel #addImgCont>
+  <div class="display">
+    <div class="initialImg" *ngIf="imgs.length == 0">
+      <div class="name">Waiting for an image.</div>
+    </div>
+    <div class="allImgs">
+      <div class="showImgs" *ngFor="let img of imgs; let i = index">
+        <img src="{{ img.url }}" alt="" />
+        <div class="name">{{ img.name.split(".")[0] }}</div>
+      </div>
+    </div>
+    <div class="btnsCont">
+      <button>
+        <label>
+          Add
+          <input
+            type="file"
+            id="addBtn"
+            (change)="changingImg($event)"
+            ngModel
+            #addBtn
+          />
+        </label>
+      </button>
+      <button (click)="removeLastImage()">Delete last</button>
+      <button (click)="chooseImgModal(false)">Ok</button>
+    </div>
+  </div>
+</div>

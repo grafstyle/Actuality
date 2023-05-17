@@ -3,7 +3,8 @@
   background-color: #070;
 }
 
-.postInput > .content > .imgs-vids {
+.postInput > .imgs-vids {
+  display: flex;
   border-right-color: #110;
 }
 
@@ -13,42 +14,6 @@
   background-color: #220;
 }
 
-.addImgCont {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  left: 0;
-  position: fixed;
-  z-index: 99999;
-  height: 100vh;
-  width: 100%;
-  opacity: 0;
-  pointer-events: none;
-  background-color: rgba(0, 0, 0, 0.6);
-}
-
-.addImgCont > .display {
-  background-color: #150;
-}
-
-.allImgs,
-.imgs-vids {
-  display: flex;
-}
-
-.display {
-  width: 450px;
-}
-
-.display > .allImgs {
-  flex-wrap: wrap;
-}
-
 .imgs-vids > .showImgs > img {
   height: 100px;
-}
-
-.allImgs > .showImgs > img {
-  height: 120px;
 }
