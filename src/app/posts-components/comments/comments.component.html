@@ -1,1 +1,17 @@
-<p>comments works!</p>
+<div class="comments">
+  <h3>Comments</h3>
+  <div class="allComments" *ngFor="let comment of comments; let i = index">
+    <div class="comment" *ngIf="comment.id_post == post.id">
+      <div class="imgCont user">
+        <img src="{{ userOfComments.image }}" alt="" />
+      </div>
+      <div class="userComment">
+        <h4>{{ userOfComments.name }}</h4>
+        <div class="imgs" *ngFor="let img of comment.images">
+          <img *ngIf="img != undefined" src="{{ img }}" alt="" />
+        </div>
+        <p>{{ comment.comment }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+.comments > .allComments > .comment {
+  display: flex;
+  background-color: #079;
+}
+
+.comments > .allComments > .comment > .user {
+  height: 30px;
+  width: 30px;
+}
+
+.comments > .allComments > .comment > .userComment > .imgs > img {
+  height: 120px;
+  width: auto;
+}
