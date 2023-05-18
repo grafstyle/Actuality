@@ -36,7 +36,7 @@ export class LikesComponent {
           id_post: this.idPost,
         });
         this.cantLikes++;
-      } else this.touchLike++;
+      } else this.setLike();
     } catch (err) {
       console.log('Something went wrong when add like.');
     }

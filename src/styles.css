@@ -29,8 +29,7 @@
   background-color: #888;
 }
 
-.post > .user,
-.post > .comments > .allComments > .comment {
+.post > .user {
   display: flex;
 }
 
@@ -41,18 +40,4 @@
 
 .post > .content > .media > .imgCont {
   height: 400px;
-}
-
-.post > .comments > .allComments > .comment {
-  background-color: #079;
-}
-
-.post > .comments > .allComments > .comment > .user {
-  height: 30px;
-  width: 30px;
-}
-
-.post > .comments > .allComments > .comment > .userComment > .imgs > img {
-  height: 120px;
-  width: auto;
 }

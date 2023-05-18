@@ -18,6 +18,7 @@ import { SearchAllComponent } from './search/search-all/search-all.component';
 import { SearchPostsComponent } from './search/search-posts/search-posts.component';
 import { LikesComponent } from './posts-components/likes/likes.component';
 import { AddImagesInputComponent } from './post-input/add-images-input/add-images-input.component';
+import { CommentsComponent } from './posts-components/comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { AddImagesInputComponent } from './post-input/add-images-input/add-image
     SearchUsersComponent,
     LikesComponent,
     AddImagesInputComponent,
+    CommentsComponent,
   ],
   imports: [
     BrowserModule,
