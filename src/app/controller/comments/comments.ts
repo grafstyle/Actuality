@@ -32,6 +32,18 @@ export class Comments {
     });
   }
 
+  public static getLastID(): Promise<number> {
+    return new Promise((res, rej) => {
+      this.getAll()
+        .then((data) => {
+          res(data[data.length - 1].id);
+        })
+        .catch(() => {
+          rej(0);
+        });
+    });
+  }
+
   public static post(data: Comment): Promise<string> {
     return new Promise((res, rej) => {
       this.apiService.post(this.path, data).subscribe({
