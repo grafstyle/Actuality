@@ -22,33 +22,16 @@
         </div>
       </div>
     </div>
-    <div class="dateAndLikes">
-      <p>
-        {{
-          cpost.likes.length + (cpost.likes.length == 1 ? " like" : " likes")
-        }}&nbsp;&nbsp;&nbsp;&nbsp;
-      </p>
-      <p>Publicado el {{ cpost.post.date_added }}</p>
-    </div>
-    <div class="comments">
-      <h3>Comments</h3>
-      <div
-        class="allComments"
-        *ngFor="let comment of cpost.comments; let i = index"
-      >
-        <div class="comment" *ngIf="comment.id_post == cpost.post.id">
-          <div class="imgCont user">
-            <img src="{{ cpost.user_of_comments[i].image }}" alt="" />
-          </div>
-          <div class="userComment">
-            <h4>{{ cpost.user_of_comments[i].name }}</h4>
-            <div class="imgs" *ngFor="let img of comment.images">
-              <img *ngIf="img != undefined" src="{{ img }}" alt="" />
-            </div>
-            <p>{{ comment.comment }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <app-likes
+      [idPost]="cpost.post.id"
+      [cantLikes]="cpost.likes.length"
+      [dateAdded]="cpost.post.date_added"
+    ></app-likes>
+    <app-comments
+      [idPost]="cpost.post.id"
+      [comments]="cpost.comments"
+      [post]="cpost.post"
+      [userOfComments]="cpost.user_of_comments[i]"
+    ></app-comments>
   </div>
 </div>
