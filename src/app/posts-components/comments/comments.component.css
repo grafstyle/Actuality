@@ -1,14 +1,16 @@
-.comments > .allComments > .comment {
+.allComments > .comment,
+.addComment {
   display: flex;
   background-color: #079;
 }
 
-.comments > .allComments > .comment > .user {
-  height: 30px;
-  width: 30px;
+.allComments > .comment > .user,
+.addComment > .userImg > .user {
+  height: 50px;
+  width: 50px;
 }
 
-.comments > .allComments > .comment > .userComment > .imgs > img {
+.allComments > .comment > .userComment > .imgs > img {
   height: 120px;
   width: auto;
 }
