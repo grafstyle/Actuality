@@ -10,7 +10,30 @@
   width: 50px;
 }
 
+.allComments > .comment > .userComment {
+  width: 100%;
+}
+
 .allComments > .comment > .userComment > .imgs > img {
   height: 120px;
   width: auto;
+}
+
+.allComments > .comment > .userComment > .nameAndActions {
+  background: #092;
+}
+
+.allComments > .comment > .userComment > .nameAndActions > h4,
+.allComments > .comment > .userComment > .nameAndActions > .actions {
+  width: 50%;
+}
+
+.allComments > .comment > .userComment > .nameAndActions,
+.allComments > .comment > .userComment > .nameAndActions > .actions {
+  display: flex;
+  gap: 5px;
+}
+
+.allComments > .comment > .userComment > .nameAndActions > .actions {
+  justify-content: flex-end;
 }

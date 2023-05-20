@@ -18,10 +18,10 @@ export class Service {
   }
 
   put(path: string, id: number, data: object) {
-    return this._http.put(`${this.server}${path}/${id.toString()}`, data);
+    return this._http.put(`${this.server}${path}/put?id=${id}`, data);
   }
 
   delete(path: string, id: number) {
-    return this._http.delete(`${this.server}${path}/${id.toString()}`);
+    return this._http.delete(`${this.server}${path}/delete?id=${id}`);
   }
 }
