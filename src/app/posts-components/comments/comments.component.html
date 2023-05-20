@@ -8,7 +8,15 @@
           <img src="{{ userOfComments.image }}" alt="" />
         </div>
         <div class="userComment">
-          <h4>{{ userOfComments.name }}</h4>
+          <div class="nameAndActions">
+            <h4>{{ userOfComments.name }}</h4>
+            <div class="actions" *ngIf="userOfComments.id == user.id">
+              <button class="editBtn">edit</button>
+              <button class="deleteBtn" (click)="deleteComment(comment.id)">
+                delete
+              </button>
+            </div>
+          </div>
           <div class="imgs" *ngFor="let img of comment.images">
             <img *ngIf="img != undefined" src="{{ img }}" alt="" />
           </div>
