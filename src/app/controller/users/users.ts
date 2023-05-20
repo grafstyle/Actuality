@@ -130,7 +130,7 @@ export class Users {
 
   public static get(id: number): Promise<User> {
     return new Promise((res, rej) => {
-      Users.apiService.get(`${Users.path}/${id}`).subscribe({
+      Users.apiService.get(`${Users.getPath}id=${id}`).subscribe({
         next: (user: any) => res(user as User),
         error: () => rej('Something went wrong when get the user.'),
       });
