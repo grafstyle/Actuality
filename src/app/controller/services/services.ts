@@ -22,6 +22,6 @@ export class Service {
   }
 
   delete(path: string, id: number) {
-    return this._http.delete(`${this.server}${path}/${id.toString()}`);
+    return this._http.delete(`${this.server}${path}/delete?id=${id}`);
   }
 }
