@@ -7,7 +7,7 @@ export class Comments {
 
   public static get(id: number): Promise<Comment[]> {
     return new Promise((res, rej) => {
-      this.apiService.get(`${Comments.path}/${id}`).subscribe({
+      this.apiService.get(`${Comments.getPath}id=${id}`).subscribe({
         next: (e: any) => res(e as Comment[]),
         error: () => rej([]),
       });
@@ -36,6 +36,7 @@ export class Comments {
     return new Promise((res, rej) => {
       this.getAll()
         .then((data) => {
+          if (data.length == 0) res(0);
           res(data[data.length - 1].id);
         })
         .catch(() => {
