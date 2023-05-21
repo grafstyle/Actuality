@@ -10,7 +10,7 @@ export class Posts {
 
   public static get(id: number): Promise<Post[]> {
     return new Promise((res, rej) => {
-      this.apiService.get(`${this.path}/${id}`).subscribe({
+      this.apiService.get(`${this.getPath}id=${id}`).subscribe({
         next: (e: any) => res(e as Post[]),
         error: () => rej([]),
       });
