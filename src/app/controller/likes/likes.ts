@@ -7,7 +7,7 @@ export class Likes {
 
   public static get(id: number): Promise<Like[]> {
     return new Promise((res, rej) => {
-      Likes.apiService.get(`${Likes.path}/${id}`).subscribe({
+      Likes.apiService.get(`${Likes.getPath}id=${id}`).subscribe({
         next: (likes: any) => res(likes as Like[]),
         error: () => rej([]),
       });
