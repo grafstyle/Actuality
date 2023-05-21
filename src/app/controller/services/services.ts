@@ -24,4 +24,8 @@ export class Service {
   delete(path: string, id: number) {
     return this._http.delete(`${this.server}${path}/delete?id=${id}`);
   }
+
+  deleteFile(url: string) {
+    return this._http.delete(`${this.server}delete/file?url=${url}`);
+  }
 }
