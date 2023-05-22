@@ -2,25 +2,31 @@
   <h3>Comments</h3>
   <div class="sectionComments">
     <app-add-comment [idPost]="idPost"></app-add-comment>
-    <div class="allComments" *ngFor="let comment of comments; let i = index">
-      <div class="comment" *ngIf="comment.id_post == post.id">
+    <div
+      class="allComments"
+      *ngFor="let comment of cpost.comments; let i = index"
+    >
+      <div class="comment" *ngIf="comment.id_post == cpost.post.id">
         <div class="imgCont user">
-          <img src="{{ userOfComments.image }}" alt="" />
+          <img src="{{ cpost.user_of_comments[i].image }}" alt="" />
         </div>
         <div class="userComment">
           <div class="nameAndActions">
-            <h4>{{ userOfComments.name }}</h4>
-            <div class="actions" *ngIf="userOfComments.id == user.id">
+            <h4>{{ cpost.user_of_comments[i].name }}</h4>
+            <div
+              class="actions"
+              *ngIf="cpost.user_of_comments[i].id == user.id"
+            >
               <button class="editBtn">edit</button>
               <button class="deleteBtn" (click)="deleteComment(comment.id)">
                 delete
               </button>
             </div>
           </div>
+          <p>{{ comment.comment }}</p>
           <div class="imgs" *ngFor="let img of comment.images">
             <img *ngIf="img != undefined" src="{{ img }}" alt="" />
           </div>
-          <p>{{ comment.comment }}</p>
         </div>
       </div>
     </div>
