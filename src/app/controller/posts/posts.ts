@@ -52,23 +52,25 @@ export class Posts {
       const users_of_comments: User[] = [];
       const cposts: CPost[] = [];
 
-      posts.forEach(async (post) => {
-        const cpost: CPost = {} as CPost;
+      (async () => {
+        for (const post of posts) {
+          const cpost: CPost = {} as CPost;
 
-        cpost.comments = await Comments.getBy('id_post', post.id);
-        cpost.likes = await Likes.getBy('id_post', post.id);
-        cpost.user_of_post = await Users.get(post.id_user);
+          cpost.comments = await Comments.getBy('id_post', post.id);
+          cpost.likes = await Likes.getBy('id_post', post.id);
+          cpost.user_of_post = await Users.get(post.id_user);
 
-        cpost.comments.forEach(async (comment: Comment) => {
-          users_of_comments.push(await Users.get(comment.id_user));
-        });
+          cpost.comments.forEach(async (comment: Comment) => {
+            users_of_comments.push(await Users.get(comment.id_user));
+          });
 
-        cpost.post = post;
-        cpost.user_of_comments = users_of_comments;
+          cpost.post = post;
+          cpost.user_of_comments = users_of_comments;
 
-        cposts.push(cpost);
-      });
-      res(cposts);
+          cposts.push(cpost);
+        }
+        res(cposts);
+      })();
     });
   }
 
