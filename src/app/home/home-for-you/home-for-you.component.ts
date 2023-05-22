@@ -17,8 +17,8 @@ export class HomeForYouComponent {
     await this.getCompletePosts();
 
     this.refresh.getUpdate().subscribe({
-      next: async () => {
-        await this.getCompletePosts();
+      next: async (subject: any) => {
+        if (subject.text == 'refresh_posts') await this.getCompletePosts();
       },
     });
   }
