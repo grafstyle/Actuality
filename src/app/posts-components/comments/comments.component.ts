@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { User, Users } from 'src/app/controller/users/users';
-import { Post } from 'src/app/controller/posts/posts';
-import { Comment, Comments } from 'src/app/controller/comments/comments';
+import { CPost, Posts } from 'src/app/controller/posts/posts';
+import { Comments } from 'src/app/controller/comments/comments';
 import { Cookies } from 'src/app/cookies/cookies';
 
 @Component({
@@ -11,14 +11,12 @@ import { Cookies } from 'src/app/cookies/cookies';
 })
 export class CommentsComponent {
   @Input() idPost: number = 0;
-  @Input() comments: Comment[] = [];
-  @Input() post: Post = {} as Post;
-  @Input() userOfComments: User = {} as User;
-
+  cpost: CPost = {} as CPost;
   user: User = {} as User;
 
   async ngOnInit(): Promise<void> {
     this.user = await Users.get(Cookies.getUserID());
+    this.cpost = (await Posts.getCPosts(await Posts.get(this.idPost)))[0];
   }
 
   async deleteComment(id: number): Promise<void> {
