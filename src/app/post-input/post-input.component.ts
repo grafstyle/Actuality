@@ -84,7 +84,7 @@ export class PostInputComponent {
 
     alert(postResponse);
     if (postResponse == 'The data has been posted.') {
-      this.refresh.setUpdate(postResponse);
+      this.refresh.setUpdate('refresh_posts');
       this.cleanAll();
     }
   }
