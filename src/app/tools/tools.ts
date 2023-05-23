@@ -1,4 +1,21 @@
+import { ElementRef } from '@angular/core';
+
 export class Tools {
+  public getNameOfCloudinaryFile(url: string): string {
+    const dirs: string[] = url.split('/');
+    return dirs[dirs.length - 1];
+  }
+
+  public setCursorToLast(elem: ElementRef<HTMLElement>): void {
+    const range: Range = document.createRange();
+    const sel: Selection | null = window.getSelection();
+    range.setStart(elem.nativeElement, 1);
+    range.collapse(true);
+
+    sel?.removeAllRanges();
+    sel?.addRange(range);
+  }
+
   public convIfUndefined(textOrUndefined: string | undefined): string {
     if (textOrUndefined == undefined) return '';
     return textOrUndefined;
