@@ -13,6 +13,7 @@ import { Cookies } from 'src/app/cookies/cookies';
 import { Tools } from 'src/app/tools/tools';
 import { AddImagesInputComponent } from 'src/app/post-input/add-images-input/add-images-input.component';
 import { Cloudinary } from 'src/app/controller/cloudinary/cloudinary';
+import { RefreshService } from 'src/app/tools/refresh-service/refresh-service';
 
 @Component({
   selector: 'app-comments',
@@ -44,6 +45,8 @@ export class CommentsComponent {
   clickEdit: number = 0;
   actualElem: number = 0;
 
+  constructor(private refresh: RefreshService) {}
+
   ngAfterViewInit(): void {
     const commentBody = this.comment_body.toArray()[this.actualElem];
 
@@ -54,6 +57,12 @@ export class CommentsComponent {
   async ngOnInit(): Promise<void> {
     this.user = await Users.get(Cookies.getUserID());
     this.cpost = (await Posts.getCPosts(await Posts.get(this.idPost)))[0];
+
+    this.refresh.getUpdate().subscribe({
+      next: (subject: any) => {
+        if (subject.text == 'refresh_comments') this.ngOnInit();
+      },
+    });
   }
 
   async updateComment(id: number, actualElem: number): Promise<void> {
@@ -105,16 +114,13 @@ export class CommentsComponent {
       if (somethingEdited)
         commentUpdated.date_modified = this.tools.getFormattedActualDate();
 
-      Comments.put(id, commentUpdated).then(() =>
-        alert('The comment are updated satisfactory.')
-      );
+      Comments.put(id, commentUpdated).then(() => this.ngOnInit());
 
       this.clickEdit = 0;
     }
   }
 
   async deleteComment(id: number): Promise<void> {
-    const response = await Comments.delete(id);
-    alert(response);
+    Comments.delete(id).then(() => this.ngOnInit());
   }
 }
