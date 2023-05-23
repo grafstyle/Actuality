@@ -77,7 +77,7 @@ export class AddCommentComponent {
       const uploadImage = await Cloudinary.post({
         name: img.name,
         image: await this.addImagesInput.getImage(img.file),
-        url: `comments/${newCommentID}/image/`,
+        url: `comments/${newCommentID}/`,
       });
 
       this.toComment.images.push(await JSON.parse(uploadImage)['secure_url']);
@@ -90,7 +90,7 @@ export class AddCommentComponent {
 
     alert(postResponse);
     if (postResponse == 'The data has been posted.') {
-      this.refresh.setUpdate(postResponse);
+      this.refresh.setUpdate('refresh_comments');
       this.cleanAll();
     }
   }
