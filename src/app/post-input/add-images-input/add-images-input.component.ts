@@ -1,5 +1,5 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { RefreshService } from 'src/app/tools/refresh-service/refresh-service';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Tools } from 'src/app/tools/tools';
 
 @Component({
   selector: 'app-add-images-input',
@@ -8,11 +8,18 @@ import { RefreshService } from 'src/app/tools/refresh-service/refresh-service';
 })
 export class AddImagesInputComponent {
   imgs: Image[] = [];
+  imgsToDelete: string[] = [];
+  tools: Tools = new Tools();
+
+  @Input() elemWithChilds!: HTMLElement;
+  @Input() imgsInCloud: string[] | undefined = [];
 
   @ViewChild('addImgCont') addImgCont!: ElementRef<HTMLDivElement>;
   @ViewChild('addBtn') addbtn!: ElementRef<HTMLInputElement>;
 
-  constructor(private refresh: RefreshService) {}
+  ngAfterViewInit() {
+    this.setImgsOfCloud();
+  }
 
   chooseImgModal(show: boolean): void {
     if (show) {
@@ -23,6 +30,17 @@ export class AddImagesInputComponent {
 
     this.addImgCont.nativeElement.style.opacity = '0';
     this.addImgCont.nativeElement.style.pointerEvents = 'none';
+  }
+
+  setImgsOfCloud(): void {
+    if (this.imgsInCloud != undefined) {
+      for (const image of this.imgsInCloud) {
+        const newImg: Image = {} as Image;
+        newImg.url = image;
+        newImg.name = this.tools.getNameOfCloudinaryFile(image);
+        this.imgs.push(newImg);
+      }
+    }
   }
 
   async changingImg(e: Event): Promise<void> {
@@ -48,7 +66,17 @@ export class AddImagesInputComponent {
     });
   }
 
-  removeLastImage(): void {
+  removeLastChildOf(container: HTMLElement) {
+    const last: ChildNode | null = container.lastElementChild;
+    if (last != null) container.removeChild(last);
+  }
+
+  async removeLastImage(): Promise<void> {
+    const lastImg = this.imgs[this.imgs.length - 1].url;
+    if (lastImg.includes('https://res.cloudinary.com'))
+      this.imgsToDelete.push(lastImg);
+    if (this.elemWithChilds != undefined)
+      this.removeLastChildOf(this.elemWithChilds);
     this.imgs.pop();
     if (this.imgs.length == 0) this.addbtn.nativeElement.value = '';
   }
