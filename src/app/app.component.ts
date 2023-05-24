@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { Users } from './controller/users/users';
+import { User, Users } from './controller/users/users';
 import { AuthService } from '@auth0/auth0-angular';
 import { Service } from './controller/services/services';
 import { Posts } from './controller/posts/posts';
 import { Comments } from './controller/comments/comments';
 import { Likes } from './controller/likes/likes';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { Cloudinary } from './controller/cloudinary/cloudinary';
 import { CookieService } from 'ngx-cookie-service';
 import { Cookies } from './cookies/cookies';
@@ -33,6 +33,13 @@ export class AppComponent {
     }
   }
 
+  goProfile() {
+    Users.get(Cookies.getUserID()).then((user: User) => {
+      if (user.id == undefined) this.router.navigateByUrl('/login');
+      else this.router.navigateByUrl('/profile');
+    });
+  }
+
   login() {
     Users.login();
     this.setCookies();
@@ -41,6 +48,10 @@ export class AppComponent {
   signup() {
     Users.signup();
     this.setCookies();
+  }
+
+  logout() {
+    Users.logout();
   }
 
   constructor(
@@ -61,6 +72,13 @@ export class AppComponent {
 
     router.events.subscribe({
       next: (e: any) => {
+        if (e instanceof NavigationStart) {
+          if (e.url == '/profile') {
+            Users.get(Cookies.getUserID()).then((user: User) => {
+              if (user.id == undefined) router.navigateByUrl('/login');
+            });
+          }
+        }
         if (e instanceof NavigationEnd) {
           if (e.url == '/login') this.login();
           if (e.url == '/signup') this.signup();
