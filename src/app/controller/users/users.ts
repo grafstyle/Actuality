@@ -49,6 +49,10 @@ export class Users {
       });
   }
 
+  public static logout(): void {
+    this.auth.logout();
+  }
+
   public static isActualUserAuth(): Promise<boolean> {
     return new Promise((res, rej) => {
       Users.auth.isAuthenticated$.subscribe({
