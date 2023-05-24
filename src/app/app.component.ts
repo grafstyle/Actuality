@@ -5,7 +5,7 @@ import { Service } from './controller/services/services';
 import { Posts } from './controller/posts/posts';
 import { Comments } from './controller/comments/comments';
 import { Likes } from './controller/likes/likes';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Cloudinary } from './controller/cloudinary/cloudinary';
 import { CookieService } from 'ngx-cookie-service';
 import { Cookies } from './cookies/cookies';
@@ -44,6 +44,7 @@ export class AppComponent {
   }
 
   constructor(
+    private router: Router,
     private auth: AuthService,
     private apiService: Service,
     private routerLink: Router,
@@ -57,5 +58,14 @@ export class AppComponent {
         this.apiService;
     Cookies.cookies = this.cookies;
     Users.auth = this.auth;
+
+    router.events.subscribe({
+      next: (e: any) => {
+        if (e instanceof NavigationEnd) {
+          if (e.url == '/login') this.login();
+          if (e.url == '/signup') this.signup();
+        }
+      },
+    });
   }
 }
