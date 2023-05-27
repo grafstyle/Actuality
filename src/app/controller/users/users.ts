@@ -14,39 +14,9 @@ export class Users {
   }
 
   public static async signup(): Promise<void> {
-    this.auth
-      .loginWithRedirect({
-        authorizationParams: { screen_hint: 'signup' },
-      })
-      .subscribe({
-        complete: async () => {
-          (await this.getAll()).forEach((user) => {
-            this.auth.user$.subscribe({
-              next: (registerUser) => {
-                if (user.email == registerUser?.email) return;
-              },
-            });
-          });
-
-          this.auth.user$.subscribe({
-            next: (registerUser) => {
-              this.post({
-                name: this.tools.convIfUndefined(registerUser?.given_name),
-                email: this.tools.convIfUndefined(registerUser?.email),
-                url_name: this.tools.createURLName(
-                  this.tools.convIfUndefined(registerUser?.given_name)
-                ),
-                image: this.tools.convIfUndefined(registerUser?.picture),
-                joined: this.tools.convIfUndefined(registerUser?.updated_at),
-                bio: '',
-                portrait: '',
-                followed: [],
-                followers: [],
-              });
-            },
-          });
-        },
-      });
+    this.auth.loginWithRedirect({
+      authorizationParams: { screen_hint: 'signup' },
+    });
   }
 
   public static logout(): void {
