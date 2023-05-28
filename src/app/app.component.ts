@@ -9,6 +9,7 @@ import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { Cloudinary } from './controller/cloudinary/cloudinary';
 import { CookieService } from 'ngx-cookie-service';
 import { Cookies } from './cookies/cookies';
+import { Tools } from './tools/tools';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ import { Cookies } from './cookies/cookies';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  tools: Tools = new Tools();
   title = 'Actuality';
 
   search(e: Event) {
@@ -25,11 +27,14 @@ export class AppComponent {
   }
 
   async setCookies() {
-    const emailName = (await Users.getByAuth()).email;
-    let idName = (await Users.getByEmail(emailName)).id;
-    if (Number.isNaN(Cookies.getUserID())) {
-      if (idName == undefined) idName = 0;
-      Cookies.setUserID(idName);
+    try {
+      const emailName: string | null = (await Users.getByAuth()).email;
+      let id: number | undefined = 0;
+      if (emailName != null) id = (await Users.getByEmail(emailName)).id;
+      if (Number.isNaN(Cookies.getUserID()) && id != undefined)
+        Cookies.setUserID(id);
+    } catch (err) {
+      // Catch empty? 🤨
     }
   }
 
@@ -47,7 +52,6 @@ export class AppComponent {
 
   signup() {
     Users.signup();
-    this.setCookies();
   }
 
   logout() {
@@ -83,6 +87,34 @@ export class AppComponent {
           if (e.url == '/login') this.login();
           if (e.url == '/signup') this.signup();
         }
+      },
+    });
+  }
+
+  ngOnInit(): void {
+    this.setCookies();
+
+    this.auth.isAuthenticated$.subscribe({
+      next: (isAuth) => {
+        if (isAuth)
+          this.auth.user$.subscribe({
+            next: (actualUser) => {
+              if (actualUser != undefined)
+                Users.post({
+                  name: this.tools.convIfUndefined(actualUser?.given_name),
+                  email: this.tools.convIfUndefined(actualUser?.email),
+                  url_name: this.tools.createURLName(
+                    this.tools.convIfUndefined(actualUser?.given_name)
+                  ),
+                  image: this.tools.convIfUndefined(actualUser?.picture),
+                  joined: this.tools.convIfUndefined(actualUser?.updated_at),
+                  bio: '',
+                  portrait: '',
+                  followed: [],
+                  followers: [],
+                });
+            },
+          });
       },
     });
   }
