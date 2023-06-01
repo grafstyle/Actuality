@@ -12,7 +12,7 @@ export class AddImagesInputComponent {
   tools: Tools = new Tools();
 
   @Input() elemWithChilds!: HTMLElement;
-  @Input() imgsInCloud: string[] | undefined = [];
+  @Input() imgsInCloud: string[] = [];
 
   @ViewChild('addImgCont') addImgCont!: ElementRef<HTMLDivElement>;
   @ViewChild('addBtn') addbtn!: ElementRef<HTMLInputElement>;
@@ -46,12 +46,25 @@ export class AddImagesInputComponent {
   async changingImg(e: Event): Promise<void> {
     const elem: HTMLInputElement = e.target as HTMLInputElement;
     const newImg: Image = {} as Image;
+
+    const file: File = elem.files?.item(0) as File;
+    const url: string = await this.getImage(file);
+    const name: string = file.name;
+
+    for (const img of this.imgsInCloud)
+      if (name == this.tools.getNameOfCloudinaryFile(img)) {
+        alert('Some image has the same name.');
+        this.addbtn.nativeElement.value = '';
+        return;
+      }
+
     if (this.imgs.length < 3) {
-      newImg.file = elem.files?.item(0) as File;
-      newImg.url = await this.getImage(newImg.file);
-      newImg.name = newImg.file.name;
+      newImg.file = file;
+      newImg.url = url;
+      newImg.name = name;
 
       this.imgs.push(newImg);
+      this.imgsInCloud.push(newImg.url);
       return;
     }
     alert('Sorry only accept three images and/or videos. :(');
@@ -73,12 +86,15 @@ export class AddImagesInputComponent {
 
   async removeLastImage(): Promise<void> {
     const lastImg = this.imgs[this.imgs.length - 1].url;
-    if (lastImg.includes('https://res.cloudinary.com'))
+    if (
+      lastImg.includes('https://res.cloudinary.com') &&
+      this.elemWithChilds != undefined
+    ) {
       this.imgsToDelete.push(lastImg);
-    if (this.elemWithChilds != undefined)
       this.removeLastChildOf(this.elemWithChilds);
+    }
     this.imgs.pop();
-    if (this.imgs.length == 0) this.addbtn.nativeElement.value = '';
+    this.addbtn.nativeElement.value = '';
   }
 }
 
