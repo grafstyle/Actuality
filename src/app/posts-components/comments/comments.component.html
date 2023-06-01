@@ -30,12 +30,14 @@
             </div>
           </div>
           <p #comment_body>{{ comment.comment }}</p>
-          <div #imgs_cont class="imgs" *ngFor="let img of comment.images">
-            <img *ngIf="img != undefined" src="{{ img }}" alt="" />
+          <div #imgs_cont class="imgsOrVids">
+            <div class="imgs" *ngFor="let img of comment.images">
+              <img *ngIf="img != undefined" src="{{ img }}" alt="" />
+            </div>
           </div>
           <app-add-images-input
-            [imgsInCloud]="comment.images"
-            [elemWithChilds]="imgs_cont.nativeElement"
+            [imgsInCloud]="comment.images || []"
+            [elemWithChilds]="imgs_cont"
             *ngIf="showImagesInput && actualElem == i"
           ></app-add-images-input>
         </div>
