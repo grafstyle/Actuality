@@ -29,7 +29,7 @@ export class CommentsComponent {
   @ViewChildren('comment_body') comment_body!: QueryList<
     ElementRef<HTMLParagraphElement>
   >;
-  @ViewChild('imgs_cont') imgs_cont!: ElementRef<HTMLDivElement>;
+  @ViewChildren('imgs_cont') imgs_cont!: ElementRef<HTMLDivElement>;
   @ViewChildren('edit_comment_btn') edit_btn!: QueryList<
     ElementRef<HTMLButtonElement>
   >;
@@ -70,6 +70,9 @@ export class CommentsComponent {
     this.actualElem = actualElem;
     const commentUpdated: Comment = {} as Comment;
     let somethingEdited: boolean = false;
+    const imgsToDB: string[] = [];
+
+    const imgsComponent = this.imgsToEdit; // To avoid errors with "undefined"
 
     const editBtn = this.edit_btn.toArray()[this.actualElem];
     const commentBody = this.comment_body.toArray()[this.actualElem];
@@ -97,24 +100,38 @@ export class CommentsComponent {
       }
 
       if (this.imgsToEdit.imgsToDelete.length > 0) {
-        console.log(this.imgsToEdit.imgsToDelete);
-
         for (const url of this.imgsToEdit.imgsToDelete)
           Cloudinary.delete(url).catch(() =>
             alert('Something went wrong at delete some image.')
           );
-
-        if (this.imgsToEdit.imgs.length == 0) commentUpdated.images = [];
-        else
-          for (const urlKeeped of this.imgsToEdit.imgs)
-            commentUpdated.images?.push(urlKeeped.url);
         somethingEdited = true;
       }
 
-      if (somethingEdited)
-        commentUpdated.date_modified = this.tools.getFormattedActualDate();
+      for (const img of this.imgsToEdit.imgs) {
+        if (img.url.includes('https://res.cloudinary.com'))
+          imgsToDB.push(img.url);
 
-      Comments.put(id, commentUpdated).then(() => this.ngOnInit());
+        try {
+          const uploadImage = await Cloudinary.post({
+            name: img.name,
+            image: await imgsComponent.getImage(img.file),
+            url: `comments/${id}/`,
+          });
+
+          imgsToDB.push(await JSON.parse(uploadImage)['secure_url']);
+
+          somethingEdited = true;
+        } catch (err) {
+          /* Catch not empty, or yes? */
+        }
+      }
+
+      commentUpdated.images = imgsToDB;
+
+      if (somethingEdited) {
+        commentUpdated.date_modified = this.tools.getFormattedActualDate();
+        Comments.put(id, commentUpdated).then(() => this.ngOnInit());
+      }
 
       this.clickEdit = 0;
     }

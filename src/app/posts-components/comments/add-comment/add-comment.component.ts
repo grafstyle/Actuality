@@ -1,8 +1,10 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 
-import { Image } from 'src/app/post-input/add-images-input/add-images-input.component';
+import {
+  Image,
+  AddImagesInputComponent,
+} from 'src/app/post-input/add-images-input/add-images-input.component';
 import { Comment, Comments } from 'src/app/controller/comments/comments';
-import { AddImagesInputComponent } from 'src/app/post-input/add-images-input/add-images-input.component';
 import { Tools } from 'src/app/tools/tools';
 import { RefreshService } from 'src/app/tools/refresh-service/refresh-service';
 import { Cookies } from 'src/app/cookies/cookies';
