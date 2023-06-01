@@ -13,6 +13,8 @@ export class HomeFollowedComponent {
   err: string = '';
   noFollows: string = '';
   cposts: CPost[][] = [];
+  def_person_img: string =
+    'https://res.cloudinary.com/dp5gpr5sc/image/upload/v1685629395/app_assets/person.svg';
 
   constructor(private refresh: RefreshService) {}
 
