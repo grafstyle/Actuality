@@ -24,6 +24,9 @@ export class AddCommentComponent {
   tools: Tools = new Tools();
   imgs: Image[] = [];
 
+  def_person_img: string =
+    'https://res.cloudinary.com/dp5gpr5sc/image/upload/v1685629395/app_assets/person.svg';
+
   @ViewChild(AddImagesInputComponent) addImagesInput!: AddImagesInputComponent;
   @ViewChild('comment_body') commentBody!: ElementRef<HTMLDivElement>;
 
