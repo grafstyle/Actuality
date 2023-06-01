@@ -13,6 +13,9 @@ export class ProfileComponent {
   user: User = {} as User;
   cposts: CPost[] = [];
 
+  def_person_img: string =
+    'https://res.cloudinary.com/dp5gpr5sc/image/upload/v1685629395/app_assets/person.svg';
+
   async ngOnInit() {
     try {
       this.user = (await Users.getBy('id', Cookies.getUserID()))[0];
