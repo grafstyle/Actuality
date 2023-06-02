@@ -18,7 +18,7 @@ const routes: Routes = [
       { path: 'followed', component: HomeFollowedComponent },
     ],
   },
-  { path: 'profile', component: ProfileComponent },
+  { path: ':profile', component: ProfileComponent },
   {
     path: 'search',
     component: SearchComponent,
