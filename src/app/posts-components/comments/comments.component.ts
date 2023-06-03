@@ -116,7 +116,7 @@ export class CommentsComponent {
         try {
           const uploadImage = await Cloudinary.post({
             name: img.name,
-            image: await imgsComponent.getImage(img.file),
+            image: await this.tools.getImage(img.file),
             url: `comments/${id}/`,
           });
 

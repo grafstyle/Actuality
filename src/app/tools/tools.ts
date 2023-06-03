@@ -1,6 +1,15 @@
 import { ElementRef } from '@angular/core';
 
 export class Tools {
+  getImage(file: File): Promise<string> {
+    return new Promise((res, rej) => {
+      const reader: FileReader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => res(reader.result as string);
+      reader.onerror = (err) => rej(err);
+    });
+  }
+
   public getNameOfCloudinaryFile(url: string): string {
     const dirs: string[] = url.split('/');
     return dirs[dirs.length - 1];
