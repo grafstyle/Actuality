@@ -85,6 +85,7 @@ export class AddImagesInputComponent {
       this.removeLastChildOf(this.elemWithChilds);
     }
     this.imgs.pop();
+    this.imgsInCloud.pop();
     this.addbtn.nativeElement.value = '';
   }
 }
