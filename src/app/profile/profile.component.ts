@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { User, Users } from '../controller/users/users';
 import { CPost, Posts } from '../controller/posts/posts';
 import { Cookies } from '../cookies/cookies';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Tools } from '../tools/tools';
 import { Cloudinary } from '../controller/cloudinary/cloudinary';
@@ -57,7 +57,11 @@ export class ProfileComponent {
   def_person_img: string =
     'https://res.cloudinary.com/dp5gpr5sc/image/upload/v1685629395/app_assets/person.svg';
 
-  constructor(private router: ActivatedRoute, private location: Location) {}
+  constructor(
+    private router: ActivatedRoute,
+    private location: Location,
+    private routerActions: Router
+  ) {}
 
   async ngOnInit() {
     try {
@@ -95,6 +99,7 @@ export class ProfileComponent {
     this.bioError = '';
 
     let canEdit: boolean = true;
+    let isEditedUrlName: boolean = false;
 
     this.edit_btn.nativeElement.innerText = this.editProfileStr;
 
@@ -140,7 +145,10 @@ export class ProfileComponent {
       } else if (editedUrlName.length > 30) {
         this.urlNameError = 'The url name is so long.';
         canEdit = false;
-      } else this.urlNameError = '';
+      } else {
+        isEditedUrlName = true;
+        this.urlNameError = '';
+      }
     }
 
     if (editedBio != this.lastBio) {
@@ -197,7 +205,11 @@ export class ProfileComponent {
     editedUser.bio = editedBio;
 
     if (this.user.id != undefined)
-      Users.put(editedUser, this.user.id).then(() => this.ngOnInit());
+      Users.put(editedUser, this.user.id).then(() => {
+        if (isEditedUrlName)
+          this.routerActions.navigateByUrl(editedUser.url_name);
+        this.ngOnInit();
+      });
 
     return canEdit;
   }
