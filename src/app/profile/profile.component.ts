@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { User, Users } from '../controller/users/users';
 import { CPost, Posts } from '../controller/posts/posts';
 import { Cookies } from '../cookies/cookies';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Tools } from '../tools/tools';
 import { Cloudinary } from '../controller/cloudinary/cloudinary';
@@ -62,7 +62,13 @@ export class ProfileComponent {
     private router: ActivatedRoute,
     private location: Location,
     private routerActions: Router
-  ) {}
+  ) {
+    routerActions.events.subscribe({
+      next: (e) => {
+        if (e instanceof NavigationEnd) this.ngOnInit();
+      },
+    });
+  }
 
   async ngOnInit() {
     try {
