@@ -18,6 +18,9 @@ const routes: Routes = [
       { path: 'followed', component: HomeFollowedComponent },
     ],
   },
+  { path: 'home', redirectTo: '' },
+  { path: 'login', redirectTo: '' },
+  { path: 'signup', redirectTo: '' },
   { path: ':profile', component: ProfileComponent },
   {
     path: 'search',
@@ -28,9 +31,6 @@ const routes: Routes = [
       { path: 'posts', component: SearchPostsComponent },
     ],
   },
-  { path: 'home', redirectTo: '' },
-  { path: 'login', redirectTo: '' },
-  { path: 'signup', redirectTo: '' },
 ];
 
 @NgModule({
