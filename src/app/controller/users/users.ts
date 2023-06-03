@@ -1,13 +1,11 @@
 import { AuthService } from '@auth0/auth0-angular';
 import { Service } from '../services/services';
-import { Tools } from 'src/app/tools/tools';
 
 export class Users {
   private static path: string = 'users';
   private static getPath: string = 'users/get?';
   public static auth: AuthService;
   public static apiService: Service;
-  private static tools: Tools = new Tools();
 
   public static login(): void {
     this.auth.loginWithRedirect();
@@ -122,7 +120,7 @@ export class Users {
 
   public static put(data: User, id: number): Promise<string> {
     return new Promise((res, rej) => {
-      Users.apiService.put('user', id, data).subscribe({
+      Users.apiService.put(this.path, id, data).subscribe({
         next: () => res('The user has been uplodaded.'),
         error: () => rej('Something went wrong when add the user.'),
       });
@@ -131,7 +129,7 @@ export class Users {
 
   public static delete(id: number): Promise<string> {
     return new Promise((res, rej) => {
-      Users.apiService.delete('user', id).subscribe({
+      Users.apiService.delete(this.path, id).subscribe({
         next: () => res('The user has been uplodaded.'),
         error: () => rej('Something went wrong when add the user.'),
       });
