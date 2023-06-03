@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { User, Users } from '../controller/users/users';
 import { CPost, Posts } from '../controller/posts/posts';
 import { Cookies } from '../cookies/cookies';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { Tools } from '../tools/tools';
+import { Cloudinary } from '../controller/cloudinary/cloudinary';
 
 @Component({
   selector: 'app-profile',
@@ -15,6 +17,43 @@ export class ProfileComponent {
   user: User = {} as User;
   cposts: CPost[] = [];
 
+  userImgUpload: Image = {} as Image;
+  portraitImgUpload: Image = {} as Image;
+
+  tools: Tools = new Tools();
+
+  @ViewChild('edit_profile') edit_profile!: ElementRef<HTMLDivElement>;
+
+  @ViewChild('edit_btn') edit_btn!: ElementRef<HTMLButtonElement>;
+  @ViewChild('edit_portrait_img')
+  edit_portrait_img!: ElementRef<HTMLButtonElement>;
+  @ViewChild('edit_user_img') edit_user_img!: ElementRef<HTMLButtonElement>;
+
+  @ViewChild('portrait_img') portrait_img!: ElementRef<HTMLImageElement>;
+  @ViewChild('user_img') user_img!: ElementRef<HTMLImageElement>;
+
+  @ViewChild('portrait_input') portrait_input!: ElementRef<HTMLInputElement>;
+  @ViewChild('user_img_input') user_input!: ElementRef<HTMLInputElement>;
+
+  @ViewChild('portrait_options') portrait_options!: ElementRef<HTMLDivElement>;
+  @ViewChild('user_img_options') user_img_options!: ElementRef<HTMLDivElement>;
+
+  @ViewChild('name') name_text!: ElementRef<HTMLDivElement>;
+  @ViewChild('url_name') url_name_text!: ElementRef<HTMLDivElement>;
+  @ViewChild('bio') bio_text!: ElementRef<HTMLDivElement>;
+
+  canEditProfile: boolean = false;
+  lastTextName: string = '';
+  lastTextUrlName: string = '';
+  lastBio: string = '';
+  lastUserImg: string = '';
+  lastPortraitImg: string = '';
+  nameError: string = '';
+  urlNameError: string = '';
+  bioError: string = '';
+  bioLetters: number = 0;
+  editProfileStr = 'Edit Profile';
+  okStr = 'Ok';
   def_person_img: string =
     'https://res.cloudinary.com/dp5gpr5sc/image/upload/v1685629395/app_assets/person.svg';
 
@@ -30,8 +69,11 @@ export class ProfileComponent {
       if (paramByUrl == 'profile') {
         this.user = await Users.get(Cookies.getUserID());
         this.location.replaceState(this.user.url_name);
-      } else if (intentGetUser != undefined) this.user = intentGetUser;
-      else return;
+        this.canEditProfile = true;
+      } else if (intentGetUser != undefined) {
+        this.user = intentGetUser;
+        if (Cookies.getUserID() == this.user.id) this.canEditProfile = true;
+      } else return;
 
       this.cposts = await Posts.getCPosts(
         await Posts.getBy('id_user', Cookies.getUserID())
@@ -40,4 +82,212 @@ export class ProfileComponent {
       this.err = 'Something went wrong getting the user.';
     }
   }
+
+  async editProfile(): Promise<boolean> {
+    const editedUser: User = {} as User;
+
+    let editedName: string = this.name_text.nativeElement.innerText;
+    let editedUrlName: string = this.url_name_text.nativeElement.innerText;
+    let editedBio: string = this.bio_text.nativeElement.innerText;
+
+    this.nameError = '';
+    this.urlNameError = '';
+    this.bioError = '';
+
+    let canEdit: boolean = true;
+
+    this.edit_btn.nativeElement.innerText = this.editProfileStr;
+
+    if (this.lastTextName != editedName && editedName != '')
+      editedUser.name = editedName;
+    else this.name_text.nativeElement.innerText = this.lastTextName;
+
+    if (this.lastTextUrlName != editedName && editedName != '')
+      editedUser.url_name = editedUrlName;
+    else this.url_name_text.nativeElement.innerText = this.lastTextUrlName;
+
+    if (this.lastBio != editedName && editedName != '')
+      editedUser.bio = editedBio;
+    else this.bio_text.nativeElement.innerText = this.lastBio;
+
+    editedName = this.name_text.nativeElement.innerText;
+    editedUrlName = this.url_name_text.nativeElement.innerText;
+    editedBio = this.bio_text.nativeElement.innerText;
+
+    if (editedName != this.lastTextName) {
+      if (editedName.match(/(?=[^a-z])\S/gi) || editedName.includes('\n')) {
+        this.nameError =
+          "The name must don't have special caracters or numbers.";
+        canEdit = false;
+      } else if (editedName.length > 30) {
+        this.nameError = 'The name is so long.';
+        canEdit = false;
+      } else this.nameError = '';
+    }
+
+    if (editedUrlName != this.lastTextUrlName) {
+      const exist: User = (await Users.getBy('url_name', editedUrlName))[0];
+
+      if (exist != undefined) {
+        this.urlNameError = 'The url name exist.';
+      } else if (
+        editedUrlName.match(/[^a-z0-9_]|\s/gi) ||
+        editedUrlName.includes('\n')
+      ) {
+        this.urlNameError =
+          'The url name only accepts digits, underscore and letters.';
+        canEdit = false;
+      } else if (editedUrlName.length > 30) {
+        this.urlNameError = 'The url name is so long.';
+        canEdit = false;
+      } else this.urlNameError = '';
+    }
+
+    if (editedBio != this.lastBio) {
+      if (editedBio.length > 300) {
+        this.bioError = 'The bio is so long.';
+        canEdit = false;
+      } else this.bioError = '';
+    }
+
+    if (canEdit == false) return canEdit;
+
+    if (
+      this.userImgUpload.url != undefined &&
+      this.userImgUpload.url != this.lastUserImg
+    ) {
+      try {
+        if (this.lastUserImg.includes('https://res.cloudinary.com'))
+          await Cloudinary.delete(this.lastUserImg);
+
+        const imageUploaded = await Cloudinary.post({
+          name: this.userImgUpload.name,
+          image: await this.tools.getImage(this.userImgUpload.file),
+          url: `users/${this.user.id}/image`,
+        });
+
+        editedUser.image = await JSON.parse(imageUploaded)['secure_url'];
+      } catch (err) {
+        // Not empty
+      }
+    }
+
+    if (
+      this.portraitImgUpload.url != undefined &&
+      this.portraitImgUpload.url != this.lastPortraitImg
+    ) {
+      try {
+        if (this.lastPortraitImg.includes('https://res.cloudinary.com'))
+          await Cloudinary.delete(this.lastPortraitImg);
+
+        const imageUploaded = await Cloudinary.post({
+          name: this.portraitImgUpload.name,
+          image: await this.tools.getImage(this.portraitImgUpload.file),
+          url: `users/${this.user.id}/portrait`,
+        });
+
+        editedUser.portrait = await JSON.parse(imageUploaded)['secure_url'];
+      } catch (err) {
+        // Not empty
+      }
+    }
+
+    editedUser.name = editedName;
+    editedUser.url_name = editedUrlName;
+    editedUser.bio = editedBio;
+
+    if (this.user.id != undefined)
+      Users.put(editedUser, this.user.id).then(() => this.ngOnInit());
+
+    return canEdit;
+  }
+
+  setBioLetters(): void {
+    this.bioLetters = this.bio_text.nativeElement.innerText.length;
+  }
+
+  editUserImg(open: boolean): void {
+    if (open) {
+      this.edit_user_img.nativeElement.style.display = 'none';
+      this.user_img_options.nativeElement.style.display = 'block';
+
+      if (this.user_img.nativeElement.src.includes('https://'))
+        this.lastUserImg = this.user_img.nativeElement.src;
+      return;
+    }
+
+    this.edit_user_img.nativeElement.style.display = 'block';
+    this.user_img_options.nativeElement.style.display = 'none';
+  }
+
+  async changeUserImg(e: Event): Promise<void> {
+    const input: HTMLInputElement = e.target as HTMLInputElement;
+
+    this.userImgUpload.file = input.files?.item(0) as File;
+    this.userImgUpload.name = this.userImgUpload.file.name;
+    this.userImgUpload.url = await this.tools.getImage(this.userImgUpload.file);
+
+    this.user_img.nativeElement.src = this.userImgUpload.url;
+  }
+
+  quitNewUserImg(): void {
+    this.user_img.nativeElement.src = this.lastUserImg;
+    this.user_input.nativeElement.value = '';
+  }
+
+  editPortraitImg(open: boolean): void {
+    if (open) {
+      this.edit_portrait_img.nativeElement.style.display = 'none';
+      this.portrait_options.nativeElement.style.display = 'block';
+
+      if (this.portrait_img.nativeElement.src.includes('https://'))
+        this.lastPortraitImg = this.portrait_img.nativeElement.src;
+      return;
+    }
+
+    this.edit_portrait_img.nativeElement.style.display = 'block';
+    this.portrait_options.nativeElement.style.display = 'none';
+  }
+
+  async changePortrait(e: Event): Promise<void> {
+    const input: HTMLInputElement = e.target as HTMLInputElement;
+
+    this.portraitImgUpload.file = input.files?.item(0) as File;
+    this.portraitImgUpload.name = this.portraitImgUpload.file.name;
+    this.portraitImgUpload.url = await this.tools.getImage(
+      this.portraitImgUpload.file
+    );
+
+    this.portrait_img.nativeElement.src = this.portraitImgUpload.url;
+  }
+
+  quitNewPortrait(): void {
+    this.portrait_img.nativeElement.src = this.lastPortraitImg;
+    this.portrait_input.nativeElement.value = '';
+  }
+
+  async modalEditProfile(open: boolean): Promise<void> {
+    if (open) {
+      this.edit_profile.nativeElement.style.opacity = '1';
+      this.edit_profile.nativeElement.style.pointerEvents = 'all';
+
+      this.lastTextName = this.name_text.nativeElement.innerText;
+      this.lastTextUrlName = this.url_name_text.nativeElement.innerText;
+      this.lastBio = this.bio_text.nativeElement.innerText;
+
+      this.tools.setCursorToLast(this.name_text);
+      return;
+    }
+
+    if (await this.editProfile()) {
+      this.edit_profile.nativeElement.style.opacity = '0';
+      this.edit_profile.nativeElement.style.pointerEvents = 'none';
+    }
+  }
+}
+
+interface Image {
+  file: File;
+  name: string;
+  url: string;
 }
