@@ -48,7 +48,7 @@ export class AddImagesInputComponent {
     const newImg: Image = {} as Image;
 
     const file: File = elem.files?.item(0) as File;
-    const url: string = await this.getImage(file);
+    const url: string = await this.tools.getImage(file);
     const name: string = file.name;
 
     for (const img of this.imgsInCloud)
@@ -68,15 +68,6 @@ export class AddImagesInputComponent {
       return;
     }
     alert('Sorry only accept three images and/or videos. :(');
-  }
-
-  getImage(file: File): Promise<string> {
-    return new Promise((res, rej) => {
-      const reader: FileReader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => res(reader.result as string);
-      reader.onerror = (err) => rej(err);
-    });
   }
 
   removeLastChildOf(container: HTMLElement) {
