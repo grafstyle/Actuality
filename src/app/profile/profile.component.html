@@ -118,6 +118,9 @@
     <div class="user">
       <img class="imgCont" src="{{ user.image || def_person_img }}" alt="" />
       <p class="name">{{ user.name }}</p>
+      <div *ngIf="canEditProfile" class="actions">
+        <button (click)="deletePost(cpost.post.id)">Delete</button>
+      </div>
     </div>
     <div class="content">
       <div class="title">{{ cpost.post.title }}</div>

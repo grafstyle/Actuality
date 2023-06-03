@@ -86,15 +86,19 @@ export class ProfileComponent {
         if (Cookies.getUserID() == this.user.id) this.canEditProfile = true;
       } else return;
 
-      if (this.user != undefined) {
-        this.cposts = await Posts.getCPosts(
-          await Posts.getBy('id_user', this.user.id)
-        );
-        if (this.cposts.length == 0)
-          this.noOnePost = "The user don't have posts.";
-      }
+      this.refreshPosts();
     } catch (e) {
       this.err = 'Something went wrong getting the user.';
+    }
+  }
+
+  async refreshPosts(): Promise<void> {
+    if (this.user != undefined) {
+      this.cposts = await Posts.getCPosts(
+        await Posts.getBy('id_user', this.user.id)
+      );
+      if (this.cposts.length == 0)
+        this.noOnePost = "The user don't have posts.";
     }
   }
 
@@ -306,6 +310,10 @@ export class ProfileComponent {
       this.edit_profile.nativeElement.style.opacity = '0';
       this.edit_profile.nativeElement.style.pointerEvents = 'none';
     }
+  }
+
+  deletePost(id: number): void {
+    Posts.delete(id).then(() => this.refreshPosts());
   }
 }
 
