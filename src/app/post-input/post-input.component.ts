@@ -69,7 +69,7 @@ export class PostInputComponent {
       const uploadImage = await Cloudinary.post({
         name: img.name,
         image: await this.tools.getImage(img.file),
-        url: `posts/${newPostID}/image/`,
+        url: `posts/${newPostID}/`,
       });
 
       this.toPost.images.push(await JSON.parse(uploadImage)['secure_url']);
