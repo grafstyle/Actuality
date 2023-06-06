@@ -24,12 +24,20 @@ export class ProfileComponent {
   err: string = '';
   noOnePost: string = '';
   user: User = {} as User;
+  userRegistered: User = {} as User;
   cposts: CPost[] = [];
 
   userImgUpload: Image = {} as Image;
   portraitImgUpload: Image = {} as Image;
 
   tools: Tools = new Tools();
+
+  @ViewChild('follow_btn') follow_btn!: ElementRef<HTMLButtonElement>;
+
+  canFollow: boolean = false;
+  clickFollow: number = 0;
+  followStr: string = 'Follow';
+  unfollowStr: string = 'Unfollow';
 
   @ViewChild('edit_profile') edit_profile!: ElementRef<HTMLDivElement>;
 
@@ -107,9 +115,18 @@ export class ProfileComponent {
         this.user = await Users.get(Cookies.getUserID());
         this.location.replaceState(this.user.url_name);
         this.canEditProfile = true;
+        this.canFollow = false;
       } else if (intentGetUser != undefined) {
         this.user = intentGetUser;
         if (Cookies.getUserID() == this.user.id) this.canEditProfile = true;
+        else {
+          this.userRegistered = await Users.get(Cookies.getUserID());
+          this.canFollow = true;
+          if (this.userFollowsUser()) {
+            this.follow_btn.nativeElement.textContent = this.unfollowStr;
+            this.clickFollow = 1;
+          }
+        }
       } else return;
 
       this.refreshPosts();
@@ -125,6 +142,81 @@ export class ProfileComponent {
       );
       if (this.cposts.length == 0)
         this.noOnePost = "The user don't have posts.";
+    }
+  }
+
+  async refreshUserOfUrl(): Promise<void> {
+    if (this.user.id != undefined) this.user = await Users.get(this.user.id);
+  }
+
+  userFollowsUser(): boolean {
+    const followers: number[] = this.user.followers;
+
+    if (followers != undefined)
+      for (const follower of followers)
+        if (follower == this.userRegistered.id) return true;
+
+    return false;
+  }
+
+  async followClick(): Promise<void> {
+    this.clickFollow++;
+
+    if (this.userRegistered == undefined)
+      this.routerActions.navigateByUrl('/signup');
+
+    const editedFollowers: number[] = [];
+    const editedFollowed: number[] = [];
+    const editedProfileUser: User = {} as User;
+    const editedRegisteredUser: User = {} as User;
+
+    if (this.clickFollow == 1) {
+      if (this.user.id != undefined && this.userRegistered.id != undefined) {
+        const followers: number[] = [...this.user.followers];
+        const followed_of_registered: number[] = [
+          ...this.userRegistered.followed,
+        ];
+
+        if (this.userRegistered.id != undefined)
+          followers.push(this.userRegistered.id);
+        followed_of_registered.push(this.user.id);
+
+        editedProfileUser.followers = followers;
+        editedRegisteredUser.followed = followed_of_registered;
+
+        Users.put(editedProfileUser, this.user.id).then(() => {
+          this.refreshUserOfUrl();
+          this.follow_btn.nativeElement.textContent = this.unfollowStr;
+        });
+
+        Users.put(editedRegisteredUser, this.userRegistered.id);
+      }
+    }
+
+    if (this.clickFollow == 2) {
+      if (this.user.id != undefined && this.userRegistered.id != undefined) {
+        for (const follower of this.user.followers) {
+          if (follower == this.userRegistered.id) continue;
+          editedFollowers.push(follower);
+        }
+
+        for (const followed of this.userRegistered.followed) {
+          if (followed == this.user.id) continue;
+          editedFollowed.push(followed);
+        }
+
+        editedProfileUser.followers = editedFollowers;
+        editedRegisteredUser.followed = editedFollowed;
+
+        Users.put(editedProfileUser, this.user.id).then(() => {
+          this.refreshUserOfUrl();
+          this.follow_btn.nativeElement.textContent = this.followStr;
+        });
+
+        Users.put(editedRegisteredUser, this.userRegistered.id);
+      }
+
+      this.clickFollow = 0;
     }
   }
 

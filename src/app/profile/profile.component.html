@@ -87,6 +87,9 @@
       <button #edit_btn *ngIf="canEditProfile" (click)="modalEditProfile(true)">
         Edit profile
       </button>
+      <button #follow_btn *ngIf="canFollow" (click)="followClick()">
+        Follow
+      </button>
     </div>
     <div class="imgCont userImg">
       <img src="{{ user.image || def_person_img }}" alt="" />
@@ -101,8 +104,8 @@
       <p>{{ user.bio }}</p>
     </div>
     <div class="otherInfo">
-      <div class="followers">0 followers</div>
-      <div class="followed">0 followed</div>
+      <div class="followers">{{ user.followers.length }} followers</div>
+      <div class="followed">{{ user.followed.length }} followed</div>
       <div class="joined">
         <p>Was joined 24 of april of 2023</p>
       </div>
