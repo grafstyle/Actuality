@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   ElementRef,
   Input,
@@ -47,7 +48,7 @@ export class CommentsComponent {
   clickEdit: number = 0;
   actualElem: number = 0;
 
-  constructor(private refresh: RefreshService) {}
+  constructor(private refresh: RefreshService, private cd: ChangeDetectorRef) {}
 
   ngAfterViewInit(): void {
     const commentBody = this.comment_body.toArray()[this.actualElem];
@@ -74,8 +75,6 @@ export class CommentsComponent {
     let somethingEdited: boolean = false;
     const imgsToDB: string[] = [];
 
-    const imgsComponent = this.imgsToEdit; // To avoid errors with "undefined"
-
     const editBtn = this.edit_btn.toArray()[this.actualElem];
     const commentBody = this.comment_body.toArray()[this.actualElem];
 
@@ -89,7 +88,6 @@ export class CommentsComponent {
     }
 
     if (this.clickEdit == 2) {
-      this.showImagesInput = false;
       editBtn.nativeElement.textContent = this.editStr;
       commentBody.nativeElement.contentEditable = 'false';
 
@@ -136,7 +134,11 @@ export class CommentsComponent {
       }
 
       this.clickEdit = 0;
+
+      this.showImagesInput = false;
     }
+
+    this.cd.detectChanges(); // To avoid errors in develop mode.
   }
 
   async deleteComment(id: number): Promise<void> {
