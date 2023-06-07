@@ -129,7 +129,7 @@ export class CommentsComponent {
       commentUpdated.images = imgsToDB;
 
       if (somethingEdited) {
-        commentUpdated.date_modified = this.tools.getFormattedActualDate();
+        commentUpdated.date_modified = this.tools.getActualISODate();
         Comments.put(id, commentUpdated).then(() => this.ngOnInit());
       }
 
