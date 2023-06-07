@@ -21,7 +21,6 @@ const routes: Routes = [
   { path: 'home', redirectTo: '' },
   { path: 'login', redirectTo: '' },
   { path: 'signup', redirectTo: '' },
-  { path: ':profile', component: ProfileComponent },
   {
     path: 'search',
     component: SearchComponent,
@@ -31,6 +30,7 @@ const routes: Routes = [
       { path: 'posts', component: SearchPostsComponent },
     ],
   },
+  { path: ':profile', component: ProfileComponent },
 ];
 
 @NgModule({
