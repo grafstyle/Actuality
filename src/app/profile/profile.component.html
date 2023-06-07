@@ -2,12 +2,94 @@
   <p>{{ err }}</p>
 </div>
 <div class="user" *ngIf="user.id != undefined">
+  <div class="editProfile editContainer" #edit_profile>
+    <div class="content">
+      <div class="portrait_edit">
+        <div class="imgCont frontEdit">
+          <img #portrait_img src="{{ user.portrait }}" alt="" />
+          <button
+            #edit_portrait_img
+            class="editBtn edit_portrait_btn"
+            (click)="editPortraitImg(true)"
+          >
+            Edit
+          </button>
+        </div>
+        <div class="options" #portrait_options>
+          <input
+            #portrait_input
+            (change)="changePortrait($event)"
+            type="file"
+          />
+          <button (click)="editPortraitImg(false)">Ok</button>
+          <button (click)="quitNewPortrait()">X</button>
+        </div>
+      </div>
+      <div class="user_img_edit">
+        <div class="imgCont userImgEdit">
+          <img #user_img src="{{ user.image || def_person_img }}" alt="" />
+          <button
+            #edit_user_img
+            class="editBtn edit_user_img_btn"
+            (click)="editUserImg(true)"
+          >
+            Edit
+          </button>
+        </div>
+        <div class="options" #user_img_options>
+          <input #user_img_input (change)="changeUserImg($event)" type="file" />
+          <button (click)="editUserImg(false)">Ok</button>
+          <button (click)="quitNewUserImg()">X</button>
+        </div>
+      </div>
+      <div class="name_edit">
+        <h2>Name:</h2>
+        <div class="name" #name contenteditable="true">{{ user.name }}</div>
+        <h4 class="inputError" *ngIf="nameError != ''">{{ this.nameError }}</h4>
+      </div>
+      <div class="url_name_edit">
+        <h2>Url name:</h2>
+        <div class="editCont">
+          <p>@</p>
+          <div class="url_name" #url_name contenteditable="true">
+            {{ user.url_name }}
+          </div>
+        </div>
+        <h4 class="inputError" *ngIf="urlNameError != ''">
+          {{ this.urlNameError }}
+        </h4>
+      </div>
+      <div class="bio_edit">
+        <h2>Bio:</h2>
+        <div
+          #bio
+          contenteditable="true"
+          (keydown)="setBioLetters()"
+          (keyup)="setBioLetters()"
+        >
+          {{ user.bio }}
+        </div>
+        <div class="cont_count_letters">
+          <h3 class="count_letters">{{ this.bioLetters }}</h3>
+        </div>
+      </div>
+      <h4 class="inputError" *ngIf="bioError != ''">{{ this.bioError }}</h4>
+      <div class="btns">
+        <button (click)="modalEditProfile(false)">Ok</button>
+      </div>
+    </div>
+  </div>
   <div class="portrait">
     <div class="imgCont front">
       <img src="{{ user.portrait }}" alt="" />
     </div>
     <div class="editProfCont">
-      <button>Edit profile</button>
+      <button #edit_btn *ngIf="canEditProfile" (click)="modalEditProfile(true)">
+        Edit profile
+      </button>
+      <button #follow_btn *ngIf="canFollow" (click)="followClick()">
+        Follow
+      </button>
     </div>
     <div class="imgCont userImg">
       <img src="{{ user.image || def_person_img }}" alt="" />
@@ -22,8 +104,8 @@
       <p>{{ user.bio }}</p>
     </div>
     <div class="otherInfo">
-      <div class="followers">0 followers</div>
-      <div class="followed">0 followed</div>
+      <div class="followers">{{ user.followers.length }} followers</div>
+      <div class="followed">{{ user.followed.length }} followed</div>
       <div class="joined">
         <p>Was joined 24 of april of 2023</p>
       </div>
@@ -31,11 +113,74 @@
   </div>
 </div>
 <app-post-input></app-post-input>
+<div class="noOnePost" *ngIf="cposts.length == 0">
+  <p>{{ noOnePost }}</p>
+</div>
 <div class="allPosts" *ngFor="let cpost of cposts; let i = index">
+  <div class="editPost editContainer" #edit_post>
+    <div class="content">
+      <div class="post">
+        <div class="user">
+          <img
+            class="imgCont"
+            src="{{ user.image || def_person_img }}"
+            alt=""
+          />
+          <p class="name">{{ user.name }}</p>
+        </div>
+        <div class="content_edit">
+          <div class="title" contenteditable="true" #title_posts>
+            {{ cpost.post.title }}
+          </div>
+          <div class="media" #media>
+            <button
+              #edit_post_imgs_btn
+              class="editBtn edit_profile_imgs_btn"
+              (click)="editImagesOfPost()"
+            >
+              Edit
+            </button>
+            <div class="imgCont" *ngIf="cpost.post.images.length == 0">
+              <img
+                src="https://us.123rf.com/450wm/solarus/solarus2112/solarus211200026/178493166-vector-de-icono-de-imagen-predeterminado-falta-la-página-de-imagen-para-el-diseño-del-sitio-web-o.jpg?ver=6"
+                alt=""
+              />
+            </div>
+            <div class="imgCont" *ngFor="let imgOrVideo of cpost.post.images">
+              <img
+                src="{{ imgOrVideo }}"
+                alt=""
+                *ngIf="!imgOrVideo.includes('.mp4')"
+              />
+            </div>
+          </div>
+          <div
+            class="edit_image_actions"
+            #edit_image_actions
+            *ngIf="showImgsInputPost && selectedPost == i"
+          >
+            <app-add-images-input
+              #imgs_input
+              [imgsInCloud]="cpost.post.images || []"
+              [elemWithChilds]="media"
+            ></app-add-images-input>
+            <button (click)="quitNewImgsOfPost(true)">Ok</button>
+          </div>
+        </div>
+        <div class="btns">
+          <button (click)="modalEditPost(false, i)">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="post">
     <div class="user">
       <img class="imgCont" src="{{ user.image || def_person_img }}" alt="" />
       <p class="name">{{ user.name }}</p>
+      <div *ngIf="canEditProfile" class="actions">
+        <button (click)="modalEditPost(true, i, cpost.post)">Edit</button>
+        <button (click)="deletePost(cpost.post.id)">Delete</button>
+      </div>
     </div>
     <div class="content">
       <div class="title">{{ cpost.post.title }}</div>
