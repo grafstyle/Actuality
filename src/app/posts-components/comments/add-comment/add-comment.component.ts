@@ -88,8 +88,8 @@ export class AddCommentComponent {
       this.toComment.images.push(await JSON.parse(uploadImage)['secure_url']);
     }
 
-    this.toComment.date_added = this.tools.getFormattedActualDate();
-    this.toComment.date_modified = this.tools.getFormattedActualDate();
+    this.toComment.date_added = this.tools.getActualISODate();
+    this.toComment.date_modified = this.tools.getActualISODate();
 
     const postResponse: string = await Comments.post(this.toComment);
 
