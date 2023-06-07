@@ -498,7 +498,7 @@ export class ProfileComponent {
     editedPost.images = imgsToDB;
 
     if (somethingEdited) {
-      this.postToEdit.date_modified = this.tools.getFormattedActualDate();
+      this.postToEdit.date_modified = this.tools.getActualISODate();
       Posts.put(this.postToEdit.id, editedPost).then(() => this.refreshPosts());
     }
 
