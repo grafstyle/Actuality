@@ -45,6 +45,11 @@ export class Tools {
     return `${hour}:${timeSplit[1]}`;
   }
 
+  public getActualISODate(): string {
+    const date = new Date().toISOString();
+    return date;
+  }
+
   public getFormattedActualDate(): string {
     const date: Date = new Date();
 
