@@ -91,6 +91,11 @@ export class ProfileComponent {
   lastTextPostTitle: string = '';
   showImgsInputPost: boolean = false;
 
+  @ViewChild('followe_rs_d_view') frsd_view!: ElementRef<HTMLDivElement>;
+  folls: User[] = [];
+  follsEmptyStr: string = '';
+  modalFollowedOpened: boolean = false;
+
   constructor(
     private router: ActivatedRoute,
     private location: Location,
@@ -159,19 +164,78 @@ export class ProfileComponent {
     return false;
   }
 
+  async unfollowAndRefresh(
+    idToUnfollow: number | undefined = undefined
+  ): Promise<void> {
+    await this.unfollowUser(idToUnfollow).then(() => this.showAllFollowed());
+  }
+
+  async unfollowUser(
+    idToUnfollow: number | undefined = undefined
+  ): Promise<void> {
+    const editedFollowers: number[] = [];
+    const editedFollowed: number[] = [];
+
+    const editedProfileUser: User = {} as User;
+    const editedRegisteredUser: User = {} as User;
+
+    let userWithFd: User = {} as User;
+
+    if (idToUnfollow != undefined) userWithFd = await Users.get(idToUnfollow);
+    else userWithFd = this.userRegistered;
+
+    if (this.user.id != undefined && userWithFd.id != undefined) {
+      if (idToUnfollow != undefined) {
+        for (const followed of this.user.followed) {
+          if (followed == userWithFd.id) continue;
+          editedFollowed.push(followed);
+        }
+
+        for (const followers of userWithFd.followers) {
+          if (followers == this.user.id) continue;
+          editedFollowers.push(followers);
+        }
+
+        editedProfileUser.followed = editedFollowed;
+        editedRegisteredUser.followers = editedFollowers;
+      } else {
+        for (const follower of this.user.followers) {
+          if (follower == userWithFd.id) continue;
+          editedFollowers.push(follower);
+        }
+
+        for (const followed of userWithFd.followed) {
+          if (followed == this.user.id) continue;
+          editedFollowed.push(followed);
+        }
+
+        editedProfileUser.followers = editedFollowers;
+        editedRegisteredUser.followed = editedFollowed;
+      }
+
+      await Users.put(editedProfileUser, this.user.id).then(async () => {
+        await this.refreshUserOfUrl();
+        if (this.follow_btn != undefined)
+          this.follow_btn.nativeElement.textContent = this.followStr;
+      });
+
+      await Users.put(editedRegisteredUser, userWithFd.id);
+    }
+  }
+
   async followClick(): Promise<void> {
     this.clickFollow++;
+
+    const editedProfileUser: User = {} as User;
+    const editedRegisteredUser: User = {} as User;
 
     if (this.userRegistered == undefined)
       this.routerActions.navigateByUrl('/signup');
 
-    const editedFollowers: number[] = [];
-    const editedFollowed: number[] = [];
-    const editedProfileUser: User = {} as User;
-    const editedRegisteredUser: User = {} as User;
-
     if (this.clickFollow == 1) {
       if (this.user.id != undefined && this.userRegistered.id != undefined) {
+        this.userRegistered = await Users.get(this.userRegistered.id);
+
         const followers: number[] = [...this.user.followers];
         const followed_of_registered: number[] = [
           ...this.userRegistered.followed,
@@ -184,38 +248,18 @@ export class ProfileComponent {
         editedProfileUser.followers = followers;
         editedRegisteredUser.followed = followed_of_registered;
 
-        Users.put(editedProfileUser, this.user.id).then(() => {
-          this.refreshUserOfUrl();
+        await Users.put(editedProfileUser, this.user.id).then(async () => {
+          await this.refreshUserOfUrl();
           this.follow_btn.nativeElement.textContent = this.unfollowStr;
         });
 
-        Users.put(editedRegisteredUser, this.userRegistered.id);
+        if (this.userRegistered.id != undefined)
+          await Users.put(editedRegisteredUser, this.userRegistered.id);
       }
     }
 
     if (this.clickFollow == 2) {
-      if (this.user.id != undefined && this.userRegistered.id != undefined) {
-        for (const follower of this.user.followers) {
-          if (follower == this.userRegistered.id) continue;
-          editedFollowers.push(follower);
-        }
-
-        for (const followed of this.userRegistered.followed) {
-          if (followed == this.user.id) continue;
-          editedFollowed.push(followed);
-        }
-
-        editedProfileUser.followers = editedFollowers;
-        editedRegisteredUser.followed = editedFollowed;
-
-        Users.put(editedProfileUser, this.user.id).then(() => {
-          this.refreshUserOfUrl();
-          this.follow_btn.nativeElement.textContent = this.followStr;
-        });
-
-        Users.put(editedRegisteredUser, this.userRegistered.id);
-      }
-
+      await this.unfollowUser();
       this.clickFollow = 0;
     }
   }
@@ -543,6 +587,39 @@ export class ProfileComponent {
 
   deletePost(id: number): void {
     Posts.delete(id).then(() => this.refreshPosts());
+  }
+
+  async showContFoll(show: boolean = true): Promise<void> {
+    this.folls = [];
+
+    if (show) {
+      this.frsd_view.nativeElement.style.opacity = '1';
+      this.frsd_view.nativeElement.style.pointerEvents = 'all';
+      return;
+    }
+
+    this.modalFollowedOpened = false;
+    this.frsd_view.nativeElement.style.opacity = '0';
+    this.frsd_view.nativeElement.style.pointerEvents = 'none';
+  }
+
+  async showAllFollowers(): Promise<void> {
+    this.showContFoll();
+
+    for (const id of this.user.followers) this.folls.push(await Users.get(id));
+
+    if (this.folls.length == 0)
+      this.follsEmptyStr = "This user don't has followers.";
+  }
+
+  async showAllFollowed(): Promise<void> {
+    this.showContFoll();
+    this.modalFollowedOpened = true;
+
+    for (const id of this.user.followed) this.folls.push(await Users.get(id));
+
+    if (this.folls.length == 0)
+      this.follsEmptyStr = "This user don't follow anyone.";
   }
 }
 
