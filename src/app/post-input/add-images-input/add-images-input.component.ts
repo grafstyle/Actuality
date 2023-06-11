@@ -70,20 +70,10 @@ export class AddImagesInputComponent {
     alert('Sorry only accept three images and/or videos. :(');
   }
 
-  removeLastChildOf(container: HTMLElement) {
-    const last: ChildNode | null = container.lastElementChild;
-    if (last != null) container.removeChild(last);
-  }
-
   async removeLastImage(): Promise<void> {
     const lastImg = this.imgs[this.imgs.length - 1].url;
-    if (
-      lastImg.includes('https://res.cloudinary.com') &&
-      this.elemWithChilds != undefined
-    ) {
+    if (lastImg.includes('https://res.cloudinary.com'))
       this.imgsToDelete.push(lastImg);
-      this.removeLastChildOf(this.elemWithChilds);
-    }
     this.imgs.pop();
     this.imgsInCloud.pop();
     this.addbtn.nativeElement.value = '';
