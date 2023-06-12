@@ -6,8 +6,7 @@
 
 /* Containers of modals */
 
-.editContainer,
-.modalContainer {
+.editContainer {
   z-index: 9999;
   pointer-events: none;
   opacity: 0;
