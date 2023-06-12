@@ -41,3 +41,20 @@
 .post > .content > .media > .imgCont {
   height: 400px;
 }
+
+/* For modals */
+
+.modalContainer {
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  left: 0;
+  top: 0;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
