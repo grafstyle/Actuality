@@ -20,6 +20,7 @@ import { LikesComponent } from './posts-components/likes/likes.component';
 import { AddImagesInputComponent } from './post-input/add-images-input/add-images-input.component';
 import { CommentsComponent } from './posts-components/comments/comments.component';
 import { AddCommentComponent } from './posts-components/comments/add-comment/add-comment.component';
+import { LoadScreenComponent } from './load-screen/load-screen.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { AddCommentComponent } from './posts-components/comments/add-comment/add
     AddImagesInputComponent,
     CommentsComponent,
     AddCommentComponent,
+    LoadScreenComponent,
   ],
   imports: [
     BrowserModule,
