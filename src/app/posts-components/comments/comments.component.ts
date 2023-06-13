@@ -48,6 +48,19 @@ export class CommentsComponent {
   clickEdit: number = 0;
   actualElem: number = 0;
 
+  @ViewChild('all_comments_cont')
+  all_comments_cont!: ElementRef<HTMLDivElement>;
+  @ViewChildren('comment_body_all') comment_body_all!: QueryList<
+    ElementRef<HTMLParagraphElement>
+  >;
+  @ViewChildren('imgs_cont_all') imgs_cont_all!: ElementRef<HTMLDivElement>;
+  @ViewChildren('edit_comment_btn_all') edit_btn_all!: QueryList<
+    ElementRef<HTMLButtonElement>
+  >;
+
+  showImagesInputAll: boolean = false;
+  actualComments: Comment[] = [];
+
   constructor(private refresh: RefreshService, private cd: ChangeDetectorRef) {}
 
   ngAfterViewInit(): void {
@@ -61,6 +74,8 @@ export class CommentsComponent {
     this.user = await Users.get(Cookies.getUserID());
     this.cpost = (await Posts.getCPosts(await Posts.get(this.idPost)))[0];
 
+    this.actualComments = await Comments.getBy('id_post', this.idPost);
+
     this.refresh.getUpdate().subscribe({
       next: (subject: any) => {
         if (subject.text == 'refresh_comments') this.ngOnInit();
@@ -68,21 +83,45 @@ export class CommentsComponent {
     });
   }
 
-  async updateComment(id: number, actualElem: number): Promise<void> {
+  seeAllComments(): void {
+    this.all_comments_cont.nativeElement.style.opacity = '1';
+    this.all_comments_cont.nativeElement.style.pointerEvents = 'all';
+  }
+
+  hideAllComments(): void {
+    this.all_comments_cont.nativeElement.style.opacity = '0';
+    this.all_comments_cont.nativeElement.style.pointerEvents = 'none';
+  }
+
+  async updateComment(
+    id: number,
+    actualElem: number,
+    ofAllComments: boolean = false
+  ): Promise<void> {
     this.clickEdit++;
     this.actualElem = actualElem;
     const commentUpdated: Comment = {} as Comment;
     let somethingEdited: boolean = false;
     const imgsToDB: string[] = [];
 
-    const editBtn = this.edit_btn.toArray()[this.actualElem];
-    const commentBody = this.comment_body.toArray()[this.actualElem];
+    let editBtn: ElementRef<HTMLButtonElement>;
+    let commentBody: ElementRef<HTMLDivElement>;
+
+    if (ofAllComments) {
+      editBtn = this.edit_btn_all.toArray()[this.actualElem];
+      commentBody = this.comment_body_all.toArray()[this.actualElem];
+    } else {
+      editBtn = this.edit_btn.toArray()[this.actualElem];
+      commentBody = this.comment_body.toArray()[this.actualElem];
+    }
 
     if (this.clickEdit == 1) {
       editBtn.nativeElement.textContent = this.okStr;
       commentBody.nativeElement.contentEditable = 'true';
       commentBody.nativeElement.focus();
-      this.showImagesInput = true;
+
+      if (ofAllComments) this.showImagesInputAll = true;
+      else this.showImagesInput = true;
 
       this.tools.setCursorToLast(commentBody);
     }
@@ -134,8 +173,7 @@ export class CommentsComponent {
       }
 
       this.clickEdit = 0;
-
-      this.showImagesInput = false;
+      this.showImagesInput = this.showImagesInputAll = false;
     }
 
     this.cd.detectChanges(); // To avoid errors in develop mode.

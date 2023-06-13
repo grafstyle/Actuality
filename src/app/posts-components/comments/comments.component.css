@@ -39,3 +39,13 @@
 .allComments > .comment > .userComment > .nameAndActions > .actions {
   justify-content: flex-end;
 }
+
+.modalContainer > .content {
+  background-color: #fff;
+  width: 50%;
+}
+
+.modalContainer > .content > .commentsCont {
+  overflow-y: scroll;
+  height: 300px;
+}
