@@ -9,12 +9,13 @@
     <div class="user">
       <img
         class="imgCont"
-        src="{{
-          cpost.user_of_post.image ? cpost.user_of_post.image : def_person_img
-        }}"
+        src="{{ cpost.user_of_post.image }}"
         alt=""
+        [routerLink]="['/' + cpost.user_of_comments[i].url_name]"
       />
-      <p class="name">{{ cpost.user_of_post.name }}</p>
+      <p class="name" [routerLink]="['/' + cpost.user_of_comments[i].url_name]">
+        {{ cpost.user_of_post.name }}
+      </p>
     </div>
     <div class="content">
       <div class="title">{{ cpost.post.title }}</div>
