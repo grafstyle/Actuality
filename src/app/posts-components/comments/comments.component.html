@@ -15,11 +15,14 @@
                 : def_person_img
             }}"
             alt=""
+            [routerLink]="['/' + cpost.user_of_comments[i].url_name]"
           />
         </div>
         <div class="userComment">
           <div class="nameAndActions">
-            <h4>{{ cpost.user_of_comments[i].name }}</h4>
+            <h4 [routerLink]="['/' + cpost.user_of_comments[i].url_name]">
+              {{ cpost.user_of_comments[i].name }}
+            </h4>
             <div
               class="actions"
               *ngIf="cpost.user_of_comments[i].id == user.id"
@@ -76,11 +79,14 @@
                     : def_person_img
                 }}"
                 alt=""
+                [routerLink]="['/' + cpost.user_of_comments[i].url_name]"
               />
             </div>
             <div class="userComment">
               <div class="nameAndActions">
-                <h4>{{ cpost.user_of_comments[i].name }}</h4>
+                <h4 [routerLink]="['/' + cpost.user_of_comments[i].url_name]">
+                  {{ cpost.user_of_comments[i].name }}
+                </h4>
                 <div
                   class="actions"
                   *ngIf="cpost.user_of_comments[i].id == user.id"
