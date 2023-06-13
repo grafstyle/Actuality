@@ -6,7 +6,7 @@
       class="allComments"
       *ngFor="let comment of cpost.comments; let i = index"
     >
-      <div class="comment" *ngIf="comment.id_post == cpost.post.id">
+      <div class="comment" *ngIf="comment.id_post == cpost.post.id && i < 5">
         <div class="imgCont user">
           <img
             src="{{
@@ -46,6 +46,69 @@
             [imgsInCloud]="comment.images || []"
             *ngIf="showImagesInput && actualElem == i"
           ></app-add-images-input>
+        </div>
+      </div>
+    </div>
+    <div class="seeMoreCont" *ngIf="cpost.comments.length > 5">
+      <button (click)="seeAllComments()">See more</button>
+    </div>
+  </div>
+
+  <!-- All comments modal -->
+
+  <div class="allCommentsCont modalContainer" #all_comments_cont>
+    <div class="content">
+      <div class="closeCont">
+        <p (click)="hideAllComments()">X</p>
+      </div>
+      <app-add-comment [idPost]="idPost"></app-add-comment>
+      <div class="commentsCont">
+        <div
+          class="allComments"
+          *ngFor="let comment of cpost.comments; let i = index"
+        >
+          <div class="comment" *ngIf="comment.id_post == cpost.post.id">
+            <div class="imgCont user">
+              <img
+                src="{{
+                  cpost.user_of_post.image
+                    ? cpost.user_of_post.image
+                    : def_person_img
+                }}"
+                alt=""
+              />
+            </div>
+            <div class="userComment">
+              <div class="nameAndActions">
+                <h4>{{ cpost.user_of_comments[i].name }}</h4>
+                <div
+                  class="actions"
+                  *ngIf="cpost.user_of_comments[i].id == user.id"
+                >
+                  <button
+                    class="editBtn"
+                    (click)="updateComment(comment.id, i, true)"
+                    #edit_comment_btn_all
+                  >
+                    {{ editStr }}
+                  </button>
+                  <button class="deleteBtn" (click)="deleteComment(comment.id)">
+                    delete
+                  </button>
+                </div>
+              </div>
+              <p #comment_body_all>{{ comment.comment }}</p>
+              <div #imgs_cont_all class="imgsOrVids">
+                <div class="imgs" *ngFor="let img of actualComments[i].images">
+                  <img *ngIf="img != undefined" src="{{ img }}" alt="" />
+                </div>
+              </div>
+              <app-add-images-input
+                [imgsInCloud]="actualComments[i].images || []"
+                *ngIf="showImagesInputAll && actualElem == i"
+              ></app-add-images-input>
+            </div>
+          </div>
         </div>
       </div>
     </div>
