@@ -130,7 +130,11 @@ export class ProfileComponent {
             this.clickFollow = 1;
           }
         }
-      } else return;
+      } else {
+        if (this.user.id == undefined && this.userRegistered.id == undefined)
+          this.err = "This user doesn't exist.";
+        return;
+      }
 
       this.refreshPosts();
     } catch (e) {

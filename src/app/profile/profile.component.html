@@ -1,6 +1,3 @@
-<div *ngIf="user.id == undefined">
-  <p>{{ err }}</p>
-</div>
 <div class="user" *ngIf="user.id != undefined">
   <div class="editProfile editContainer" #edit_profile>
     <div class="content">
@@ -150,6 +147,9 @@
   </div>
 </div>
 <app-post-input></app-post-input>
+<div *ngIf="user.id == undefined">
+  <p>{{ err }}</p>
+</div>
 <div class="noOnePost" *ngIf="cposts.length == 0">
   <p>{{ noOnePost }}</p>
 </div>
