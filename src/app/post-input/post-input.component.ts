@@ -22,6 +22,8 @@ export class PostInputComponent {
   @ViewChild(AddImagesInputComponent) addImagesInput!: AddImagesInputComponent;
   @ViewChild('post_body') postBody!: ElementRef<HTMLDivElement>;
 
+  showLoadScreen: boolean = false;
+
   constructor(private refresh: RefreshService) {}
 
   ngAfterViewInit() {
@@ -58,6 +60,8 @@ export class PostInputComponent {
       return;
     }
 
+    this.showLoadScreen = true;
+
     this.toPost.id_user = idUser;
 
     const newPostID: number = (await Posts.getLastID()) + 1;
@@ -78,14 +82,10 @@ export class PostInputComponent {
     this.toPost.date_added = this.tools.getActualISODate();
     this.toPost.date_modified = this.tools.getActualISODate();
 
-    this.cleanAll();
-
-    const postResponse: string = await Posts.post(this.toPost);
-
-    alert(postResponse);
-    if (postResponse == 'The data has been posted.') {
+    await Posts.post(this.toPost).then(() => {
       this.refresh.setUpdate('refresh_posts');
       this.cleanAll();
-    }
+      this.showLoadScreen = false;
+    });
   }
 }
