@@ -120,9 +120,7 @@ export class ProfileComponent {
 
       if (paramByUrl == 'profile') {
         this.user = await Users.get(Cookies.getUserID());
-        this.location.replaceState(this.user.url_name);
-        this.canEditProfile = true;
-        this.canFollow = false;
+        this.routerActions.navigateByUrl('/' + this.user.url_name);
       } else if (intentGetUser != undefined) {
         this.user = intentGetUser;
         if (Cookies.getUserID() == this.user.id) this.canEditProfile = true;
