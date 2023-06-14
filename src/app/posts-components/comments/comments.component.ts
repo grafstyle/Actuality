@@ -61,6 +61,8 @@ export class CommentsComponent {
   showImagesInputAll: boolean = false;
   actualComments: Comment[] = [];
 
+  showLoadScreen: boolean = false;
+
   constructor(private refresh: RefreshService, private cd: ChangeDetectorRef) {}
 
   ngAfterViewInit(): void {
@@ -130,6 +132,8 @@ export class CommentsComponent {
       editBtn.nativeElement.textContent = this.editStr;
       commentBody.nativeElement.contentEditable = 'false';
 
+      this.showLoadScreen = true;
+
       if (commentBody.nativeElement.textContent == '')
         commentBody.nativeElement.textContent = this.bodyOfComment;
       else {
@@ -169,7 +173,10 @@ export class CommentsComponent {
 
       if (somethingEdited) {
         commentUpdated.date_modified = this.tools.getActualISODate();
-        Comments.put(id, commentUpdated).then(() => this.ngOnInit());
+        await Comments.put(id, commentUpdated).then(() => {
+          this.showLoadScreen = false;
+          this.ngOnInit();
+        });
       }
 
       this.clickEdit = 0;
@@ -180,6 +187,10 @@ export class CommentsComponent {
   }
 
   async deleteComment(id: number): Promise<void> {
-    Comments.delete(id).then(() => this.ngOnInit());
+    this.showLoadScreen = true;
+    await Comments.delete(id).then(() => {
+      this.showLoadScreen = false;
+      this.ngOnInit();
+    });
   }
 }

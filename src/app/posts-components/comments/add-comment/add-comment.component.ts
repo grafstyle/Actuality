@@ -30,6 +30,8 @@ export class AddCommentComponent {
   @ViewChild(AddImagesInputComponent) addImagesInput!: AddImagesInputComponent;
   @ViewChild('comment_body') commentBody!: ElementRef<HTMLDivElement>;
 
+  showLoadScreen: boolean = false;
+
   constructor(private refresh: RefreshService) {}
 
   async ngOnInit() {
@@ -70,6 +72,8 @@ export class AddCommentComponent {
       return;
     }
 
+    this.showLoadScreen = true;
+
     this.toComment.id_user = idUser;
     this.toComment.id_post = this.idPost;
 
@@ -91,12 +95,10 @@ export class AddCommentComponent {
     this.toComment.date_added = this.tools.getActualISODate();
     this.toComment.date_modified = this.tools.getActualISODate();
 
-    const postResponse: string = await Comments.post(this.toComment);
-
-    alert(postResponse);
-    if (postResponse == 'The data has been posted.') {
+    await Comments.post(this.toComment).then(() => {
       this.refresh.setUpdate('refresh_comments');
       this.cleanAll();
-    }
+      this.showLoadScreen = false;
+    });
   }
 }
