@@ -10,7 +10,6 @@ import { User, Users } from '../controller/users/users';
 import { CPost, Post, Posts } from '../controller/posts/posts';
 import { Cookies } from '../cookies/cookies';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Location } from '@angular/common';
 import { Tools } from '../tools/tools';
 import { Cloudinary } from '../controller/cloudinary/cloudinary';
 import { AddImagesInputComponent } from '../post-input/add-images-input/add-images-input.component';
@@ -100,7 +99,6 @@ export class ProfileComponent {
 
   constructor(
     private router: ActivatedRoute,
-    private location: Location,
     private routerActions: Router,
     private cd: ChangeDetectorRef
   ) {
@@ -120,9 +118,7 @@ export class ProfileComponent {
 
       if (paramByUrl == 'profile') {
         this.user = await Users.get(Cookies.getUserID());
-        this.location.replaceState(this.user.url_name);
-        this.canEditProfile = true;
-        this.canFollow = false;
+        this.routerActions.navigateByUrl('/' + this.user.url_name);
       } else if (intentGetUser != undefined) {
         this.user = intentGetUser;
         if (Cookies.getUserID() == this.user.id) this.canEditProfile = true;
