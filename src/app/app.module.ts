@@ -21,6 +21,7 @@ import { AddImagesInputComponent } from './post-input/add-images-input/add-image
 import { CommentsComponent } from './posts-components/comments/comments.component';
 import { AddCommentComponent } from './posts-components/comments/add-comment/add-comment.component';
 import { LoadScreenComponent } from './load-screen/load-screen.component';
+import { ProfilePostsComponent } from './profile/profile-posts/profile-posts.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { LoadScreenComponent } from './load-screen/load-screen.component';
     CommentsComponent,
     AddCommentComponent,
     LoadScreenComponent,
+    ProfilePostsComponent,
   ],
   imports: [
     BrowserModule,
