@@ -10,7 +10,6 @@ import { User, Users } from '../controller/users/users';
 import { CPost, Post, Posts } from '../controller/posts/posts';
 import { Cookies } from '../cookies/cookies';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Location } from '@angular/common';
 import { Tools } from '../tools/tools';
 import { Cloudinary } from '../controller/cloudinary/cloudinary';
 import { AddImagesInputComponent } from '../post-input/add-images-input/add-images-input.component';
@@ -96,9 +95,10 @@ export class ProfileComponent {
   follsEmptyStr: string = '';
   modalFollowedOpened: boolean = false;
 
+  showLoadScreen: boolean = false;
+
   constructor(
     private router: ActivatedRoute,
-    private location: Location,
     private routerActions: Router,
     private cd: ChangeDetectorRef
   ) {
@@ -118,9 +118,7 @@ export class ProfileComponent {
 
       if (paramByUrl == 'profile') {
         this.user = await Users.get(Cookies.getUserID());
-        this.location.replaceState(this.user.url_name);
-        this.canEditProfile = true;
-        this.canFollow = false;
+        this.routerActions.navigateByUrl('/' + this.user.url_name);
       } else if (intentGetUser != undefined) {
         this.user = intentGetUser;
         if (Cookies.getUserID() == this.user.id) this.canEditProfile = true;
@@ -132,7 +130,11 @@ export class ProfileComponent {
             this.clickFollow = 1;
           }
         }
-      } else return;
+      } else {
+        if (this.user.id == undefined && this.userRegistered.id == undefined)
+          this.err = "This user doesn't exist.";
+        return;
+      }
 
       this.refreshPosts();
     } catch (e) {
@@ -337,6 +339,8 @@ export class ProfileComponent {
 
     if (canEdit == false) return canEdit;
 
+    this.showLoadScreen = true;
+
     if (
       this.userImgUpload.url != undefined &&
       this.userImgUpload.url != this.lastUserImg
@@ -383,6 +387,7 @@ export class ProfileComponent {
 
     if (this.user.id != undefined)
       Users.put(editedUser, this.user.id).then(() => {
+        this.showLoadScreen = false;
         if (isEditedUrlName)
           this.routerActions.navigateByUrl(editedUser.url_name);
         this.ngOnInit();
@@ -511,6 +516,8 @@ export class ProfileComponent {
       somethingEdited = true;
     }
 
+    this.showLoadScreen = true;
+
     if (this.add_images_input != undefined) {
       for (const url of this.add_images_input.imgsToDelete)
         Cloudinary.delete(url)
@@ -543,7 +550,10 @@ export class ProfileComponent {
 
     if (somethingEdited) {
       this.postToEdit.date_modified = this.tools.getActualISODate();
-      Posts.put(this.postToEdit.id, editedPost).then(() => this.refreshPosts());
+      await Posts.put(this.postToEdit.id, editedPost).then(() => {
+        this.showLoadScreen = false;
+        this.refreshPosts();
+      });
     }
 
     return somethingEdited;
@@ -586,7 +596,11 @@ export class ProfileComponent {
   }
 
   deletePost(id: number): void {
-    Posts.delete(id).then(() => this.refreshPosts());
+    this.showLoadScreen = true;
+    Posts.delete(id).then(() => {
+      this.showLoadScreen = false;
+      this.refreshPosts();
+    });
   }
 
   async showContFoll(show: boolean = true): Promise<void> {
