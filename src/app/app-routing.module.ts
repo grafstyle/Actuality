@@ -8,6 +8,7 @@ import { HomeForYouComponent } from './home/home-for-you/home-for-you.component'
 import { SearchPostsComponent } from './search/search-posts/search-posts.component';
 import { SearchUsersComponent } from './search/search-users/search-users.component';
 import { SearchAllComponent } from './search/search-all/search-all.component';
+import { ProfilePostsComponent } from './profile/profile-posts/profile-posts.component';
 
 const routes: Routes = [
   {
@@ -30,7 +31,11 @@ const routes: Routes = [
       { path: 'posts', component: SearchPostsComponent },
     ],
   },
-  { path: ':profile', component: ProfileComponent },
+  {
+    path: ':profile',
+    component: ProfileComponent,
+    children: [{ path: '', component: ProfilePostsComponent }],
+  },
 ];
 
 @NgModule({
