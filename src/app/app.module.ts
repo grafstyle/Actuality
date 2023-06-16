@@ -22,6 +22,7 @@ import { CommentsComponent } from './posts-components/comments/comments.componen
 import { AddCommentComponent } from './posts-components/comments/add-comment/add-comment.component';
 import { LoadScreenComponent } from './load-screen/load-screen.component';
 import { ProfilePostsComponent } from './profile/profile-posts/profile-posts.component';
+import { MultimediaPostsComponent } from './profile/multimedia-posts/multimedia-posts.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ProfilePostsComponent } from './profile/profile-posts/profile-posts.com
     AddCommentComponent,
     LoadScreenComponent,
     ProfilePostsComponent,
+    MultimediaPostsComponent,
   ],
   imports: [
     BrowserModule,
