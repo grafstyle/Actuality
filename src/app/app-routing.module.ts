@@ -9,6 +9,7 @@ import { SearchPostsComponent } from './search/search-posts/search-posts.compone
 import { SearchUsersComponent } from './search/search-users/search-users.component';
 import { SearchAllComponent } from './search/search-all/search-all.component';
 import { ProfilePostsComponent } from './profile/profile-posts/profile-posts.component';
+import { MultimediaPostsComponent } from './profile/multimedia-posts/multimedia-posts.component';
 
 const routes: Routes = [
   {
@@ -34,7 +35,10 @@ const routes: Routes = [
   {
     path: ':profile',
     component: ProfileComponent,
-    children: [{ path: '', component: ProfilePostsComponent }],
+    children: [
+      { path: '', component: ProfilePostsComponent },
+      { path: 'multimedia', component: MultimediaPostsComponent },
+    ],
   },
 ];
 
