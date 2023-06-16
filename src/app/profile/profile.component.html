@@ -150,92 +150,12 @@
 <div *ngIf="user.id == undefined">
   <p>{{ err }}</p>
 </div>
-<div class="noOnePost" *ngIf="cposts.length == 0">
-  <p>{{ noOnePost }}</p>
+<div class="opts_profile" *ngIf="user.id != undefined">
+  <a [routerLink]="['/' + user.url_name]">Posts</a>
+  <a [routerLink]="['/' + user.url_name + '/multimedia']">Multimedia</a>
 </div>
-<div class="allPosts" *ngFor="let cpost of cposts; let i = index">
-  <div class="editPost editContainer" #edit_post>
-    <div class="content">
-      <div class="post">
-        <div class="user">
-          <img
-            class="imgCont"
-            src="{{ user.image || def_person_img }}"
-            alt=""
-          />
-          <p class="name">{{ user.name }}</p>
-        </div>
-        <div class="content_edit">
-          <div class="title" contenteditable="true" #title_posts>
-            {{ cpost.post.title }}
-          </div>
-          <div class="media" #media>
-            <button
-              #edit_post_imgs_btn
-              class="editBtn edit_profile_imgs_btn"
-              (click)="editImagesOfPost()"
-            >
-              Edit
-            </button>
-            <div class="imgCont" *ngIf="cpost.post.images.length == 0">
-              <img
-                src="https://us.123rf.com/450wm/solarus/solarus2112/solarus211200026/178493166-vector-de-icono-de-imagen-predeterminado-falta-la-página-de-imagen-para-el-diseño-del-sitio-web-o.jpg?ver=6"
-                alt=""
-              />
-            </div>
-            <div class="imgCont" *ngFor="let imgOrVideo of cpost.post.images">
-              <img
-                src="{{ imgOrVideo }}"
-                alt=""
-                *ngIf="!imgOrVideo.includes('.mp4')"
-              />
-            </div>
-          </div>
-          <div
-            class="edit_image_actions"
-            #edit_image_actions
-            *ngIf="showImgsInputPost && selectedPost == i"
-          >
-            <app-add-images-input
-              #imgs_input
-              [imgsInCloud]="cpost.post.images || []"
-            ></app-add-images-input>
-            <button (click)="quitNewImgsOfPost(true)">Ok</button>
-          </div>
-        </div>
-        <div class="btns">
-          <button (click)="modalEditPost(false, i)">Ok</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="post">
-    <div class="user">
-      <img class="imgCont" src="{{ user.image || def_person_img }}" alt="" />
-      <p class="name">{{ user.name }}</p>
-      <div *ngIf="canEditProfile" class="actions">
-        <button (click)="modalEditPost(true, i, cpost.post)">Edit</button>
-        <button (click)="deletePost(cpost.post.id)">Delete</button>
-      </div>
-    </div>
-    <div class="content">
-      <div class="title">{{ cpost.post.title }}</div>
-      <div class="media">
-        <div class="imgCont" *ngFor="let imgOrVideo of cpost.post.images">
-          <img
-            src="{{ imgOrVideo }}"
-            alt=""
-            *ngIf="!imgOrVideo.includes('.mp4')"
-          />
-        </div>
-      </div>
-    </div>
-    <app-likes
-      [idPost]="cpost.post.id"
-      [cantLikes]="cpost.likes.length"
-      [dateAdded]="cpost.post.date_added"
-    ></app-likes>
-    <app-comments [idPost]="cpost.post.id"></app-comments>
-  </div>
-</div>
+<router-outlet
+  *ngIf="user.id != undefined"
+  (activate)="elemLoaded($event)"
+></router-outlet>
 <app-load-screen *ngIf="showLoadScreen"></app-load-screen>
