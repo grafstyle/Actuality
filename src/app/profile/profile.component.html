@@ -152,6 +152,7 @@
 </div>
 <div class="opts_profile" *ngIf="user.id != undefined">
   <a [routerLink]="['/' + user.url_name]">Posts</a>
+  <a [routerLink]="['/' + user.url_name + '/multimedia']">Multimedia</a>
 </div>
 <router-outlet
   *ngIf="user.id != undefined"
