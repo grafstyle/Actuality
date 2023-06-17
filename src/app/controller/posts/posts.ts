@@ -10,7 +10,7 @@ export class Posts {
 
   public static get(id: number): Promise<Post[]> {
     return new Promise((res, rej) => {
-      this.apiService.get(`${this.getPath}id=${id}`).subscribe({
+      Posts.apiService.get(`${Posts.getPath}id=${id}`).subscribe({
         next: (e: any) => res(e as Post[]),
         error: () => rej([]),
       });
@@ -19,7 +19,7 @@ export class Posts {
 
   public static getAll(): Promise<Post[]> {
     return new Promise((res, rej) => {
-      this.apiService.get(this.path).subscribe({
+      Posts.apiService.get(Posts.path).subscribe({
         next: (e: any) => res(e as Post[]),
         error: () => rej([]),
       });
@@ -28,9 +28,10 @@ export class Posts {
 
   public static getLastID(): Promise<number> {
     return new Promise((res, rej) => {
-      this.getAll()
+      Posts.getAll()
         .then((data) => {
-          res(data[data.length - 1].id);
+          if (data.length == 0) res(0);
+          else res(data[data.length - 1].id);
         })
         .catch(() => {
           rej(0);
@@ -96,7 +97,7 @@ export class Posts {
 
   public static post(data: Post): Promise<string> {
     return new Promise((res, rej) => {
-      this.apiService.post(this.path, data).subscribe({
+      Posts.apiService.post(Posts.path, data).subscribe({
         next: () => res('The data has been posted.'),
         error: () => rej('Something went wrong when post the data.'),
       });
@@ -105,7 +106,7 @@ export class Posts {
 
   public static put(id: number, data: Post): Promise<string> {
     return new Promise((res, rej) => {
-      this.apiService.put(this.path, id, data).subscribe({
+      Posts.apiService.put(Posts.path, id, data).subscribe({
         next: () => res('The data has been updated.'),
         error: () => rej('Something went wrong when update the data.'),
       });
@@ -114,7 +115,7 @@ export class Posts {
 
   public static delete(id: number): Promise<string> {
     return new Promise((res, rej) => {
-      this.apiService.delete(this.path, id).subscribe({
+      Posts.apiService.delete(Posts.path, id).subscribe({
         next: () => res('The data has been deleted.'),
         error: () => rej('Something went wrong when delete the data.'),
       });
