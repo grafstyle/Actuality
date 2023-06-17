@@ -11,9 +11,9 @@
         class="imgCont"
         src="{{ cpost.user_of_post.image }}"
         alt=""
-        [routerLink]="['/' + cpost.user_of_comments[i].url_name]"
+        [routerLink]="['/' + cpost.user_of_post.url_name]"
       />
-      <p class="name" [routerLink]="['/' + cpost.user_of_comments[i].url_name]">
+      <p class="name" [routerLink]="['/' + cpost.user_of_post.url_name]">
         {{ cpost.user_of_post.name }}
       </p>
     </div>
