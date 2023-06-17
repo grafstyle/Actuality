@@ -16,7 +16,7 @@ import { Tools } from 'src/app/tools/tools';
 @Component({
   selector: 'app-multimedia-posts',
   templateUrl: './multimedia-posts.component.html',
-  styleUrls: ['./multimedia-posts.component.css'],
+  styleUrls: ['./multimedia-posts.component.css', '../profile.component.css'],
 })
 export class MultimediaPostsComponent {
   user: User = {} as User;
