@@ -16,7 +16,7 @@ import { RefreshService } from 'src/app/tools/refresh-service/refresh-service';
 @Component({
   selector: 'app-profile-posts',
   templateUrl: './profile-posts.component.html',
-  styleUrls: ['./profile-posts.component.css'],
+  styleUrls: ['./profile-posts.component.css', '../profile.component.css'],
 })
 export class ProfilePostsComponent {
   noOnePost: string = '';

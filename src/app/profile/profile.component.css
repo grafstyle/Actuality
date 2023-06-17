@@ -112,3 +112,15 @@
   width: 80px;
   height: 80px;
 }
+
+/* Edit of post part */
+
+.editPost > .content > .post > .content_edit > .media {
+  min-height: 50px;
+  min-width: 50px;
+  position: relative;
+}
+
+.editPost > .content > .post > .content_edit > .media > .imgCont {
+  height: 400px;
+}
