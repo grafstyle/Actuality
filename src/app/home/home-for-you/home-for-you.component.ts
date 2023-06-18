@@ -28,6 +28,8 @@ export class HomeForYouComponent {
   async getCompletePosts(): Promise<void> {
     try {
       this.cposts = await Posts.getCPosts(await Posts.getAll());
+      if (this.cposts.length == 0) this.err = 'No posts yet.';
+      else this.err = '';
     } catch (e) {
       this.err = 'Something went wrong when get the data.';
     }
