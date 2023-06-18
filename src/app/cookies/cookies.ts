@@ -16,4 +16,8 @@ export class Cookies {
   public static getUserID(): number {
     return parseInt(this.cookies.get('userID'));
   }
+
+  public static deleteUserID(): void {
+    this.cookies.delete('userID');
+  }
 }

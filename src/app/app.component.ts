@@ -56,6 +56,7 @@ export class AppComponent {
 
   logout() {
     Users.logout();
+    Cookies.deleteUserID();
   }
 
   constructor(
