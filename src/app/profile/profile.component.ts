@@ -95,6 +95,8 @@ export class ProfileComponent {
       )[0];
 
       if (paramByUrl == 'profile') {
+        if (isNaN(Cookies.getUserID()))
+          this.routerActions.navigateByUrl('/login');
         this.user = await Users.get(Cookies.getUserID());
         this.routerActions.navigateByUrl('/' + this.user.url_name);
       } else if (intentGetUser != undefined) {
