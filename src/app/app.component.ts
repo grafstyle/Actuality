@@ -39,10 +39,8 @@ export class AppComponent {
   }
 
   goProfile() {
-    Users.get(Cookies.getUserID()).then((user: User) => {
-      if (user.id == undefined) this.router.navigateByUrl('/login');
-      else this.router.navigateByUrl('/profile');
-    });
+    if (isNaN(Cookies.getUserID())) this.router.navigateByUrl('/login');
+    else this.router.navigateByUrl('/profile');
   }
 
   login() {
@@ -77,14 +75,9 @@ export class AppComponent {
 
     router.events.subscribe({
       next: (e: any) => {
-        if (e instanceof NavigationStart) {
-          if (e.url == '/profile') {
-            Users.get(Cookies.getUserID()).then((user: User) => {
-              if (user.id == undefined) router.navigateByUrl('/login');
-            });
-          }
-        }
         if (e instanceof NavigationEnd) {
+          if (e.url == '/profile')
+            if (isNaN(Cookies.getUserID())) router.navigateByUrl('/login');
           if (e.url == '/login') this.login();
           if (e.url == '/signup') this.signup();
         }
