@@ -35,7 +35,15 @@ export class AddCommentComponent {
   constructor(private refresh: RefreshService) {}
 
   async ngOnInit() {
-    this.user = await Users.get(Cookies.getUserID());
+    if (!isNaN(Cookies.getUserID()))
+      this.user = await Users.get(Cookies.getUserID());
+
+    this.refresh.getUpdate().subscribe({
+      next: async (subject: any) => {
+        if (subject.text == RefreshService.COOKIE_UPDATED)
+          this.user = await Users.get(Cookies.getUserID());
+      },
+    });
   }
 
   ngAfterViewInit() {
