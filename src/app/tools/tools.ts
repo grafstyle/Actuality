@@ -25,9 +25,8 @@ export class Tools {
     sel?.addRange(range);
   }
 
-  public convIfUndefined(textOrUndefined: string | undefined): string {
-    if (textOrUndefined == undefined) return '';
-    return textOrUndefined;
+  public getNameMail(email: string): string {
+    return email.split('@')[0];
   }
 
   public createURLName(name: string): string {
