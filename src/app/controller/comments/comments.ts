@@ -79,6 +79,6 @@ export interface Comment {
   id_post: number;
   comment: string;
   images?: string[];
-  date_added: string;
-  date_modified?: string;
+  date_added: Date;
+  date_modified?: Date;
 }
