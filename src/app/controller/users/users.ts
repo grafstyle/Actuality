@@ -152,5 +152,5 @@ export interface User {
   bio: string;
   followers: number[];
   followed: number[];
-  joined: string;
+  joined: Date;
 }
