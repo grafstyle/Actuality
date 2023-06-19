@@ -79,8 +79,8 @@ export class PostInputComponent {
       this.toPost.images.push(await JSON.parse(uploadImage)['secure_url']);
     }
 
-    this.toPost.date_added = this.tools.getActualISODate();
-    this.toPost.date_modified = this.tools.getActualISODate();
+    this.toPost.date_added = this.tools.getActualDate();
+    this.toPost.date_modified = this.tools.getActualDate();
 
     await Posts.post(this.toPost).then(() => {
       this.refresh.setUpdate('refresh_posts');
