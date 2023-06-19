@@ -138,7 +138,7 @@ export class MultimediaPostsComponent {
     editedPost.images = imgsToDB;
 
     if (somethingEdited) {
-      this.postToEdit.date_modified = this.tools.getActualISODate();
+      this.postToEdit.date_modified = this.tools.getActualDate();
       await Posts.put(this.postToEdit.id, editedPost).then(() => {
         this.showLoadScreen = false;
         this.refreshPosts();
