@@ -128,8 +128,8 @@ export interface Post {
   id_user: number;
   title: string;
   images: string[];
-  date_added: string;
-  date_modified: string;
+  date_added: Date;
+  date_modified: Date;
 }
 
 export interface CPost {
