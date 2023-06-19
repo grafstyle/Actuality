@@ -56,6 +56,32 @@ export class AppComponent {
     Cookies.deleteUserID();
   }
 
+  async convUrlName(url_name: string): Promise<string> {
+    await Users.getBy('url_name', url_name).then((user: User[]) => {
+      if (user.length > 0) {
+        const lastUserSplitted: string[] =
+          user[user.length - 1].url_name.split('_');
+        if (!isNaN(parseInt(lastUserSplitted[lastUserSplitted.length - 1]))) {
+          url_name = '';
+          const lastUserNumber: number = parseInt(
+            lastUserSplitted[lastUserSplitted.length - 1]
+          );
+          const newUserNumber: number = lastUserNumber + 1;
+
+          for (let i: number = 0; i < lastUserSplitted.length - 1; i++)
+            if (i < lastUserSplitted.length - 2)
+              url_name += lastUserSplitted[i] + '_';
+            else url_name += lastUserSplitted[i];
+
+          url_name += `_${newUserNumber}`;
+        } else {
+          url_name = url_name + '_1';
+        }
+      }
+    });
+    return url_name;
+  }
+
   constructor(
     private router: Router,
     private auth: AuthService,
@@ -90,22 +116,23 @@ export class AppComponent {
     const isAuth: boolean = await Users.isActualUserAuth();
     if (isAuth)
       this.auth.user$.subscribe({
-        next: (actualUser) => {
+        next: async (actualUser) => {
           if (actualUser != undefined) {
-            Users.post({
-              name: this.tools.convIfUndefined(actualUser?.given_name),
-              email: this.tools.convIfUndefined(actualUser?.email),
-              url_name: this.tools.createURLName(
-                this.tools.convIfUndefined(actualUser?.given_name)
-              ),
-              image: this.tools.convIfUndefined(actualUser?.picture),
-              joined: this.tools.convIfUndefined(actualUser?.updated_at),
+            const email: string = actualUser?.email || '';
+            const name: string =
+              actualUser?.given_name || this.tools.getNameMail(email);
+
+            await Users.post({
+              name: name,
+              email: email,
+              url_name: this.tools.createURLName(await this.convUrlName(name)),
+              image: actualUser?.picture || '',
+              joined: this.tools.getActualISODate(),
               bio: '',
               portrait: '',
               followed: [],
               followers: [],
             });
-
             this.setCookies();
           }
         },
