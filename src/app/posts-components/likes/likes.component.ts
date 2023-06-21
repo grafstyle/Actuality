@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Likes } from 'src/app/controller/likes/likes';
 import { Cookies } from 'src/app/cookies/cookies';
+import { Tools } from 'src/app/tools/tools';
 
 @Component({
   selector: 'app-likes',
@@ -8,11 +9,19 @@ import { Cookies } from 'src/app/cookies/cookies';
   styleUrls: ['./likes.component.css'],
 })
 export class LikesComponent {
+  tools: Tools = new Tools();
+
   @Input() dateAdded: string = '21/08/2005';
   @Input() cantLikes: number = 0;
   @Input() idPost: number = 0;
 
   touchLike: number = 0;
+
+  formatDate(): string {
+    const isoDate = this.dateAdded;
+    const splittedDate: string[] = this.tools.dateToString(isoDate).split(' ');
+    return `posted on ${splittedDate[0]} at ${splittedDate[1]} ${splittedDate[2]}`;
+  }
 
   setLike(): void {
     this.touchLike++;
