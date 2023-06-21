@@ -40,8 +40,10 @@ export class Tools {
     const hour: number = parseInt(timeSplit[0]);
 
     if (hour > 12) timeSplit[0] = (hour - 12).toString();
+    else if (hour == 0) timeSplit[0] = '12';
+    else timeSplit[0] = hour.toString();
 
-    return `${hour}:${timeSplit[1]}`;
+    return `${timeSplit[0]}:${timeSplit[1]}`;
   }
 
   public getActualISODate(): string {
@@ -49,10 +51,10 @@ export class Tools {
     return date;
   }
 
-  public getFormattedActualDate(): string {
-    const date: Date = new Date();
+  public dateToString(dateStr: string): string {
+    const date = new Date(dateStr);
 
-    const day: number = date.getDay();
+    const day: number = date.getDate();
     const month: number = date.getMonth();
     const year: number = date.getFullYear();
 
@@ -67,7 +69,7 @@ export class Tools {
 
     const convMins: string = minutes < 10 ? `0${minutes}` : `${minutes}`;
 
-    const finalHour = this.format12Time(`${hour}:${convMins}${AM_or_PM}`);
+    const finalHour = this.format12Time(`${hour}:${convMins} ${AM_or_PM}`);
 
     return `${onlyDate} ${finalHour}`;
   }
