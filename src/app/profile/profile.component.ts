@@ -118,6 +118,16 @@ export class ProfileComponent {
     }
   }
 
+  formatDate(): string {
+    const date = this.tools
+      .dateToString(this.user.joined)
+      .split(' ')[0]
+      .split('/');
+    return `joined at ${date[0]} of ${this.tools
+      .getMonthOfNumber(date[1])
+      .toLowerCase()} of ${date[2]}`;
+  }
+
   elemLoaded(component: ProfilePostsComponent) {
     component.user = this.user;
     if (this.user.id == Cookies.getUserID()) component.canEditPost = true;
