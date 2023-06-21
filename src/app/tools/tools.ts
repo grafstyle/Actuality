@@ -51,6 +51,25 @@ export class Tools {
     return date;
   }
 
+  public getMonthOfNumber(numberStr: string): string {
+    const months: string[] = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ];
+    const monthNumber: number = parseInt(numberStr);
+    return months[monthNumber];
+  }
+
   public dateToString(dateStr: string): string {
     const date = new Date(dateStr);
 
