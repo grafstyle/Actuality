@@ -23,6 +23,7 @@ export class PostInputComponent {
   @ViewChild('post_body') postBody!: ElementRef<HTMLDivElement>;
 
   showLoadScreen: boolean = false;
+  alertError: string = '';
 
   constructor(private refresh: RefreshService) {}
 
@@ -51,12 +52,12 @@ export class PostInputComponent {
     const idUser: number = Cookies.getUserID();
 
     if (idUser == 0) {
-      alert('Auth first');
+      this.alertError = 'Auth first';
       return;
     }
 
-    if (this.getBodyText() == ('' || undefined)) {
-      alert('Almost add an title to your post.');
+    if (this.getBodyText() == '') {
+      this.alertError = 'Is necessary add a title to your post.';
       return;
     }
 
