@@ -24,6 +24,7 @@ import { LoadScreenComponent } from './load-screen/load-screen.component';
 import { ProfilePostsComponent } from './profile/profile-posts/profile-posts.component';
 import { MultimediaPostsComponent } from './profile/multimedia-posts/multimedia-posts.component';
 import { LikedPostsComponent } from './profile/liked-posts/liked-posts.component';
+import { AlertComponentComponent } from './components/alert-component/alert-component.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { LikedPostsComponent } from './profile/liked-posts/liked-posts.component
     ProfilePostsComponent,
     MultimediaPostsComponent,
     LikedPostsComponent,
+    AlertComponentComponent,
   ],
   imports: [
     BrowserModule,
