@@ -1,1 +1,8 @@
-<p>alert-component works!</p>
+<div class="modalContainer contError" #contError>
+  <div class="container">
+    <p>{{ msg }}</p>
+    <div class="btnsCont">
+      <button (click)="this.close()">Ok</button>
+    </div>
+  </div>
+</div>
