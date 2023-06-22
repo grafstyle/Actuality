@@ -48,6 +48,8 @@ export class LikedPostsComponent {
 
   constructor(private refresh: RefreshService, private cd: ChangeDetectorRef) {}
 
+  alertError: string = '';
+
   ngOnInit(): void {
     this.refreshPosts();
 
@@ -117,7 +119,10 @@ export class LikedPostsComponent {
       for (const url of this.add_images_input.imgsToDelete)
         Cloudinary.delete(url)
           .then(() => (somethingEdited = true))
-          .catch(() => alert('Something went wrong at delete some image.'));
+          .catch(
+            () =>
+              (this.alertError = 'Something went wrong at delete some image.')
+          );
 
       for (const img of this.add_images_input.imgs) {
         if (img.url.includes('https://res.cloudinary.com'))
