@@ -3,6 +3,8 @@ import { Observable, Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class RefreshService {
+  public static readonly COOKIE_UPDATED: string = 'cookie_updated';
+
   private subject: Subject<RefreshData> = new Subject<RefreshData>();
 
   setUpdate(msg: string): void {

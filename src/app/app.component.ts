@@ -10,6 +10,7 @@ import { Cloudinary } from './controller/cloudinary/cloudinary';
 import { CookieService } from 'ngx-cookie-service';
 import { Cookies } from './cookies/cookies';
 import { Tools } from './tools/tools';
+import { RefreshService } from './tools/refresh-service/refresh-service';
 
 @Component({
   selector: 'app-root',
@@ -28,26 +29,22 @@ export class AppComponent {
 
   async setCookies() {
     try {
-      const emailName: string | null = (await Users.getByAuth()).email;
-      let id: number | undefined = 0;
-      if (emailName != null) id = (await Users.getByEmail(emailName)).id;
-      if (Number.isNaN(Cookies.getUserID()) && id != undefined)
-        Cookies.setUserID(id);
+      const emailName: string | undefined = (await Users.getByAuth()).email;
+      let id: number | undefined = undefined;
+      if (emailName != undefined) id = (await Users.getByEmail(emailName)).id;
+      if (isNaN(Cookies.getUserID()) && id != undefined) Cookies.setUserID(id);
     } catch (err) {
       // Catch empty? 🤨
     }
   }
 
   goProfile() {
-    Users.get(Cookies.getUserID()).then((user: User) => {
-      if (user.id == undefined) this.router.navigateByUrl('/login');
-      else this.router.navigateByUrl('/profile');
-    });
+    if (isNaN(Cookies.getUserID())) this.router.navigateByUrl('/login');
+    else this.router.navigateByUrl('/profile');
   }
 
   login() {
     Users.login();
-    this.setCookies();
   }
 
   signup() {
@@ -56,6 +53,33 @@ export class AppComponent {
 
   logout() {
     Users.logout();
+    Cookies.deleteUserID();
+  }
+
+  async convUrlName(url_name: string): Promise<string> {
+    await Users.getBy('url_name', url_name).then((user: User[]) => {
+      if (user.length > 0) {
+        const lastUserSplitted: string[] =
+          user[user.length - 1].url_name.split('_');
+        if (!isNaN(parseInt(lastUserSplitted[lastUserSplitted.length - 1]))) {
+          url_name = '';
+          const lastUserNumber: number = parseInt(
+            lastUserSplitted[lastUserSplitted.length - 1]
+          );
+          const newUserNumber: number = lastUserNumber + 1;
+
+          for (let i: number = 0; i < lastUserSplitted.length - 1; i++)
+            if (i < lastUserSplitted.length - 2)
+              url_name += lastUserSplitted[i] + '_';
+            else url_name += lastUserSplitted[i];
+
+          url_name += `_${newUserNumber}`;
+        } else {
+          url_name = url_name + '_1';
+        }
+      }
+    });
+    return url_name;
   }
 
   constructor(
@@ -63,7 +87,8 @@ export class AppComponent {
     private auth: AuthService,
     private apiService: Service,
     private routerLink: Router,
-    private cookies: CookieService
+    private cookies: CookieService,
+    private refresh: RefreshService
   ) {
     Users.apiService =
       Posts.apiService =
@@ -72,18 +97,14 @@ export class AppComponent {
       Cloudinary.apiService =
         this.apiService;
     Cookies.cookies = this.cookies;
+    Cookies.refresh = this.refresh;
     Users.auth = this.auth;
 
     router.events.subscribe({
       next: (e: any) => {
-        if (e instanceof NavigationStart) {
-          if (e.url == '/profile') {
-            Users.get(Cookies.getUserID()).then((user: User) => {
-              if (user.id == undefined) router.navigateByUrl('/login');
-            });
-          }
-        }
         if (e instanceof NavigationEnd) {
+          if (e.url == '/profile')
+            if (isNaN(Cookies.getUserID())) router.navigateByUrl('/login');
           if (e.url == '/login') this.login();
           if (e.url == '/signup') this.signup();
         }
@@ -91,31 +112,30 @@ export class AppComponent {
     });
   }
 
-  ngOnInit(): void {
-    this.setCookies();
+  async ngOnInit(): Promise<void> {
+    const isAuth: boolean = await Users.isActualUserAuth();
+    if (isAuth)
+      this.auth.user$.subscribe({
+        next: async (actualUser) => {
+          if (actualUser != undefined) {
+            const email: string = actualUser?.email || '';
+            const name: string =
+              actualUser?.given_name || this.tools.getNameMail(email);
 
-    this.auth.isAuthenticated$.subscribe({
-      next: (isAuth) => {
-        if (isAuth)
-          this.auth.user$.subscribe({
-            next: (actualUser) => {
-              if (actualUser != undefined)
-                Users.post({
-                  name: this.tools.convIfUndefined(actualUser?.given_name),
-                  email: this.tools.convIfUndefined(actualUser?.email),
-                  url_name: this.tools.createURLName(
-                    this.tools.convIfUndefined(actualUser?.given_name)
-                  ),
-                  image: this.tools.convIfUndefined(actualUser?.picture),
-                  joined: this.tools.convIfUndefined(actualUser?.updated_at),
-                  bio: '',
-                  portrait: '',
-                  followed: [],
-                  followers: [],
-                });
-            },
-          });
-      },
-    });
+            await Users.post({
+              name: name,
+              email: email,
+              url_name: this.tools.createURLName(await this.convUrlName(name)),
+              image: actualUser?.picture || '',
+              joined: this.tools.getActualISODate(),
+              bio: '',
+              portrait: '',
+              followed: [],
+              followers: [],
+            });
+            this.setCookies();
+          }
+        },
+      });
   }
 }

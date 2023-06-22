@@ -63,6 +63,8 @@ export class CommentsComponent {
 
   showLoadScreen: boolean = false;
 
+  alertError: string = '';
+
   constructor(private refresh: RefreshService, private cd: ChangeDetectorRef) {}
 
   ngAfterViewInit(): void {
@@ -144,8 +146,10 @@ export class CommentsComponent {
 
       if (this.imgsToEdit.imgsToDelete.length > 0) {
         for (const url of this.imgsToEdit.imgsToDelete)
-          Cloudinary.delete(url).catch(() =>
-            alert('Something went wrong at delete some image.')
+          Cloudinary.delete(url).catch(
+            () =>
+              (this.alertError =
+                'Something went wrong at delete some image in server.')
           );
         somethingEdited = true;
       }

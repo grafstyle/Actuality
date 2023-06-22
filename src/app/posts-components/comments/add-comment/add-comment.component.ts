@@ -32,10 +32,20 @@ export class AddCommentComponent {
 
   showLoadScreen: boolean = false;
 
+  alertError: string = '';
+
   constructor(private refresh: RefreshService) {}
 
   async ngOnInit() {
-    this.user = await Users.get(Cookies.getUserID());
+    if (!isNaN(Cookies.getUserID()))
+      this.user = await Users.get(Cookies.getUserID());
+
+    this.refresh.getUpdate().subscribe({
+      next: async (subject: any) => {
+        if (subject.text == RefreshService.COOKIE_UPDATED)
+          this.user = await Users.get(Cookies.getUserID());
+      },
+    });
   }
 
   ngAfterViewInit() {
@@ -63,12 +73,12 @@ export class AddCommentComponent {
     const idUser: number = Cookies.getUserID();
 
     if (idUser == 0) {
-      alert('Auth first');
+      this.alertError = 'Auth first';
       return;
     }
 
     if (this.getBodyText() == ('' || undefined)) {
-      alert('Almost add an title to your post.');
+      this.alertError = 'Almost add an title to your post.';
       return;
     }
 

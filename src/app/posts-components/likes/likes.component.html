@@ -3,5 +3,5 @@
   <p>
     {{ cantLikes + (cantLikes == 1 ? " like" : " likes") }}
   </p>
-  <p>Publicado el {{ dateAdded }}</p>
+  <p>{{ formatDate() }}</p>
 </div>
