@@ -49,6 +49,8 @@ export class ProfilePostsComponent {
   def_person_img: string =
     'https://res.cloudinary.com/dp5gpr5sc/image/upload/v1685629395/app_assets/person.svg';
 
+  alertError: string = '';
+
   constructor(private cd: ChangeDetectorRef, private refresh: RefreshService) {}
 
   ngOnInit(): void {
@@ -115,7 +117,10 @@ export class ProfilePostsComponent {
       for (const url of this.add_images_input.imgsToDelete)
         Cloudinary.delete(url)
           .then(() => (somethingEdited = true))
-          .catch(() => alert('Something went wrong at delete some image.'));
+          .catch(
+            () =>
+              (this.alertError = 'Something went wrong at delete some image.')
+          );
 
       for (const img of this.add_images_input.imgs) {
         if (img.url.includes('https://res.cloudinary.com'))
