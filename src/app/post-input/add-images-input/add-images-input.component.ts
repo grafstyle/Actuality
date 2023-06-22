@@ -16,6 +16,8 @@ export class AddImagesInputComponent {
   @ViewChild('addImgCont') addImgCont!: ElementRef<HTMLDivElement>;
   @ViewChild('addBtn') addbtn!: ElementRef<HTMLInputElement>;
 
+  alertError: string = '';
+
   ngAfterViewInit() {
     this.setImgsOfCloud();
   }
@@ -52,7 +54,7 @@ export class AddImagesInputComponent {
 
     for (const img of this.imgsInCloud)
       if (name == this.tools.getNameOfCloudinaryFile(img)) {
-        alert('Some image has the same name.');
+        this.alertError = 'Some image has the same name.';
         this.addbtn.nativeElement.value = '';
         return;
       }
@@ -66,7 +68,7 @@ export class AddImagesInputComponent {
       this.imgsInCloud.push(newImg.url);
       return;
     }
-    alert('Sorry only accept three images and/or videos. :(');
+    this.alertError = 'Sorry only accept three images and/or videos. :(';
   }
 
   async removeLastImage(): Promise<void> {
