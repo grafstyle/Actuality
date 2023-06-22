@@ -126,4 +126,8 @@
     </div>
   </div>
 </div>
+<app-alert-component
+  [msg]="alertError"
+  *ngIf="alertError != ''"
+></app-alert-component>
 <app-load-screen *ngIf="showLoadScreen"></app-load-screen>
