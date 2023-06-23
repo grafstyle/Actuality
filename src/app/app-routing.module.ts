@@ -11,6 +11,7 @@ import { SearchAllComponent } from './search/search-all/search-all.component';
 import { ProfilePostsComponent } from './profile/profile-posts/profile-posts.component';
 import { MultimediaPostsComponent } from './profile/multimedia-posts/multimedia-posts.component';
 import { LikedPostsComponent } from './profile/liked-posts/liked-posts.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,11 @@ const routes: Routes = [
       { path: 'multimedia', component: MultimediaPostsComponent },
       { path: 'liked', component: LikedPostsComponent },
     ],
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    component: PageNotFoundComponent,
   },
 ];
 
