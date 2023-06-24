@@ -35,8 +35,23 @@
               <img
                 src="{{ imgOrVideo }}"
                 alt=""
-                *ngIf="!imgOrVideo.includes('.mp4')"
+                *ngIf="
+                  !imgOrVideo.includes('.mp4') ||
+                  !imgOrVideo.includes('video/mp4')
+                "
               />
+              <video
+                *ngIf="
+                  imgOrVideo.includes('.mp4') ||
+                  imgOrVideo.includes('video/mp4')
+                "
+                controls
+                autoplay
+                loop
+                [muted]="'muted'"
+              >
+                <source src="{{ imgOrVideo }}" type="video/mp4" />
+              </video>
             </div>
           </div>
           <div
@@ -75,6 +90,15 @@
             alt=""
             *ngIf="!imgOrVideo.includes('.mp4')"
           />
+          <video
+            *ngIf="imgOrVideo.includes('.mp4')"
+            controls
+            autoplay
+            loop
+            [muted]="'muted'"
+          >
+            <source src="{{ imgOrVideo }}" type="video/mp4" />
+          </video>
         </div>
       </div>
     </div>
