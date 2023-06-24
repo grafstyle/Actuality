@@ -15,7 +15,8 @@
   position: relative;
 }
 
-.imgCont > img {
+.imgCont > img,
+.imgCont > video {
   position: absolute;
   object-fit: cover;
   width: 100%;

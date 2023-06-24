@@ -25,6 +25,7 @@ import { ProfilePostsComponent } from './profile/profile-posts/profile-posts.com
 import { MultimediaPostsComponent } from './profile/multimedia-posts/multimedia-posts.component';
 import { LikedPostsComponent } from './profile/liked-posts/liked-posts.component';
 import { AlertComponentComponent } from './components/alert-component/alert-component.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { AlertComponentComponent } from './components/alert-component/alert-comp
     MultimediaPostsComponent,
     LikedPostsComponent,
     AlertComponentComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
