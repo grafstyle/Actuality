@@ -14,6 +14,7 @@
   background-color: #220;
 }
 
-.imgs-vids > .showImgs > img {
+.imgs-vids > .showImgs > img,
+.imgs-vids > .showImgs > video {
   height: 100px;
 }

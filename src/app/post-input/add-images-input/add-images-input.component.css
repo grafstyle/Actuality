@@ -29,6 +29,7 @@
   flex-wrap: wrap;
 }
 
-.allImgs > .showImgs > img {
+.allImgs > .showImgs > img,
+.allImgs > .showImgs > video {
   height: 120px;
 }

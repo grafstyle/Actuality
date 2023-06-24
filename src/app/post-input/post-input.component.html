@@ -2,7 +2,15 @@
   <div class="content" contentEditable="true" ngModel #post_body></div>
   <div class="imgs-vids">
     <div class="showImgs" *ngFor="let img of imgs; let i = index">
-      <img src="{{ img.url }}" alt="" />
+      <img src="{{ img.url }}" alt="" *ngIf="!img.url.includes('video/mp4')" />
+      <video
+        *ngIf="img.url.includes('video/mp4')"
+        controls
+        loop
+        [muted]="'muted'"
+      >
+        <source src="{{ img.url }}" type="video/mp4" />
+      </video>
     </div>
   </div>
   <div class="options">

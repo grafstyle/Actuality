@@ -3,11 +3,24 @@
 <div class="addImgCont" ngModel #addImgCont>
   <div class="display">
     <div class="initialImg" *ngIf="imgs.length == 0">
-      <div class="name">Waiting for an image.</div>
+      <div class="name">Waiting for an image or video.</div>
     </div>
     <div class="allImgs">
       <div class="showImgs" *ngFor="let img of imgs; let i = index">
-        <img src="{{ img.url }}" alt="" />
+        <img
+          src="{{ img.url }}"
+          alt=""
+          *ngIf="!img.url.includes('video/mp4')"
+        />
+        <video
+          *ngIf="img.url.includes('video/mp4')"
+          controls
+          autoplay
+          loop
+          [muted]="'muted'"
+        >
+          <source src="{{ img.url }}" type="video/mp4" />
+        </video>
         <div class="name">{{ img.name.split(".")[0] }}</div>
       </div>
     </div>
