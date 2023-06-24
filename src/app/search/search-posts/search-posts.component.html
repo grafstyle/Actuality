@@ -23,6 +23,14 @@
             alt=""
             *ngIf="!imgOrVideo.includes('.mp4')"
           />
+          <video
+            *ngIf="imgOrVideo.includes('.mp4')"
+            controls
+            loop
+            [muted]="'muted'"
+          >
+            <source src="{{ imgOrVideo }}" type="video/mp4" />
+          </video>
         </div>
       </div>
     </div>
