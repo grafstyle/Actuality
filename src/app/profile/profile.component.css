@@ -1,0 +1,126 @@
+/* General part */
+
+.user {
+  --img-user-padding: -60px;
+}
+
+/* Containers of modals */
+
+.editContainer {
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  left: 0;
+  top: 0;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.editContainer > .content {
+  background-color: #fff;
+  width: 50%;
+}
+
+/* All imgCont */
+
+.imgCont > .editBtn,
+.media > .editBtn {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border: 0;
+  outline: 0;
+  background: none;
+  z-index: 9999;
+}
+
+/* Profile edit part */
+
+.editProfile > .content > .portrait_edit > .frontEdit {
+  height: 300px;
+}
+
+.editProfile > .content > .user_img_edit > .userImgEdit {
+  width: 100px;
+  height: 100px;
+}
+
+.editProfile > .content > .url_name_edit > .editCont {
+  display: flex;
+}
+
+.editProfile > .content .options {
+  display: none;
+}
+
+/* Profile part */
+
+.portrait {
+  position: relative;
+}
+
+.portrait > .front {
+  height: 300px;
+}
+
+.editProfCont {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.userImg {
+  position: absolute;
+  bottom: var(--img-user-padding);
+  height: 200px;
+  width: 200px;
+}
+
+.info {
+  padding-top: calc(var(--img-user-padding) * -1);
+}
+
+.info > .otherInfo {
+  display: flex;
+  gap: 5px;
+}
+
+.followe-rs-d_view > .content {
+  width: 350px;
+  background-color: #0293;
+}
+
+.followe-rs-d_view > .content > .titleAndActions {
+  display: flex;
+}
+
+.followe-rs-d_view > .content > .users {
+  height: 350px;
+  overflow-y: scroll;
+}
+
+.followe-rs-d_view > .content > .users > .user {
+  display: flex;
+}
+
+.followe-rs-d_view > .content > .users > .user > .imgUser {
+  width: 80px;
+  height: 80px;
+}
+
+/* Edit of post part */
+
+.editPost > .content > .post > .content_edit > .media {
+  min-height: 50px;
+  min-width: 50px;
+  position: relative;
+}
+
+.editPost > .content > .post > .content_edit > .media > .imgCont {
+  height: 400px;
+}

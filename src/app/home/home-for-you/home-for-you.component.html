@@ -1,0 +1,45 @@
+<div *ngIf="err" class="errorPosts">
+  <p>{{ err }}</p>
+</div>
+<div class="allPosts" *ngFor="let cpost of cposts; let i = index">
+  <div class="post">
+    <div class="user">
+      <img
+        class="imgCont"
+        src="{{ cpost.user_of_post.image }}"
+        alt=""
+        [routerLink]="['/' + cpost.user_of_post.url_name]"
+      />
+      <p class="name" [routerLink]="['/' + cpost.user_of_post.url_name]">
+        {{ cpost.user_of_post.name }}
+      </p>
+    </div>
+    <div class="content">
+      <div class="title">{{ cpost.post.title }}</div>
+      <div class="media">
+        <div class="imgCont" *ngFor="let imgOrVideo of cpost.post.images">
+          <img
+            src="{{ imgOrVideo }}"
+            alt=""
+            *ngIf="!imgOrVideo.includes('.mp4')"
+          />
+          <video
+            *ngIf="imgOrVideo.includes('.mp4')"
+            controls
+            autoplay
+            loop
+            [muted]="'muted'"
+          >
+            <source src="{{ imgOrVideo }}" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+    </div>
+    <app-likes
+      [idPost]="cpost.post.id"
+      [cantLikes]="cpost.likes.length"
+      [dateAdded]="cpost.post.date_added"
+    ></app-likes>
+    <app-comments [idPost]="cpost.post.id"></app-comments>
+  </div>
+</div>

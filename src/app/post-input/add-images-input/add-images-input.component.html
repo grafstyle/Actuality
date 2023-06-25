@@ -1,0 +1,48 @@
+<button class="addImg" (click)="chooseImgModal(true)">IMG</button>
+
+<div class="addImgCont" ngModel #addImgCont>
+  <div class="display">
+    <div class="initialImg" *ngIf="imgs.length == 0">
+      <div class="name">Waiting for an image or video.</div>
+    </div>
+    <div class="allImgs">
+      <div class="showImgs" *ngFor="let img of imgs; let i = index">
+        <img
+          src="{{ img.url }}"
+          alt=""
+          *ngIf="!img.url.includes('video/mp4')"
+        />
+        <video
+          *ngIf="img.url.includes('video/mp4')"
+          controls
+          autoplay
+          loop
+          [muted]="'muted'"
+        >
+          <source src="{{ img.url }}" type="video/mp4" />
+        </video>
+        <div class="name">{{ img.name.split(".")[0] }}</div>
+      </div>
+    </div>
+    <div class="btnsCont">
+      <button>
+        <label>
+          Add
+          <input
+            type="file"
+            id="addBtn"
+            (change)="changingImg($event)"
+            ngModel
+            #addBtn
+          />
+        </label>
+      </button>
+      <button (click)="removeLastImage()">Delete last</button>
+      <button (click)="chooseImgModal(false)">Ok</button>
+    </div>
+  </div>
+</div>
+<app-alert-component
+  [msg]="alertError"
+  *ngIf="alertError != ''"
+></app-alert-component>
