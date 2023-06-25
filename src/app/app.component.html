@@ -1,0 +1,23 @@
+<div class="all">
+  <nav>
+    <ul>
+      <li>
+        <h1><a routerLink="/home">Inicio</a></h1>
+        <h1><a routerLink="/profile">Profile</a></h1>
+        <h1><a href="" (click)="goProfile()">Login</a></h1>
+        <h1><a routerLink="/signup">Sign in</a></h1>
+        <h1><a href="" (click)="logout()">Logout</a></h1>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="content">
+    <input
+      class="search"
+      type="text"
+      placeholder="Search all you want!"
+      (keyup.enter)="search($event)"
+    />
+    <router-outlet></router-outlet>
+  </div>
+</div>

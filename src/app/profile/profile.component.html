@@ -1,0 +1,162 @@
+<div class="user" *ngIf="user.id != undefined">
+  <div class="editProfile editContainer" #edit_profile>
+    <div class="content">
+      <div class="portrait_edit">
+        <div class="imgCont frontEdit">
+          <img #portrait_img src="{{ user.portrait }}" alt="" />
+          <button
+            #edit_portrait_img
+            class="editBtn edit_portrait_btn"
+            (click)="editPortraitImg(true)"
+          >
+            Edit
+          </button>
+        </div>
+        <div class="options" #portrait_options>
+          <input
+            #portrait_input
+            (change)="changePortrait($event)"
+            type="file"
+          />
+          <button (click)="editPortraitImg(false)">Ok</button>
+          <button (click)="quitNewPortrait()">X</button>
+        </div>
+      </div>
+      <div class="user_img_edit">
+        <div class="imgCont userImgEdit">
+          <img #user_img src="{{ user.image || def_person_img }}" alt="" />
+          <button
+            #edit_user_img
+            class="editBtn edit_user_img_btn"
+            (click)="editUserImg(true)"
+          >
+            Edit
+          </button>
+        </div>
+        <div class="options" #user_img_options>
+          <input #user_img_input (change)="changeUserImg($event)" type="file" />
+          <button (click)="editUserImg(false)">Ok</button>
+          <button (click)="quitNewUserImg()">X</button>
+        </div>
+      </div>
+      <div class="name_edit">
+        <h2>Name:</h2>
+        <div class="name" #name contenteditable="true">{{ user.name }}</div>
+        <h4 class="inputError" *ngIf="nameError != ''">{{ this.nameError }}</h4>
+      </div>
+      <div class="url_name_edit">
+        <h2>Url name:</h2>
+        <div class="editCont">
+          <p>@</p>
+          <div class="url_name" #url_name contenteditable="true">
+            {{ user.url_name }}
+          </div>
+        </div>
+        <h4 class="inputError" *ngIf="urlNameError != ''">
+          {{ this.urlNameError }}
+        </h4>
+      </div>
+      <div class="bio_edit">
+        <h2>Bio:</h2>
+        <div
+          #bio
+          contenteditable="true"
+          (keydown)="setBioLetters()"
+          (keyup)="setBioLetters()"
+        >
+          {{ user.bio }}
+        </div>
+        <div class="cont_count_letters">
+          <h3 class="count_letters">{{ this.bioLetters }}</h3>
+        </div>
+      </div>
+      <h4 class="inputError" *ngIf="bioError != ''">{{ this.bioError }}</h4>
+      <div class="btns">
+        <button (click)="modalEditProfile(false)">Ok</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile part -->
+
+  <div class="portrait">
+    <div class="imgCont front">
+      <img src="{{ user.portrait }}" alt="" />
+    </div>
+    <div class="editProfCont">
+      <button #edit_btn *ngIf="canEditProfile" (click)="modalEditProfile(true)">
+        Edit profile
+      </button>
+      <button #follow_btn *ngIf="canFollow" (click)="followClick()">
+        Follow
+      </button>
+    </div>
+    <div class="imgCont userImg">
+      <img src="{{ user.image || def_person_img }}" alt="" />
+    </div>
+  </div>
+  <div class="info">
+    <div class="names">
+      <h3>{{ user.name }}</h3>
+      <p>@{{ user.url_name }}</p>
+    </div>
+    <div class="bio">
+      <p>{{ user.bio }}</p>
+    </div>
+    <div class="otherInfo">
+      <div class="followers" (click)="showAllFollowers()">
+        {{ user.followers.length }} followers
+      </div>
+      <div class="followed" (click)="showAllFollowed()">
+        {{ user.followed.length }} followed
+      </div>
+      <div class="joined">
+        <p>{{ formatDate() }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="followe-rs-d_view modalContainer" #followe_rs_d_view>
+    <div class="content">
+      <div class="titleAndActions">
+        <h2>Followed:</h2>
+        <button (click)="showContFoll(false)">X</button>
+      </div>
+      <div class="users">
+        <div class="noUsers" *ngIf="this.folls.length == 0">
+          <p>{{ follsEmptyStr }}</p>
+        </div>
+        <div class="user" *ngFor="let foll of this.folls">
+          <div class="imgCont imgUser">
+            <img src="{{ foll.image }}" alt="" />
+          </div>
+          <div class="name">
+            <p>{{ foll.name }}</p>
+          </div>
+          <div class="btnCont">
+            <button
+              *ngIf="modalFollowedOpened"
+              (click)="unfollowAndRefresh(foll.id)"
+            >
+              Unfollow
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-post-input></app-post-input>
+<div *ngIf="user.id == undefined">
+  <p>{{ err }}</p>
+</div>
+<div class="opts_profile" *ngIf="user.id != undefined">
+  <a [routerLink]="['/' + user.url_name]">Posts</a>
+  <a [routerLink]="['/' + user.url_name + '/multimedia']">Multimedia</a>
+  <a [routerLink]="['/' + user.url_name + '/liked']">Liked</a>
+</div>
+<router-outlet
+  *ngIf="user.id != undefined"
+  (activate)="elemLoaded($event)"
+></router-outlet>
+<app-load-screen *ngIf="showLoadScreen"></app-load-screen>

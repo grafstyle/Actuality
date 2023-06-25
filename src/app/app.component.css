@@ -1,0 +1,25 @@
+.all {
+  display: flex;
+
+  --menu-width: 300px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+  padding-left: var(--menu-width);
+  margin: auto;
+  justify-content: center;
+}
+
+nav {
+  position: fixed;
+  width: var(--menu-width);
+  height: 100vh;
+  border-right: solid 3px #ff8731;
+}
+
+ul {
+  list-style: none;
+}

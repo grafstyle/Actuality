@@ -1,0 +1,51 @@
+.allComments > .comment,
+.allComments > .comment > .userComment > .imgsOrVids,
+.addComment {
+  display: flex;
+  background-color: #079;
+}
+
+.allComments > .comment > .user,
+.addComment > .userImg > .user {
+  height: 50px;
+  width: 50px;
+}
+
+.allComments > .comment > .userComment {
+  width: 100%;
+}
+
+.allComments > .comment > .userComment > .imgsOrVids > .imgs > img,
+.allComments > .comment > .userComment > .imgsOrVids > .imgs {
+  height: 120px;
+  width: auto;
+}
+
+.allComments > .comment > .userComment > .nameAndActions {
+  background: #092;
+}
+
+.allComments > .comment > .userComment > .nameAndActions > h4,
+.allComments > .comment > .userComment > .nameAndActions > .actions {
+  width: 50%;
+}
+
+.allComments > .comment > .userComment > .nameAndActions,
+.allComments > .comment > .userComment > .nameAndActions > .actions {
+  display: flex;
+  gap: 5px;
+}
+
+.allComments > .comment > .userComment > .nameAndActions > .actions {
+  justify-content: flex-end;
+}
+
+.modalContainer > .content {
+  background-color: #fff;
+  width: 50%;
+}
+
+.modalContainer > .content > .commentsCont {
+  overflow-y: scroll;
+  height: 300px;
+}
