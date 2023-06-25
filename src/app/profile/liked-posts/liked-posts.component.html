@@ -103,6 +103,7 @@
       [idPost]="cpost.post.id"
       [cantLikes]="cpost.likes.length"
       [dateAdded]="cpost.post.date_added"
+      (disliked)="refreshPosts()"
     ></app-likes>
     <app-comments [idPost]="cpost.post.id"></app-comments>
   </div>
