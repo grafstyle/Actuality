@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Likes } from 'src/app/controller/likes/likes';
 import { Cookies } from 'src/app/cookies/cookies';
 import { Tools } from 'src/app/tools/tools';
@@ -14,6 +14,7 @@ export class LikesComponent {
   @Input() dateAdded: string = '21/08/2005';
   @Input() cantLikes: number = 0;
   @Input() idPost: number = 0;
+  @Output() disliked: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   touchLike: number = 0;
 
@@ -55,8 +56,9 @@ export class LikesComponent {
     try {
       const likeID: number =
         (await Likes.getOf(this.idPost, Cookies.getUserID()))[0].id || 0;
-      Likes.delete(likeID);
+      await Likes.delete(likeID);
       this.cantLikes--;
+      this.disliked.emit(true);
     } catch (err) {
       console.log('Something went wrong when quit like.');
     }
