@@ -19,7 +19,7 @@
     </div>
     <div class="content">
       <div class="title">{{ cpost.post.title }}</div>
-      <div class="media grid_media">
+      <div class="media grid_media" *ngIf="cpost.post.images.length > 0">
         <div
           class="imgCont grid_elem"
           *ngFor="let imgOrVideo of cpost.post.images"
