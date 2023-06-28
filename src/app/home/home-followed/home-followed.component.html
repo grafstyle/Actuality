@@ -19,8 +19,11 @@
     </div>
     <div class="content">
       <div class="title">{{ cpost.post.title }}</div>
-      <div class="media">
-        <div class="imgCont" *ngFor="let imgOrVideo of cpost.post.images">
+      <div class="media grid_media">
+        <div
+          class="imgCont grid_elem"
+          *ngFor="let imgOrVideo of cpost.post.images"
+        >
           <img
             src="{{ imgOrVideo }}"
             alt=""
