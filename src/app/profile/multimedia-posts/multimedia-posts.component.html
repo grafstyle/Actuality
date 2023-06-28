@@ -33,7 +33,12 @@
             </div>
             <div
               class="imgCont grid_elem"
-              *ngFor="let imgOrVideo of cpost.post.images"
+              *ngFor="let imgOrVideo of cpost.post.images; let img_i = index"
+              [style.grid-row]="
+                img_i == 0 && cpost.post.images.length > 2
+                  ? '1/' + cpost.post.images.length
+                  : ''
+              "
             >
               <img
                 src="{{ imgOrVideo }}"
@@ -89,7 +94,12 @@
       <div class="media grid_media">
         <div
           class="imgCont grid_elem"
-          *ngFor="let imgOrVideo of cpost.post.images"
+          *ngFor="let imgOrVideo of cpost.post.images; let img_i = index"
+          [style.grid-row]="
+            img_i == 0 && cpost.post.images.length > 2
+              ? '1/' + cpost.post.images.length
+              : ''
+          "
         >
           <img
             src="{{ imgOrVideo }}"
