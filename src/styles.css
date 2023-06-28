@@ -39,8 +39,18 @@
   height: 80px;
 }
 
-.post > .content > .media > .imgCont {
+.post .media {
   height: 400px;
+}
+
+.grid_media {
+  display: grid;
+  gap: 3px;
+  grid-template-rows: repeat(auto-fill);
+}
+
+.grid_media > .grid_elem:nth-child(n + 2) {
+  grid-column: right;
 }
 
 /* For modals */
