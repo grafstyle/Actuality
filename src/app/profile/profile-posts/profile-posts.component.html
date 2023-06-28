@@ -84,8 +84,12 @@
       <img class="imgCont" src="{{ user.image || def_person_img }}" alt="" />
       <p class="name">{{ user.name }}</p>
       <div *ngIf="canEditPost" class="actions">
-        <button (click)="modalEditPost(true, i, cpost.post)">Edit</button>
-        <button (click)="deletePost(cpost.post.id)">Delete</button>
+        <button (click)="modalEditPost(true, i, cpost.post)">
+          <span class="material-symbols-outlined">edit</span>
+        </button>
+        <button (click)="deletePost(cpost.post.id)">
+          <span class="material-symbols-outlined">delete</span>
+        </button>
       </div>
     </div>
     <div class="content">

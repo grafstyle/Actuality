@@ -85,7 +85,7 @@
     </div>
     <div class="editProfCont">
       <button #edit_btn *ngIf="canEditProfile" (click)="modalEditProfile(true)">
-        Edit profile
+        <span class="material-symbols-outlined">edit</span>
       </button>
       <button #follow_btn *ngIf="canFollow" (click)="followClick()">
         Follow
@@ -111,7 +111,9 @@
         {{ user.followed.length }} followed
       </div>
       <div class="joined">
-        <p>{{ formatDate() }}</p>
+        <p>
+          <span class="material-symbols-outlined">event</span>{{ formatDate() }}
+        </p>
       </div>
     </div>
   </div>
