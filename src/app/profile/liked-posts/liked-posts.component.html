@@ -23,7 +23,7 @@
               class="editBtn edit_profile_imgs_btn"
               (click)="editImagesOfPost()"
             >
-              Edit
+              <span class="material-symbols-outlined">edit</span>
             </button>
             <div class="imgCont" *ngIf="cpost.post.images.length == 0">
               <img
@@ -82,8 +82,12 @@
         *ngIf="canEditPost && user.id == cpost.user_of_post.id"
         class="actions"
       >
-        <button (click)="modalEditPost(true, i, cpost.post)">Edit</button>
-        <button (click)="deletePost(cpost.post.id)">Delete</button>
+        <button (click)="modalEditPost(true, i, cpost.post)">
+          <span class="material-symbols-outlined">edit</span>
+        </button>
+        <button (click)="deletePost(cpost.post.id)">
+          <span class="material-symbols-outlined">delete</span>
+        </button>
       </div>
     </div>
     <div class="content">

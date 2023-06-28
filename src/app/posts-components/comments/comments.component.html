@@ -35,10 +35,10 @@
                 (click)="updateComment(comment.id, i)"
                 #edit_comment_btn
               >
-                {{ editStr }}
+                <span class="material-symbols-outlined">{{ editStr }}</span>
               </button>
               <button class="deleteBtn" (click)="deleteComment(comment.id)">
-                delete
+                <span class="material-symbols-outlined">delete</span>
               </button>
             </div>
           </div>
@@ -65,7 +65,9 @@
   <div class="allCommentsCont modalContainer" #all_comments_cont>
     <div class="content">
       <div class="closeCont">
-        <p (click)="hideAllComments()">X</p>
+        <span (click)="hideAllComments()" class="material-symbols-outlined"
+          >close</span
+        >
       </div>
       <app-add-comment
         [idPost]="idPost"
@@ -102,10 +104,10 @@
                     (click)="updateComment(comment.id, i, true)"
                     #edit_comment_btn_all
                   >
-                    {{ editStr }}
+                    <span class="material-symbols-outlined">{{ editStr }}</span>
                   </button>
                   <button class="deleteBtn" (click)="deleteComment(comment.id)">
-                    delete
+                    <span class="material-symbols-outlined">delete</span>
                   </button>
                 </div>
               </div>

@@ -9,7 +9,7 @@
             class="editBtn edit_portrait_btn"
             (click)="editPortraitImg(true)"
           >
-            Edit
+            <span class="material-symbols-outlined">edit</span>
           </button>
         </div>
         <div class="options" #portrait_options>
@@ -19,7 +19,9 @@
             type="file"
           />
           <button (click)="editPortraitImg(false)">Ok</button>
-          <button (click)="quitNewPortrait()">X</button>
+          <button (click)="quitNewPortrait()">
+            <span class="material-symbols-outlined">delete</span>
+          </button>
         </div>
       </div>
       <div class="user_img_edit">
@@ -30,13 +32,15 @@
             class="editBtn edit_user_img_btn"
             (click)="editUserImg(true)"
           >
-            Edit
+            <span class="material-symbols-outlined">edit</span>
           </button>
         </div>
         <div class="options" #user_img_options>
           <input #user_img_input (change)="changeUserImg($event)" type="file" />
           <button (click)="editUserImg(false)">Ok</button>
-          <button (click)="quitNewUserImg()">X</button>
+          <button (click)="quitNewUserImg()">
+            <span class="material-symbols-outlined">delete</span>
+          </button>
         </div>
       </div>
       <div class="name_edit">
@@ -85,7 +89,7 @@
     </div>
     <div class="editProfCont">
       <button #edit_btn *ngIf="canEditProfile" (click)="modalEditProfile(true)">
-        Edit profile
+        <span class="material-symbols-outlined">edit</span>
       </button>
       <button #follow_btn *ngIf="canFollow" (click)="followClick()">
         Follow
@@ -111,7 +115,9 @@
         {{ user.followed.length }} followed
       </div>
       <div class="joined">
-        <p>{{ formatDate() }}</p>
+        <p>
+          <span class="material-symbols-outlined">event</span>{{ formatDate() }}
+        </p>
       </div>
     </div>
   </div>
@@ -120,7 +126,11 @@
     <div class="content">
       <div class="titleAndActions">
         <h2>Followed:</h2>
-        <button (click)="showContFoll(false)">X</button>
+        <div class="action">
+          <button (click)="showContFoll(false)">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
       </div>
       <div class="users">
         <div class="noUsers" *ngIf="this.folls.length == 0">
