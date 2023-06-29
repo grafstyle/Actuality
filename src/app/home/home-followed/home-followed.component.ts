@@ -11,8 +11,8 @@ import { Cookies } from 'src/app/cookies/cookies';
 })
 export class HomeFollowedComponent {
   err: string = '';
-  noFollows: string = '';
-  cposts: CPost[][] = [];
+  errFoll: string = '';
+  cposts: CPost[] = [];
   def_person_img: string =
     'https://res.cloudinary.com/dp5gpr5sc/image/upload/v1685629395/app_assets/person.svg';
 
@@ -33,12 +33,14 @@ export class HomeFollowedComponent {
       const user = (await Users.getBy('id', Cookies.getUserID()))[0];
       const usersFollowed = user.followed;
       if (usersFollowed.length == 0)
-        this.noFollows = "You don't follow people, be more sociable. :)";
+        this.errFoll = "You don't follow people, be more sociable. :)";
       usersFollowed.forEach(async (idUserFollowed: number) => {
-        this.cposts.push(
+        this.cposts = this.cposts.concat(
           await Posts.getCPosts(await Posts.getBy('id_user', idUserFollowed))
         );
       });
+      if (this.cposts.length == 0)
+        this.errFoll = 'The people than you follows, no posted nothing.';
     } catch (e) {
       this.err = 'Something went wrong when get the data.';
     }
