@@ -1,8 +1,12 @@
 <div *ngIf="err" class="errorSearchUsers">
   <p>{{ err }}</p>
 </div>
-<div class="allUsers" *ngFor="let user of users">
-  <div class="user" [routerLink]="['/' + user['url_name']]">
+<div class="allUsers">
+  <div
+    class="user"
+    [routerLink]="['/' + user['url_name']]"
+    *ngFor="let user of users"
+  >
     <div class="imgCont imgUser">
       <img src="{{ user['image'] }}" alt="" />
     </div>

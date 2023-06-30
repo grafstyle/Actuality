@@ -8,6 +8,10 @@
   margin: 0;
 }
 
+:root {
+  --p_color: #258343;
+}
+
 /* General class "imgCont" for organizate the images. */
 
 .imgCont {
@@ -25,22 +29,45 @@
 
 /*General post and comments "class", to apply global styles*/
 
+.allPosts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .post {
   width: 100%;
-  background-color: #888;
 }
 
-.post > .user {
+.post > .all_content {
+  border-radius: 25px;
+  padding-top: 5px;
+  border: var(--p_color) solid 3px;
+  overflow: hidden;
+}
+
+.post > .all_content > .user {
   display: flex;
+  align-items: center;
 }
 
-.post > .user > .imgCont {
-  width: 80px;
-  height: 80px;
+.post > .all_content > .content > .title {
+  padding: 5px;
+}
+
+.post > .all_content > .user > .imgCont {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
 }
 
 .post .media {
   height: 400px;
+}
+
+.post .media > .grid_media {
+  width: 100%;
+  height: 100%;
 }
 
 .grid_media {
