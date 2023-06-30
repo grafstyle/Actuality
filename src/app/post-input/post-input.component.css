@@ -1,20 +1,66 @@
-.postInput > .content {
+.postInput {
+  display: flex;
+  flex-direction: column;
+  border: var(--p_color) 3px solid;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+[placeholder]:empty:before {
+  content: attr(placeholder);
+  text-align: center;
+  color: gray;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: text;
+}
+
+[placeholder]:empty:focus::before {
+  content: "";
+}
+
+.content {
   height: 100px;
-  background-color: #070;
+  padding: 15px;
+  outline: 0;
+  overflow-y: scroll;
+  overflow: hidden;
 }
 
-.postInput > .imgs-vids {
+.imgs-vids {
   display: flex;
-  border-right-color: #110;
+  gap: 3px;
 }
 
-.postInput > .options {
+.options {
   display: flex;
+  align-items: center;
   gap: 5px;
-  background-color: #220;
+  background-color: var(--p_color);
+  padding: 5px 25px;
 }
 
-.imgs-vids > .showImgs > img,
-.imgs-vids > .showImgs > video {
+.upload {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.upload > button {
+  font-size: 12pt;
+  color: var(--txt_color);
+  transition: all 0.3s ease-out;
+}
+
+.upload > button:hover {
+  color: var(--txt_s_color);
+}
+
+.showImgs,
+.showImgs > img,
+.showImgs > video {
   height: 100px;
 }
