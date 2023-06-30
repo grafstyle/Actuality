@@ -34,11 +34,10 @@ export class HomeFollowedComponent {
       const usersFollowed = user.followed;
       if (usersFollowed.length == 0)
         this.errFoll = "You don't follow people, be more sociable. :)";
-      usersFollowed.forEach(async (idUserFollowed: number) => {
+      for (const idUserFollowed of usersFollowed)
         this.cposts = this.cposts.concat(
           await Posts.getCPosts(await Posts.getBy('id_user', idUserFollowed))
         );
-      });
       if (this.cposts.length == 0)
         this.errFoll = 'The people than you follows, no posted nothing.';
     } catch (e) {
