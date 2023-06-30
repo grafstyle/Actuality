@@ -1,5 +1,11 @@
 <div class="postInput">
-  <div class="content" contentEditable="true" ngModel #post_body></div>
+  <div
+    class="content"
+    placeholder="Something new?"
+    contentEditable="true"
+    ngModel
+    #post_body
+  ></div>
   <div class="imgs-vids">
     <div class="showImgs" *ngFor="let img of imgs; let i = index">
       <img src="{{ img.url }}" alt="" *ngIf="!img.url.includes('video/mp4')" />
@@ -16,7 +22,7 @@
   <div class="options">
     <app-add-images-input></app-add-images-input>
     <div class="upload">
-      <button class="postData" (click)="post()">post</button>
+      <button class="postData" (click)="post()">Post</button>
     </div>
   </div>
 </div>

@@ -12,6 +12,10 @@ export class AddImagesInputComponent {
   tools: Tools = new Tools();
 
   @Input() imgsInCloud: string[] = [];
+  @Input() hoverColor: string = '';
+  @Input() fontSize: string = '';
+
+  hoverAddImg: boolean = false;
 
   @ViewChild('addImgCont') addImgCont!: ElementRef<HTMLDivElement>;
   @ViewChild('addBtn') addbtn!: ElementRef<HTMLInputElement>;

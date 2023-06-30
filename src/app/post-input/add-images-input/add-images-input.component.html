@@ -1,11 +1,21 @@
-<button class="addImg" (click)="chooseImgModal(true)">
-  <span class="material-symbols-outlined">image</span>
+<button
+  class="addImg"
+  (mouseover)="hoverAddImg = true"
+  (mouseleave)="hoverAddImg = false"
+  [ngStyle]="{ color: hoverColor != '' && hoverAddImg ? hoverColor : '' }"
+  (click)="chooseImgModal(true)"
+>
+  <span
+    class="material-symbols-outlined"
+    [ngStyle]="{ fontSize: fontSize != '' ? fontSize : '' }"
+    >image</span
+  >
 </button>
 
-<div class="addImgCont" ngModel #addImgCont>
+<div class="modalContainer addImgCont" ngModel #addImgCont>
   <div class="display">
     <div class="initialImg" *ngIf="imgs.length == 0">
-      <div class="name">Waiting for an image or video.</div>
+      <div class="wait">Waiting for an image or video.</div>
     </div>
     <div class="allImgs">
       <div class="showImgs" *ngFor="let img of imgs; let i = index">
@@ -27,7 +37,7 @@
       </div>
     </div>
     <div class="btnsCont">
-      <button>
+      <button class="addBtn">
         <label>
           Add
           <input
