@@ -22,7 +22,7 @@ import { RefreshService } from 'src/app/tools/refresh-service/refresh-service';
   styleUrls: ['./comments.component.css'],
 })
 export class CommentsComponent {
-  private tools: Tools = new Tools();
+  tools: Tools = new Tools();
   def_person_img: string =
     'https://res.cloudinary.com/dp5gpr5sc/image/upload/v1685629395/app_assets/person.svg';
 
@@ -41,7 +41,7 @@ export class CommentsComponent {
 
   user: User = {} as User;
 
-  okStr: string = 'Ok';
+  okStr: string = 'Done';
   editStr: string = 'Edit';
   bodyOfComment: string = '';
   showImagesInput: boolean = false;
@@ -120,7 +120,7 @@ export class CommentsComponent {
     }
 
     if (this.clickEdit == 1) {
-      editBtn.nativeElement.textContent = this.okStr;
+      editBtn.nativeElement.children[0].textContent = this.okStr;
       commentBody.nativeElement.contentEditable = 'true';
       commentBody.nativeElement.focus();
 
@@ -131,7 +131,7 @@ export class CommentsComponent {
     }
 
     if (this.clickEdit == 2) {
-      editBtn.nativeElement.textContent = this.editStr;
+      editBtn.nativeElement.children[0].textContent = this.editStr;
       commentBody.nativeElement.contentEditable = 'false';
 
       this.showLoadScreen = true;
