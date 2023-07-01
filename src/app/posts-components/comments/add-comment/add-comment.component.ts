@@ -9,7 +9,7 @@ import { Tools } from 'src/app/tools/tools';
 import { RefreshService } from 'src/app/tools/refresh-service/refresh-service';
 import { Cookies } from 'src/app/cookies/cookies';
 import { Cloudinary } from 'src/app/controller/cloudinary/cloudinary';
-import { User, Users } from 'src/app/controller/users/users';
+import { User } from 'src/app/controller/users/users';
 
 @Component({
   selector: 'app-add-comment',
@@ -35,18 +35,6 @@ export class AddCommentComponent {
   alertError: string = '';
 
   constructor(private refresh: RefreshService) {}
-
-  async ngOnInit() {
-    if (!isNaN(Cookies.getUserID()))
-      this.user = await Users.get(Cookies.getUserID());
-
-    this.refresh.getUpdate().subscribe({
-      next: async (subject: any) => {
-        if (subject.text == RefreshService.COOKIE_UPDATED)
-          this.user = await Users.get(Cookies.getUserID());
-      },
-    });
-  }
 
   ngAfterViewInit() {
     this.setImgsOfImgsComponent();

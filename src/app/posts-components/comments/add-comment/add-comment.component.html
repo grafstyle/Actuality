@@ -1,24 +1,27 @@
 <div class="addComment">
-  <div class="userImg">
-    <div class="imgCont user">
-      <img src="{{ user.image || def_person_img }}" alt="" />
-    </div>
-  </div>
   <div class="add">
-    <div class="name">
-      <h4>{{ user.name }}</h4>
-    </div>
-    <div class="content" contenteditable="true" ngModel #comment_body></div>
-    <div class="commentInput">
-      <div class="imgs-vids">
-        <div class="showImgs" *ngFor="let img of imgs; let i = index">
-          <img src="{{ img.url }}" alt="" />
+    <div class="comment_add">
+      <div class="commentInput">
+        <div
+          class="content"
+          placeholder="Add a comment"
+          contenteditable="true"
+          ngModel
+          #comment_body
+        ></div>
+        <div class="options">
+          <app-add-images-input
+            [hoverColor]="'var(--p_color)'"
+            [fontSize]="'28pt'"
+          ></app-add-images-input>
+          <div class="upload">
+            <button class="postData" (click)="comment()">Comment</button>
+          </div>
         </div>
       </div>
-      <div class="options">
-        <app-add-images-input></app-add-images-input>
-        <div class="upload">
-          <button class="postData" (click)="comment()">comment</button>
+      <div class="imgs-vids" *ngIf="imgs.length > 0">
+        <div class="imgOrVid" *ngFor="let img of imgs; let i = index">
+          <img src="{{ img.url }}" alt="" />
         </div>
       </div>
     </div>
