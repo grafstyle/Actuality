@@ -26,7 +26,7 @@ export class LikesComponent {
   formatDate(): string {
     const isoDate = this.dateAdded;
     const splittedDate: string[] = this.tools.dateToString(isoDate).split(' ');
-    return `posted on ${splittedDate[0]} at ${splittedDate[1]} ${splittedDate[2]}`;
+    return `Posted on ${splittedDate[0]} at ${splittedDate[1]} ${splittedDate[2]}`;
   }
 
   async hasLike(): Promise<boolean> {
