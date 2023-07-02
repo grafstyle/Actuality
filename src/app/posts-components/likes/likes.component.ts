@@ -18,10 +18,27 @@ export class LikesComponent {
 
   touchLike: number = 0;
 
+  async ngOnInit(): Promise<void> {
+    const hasLike: boolean = await this.hasLike();
+    if (hasLike) this.touchLike++;
+  }
+
   formatDate(): string {
     const isoDate = this.dateAdded;
     const splittedDate: string[] = this.tools.dateToString(isoDate).split(' ');
     return `posted on ${splittedDate[0]} at ${splittedDate[1]} ${splittedDate[2]}`;
+  }
+
+  async hasLike(): Promise<boolean> {
+    try {
+      const likeID: undefined | number = (
+        await Likes.getOf(this.idPost, Cookies.getUserID())
+      )[0]?.id;
+      if (likeID != undefined) return true;
+    } catch (err) {
+      console.log('Something went wrong when get like.');
+    }
+    return false;
   }
 
   setLike(): void {
@@ -37,10 +54,8 @@ export class LikesComponent {
 
   async addLike(): Promise<void> {
     try {
-      const likeID: undefined | number = (
-        await Likes.getOf(this.idPost, Cookies.getUserID())
-      )[0]?.id;
-      if (likeID == undefined) {
+      const hasLike: boolean = await this.hasLike();
+      if (hasLike == false) {
         Likes.post({
           id_user: Cookies.getUserID(),
           id_post: this.idPost,
