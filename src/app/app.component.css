@@ -1,7 +1,7 @@
 .all {
   display: flex;
 
-  --menu-width: 300px;
+  --menu-width: 250px;
 }
 
 .content {
@@ -14,12 +14,68 @@
 }
 
 nav {
+  display: flex;
   position: fixed;
   width: var(--menu-width);
   height: 100vh;
-  border-right: solid 3px #ff8731;
+  border-right: solid 3px var(--p_color);
+}
+
+ul,
+ul > li,
+ul > li > h1,
+ul > li > h1 > a,
+ul > li > .logo,
+ul > li > .icon {
+  display: flex;
+  width: 100%;
 }
 
 ul {
   list-style: none;
+  flex-direction: column;
+}
+
+ul > li > .icon {
+  display: none;
+  width: 50px;
+  height: 50px;
+}
+
+ul > li .icon > span {
+  font-size: 36pt;
+  color: var(--p_color);
+}
+
+ul > li > .logo {
+  margin: 10px 5px;
+}
+
+ul > li > .logo > img {
+  height: 50px;
+}
+
+ul > li > h1 {
+  gap: 5px;
+}
+
+ul > li > h1 > a {
+  padding: 5px;
+  align-items: center;
+}
+
+ul > li > h1 > a {
+  color: var(--txt_color);
+  text-decoration: none;
+  transition: all 0.3s ease-out;
+}
+
+ul > li > h1 > a:hover {
+  color: var(--p_color);
+}
+
+ul > li > h1 > a > span {
+  margin-right: 5px;
+  font-size: 24pt;
+  color: var(--p_color);
 }

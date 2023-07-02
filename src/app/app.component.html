@@ -6,19 +6,43 @@
   <nav>
     <ul>
       <li>
+        <div class="icon">
+          <span class="material-symbols-outlined">menu</span>
+        </div>
+        <div class="logo">
+          <img
+            routerLink="/home"
+            src="https://res.cloudinary.com/dp5gpr5sc/image/upload/v1687546639/app_assets/Logo.png"
+            alt="Logo of actuality"
+          />
+        </div>
+      </li>
+      <li>
         <h1>
-          <span class="material-symbols-outlined">home</span
-          ><a routerLink="/home">Inicio</a>
+          <a routerLink="/home"
+            ><span class="material-symbols-outlined">home</span>Home</a
+          >
         </h1>
+      </li>
+      <li>
         <h1>
-          <span class="material-symbols-outlined">account_circle</span
-          ><a routerLink="/profile">Profile</a>
+          <a routerLink="/profile"
+            ><span class="material-symbols-outlined">account_circle</span
+            >Profile</a
+          >
         </h1>
+      </li>
+      <li>
         <h1><a href="" (click)="goProfile()">Login</a></h1>
+      </li>
+      <li>
         <h1><a routerLink="/signup">Sign in</a></h1>
+      </li>
+      <li>
         <h1>
-          <span class="material-symbols-outlined">logout</span
-          ><a href="" (click)="logout()">Logout</a>
+          <a href="" (click)="logout()"
+            ><span class="material-symbols-outlined">logout</span>Logout</a
+          >
         </h1>
       </li>
     </ul>
