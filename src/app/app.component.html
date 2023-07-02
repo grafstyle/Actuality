@@ -49,12 +49,15 @@
   </nav>
 
   <div class="content">
-    <input
-      class="search"
-      type="text"
-      placeholder="Search all you want!"
-      (keyup.enter)="search($event)"
-    />
+    <label class="contSearch">
+      <input
+        class="search"
+        type="text"
+        placeholder="Search all you want!"
+        (keyup.enter)="search($event)"
+      />
+      <span class="material-symbols-outlined">search</span>
+    </label>
     <router-outlet></router-outlet>
   </div>
 </div>
