@@ -1,0 +1,23 @@
+.add {
+  width: 100%;
+}
+
+.content {
+  height: 100px;
+  background-color: #827;
+}
+
+.imgs-vids {
+  display: flex;
+  border-right-color: #110;
+}
+
+.options {
+  display: flex;
+  gap: 5px;
+  background-color: #220;
+}
+
+.imgs-vids > .showImgs > img {
+  height: 100px;
+}
