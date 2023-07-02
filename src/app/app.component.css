@@ -1,7 +1,7 @@
 .all {
   display: flex;
 
-  --menu-width: 300px;
+  --menu-width: 250px;
 }
 
 .content {
@@ -14,12 +14,101 @@
 }
 
 nav {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
   position: fixed;
   width: var(--menu-width);
   height: 100vh;
-  border-right: solid 3px #ff8731;
+  border-right: solid 3px var(--p_color);
+}
+
+ul,
+ul > li,
+ul > li > h1,
+ul > li > h1 > a,
+nav > .logo_cont,
+nav > .icon {
+  display: flex;
+  width: 100%;
 }
 
 ul {
   list-style: none;
+  flex-direction: column;
+  padding: 5px;
+  border: var(--p_color) 3px solid;
+  height: 100%;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+nav > .icon {
+  display: none;
+  width: 50px;
+  height: 50px;
+}
+
+nav > .icon > span {
+  font-size: 36pt;
+  color: var(--p_color);
+}
+
+nav > .logo_cont {
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+  padding-top: 15px;
+}
+
+nav > .logo_cont > .logo {
+  padding: 15px;
+  border-radius: 100%;
+  background-color: var(--p_color);
+}
+
+nav > .logo_cont > .logo > .logo_img {
+  height: 80px;
+  width: 80px;
+  mask: url("https://res.cloudinary.com/dp5gpr5sc/image/upload/v1687546639/app_assets/Logov.svg")
+    no-repeat center;
+  --webkit-mask: url("https://res.cloudinary.com/dp5gpr5sc/image/upload/v1687546639/app_assets/Logov.svg")
+    no-repeat center;
+  background-color: #fff;
+}
+
+ul > li > h1 {
+  gap: 5px;
+}
+
+ul > li {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  margin-bottom: 10px;
+  transition: all 0.3s ease-out;
+}
+
+ul > li:hover {
+  background-color: var(--p_color);
+}
+
+ul > li > h1 > a {
+  padding: 10px 15px;
+  align-items: center;
+  color: var(--txt_color);
+}
+
+ul > li > h1 > a {
+  color: var(--txt_color);
+  text-decoration: none;
+  transition: all 0.3s ease-out;
+}
+
+ul > li > h1 > a:hover {
+  color: var(--txt_s_color);
+}
+
+ul > li > h1 > a > span {
+  margin-right: 5px;
+  font-size: 24pt;
 }

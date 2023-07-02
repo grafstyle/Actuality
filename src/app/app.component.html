@@ -4,21 +4,41 @@
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
   />
   <nav>
+    <div class="icon">
+      <span class="material-symbols-outlined">menu</span>
+    </div>
+    <div class="logo_cont">
+      <div class="logo" routerLink="/home">
+        <div class="logo_img"></div>
+      </div>
+    </div>
     <ul>
       <li>
         <h1>
-          <span class="material-symbols-outlined">home</span
-          ><a routerLink="/home">Inicio</a>
+          <a routerLink="/home"
+            ><span class="material-symbols-outlined">home</span>Home</a
+          >
         </h1>
+      </li>
+      <li>
         <h1>
-          <span class="material-symbols-outlined">account_circle</span
-          ><a routerLink="/profile">Profile</a>
+          <a routerLink="/profile"
+            ><span class="material-symbols-outlined">account_circle</span
+            >Profile</a
+          >
         </h1>
+      </li>
+      <li>
         <h1><a href="" (click)="goProfile()">Login</a></h1>
+      </li>
+      <li>
         <h1><a routerLink="/signup">Sign in</a></h1>
+      </li>
+      <li>
         <h1>
-          <span class="material-symbols-outlined">logout</span
-          ><a href="" (click)="logout()">Logout</a>
+          <a href="" (click)="logout()"
+            ><span class="material-symbols-outlined">logout</span>Logout</a
+          >
         </h1>
       </li>
     </ul>
