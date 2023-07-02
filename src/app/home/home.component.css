@@ -1,0 +1,21 @@
+.options,
+.options > a {
+  display: flex;
+  width: 100%;
+}
+
+.options {
+  font-size: 14pt;
+}
+
+.options > a {
+  justify-content: center;
+  text-decoration: none;
+  color: var(--txt_color);
+  transition: all 0.3s ease-out;
+  padding: 20px 0;
+}
+
+.options > a:hover {
+  color: var(--p_color);
+}

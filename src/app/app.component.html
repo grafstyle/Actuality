@@ -44,13 +44,20 @@
     </ul>
   </nav>
 
-  <div class="content">
-    <input
-      class="search"
-      type="text"
-      placeholder="Search all you want!"
-      (keyup.enter)="search($event)"
-    />
-    <router-outlet></router-outlet>
+  <div class="all_content">
+    <div class="search_part">
+      <label class="contSearch">
+        <input
+          class="search"
+          type="text"
+          placeholder="Search all you want!"
+          (keyup.enter)="search($event)"
+        />
+        <span class="material-symbols-outlined">search</span>
+      </label>
+    </div>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>
