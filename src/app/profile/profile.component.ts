@@ -123,7 +123,7 @@ export class ProfileComponent {
       .dateToString(this.user.joined)
       .split(' ')[0]
       .split('/');
-    return `joined at ${date[0]} of ${this.tools
+    return `Joined at ${date[0]} of ${this.tools
       .getMonthOfNumber(date[1])
       .toLowerCase()} of ${date[2]}`;
   }
@@ -384,7 +384,7 @@ export class ProfileComponent {
   editUserImg(open: boolean): void {
     if (open) {
       this.edit_user_img.nativeElement.style.display = 'none';
-      this.user_img_options.nativeElement.style.display = 'block';
+      this.user_img_options.nativeElement.style.display = 'flex';
 
       if (this.user_img.nativeElement.src.includes('https://'))
         this.lastUserImg = this.user_img.nativeElement.src;
@@ -413,7 +413,7 @@ export class ProfileComponent {
   editPortraitImg(open: boolean): void {
     if (open) {
       this.edit_portrait_img.nativeElement.style.display = 'none';
-      this.portrait_options.nativeElement.style.display = 'block';
+      this.portrait_options.nativeElement.style.display = 'flex';
 
       if (this.portrait_img.nativeElement.src.includes('https://'))
         this.lastPortraitImg = this.portrait_img.nativeElement.src;
