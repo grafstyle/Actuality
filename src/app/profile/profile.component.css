@@ -1,7 +1,10 @@
 /* General part */
 
-.user {
+.user_profile {
   --img-user-padding: -60px;
+  --margin_of_names: 5px;
+
+  margin-bottom: 10px;
 }
 
 /* Containers of modals */
@@ -22,7 +25,7 @@
 }
 
 .editContainer > .content {
-  background-color: #fff;
+  background-color: var(--s_color);
   width: 50%;
 }
 
@@ -35,27 +38,111 @@
   position: absolute;
   border: 0;
   outline: 0;
-  background: none;
+  background: rgba(0, 0, 0, 0.6);
+  color: var(--txt_s_color);
   z-index: 9999;
+}
+
+.media > .editBtn,
+.frontEdit > .editBtn,
+.userImgEdit > .editBtn {
+  transition: all 0.3s ease-out;
+}
+
+.media > .editBtn:hover,
+.frontEdit > .editBtn:hover,
+.userImgEdit > .editBtn:hover {
+  color: var(--p_color);
 }
 
 /* Profile edit part */
 
-.editProfile > .content > .portrait_edit > .frontEdit {
-  height: 300px;
+.editProfile > .content {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  gap: 5px;
+  border-radius: 15px;
+}
+
+.editProfile > .content > .user_img_edit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .editProfile > .content > .user_img_edit > .userImgEdit {
   width: 100px;
   height: 100px;
+  border-radius: 100%;
+  border: var(--p_color) 3px solid;
 }
 
 .editProfile > .content > .url_name_edit > .editCont {
   display: flex;
 }
 
+.editProfile > .content .portrait_edit > .options > input,
+.editProfile > .content .portrait_edit > .options > .actions_btns {
+  width: 100%;
+}
+
+.editProfile > .content .options,
+.editProfile > .content .options > input,
+.editProfile > .content .options > .actions_btns {
+  gap: 5px;
+}
+
 .editProfile > .content .options {
   display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+.editProfile > .content .options > .actions_btns {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.editProfile > .content .options > .actions_btns > button,
+.editProfile > .content > .btns > button {
+  color: var(--txt_color);
+  transition: all 0.3s ease-out;
+}
+
+.editProfile > .content .options > .actions_btns > .btn_ok,
+.editProfile > .content > .btns > button {
+  padding: 5px;
+  border: var(--txt_color) 3px solid;
+  border-radius: 15px;
+}
+
+.editProfile > .content .options > .actions_btns > button:hover,
+.editProfile > .content > .btns > button:hover {
+  border-color: var(--p_color);
+  color: var(--p_color);
+}
+
+.editProfile > .content div[contenteditable="true"] {
+  outline: 0;
+  border-bottom: var(--p_color) 3px solid;
+  padding-bottom: 5px;
+}
+
+.editProfile > .content > .url_name_edit > .editCont > p {
+  padding-bottom: 5px;
+}
+
+.editProfile > .content > .bio_edit > .cont_count_letters {
+  padding: 5px 0;
+}
+
+.editProfile > .content > .bio_edit > .cont_count_letters,
+.editProfile > .content > .btns {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }
 
 /* Profile part */
@@ -64,14 +151,38 @@
   position: relative;
 }
 
-.portrait > .front {
+.portrait > .front,
+.editProfile > .content > .portrait_edit > .frontEdit {
   height: 300px;
+  border-radius: 15px;
 }
 
 .editProfCont {
+  padding: 5px;
   width: 100%;
   display: flex;
   flex-direction: row-reverse;
+}
+
+.editProfCont > button {
+  padding: 3px;
+  border: var(--txt_color) 3px solid;
+  border-radius: 15px;
+  transition: all 0.3s ease-out;
+}
+
+.editProfCont > button > span {
+  color: var(--txt_color);
+  transition: all 0.3s ease-out;
+}
+
+.editProfCont > button:hover {
+  border-color: var(--p_color);
+}
+
+.editProfCont > button:hover,
+.editProfCont > button:hover > span {
+  color: var(--p_color);
 }
 
 .userImg {
@@ -79,44 +190,272 @@
   bottom: var(--img-user-padding);
   height: 200px;
   width: 200px;
+  background-color: var(--txt_s_color);
+  border-radius: 100%;
+}
+
+.info,
+.info > .names,
+.info > .otherInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .info {
-  padding-top: calc(var(--img-user-padding) * -1);
+  margin-top: calc((var(--img-user-padding) + var(--margin_of_names)) * -1);
+  margin-bottom: 5px;
 }
 
-.info > .otherInfo {
+.info > .names {
+  margin-top: var(--margin_of_names);
+}
+
+.info > .otherInfo > .folls_cont,
+.info > .otherInfo > .joined > p {
   display: flex;
   gap: 5px;
 }
 
-.followe-rs-d_view > .content {
+.info > .otherInfo > .joined > p {
+  align-items: center;
+}
+
+.info > .otherInfo > .joined > p > span {
+  color: var(--p_color);
+}
+
+.info > .otherInfo > .folls_cont > .followed > p,
+.info > .otherInfo > .folls_cont > .followers > p {
+  color: var(--txt_color);
+  cursor: default;
+  transition: all 0.3s ease-out;
+}
+
+.info > .otherInfo > .folls_cont > .followed > p:hover,
+.info > .otherInfo > .folls_cont > .followers > p:hover {
+  color: var(--p_color);
+}
+
+.folls_view > .content {
   width: 350px;
-  background-color: #0293;
+  background-color: var(--p_color);
+  border-radius: 15px;
+  overflow: hidden;
 }
 
-.followe-rs-d_view > .content > .titleAndActions {
+.folls_view > .content > .titleAndActions {
   display: flex;
+  padding: 5px;
 }
 
-.followe-rs-d_view > .content > .users {
+.folls_view > .content > .titleAndActions > .action {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.folls_view > .content > .titleAndActions > .action > button {
+  transition: all 0.3s ease-out;
+  color: var(--txt_color);
+}
+
+.folls_view > .content > .titleAndActions > .action > button:hover {
+  color: var(--txt_s_color);
+}
+
+.folls_view > .content > .titleAndActions > .action > button > span {
+  font-size: 22pt;
+}
+
+.folls_view > .content > .users {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
   height: 350px;
   overflow-y: scroll;
+  padding: 0 5px;
 }
 
-.followe-rs-d_view > .content > .users > .user {
+.folls_view > .content > .users > .noUsers {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
-.followe-rs-d_view > .content > .users > .user > .imgUser {
-  width: 80px;
-  height: 80px;
+.folls_view > .content > .users > .user {
+  width: 100%;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.folls_view > .content > .users > .user > .imgUser {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+}
+
+.folls_view > .content > .users > .user > .name > p {
+  width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.folls_view > .content > .users > .user > .btnCont {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.folls_view > .content > .users > .user > .btnCont > button {
+  border: var(--txt_color) 3px solid;
+  color: var(--txt_color);
+  border-radius: 15px;
+  padding: 5px;
+  transition: all 0.3s ease-out;
+}
+
+.folls_view > .content > .users > .user > .btnCont > button:hover {
+  border-color: var(--txt_s_color);
+  color: var(--txt_s_color);
 }
 
 /* Edit of post part */
+
+.editPost > .content {
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.editPost > .content > .post > .user {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.editPost > .content > .post > .user > .imgCont {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+}
 
 .editPost > .content > .post > .content_edit > .media {
   min-height: 50px;
   min-width: 50px;
   position: relative;
+}
+
+.editPost
+  > .content
+  > .post
+  > .content_edit
+  > .media
+  > .grid_media
+  > .imgCont
+  > span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 52pt;
+}
+
+.editPost > .content > .post > .content_edit > .title {
+  padding: 5px 0;
+  margin: 5px;
+  outline: 0;
+  border-bottom: var(--p_color) 3px solid;
+}
+
+.editPost > .content > .post > .content_edit > .edit_image_actions {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.editPost > .content > .post > .content_edit > .edit_image_actions > .btn_ok {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.editPost > .content > .post > .content_edit > .edit_image_actions button {
+  padding: 5px;
+  border: var(--txt_color) 3px solid;
+  border-radius: 15px;
+  color: var(--txt_color);
+  transition: all 0.3s ease-out;
+}
+
+.editPost
+  > .content
+  > .post
+  > .content_edit
+  > .edit_image_actions
+  button:hover {
+  color: var(--p_color);
+  border-color: var(--p_color);
+}
+
+.editPost > .content > .btns {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 5px 5px 5px;
+}
+
+.editPost > .content > .btns > button {
+  padding: 5px;
+  color: var(--txt_color);
+  transition: all 0.3s ease-out;
+  border: var(--txt_color) 3px solid;
+  border-radius: 15px;
+}
+
+.editPost > .content > .btns > button:hover {
+  color: var(--p_color);
+  border-color: var(--p_color);
+}
+
+.opts_profile,
+.opts_profile > a {
+  display: flex;
+  width: 100%;
+}
+
+.opts_profile > a {
+  text-decoration: none;
+  justify-content: center;
+  padding: 25px 0;
+  color: var(--txt_color);
+  transition: all 0.3s ease-out;
+}
+
+.opts_profile > a:hover {
+  color: var(--p_color);
+}
+
+.user > .imgAndName,
+.user > .actions {
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+.actions > button {
+  color: var(--txt_color);
+  transition: all 0.3s ease-out;
+}
+
+.actions > button:hover {
+  color: var(--p_color);
 }
