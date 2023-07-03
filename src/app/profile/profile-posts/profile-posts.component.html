@@ -24,10 +24,9 @@
                 </button>
                 <div class="grid_media">
                   <div class="imgCont" *ngIf="cpost.post.images.length == 0">
-                    <img
-                      src="https://us.123rf.com/450wm/solarus/solarus2112/solarus211200026/178493166-vector-de-icono-de-imagen-predeterminado-falta-la-página-de-imagen-para-el-diseño-del-sitio-web-o.jpg?ver=6"
-                      alt=""
-                    />
+                    <span class="material-symbols-outlined"
+                      >image_not_supported</span
+                    >
                   </div>
                   <div
                     class="imgCont grid_elem"
@@ -70,25 +69,30 @@
               >
                 <app-add-images-input
                   #imgs_input
+                  [hoverColor]="'var(--p_color)'"
                   [imgsInCloud]="cpost.post.images || []"
                 ></app-add-images-input>
-                <button (click)="quitNewImgsOfPost(true)">Ok</button>
+                <div class="btn_ok">
+                  <button (click)="quitNewImgsOfPost(true)">Ok</button>
+                </div>
               </div>
               <div class="title" contenteditable="true" #title_posts>
                 {{ cpost.post.title }}
               </div>
             </div>
-            <div class="btns">
-              <button (click)="modalEditPost(false, i)">Ok</button>
-            </div>
+          </div>
+          <div class="btns">
+            <button (click)="modalEditPost(false, i)">Ok</button>
           </div>
         </div>
       </div>
       <div class="user">
-        <div class="imgCont">
-          <img src="{{ user.image || def_person_img }}" alt="" />
+        <div class="imgAndName">
+          <div class="imgCont">
+            <img src="{{ user.image || def_person_img }}" alt="" />
+          </div>
+          <p class="name">{{ user.name }}</p>
         </div>
-        <p class="name">{{ user.name }}</p>
         <div *ngIf="canEditPost" class="actions">
           <button (click)="modalEditPost(true, i, cpost.post)">
             <span class="material-symbols-outlined">edit</span>

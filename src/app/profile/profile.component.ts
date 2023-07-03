@@ -63,7 +63,7 @@ export class ProfileComponent {
   urlNameError: string = '';
   bioError: string = '';
   bioLetters: number = 0;
-  editProfileStr = 'Edit Profile';
+  editProfileStr = 'Edit';
   okStr = 'Ok';
   def_person_img: string =
     'https://res.cloudinary.com/dp5gpr5sc/image/upload/v1685629395/app_assets/person.svg';
@@ -123,7 +123,7 @@ export class ProfileComponent {
       .dateToString(this.user.joined)
       .split(' ')[0]
       .split('/');
-    return `joined at ${date[0]} of ${this.tools
+    return `Joined at ${date[0]} of ${this.tools
       .getMonthOfNumber(date[1])
       .toLowerCase()} of ${date[2]}`;
   }
@@ -261,8 +261,6 @@ export class ProfileComponent {
     let canEdit: boolean = true;
     let isEditedUrlName: boolean = false;
 
-    this.edit_btn.nativeElement.innerText = this.editProfileStr;
-
     if (this.lastTextName != editedName && editedName != '')
       editedUser.name = editedName;
     else this.name_text.nativeElement.innerText = this.lastTextName;
@@ -384,7 +382,7 @@ export class ProfileComponent {
   editUserImg(open: boolean): void {
     if (open) {
       this.edit_user_img.nativeElement.style.display = 'none';
-      this.user_img_options.nativeElement.style.display = 'block';
+      this.user_img_options.nativeElement.style.display = 'flex';
 
       if (this.user_img.nativeElement.src.includes('https://'))
         this.lastUserImg = this.user_img.nativeElement.src;
@@ -413,7 +411,7 @@ export class ProfileComponent {
   editPortraitImg(open: boolean): void {
     if (open) {
       this.edit_portrait_img.nativeElement.style.display = 'none';
-      this.portrait_options.nativeElement.style.display = 'block';
+      this.portrait_options.nativeElement.style.display = 'flex';
 
       if (this.portrait_img.nativeElement.src.includes('https://'))
         this.lastPortraitImg = this.portrait_img.nativeElement.src;
