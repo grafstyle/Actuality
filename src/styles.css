@@ -6,6 +6,8 @@
   -moz-box-sizing: border-box;
   padding: 0;
   margin: 0;
+
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 :root {
@@ -49,6 +51,10 @@ button {
   gap: 10px;
 }
 
+.all_p_margin {
+  margin-top: 20px;
+}
+
 .post {
   width: 100%;
 }
@@ -60,19 +66,20 @@ button {
   overflow: hidden;
 }
 
-.post > .all_content > .user {
+.post > .all_content > .user,
+.post > .all_content > .user > .imgAndName {
   display: flex;
   align-items: center;
 }
 
-.post > .all_content > .content > .title {
-  padding: 5px;
-}
-
-.post > .all_content > .user > .imgCont {
+.post > .all_content > .user .imgCont {
   width: 60px;
   height: 60px;
   border-radius: 100%;
+}
+
+.post > .all_content > .content > .title {
+  padding: 5px;
 }
 
 .post .media {
