@@ -163,7 +163,8 @@
   </div>
 </div>
 <app-post-input></app-post-input>
-<div *ngIf="user.id == undefined">
+<div class="err_cont" *ngIf="user.id == undefined">
+  <span class="material-symbols-outlined">no_accounts</span>
   <p>{{ err }}</p>
 </div>
 <div class="opts_profile" *ngIf="user.id != undefined">

@@ -1,8 +1,10 @@
 <div class="modalContainer contError" #contError>
   <div class="container">
-    <p>{{ msg }}</p>
     <div class="btnsCont">
-      <button (click)="this.close()">Ok</button>
+      <button (click)="this.close()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
     </div>
+    <p>{{ msg }}</p>
   </div>
 </div>

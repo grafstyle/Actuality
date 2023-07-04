@@ -1,7 +1,9 @@
-<div *ngIf="err" class="errorPosts">
+<div *ngIf="err" class="errorPosts err_cont">
+  <span class="material-symbols-outlined">signal_disconnected</span>
   <p>{{ err }}</p>
 </div>
-<div *ngIf="errFoll != ''" class="noFollows">
+<div *ngIf="errFoll != ''" class="errNoFolls err_cont">
+  <span class="material-symbols-outlined">group_off</span>
   <p>{{ errFoll }}</p>
 </div>
 <div class="allPosts">
