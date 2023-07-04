@@ -1,4 +1,5 @@
-<div class="noOnePost" *ngIf="cposts.length == 0">
+<div class="noOnePost err_cont" *ngIf="cposts.length == 0">
+  <span class="material-symbols-outlined">public_off</span>
   <p>{{ noOnePost }}</p>
 </div>
 <div class="allPosts">
