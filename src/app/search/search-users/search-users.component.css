@@ -1,8 +1,23 @@
+.allUsers {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.allUsers > h3 {
+  margin-bottom: 5px;
+}
+
 .user {
   display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: default;
 }
 
 .imgUser {
   width: 60px;
   height: 60px;
+  border-radius: 100%;
 }
