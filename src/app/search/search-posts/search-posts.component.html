@@ -1,6 +1,9 @@
 <div *ngIf="err" class="errorPosts">
   <p>{{ err }}</p>
 </div>
+<div class="title">
+  <h3>Posts:</h3>
+</div>
 <div class="allPosts">
   <div class="post" *ngFor="let cpost of cposts; let i = index">
     <div class="all_content">
