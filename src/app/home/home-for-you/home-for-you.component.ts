@@ -5,7 +5,7 @@ import { RefreshService } from 'src/app/tools/refresh-service/refresh-service';
 @Component({
   selector: 'app-home-for-you',
   templateUrl: './home-for-you.component.html',
-  styleUrls: ['./home-for-you.component.css'],
+  styleUrls: ['./home-for-you.component.css', '../home.component.css'],
 })
 export class HomeForYouComponent {
   err: string = '';

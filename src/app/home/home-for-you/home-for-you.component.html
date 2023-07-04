@@ -1,5 +1,10 @@
-<div *ngIf="err" class="errorPosts">
+<div *ngIf="err" class="errorPosts err_cont">
+  <span class="material-symbols-outlined">signal_disconnected</span>
   <p>{{ err }}</p>
+</div>
+<div *ngIf="cposts.length == 0" class="errNoPosts err_cont">
+  <span class="material-symbols-outlined">public_off</span>
+  <p>The app dont has posts.</p>
 </div>
 <div class="allPosts">
   <div class="post" *ngFor="let cpost of cposts; let i = index">

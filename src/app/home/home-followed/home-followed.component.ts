@@ -7,7 +7,7 @@ import { Cookies } from 'src/app/cookies/cookies';
 @Component({
   selector: 'app-home-followed',
   templateUrl: './home-followed.component.html',
-  styleUrls: ['./home-followed.component.css'],
+  styleUrls: ['./home-followed.component.css', '../home.component.css'],
 })
 export class HomeFollowedComponent {
   err: string = '';
