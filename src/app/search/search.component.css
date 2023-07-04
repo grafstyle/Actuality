@@ -1,0 +1,18 @@
+.links,
+.links a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.links a {
+  padding: 20px 0;
+  color: var(--txt_color);
+  text-decoration: none;
+  transition: all 0.3s ease-out;
+}
+
+.links a:hover {
+  color: var(--p_color);
+}
