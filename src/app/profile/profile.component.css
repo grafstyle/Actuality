@@ -440,8 +440,7 @@
   color: var(--p_color);
 }
 
-.user > .imgAndName,
-.user > .actions {
+.user > .imgAndName {
   width: 100%;
 }
 

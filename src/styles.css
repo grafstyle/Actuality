@@ -48,7 +48,7 @@ button {
 .allPosts {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 25px;
 }
 
 .all_p_margin {
@@ -61,8 +61,8 @@ button {
 
 .post > .all_content {
   border-radius: 25px;
-  padding-top: 5px;
-  border: var(--p_color) solid 3px;
+  padding: 10px;
+  border: var(--contrast_dark) solid 3px;
   overflow: hidden;
 }
 
@@ -73,17 +73,41 @@ button {
 }
 
 .post > .all_content > .user .imgCont {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   border-radius: 100%;
+  margin: 15px;
+}
+
+.post > .all_content > .user .names {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 2px;
+}
+
+.post > .all_content > .user .name {
+  font-size: 16pt;
+}
+
+.post > .all_content > .user .url_name {
+  font-size: 14pt;
+  color: var(--p_color);
+}
+
+.post > .all_content > .user .date {
+  font-size: 8pt;
 }
 
 .post > .all_content > .content > .title {
-  padding: 5px;
+  padding: 15px 10px;
+  background-color: var(--contrast_light);
+  border-bottom: var(--contrast_dark) 3px solid;
 }
 
 .post .media {
   height: 400px;
+  margin-bottom: 10px;
 }
 
 .post .media > .grid_media {
@@ -93,7 +117,7 @@ button {
 
 .grid_media {
   display: grid;
-  gap: 3px;
+  gap: 5px;
   grid-template-rows: repeat(auto-fill);
 }
 
