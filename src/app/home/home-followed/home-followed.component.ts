@@ -3,6 +3,7 @@ import { CPost, Posts } from 'src/app/controller/posts/posts';
 import { Users } from 'src/app/controller/users/users';
 import { RefreshService } from 'src/app/tools/refresh-service/refresh-service';
 import { Cookies } from 'src/app/cookies/cookies';
+import { Tools } from 'src/app/tools/tools';
 
 @Component({
   selector: 'app-home-followed',
@@ -10,6 +11,7 @@ import { Cookies } from 'src/app/cookies/cookies';
   styleUrls: ['./home-followed.component.css', '../home.component.css'],
 })
 export class HomeFollowedComponent {
+  tools: Tools = new Tools();
   err: string = '';
   errFoll: string = '';
   cposts: CPost[] = [];

@@ -12,7 +12,15 @@
               <div class="imgCont">
                 <img src="{{ user.image || def_person_img }}" alt="" />
               </div>
-              <p class="name">{{ user.name }}</p>
+              <div class="names">
+                <p class="name">
+                  {{ cpost.user_of_post.name }}
+                </p>
+                <p class="url_name">@{{ cpost.user_of_post.url_name }}</p>
+                <p class="date">
+                  {{ tools.formatDate(cpost.post.date_added) }}
+                </p>
+              </div>
             </div>
             <div class="content_edit">
               <div class="media" #media>
@@ -92,7 +100,20 @@
           <div class="imgCont">
             <img src="{{ user.image || def_person_img }}" alt="" />
           </div>
-          <p class="name">{{ user.name }}</p>
+          <div class="names">
+            <p class="name" [routerLink]="['/' + cpost.user_of_post.url_name]">
+              {{ cpost.user_of_post.name }}
+            </p>
+            <p
+              class="url_name"
+              [routerLink]="['/' + cpost.user_of_post.url_name]"
+            >
+              @{{ cpost.user_of_post.url_name }}
+            </p>
+            <p class="date">
+              {{ tools.formatDate(cpost.post.date_added) }}
+            </p>
+          </div>
         </div>
         <div *ngIf="canEditPost" class="actions">
           <button (click)="modalEditPost(true, i, cpost.post)">
@@ -137,7 +158,6 @@
       <app-likes
         [idPost]="cpost.post.id"
         [cantLikes]="cpost.likes.length"
-        [dateAdded]="cpost.post.date_added"
       ></app-likes>
     </div>
     <app-comments [idPost]="cpost.post.id"></app-comments>

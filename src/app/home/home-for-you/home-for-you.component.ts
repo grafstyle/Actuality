@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CPost, Posts } from 'src/app/controller/posts/posts';
 import { RefreshService } from 'src/app/tools/refresh-service/refresh-service';
+import { Tools } from 'src/app/tools/tools';
 
 @Component({
   selector: 'app-home-for-you',
@@ -8,6 +9,7 @@ import { RefreshService } from 'src/app/tools/refresh-service/refresh-service';
   styleUrls: ['./home-for-you.component.css', '../home.component.css'],
 })
 export class HomeForYouComponent {
+  tools: Tools = new Tools();
   err: string = '';
   cposts: CPost[] = [];
   def_person_img: string =
