@@ -70,6 +70,18 @@ export class Tools {
     return months[monthNumber];
   }
 
+  formatDate(date: string): string {
+    const isoDate: string = date;
+    const splittedCDate: string[] = this.dateToString(isoDate).split(' ');
+    const splittedDate: string[] = splittedCDate[0].split('/');
+
+    const monthStr: string = this.getMonthOfNumber(splittedDate[1]);
+
+    return `${monthStr} ${splittedDate[0]}, ${splittedDate[2]} ${
+      splittedCDate[1]
+    } ${splittedCDate[2].toLowerCase()}`;
+  }
+
   public dateToString(dateStr: string): string {
     const date = new Date(dateStr);
 
