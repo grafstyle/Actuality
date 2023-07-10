@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CPost, Posts } from 'src/app/controller/posts/posts';
+import { Tools } from 'src/app/tools/tools';
 
 @Component({
   selector: 'app-search-posts',
@@ -8,6 +9,7 @@ import { CPost, Posts } from 'src/app/controller/posts/posts';
   styleUrls: ['./search-posts.component.css'],
 })
 export class SearchPostsComponent {
+  tools: Tools = new Tools();
   err: string = '';
   cposts: CPost[] = [];
 

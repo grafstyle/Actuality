@@ -6,7 +6,7 @@
   <span class="material-symbols-outlined">public_off</span>
   <p>The app dont has posts.</p>
 </div>
-<div class="allPosts">
+<div class="allPosts all_p_margin">
   <div class="post" *ngFor="let cpost of cposts; let i = index">
     <div class="all_content">
       <div class="user">
@@ -17,9 +17,20 @@
             [routerLink]="['/' + cpost.user_of_post.url_name]"
           />
         </div>
-        <p class="name" [routerLink]="['/' + cpost.user_of_post.url_name]">
-          {{ cpost.user_of_post.name }}
-        </p>
+        <div class="names">
+          <p class="name" [routerLink]="['/' + cpost.user_of_post.url_name]">
+            {{ cpost.user_of_post.name }}
+          </p>
+          <p
+            class="url_name"
+            [routerLink]="['/' + cpost.user_of_post.url_name]"
+          >
+            @{{ cpost.user_of_post.url_name }}
+          </p>
+          <p class="date" [routerLink]="['/' + cpost.user_of_post.url_name]">
+            {{ tools.formatDate(cpost.post.date_added) }}
+          </p>
+        </div>
       </div>
       <div class="content">
         <div class="media grid_media" *ngIf="cpost.post.images.length > 0">
@@ -55,7 +66,6 @@
       <app-likes
         [idPost]="cpost.post.id"
         [cantLikes]="cpost.likes.length"
-        [dateAdded]="cpost.post.date_added"
       ></app-likes>
     </div>
     <app-comments [idPost]="cpost.post.id"></app-comments>

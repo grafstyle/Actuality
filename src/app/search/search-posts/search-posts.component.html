@@ -16,9 +16,20 @@
             [routerLink]="['/' + cpost.user_of_post.url_name]"
           />
         </div>
-        <p class="name" [routerLink]="['/' + cpost.user_of_post.url_name]">
-          {{ cpost.user_of_post.name }}
-        </p>
+        <div class="names">
+          <p class="name" [routerLink]="['/' + cpost.user_of_post.url_name]">
+            {{ cpost.user_of_post.name }}
+          </p>
+          <p
+            class="url_name"
+            [routerLink]="['/' + cpost.user_of_post.url_name]"
+          >
+            @{{ cpost.user_of_post.url_name }}
+          </p>
+          <p class="date" [routerLink]="['/' + cpost.user_of_post.url_name]">
+            {{ tools.formatDate(cpost.post.date_added) }}
+          </p>
+        </div>
       </div>
       <div class="content">
         <div class="media grid_media" *ngIf="cpost.post.images.length > 0">
@@ -53,7 +64,6 @@
       <app-likes
         [idPost]="cpost.post.id"
         [cantLikes]="cpost.likes.length"
-        [dateAdded]="cpost.post.date_added"
       ></app-likes>
     </div>
     <app-comments [idPost]="cpost.post.id"></app-comments>
