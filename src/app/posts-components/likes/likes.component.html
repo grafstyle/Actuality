@@ -1,0 +1,14 @@
+<div class="dateAndLikes">
+  <div class="likes">
+    <button (click)="setLike()">
+      <span
+        class="material-symbols-outlined"
+        [ngClass]="touchLike == 1 ? 'liked' : 'notLiked'"
+        >favorite</span
+      >
+    </button>
+    <p>
+      {{ cantLikes + (cantLikes == 1 ? " like" : " likes") }}
+    </p>
+  </div>
+</div>

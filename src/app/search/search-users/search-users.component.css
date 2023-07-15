@@ -1,0 +1,30 @@
+.allUsers {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.allUsers > h3 {
+  margin-bottom: 5px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: default;
+  padding: 5px 10px;
+  border-radius: 50px;
+  border: var(--contrast_dark) 3px solid;
+}
+
+.user > .namesInfo > .urlname {
+  color: var(--contrast_dark);
+}
+
+.imgUser {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+}

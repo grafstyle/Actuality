@@ -1,0 +1,170 @@
+<div class="noOnePost err_cont" *ngIf="cposts.length == 0">
+  <span class="material-symbols-outlined">public_off</span>
+  <p>{{ noOnePost }}</p>
+</div>
+<div class="allPosts">
+  <div class="post" *ngFor="let cpost of cposts; let i = index">
+    <div class="all_content">
+      <div class="editPost editContainer" #edit_post>
+        <div class="content">
+          <div class="post">
+            <div class="user">
+              <div class="imgCont">
+                <img src="{{ user.image || def_person_img }}" alt="" />
+              </div>
+              <div class="names">
+                <p class="name">
+                  {{ cpost.user_of_post.name }}
+                </p>
+                <p class="url_name">@{{ cpost.user_of_post.url_name }}</p>
+                <p class="date">
+                  {{ tools.formatDate(cpost.post.date_added) }}
+                </p>
+              </div>
+            </div>
+            <div class="content_edit">
+              <div class="media" #media>
+                <button
+                  #edit_post_imgs_btn
+                  class="editBtn edit_profile_imgs_btn"
+                  (click)="editImagesOfPost()"
+                >
+                  <span class="material-symbols-outlined">edit</span>
+                </button>
+                <div class="grid_media">
+                  <div class="imgCont" *ngIf="cpost.post.images.length == 0">
+                    <span class="material-symbols-outlined"
+                      >image_not_supported</span
+                    >
+                  </div>
+                  <div
+                    class="imgCont grid_elem"
+                    *ngFor="
+                      let imgOrVideo of cpost.post.images;
+                      let img_i = index
+                    "
+                    [style.grid-row]="
+                      img_i == 0 && cpost.post.images.length > 2
+                        ? '1/' + cpost.post.images.length
+                        : ''
+                    "
+                  >
+                    <img
+                      src="{{ imgOrVideo }}"
+                      alt=""
+                      *ngIf="
+                        !imgOrVideo.includes('.mp4') ||
+                        !imgOrVideo.includes('video/mp4')
+                      "
+                    />
+                    <video
+                      *ngIf="
+                        imgOrVideo.includes('.mp4') ||
+                        imgOrVideo.includes('video/mp4')
+                      "
+                      controls
+                      autoplay
+                      loop
+                      [muted]="'muted'"
+                    >
+                      <source src="{{ imgOrVideo }}" type="video/mp4" />
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="edit_image_actions"
+                #edit_image_actions
+                *ngIf="showImgsInputPost && selectedPost == i"
+              >
+                <app-add-images-input
+                  #imgs_input
+                  [imgsInCloud]="cpost.post.images || []"
+                ></app-add-images-input>
+                <div class="btnOk">
+                  <button (click)="quitNewImgsOfPost(true)">Ok</button>
+                </div>
+              </div>
+              <div class="title" contenteditable="true" #title_posts>
+                {{ cpost.post.title }}
+              </div>
+            </div>
+            <div class="btns">
+              <button (click)="modalEditPost(false, i)">Ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="user">
+        <div class="imgAndName">
+          <div class="imgCont">
+            <img src="{{ user.image || def_person_img }}" alt="" />
+          </div>
+          <div class="names">
+            <p class="name" [routerLink]="['/' + cpost.user_of_post.url_name]">
+              {{ cpost.user_of_post.name }}
+            </p>
+            <p
+              class="url_name"
+              [routerLink]="['/' + cpost.user_of_post.url_name]"
+            >
+              @{{ cpost.user_of_post.url_name }}
+            </p>
+            <p class="date">
+              {{ tools.formatDate(cpost.post.date_added) }}
+            </p>
+          </div>
+        </div>
+        <div *ngIf="canEditPost" class="actions">
+          <button (click)="modalEditPost(true, i, cpost.post)">
+            <span class="material-symbols-outlined">edit</span>
+          </button>
+          <button (click)="deletePost(cpost.post.id)">
+            <span class="material-symbols-outlined">delete</span>
+          </button>
+        </div>
+      </div>
+      <div class="content">
+        <div class="media grid_media" *ngIf="cpost.post.images.length > 0">
+          <div
+            class="imgCont grid_elem"
+            *ngFor="let imgOrVideo of cpost.post.images; let img_i = index"
+            [style.grid-row]="
+              img_i == 0 && cpost.post.images.length > 2
+                ? '1/' + cpost.post.images.length
+                : ''
+            "
+          >
+            <img
+              src="{{ imgOrVideo }}"
+              alt=""
+              *ngIf="!imgOrVideo.includes('.mp4')"
+            />
+            <video
+              *ngIf="imgOrVideo.includes('.mp4')"
+              controls
+              autoplay
+              loop
+              [muted]="'muted'"
+            >
+              <source src="{{ imgOrVideo }}" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+        <div class="title">
+          <p>{{ cpost.post.title }}</p>
+        </div>
+      </div>
+      <app-likes
+        [idPost]="cpost.post.id"
+        [cantLikes]="cpost.likes.length"
+      ></app-likes>
+    </div>
+    <app-comments [idPost]="cpost.post.id"></app-comments>
+  </div>
+</div>
+<app-alert-component
+  [msg]="alertError"
+  *ngIf="alertError != ''"
+></app-alert-component>
+<app-load-screen *ngIf="showLoadScreen"></app-load-screen>

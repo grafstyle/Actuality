@@ -1,0 +1,183 @@
+<div class="comments">
+  <div class="sectionComments">
+    <app-add-comment
+      [idPost]="idPost"
+      *ngIf="user.id != undefined"
+    ></app-add-comment>
+    <div class="all_comments">
+      <ng-container *ngFor="let comment of cpost.comments; let i = index">
+        <div class="comment" *ngIf="i < 5">
+          <div class="all_content" *ngIf="comment.id_post == cpost.post.id">
+            <div class="imgCont user">
+              <img
+                src="{{
+                  cpost.user_of_post.image
+                    ? cpost.user_of_post.image
+                    : def_person_img
+                }}"
+                alt=""
+                [routerLink]="['/' + cpost.user_of_comments[i].url_name]"
+              />
+            </div>
+            <div class="userComment">
+              <div class="nameAndActions">
+                <div class="names">
+                  <h4 [routerLink]="['/' + cpost.user_of_comments[i].url_name]">
+                    {{ cpost.user_of_comments[i].name }}
+                  </h4>
+                  <p
+                    class="url_name"
+                    [routerLink]="['/' + cpost.user_of_comments[i].url_name]"
+                  >
+                    @{{ cpost.user_of_comments[i].url_name }}
+                  </p>
+                </div>
+                <div
+                  class="actions"
+                  *ngIf="cpost.user_of_comments[i].id == user.id"
+                >
+                  <app-add-images-input
+                    [hoverColor]="'var(--p_color)'"
+                    [imgsInCloud]="comment.images || []"
+                    *ngIf="showImagesInput && actualElem == i"
+                  ></app-add-images-input>
+                  <button
+                    class="editBtn"
+                    (click)="updateComment(comment.id, i)"
+                    #edit_comment_btn
+                  >
+                    <span class="material-symbols-outlined">{{ editStr }}</span>
+                  </button>
+                  <button class="deleteBtn" (click)="deleteComment(comment.id)">
+                    <span class="material-symbols-outlined">delete</span>
+                  </button>
+                </div>
+              </div>
+              <div
+                #imgs_cont
+                class="imgsOrVids"
+                *ngIf="comment.images != undefined && comment.images.length > 0"
+              >
+                <div class="imgs" *ngFor="let img of comment.images">
+                  <img *ngIf="img != undefined" src="{{ img }}" alt="" />
+                </div>
+              </div>
+              <p class="comment_body" #comment_body>{{ comment.comment }}</p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <div class="viewMoreCont" *ngIf="cpost.comments.length > 5">
+        <button (click)="seeAllComments()">View more</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- All comments modal -->
+
+  <div class="allCommentsCont modalContainer" #all_comments_cont>
+    <div class="content">
+      <div class="closeCont">
+        <span (click)="hideAllComments()" class="material-symbols-outlined"
+          >close</span
+        >
+      </div>
+      <div class="commentsCont">
+        <div class="all_comments">
+          <app-add-comment
+            [idPost]="idPost"
+            *ngIf="user.id != undefined"
+          ></app-add-comment>
+          <div
+            class="comment"
+            *ngFor="let comment of cpost.comments; let i = index"
+          >
+            <div class="all_content" *ngIf="comment.id_post == cpost.post.id">
+              <div class="imgCont user">
+                <img
+                  src="{{
+                    cpost.user_of_post.image
+                      ? cpost.user_of_post.image
+                      : def_person_img
+                  }}"
+                  alt=""
+                  [routerLink]="['/' + cpost.user_of_comments[i].url_name]"
+                />
+              </div>
+              <div class="userComment">
+                <div class="nameAndActions">
+                  <div class="names">
+                    <h4
+                      [routerLink]="['/' + cpost.user_of_comments[i].url_name]"
+                    >
+                      {{ cpost.user_of_comments[i].name }}
+                    </h4>
+                    <p
+                      class="url_name"
+                      [routerLink]="['/' + cpost.user_of_comments[i].url_name]"
+                    >
+                      @{{ cpost.user_of_comments[i].url_name }}
+                    </p>
+                    <p
+                      class="date"
+                      [routerLink]="['/' + cpost.user_of_comments[i].url_name]"
+                    >
+                      {{ tools.formatDate(comment.date_added) }}
+                    </p>
+                  </div>
+                  <div
+                    class="actions"
+                    *ngIf="cpost.user_of_comments[i].id == user.id"
+                  >
+                    <app-add-images-input
+                      [hoverColor]="'var(--p_color)'"
+                      [imgsInCloud]="actualComments[i].images || []"
+                      *ngIf="showImagesInputAll && actualElem == i"
+                    ></app-add-images-input>
+                    <button
+                      class="editBtn"
+                      (click)="updateComment(comment.id, i, true)"
+                      #edit_comment_btn_all
+                    >
+                      <span class="material-symbols-outlined">{{
+                        editStr
+                      }}</span>
+                    </button>
+                    <button
+                      class="deleteBtn"
+                      (click)="deleteComment(comment.id)"
+                    >
+                      <span class="material-symbols-outlined">delete</span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  #imgs_cont_all
+                  class="imgsOrVids"
+                  *ngIf="
+                    comment.images != undefined && comment.images.length > 0
+                  "
+                >
+                  <div
+                    class="imgs"
+                    *ngFor="let img of actualComments[i].images"
+                  >
+                    <img *ngIf="img != undefined" src="{{ img }}" alt="" />
+                  </div>
+                </div>
+                <p class="comment_body" #comment_body_all>
+                  {{ comment.comment }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-alert-component
+  [msg]="alertError"
+  *ngIf="alertError != ''"
+></app-alert-component>
+<app-load-screen *ngIf="showLoadScreen"></app-load-screen>

@@ -1,0 +1,164 @@
+/* All */
+
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.all {
+  --p_color: #258343;
+  --s_color: #fff;
+  --txt_color: #000;
+  --txt_s_color: #fff;
+  --contrast_light: #e4e4e4;
+  --contrast_dark: #999;
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background: none;
+  outline: 0;
+}
+
+/* General class "imgCont" for organizate the images. */
+
+.imgCont {
+  overflow: hidden;
+  position: relative;
+}
+
+.imgCont > img,
+.imgCont > video {
+  position: absolute;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/*General post and comments "class", to apply global styles*/
+
+.allPosts {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.all_p_margin {
+  margin-top: 20px;
+}
+
+.post {
+  width: 100%;
+}
+
+.post > .all_content {
+  border-radius: 25px;
+  padding: 10px;
+  border: var(--contrast_dark) solid 3px;
+  overflow: hidden;
+}
+
+.post > .all_content > .user,
+.post > .all_content > .user > .imgAndName {
+  display: flex;
+  align-items: center;
+}
+
+.post > .all_content > .user .imgCont {
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  margin: 15px;
+}
+
+.post > .all_content > .user .names {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 2px;
+}
+
+.post > .all_content > .user .name {
+  font-size: 16pt;
+}
+
+.post > .all_content > .user .url_name {
+  font-size: 14pt;
+  color: var(--p_color);
+}
+
+.post > .all_content > .user .date {
+  font-size: 8pt;
+}
+
+.post > .all_content > .content > .title {
+  padding: 15px 10px;
+  background-color: var(--contrast_light);
+  border-bottom: var(--contrast_dark) 3px solid;
+}
+
+.post .media {
+  height: 400px;
+  margin-bottom: 10px;
+}
+
+.post .media > .grid_media {
+  width: 100%;
+  height: 100%;
+}
+
+.grid_media {
+  display: grid;
+  gap: 5px;
+  grid-template-rows: repeat(auto-fill);
+}
+
+.grid_media > .grid_elem:nth-child(n + 2) {
+  grid-column: right;
+}
+
+/* For modals */
+
+.modalContainer {
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  left: 0;
+  top: 0;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.err_cont {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+  padding-bottom: 5px;
+}
+
+.err_cont > span {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  font-size: 148pt;
+}
+
+.err_cont > p {
+  font-size: 18pt;
+}
