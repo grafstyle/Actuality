@@ -441,6 +441,8 @@ export class ProfileComponent {
 
   async modalEditProfile(open: boolean): Promise<void> {
     if (open) {
+      this.setBioLetters();
+
       this.edit_profile.nativeElement.style.opacity = '1';
       this.edit_profile.nativeElement.style.pointerEvents = 'all';
 
