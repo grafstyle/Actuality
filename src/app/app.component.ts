@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { User, Users } from './controller/users/users';
 import { AuthService } from '@auth0/auth0-angular';
 import { Service } from './controller/services/services';
 import { Posts } from './controller/posts/posts';
 import { Comments } from './controller/comments/comments';
 import { Likes } from './controller/likes/likes';
-import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Cloudinary } from './controller/cloudinary/cloudinary';
 import { CookieService } from 'ngx-cookie-service';
 import { Cookies } from './cookies/cookies';
@@ -19,6 +19,12 @@ import { RefreshService } from './tools/refresh-service/refresh-service';
 })
 export class AppComponent {
   tools: Tools = new Tools();
+  s_color: string = '#fff';
+  txt_color: string = '#000';
+  txt_s_color: string = '#fff';
+  left_of_circle: string = '0';
+  bgOfLight: string = 'var(--p_color)';
+  bgOfDark: string = 'var(--contrast_dark)';
   title = 'Actuality';
 
   search(e: Event) {
@@ -54,6 +60,49 @@ export class AppComponent {
   logout() {
     Users.logout();
     Cookies.deleteUserID();
+  }
+
+  setLightMode(): void {
+    this.s_color = '#fff';
+    this.txt_color = '#222';
+    this.txt_s_color = '#fff';
+    this.left_of_circle = '0px';
+    this.bgOfLight = 'var(--p_color)';
+    this.bgOfDark = 'var(--contrast_dark)';
+
+    this.applyStyles();
+
+    Cookies.setMode(Cookies.MODE_LIGHT);
+  }
+
+  setDarkMode(): void {
+    this.s_color = '#222';
+    this.txt_color = '#fff';
+    this.txt_s_color = '#222';
+    this.left_of_circle = '95%';
+    this.bgOfLight = 'var(--contrast_dark)';
+    this.bgOfDark = 'var(--p_color)';
+
+    this.applyStyles();
+
+    Cookies.setMode(Cookies.MODE_DARK);
+  }
+
+  applyStyles(): void {
+    const styles = [
+      { name: 's_color', value: this.s_color },
+      { name: 'txt_color', value: this.txt_color },
+      { name: 'txt_s_color', value: this.txt_s_color },
+    ];
+
+    styles.forEach((style) => {
+      document.documentElement.style.setProperty(
+        `--${style.name}`,
+        style.value
+      );
+    });
+
+    document.documentElement.style.backgroundColor = this.s_color;
   }
 
   async convUrlName(url_name: string): Promise<string> {
@@ -113,6 +162,9 @@ export class AppComponent {
   }
 
   async ngOnInit(): Promise<void> {
+    if (Cookies.getMode() == Cookies.MODE_LIGHT) this.setLightMode();
+    else if (Cookies.getMode() == Cookies.MODE_DARK) this.setDarkMode();
+
     const isAuth: boolean = await Users.isActualUserAuth();
     if (isAuth)
       this.auth.user$.subscribe({

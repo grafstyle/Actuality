@@ -18,3 +18,7 @@
   gap: 5px;
   width: 100%;
 }
+
+.likes > p {
+  color: var(--txt_color);
+}

@@ -34,7 +34,7 @@
               <div class="media" #media>
                 <button
                   #edit_post_imgs_btn
-                  class="editBtn edit_profile_imgs_btn"
+                  class="editBtn edit_post_imgs_btn"
                   (click)="editImagesOfPost()"
                 >
                   <span class="material-symbols-outlined">edit</span>
@@ -90,7 +90,9 @@
                   [imgsInCloud]="cpost.post.images || []"
                 ></app-add-images-input>
                 <div class="btn_ok">
-                  <button (click)="quitNewImgsOfPost(true)">Ok</button>
+                  <button (click)="quitNewImgsOfPost(true)">
+                    <span class="material-symbols-outlined">done</span>
+                  </button>
                 </div>
               </div>
               <div class="title" contenteditable="true" #title_posts>

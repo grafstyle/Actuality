@@ -46,19 +46,27 @@
         <div class="modes">
           <div class="m_conts">
             <div class="m_cont ofLight">
-              <div class="mode light">
+              <div
+                class="mode light"
+                (click)="setLightMode()"
+                [style.backgroundColor]="bgOfLight"
+              >
                 <span class="material-symbols-outlined">light_mode</span>
               </div>
             </div>
             <div class="m_cont ofDark">
-              <div class="mode dark">
+              <div
+                class="mode dark"
+                (click)="setDarkMode()"
+                [style.backgroundColor]="bgOfDark"
+              >
                 <span class="material-symbols-outlined">dark_mode</span>
               </div>
             </div>
           </div>
           <div class="timeline">
             <hr />
-            <div class="circle"></div>
+            <div class="circle" [style.left]="left_of_circle"></div>
           </div>
         </div>
       </li>

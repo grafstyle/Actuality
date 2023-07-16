@@ -68,6 +68,7 @@
         <h2>Bio:</h2>
         <div
           #bio
+          class="bio"
           contenteditable="true"
           (keydown)="setBioLetters()"
           (keyup)="setBioLetters()"
@@ -162,7 +163,7 @@
     </div>
   </div>
 </div>
-<app-post-input></app-post-input>
+<app-post-input [marginTop]="'15px'"></app-post-input>
 <div class="err_cont" *ngIf="user.id == undefined">
   <span class="material-symbols-outlined">no_accounts</span>
   <p>{{ err }}</p>

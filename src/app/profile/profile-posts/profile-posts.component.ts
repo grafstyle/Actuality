@@ -170,6 +170,7 @@ export class ProfilePostsComponent {
 
     if (elem.style.opacity == '0') {
       elem.style.opacity = '1';
+      elem.style.padding = '5px 5px 0 5px';
       elem.style.pointerEvents = 'all';
       elem.style.height = 'auto';
     }
@@ -184,6 +185,7 @@ export class ProfilePostsComponent {
     if (onlyHide) {
       const elem: HTMLDivElement = this.edit_image_actions.nativeElement;
       elem.style.opacity = '0';
+      elem.style.padding = '0';
       elem.style.pointerEvents = 'none';
       elem.style.height = '0';
       return;

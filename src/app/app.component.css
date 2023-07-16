@@ -224,7 +224,3 @@ ul > li > .modes > .timeline > .circle {
   left: 0;
   transition: all 0.3s ease-out;
 }
-
-ul > li > .modes > .timeline > .circle {
-  left: -1;
-}

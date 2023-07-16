@@ -26,7 +26,7 @@
               <div class="media" #media>
                 <button
                   #edit_post_imgs_btn
-                  class="editBtn edit_profile_imgs_btn"
+                  class="editBtn edit_post_imgs_btn"
                   (click)="editImagesOfPost()"
                 >
                   <span class="material-symbols-outlined">edit</span>
@@ -81,17 +81,19 @@
                   #imgs_input
                   [imgsInCloud]="cpost.post.images || []"
                 ></app-add-images-input>
-                <div class="btnOk">
-                  <button (click)="quitNewImgsOfPost(true)">Ok</button>
+                <div class="btn_ok">
+                  <button (click)="quitNewImgsOfPost(true)">
+                    <span class="material-symbols-outlined">done</span>
+                  </button>
                 </div>
               </div>
               <div class="title" contenteditable="true" #title_posts>
                 {{ cpost.post.title }}
               </div>
             </div>
-            <div class="btns">
-              <button (click)="modalEditPost(false, i)">Ok</button>
-            </div>
+          </div>
+          <div class="btns">
+            <button (click)="modalEditPost(false, i)">Ok</button>
           </div>
         </div>
       </div>

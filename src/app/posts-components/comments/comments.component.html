@@ -8,16 +8,18 @@
       <ng-container *ngFor="let comment of cpost.comments; let i = index">
         <div class="comment" *ngIf="i < 5">
           <div class="all_content" *ngIf="comment.id_post == cpost.post.id">
-            <div class="imgCont user">
-              <img
-                src="{{
-                  cpost.user_of_post.image
-                    ? cpost.user_of_post.image
-                    : def_person_img
-                }}"
-                alt=""
-                [routerLink]="['/' + cpost.user_of_comments[i].url_name]"
-              />
+            <div class="imgUserCont">
+              <div class="imgCont user">
+                <img
+                  src="{{
+                    cpost.user_of_post.image
+                      ? cpost.user_of_post.image
+                      : def_person_img
+                  }}"
+                  alt=""
+                  [routerLink]="['/' + cpost.user_of_comments[i].url_name]"
+                />
+              </div>
             </div>
             <div class="userComment">
               <div class="nameAndActions">
@@ -93,16 +95,18 @@
             *ngFor="let comment of cpost.comments; let i = index"
           >
             <div class="all_content" *ngIf="comment.id_post == cpost.post.id">
-              <div class="imgCont user">
-                <img
-                  src="{{
-                    cpost.user_of_post.image
-                      ? cpost.user_of_post.image
-                      : def_person_img
-                  }}"
-                  alt=""
-                  [routerLink]="['/' + cpost.user_of_comments[i].url_name]"
-                />
+              <div class="imgUserCont">
+                <div class="imgCont user">
+                  <img
+                    src="{{
+                      cpost.user_of_post.image
+                        ? cpost.user_of_post.image
+                        : def_person_img
+                    }}"
+                    alt=""
+                    [routerLink]="['/' + cpost.user_of_comments[i].url_name]"
+                  />
+                </div>
               </div>
               <div class="userComment">
                 <div class="nameAndActions">

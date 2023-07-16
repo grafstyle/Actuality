@@ -9,6 +9,7 @@
 }
 
 .errorCont > .wdys {
+  color: var(--txt_color);
   padding: 35px 0;
 }
 
@@ -39,6 +40,10 @@
 .errorCont > .error_spec > h2 {
   font-size: 38pt;
   color: var(--p_color);
+}
+
+.errorCont > .error_spec > h3 {
+  color: var(--txt_color);
 }
 
 .errorCont > p {

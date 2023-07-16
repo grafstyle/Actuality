@@ -10,13 +10,15 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.all {
+:root {
   --p_color: #258343;
   --s_color: #fff;
   --txt_color: #000;
   --txt_s_color: #fff;
   --contrast_light: #e4e4e4;
   --contrast_dark: #999;
+
+  transition: all 0.3s ease-out;
 }
 
 button {
@@ -70,24 +72,29 @@ button {
 .post > .all_content > .user > .imgAndName {
   display: flex;
   align-items: center;
+  gap: 15px;
+}
+
+.post > .all_content > .user {
+  margin: 15px;
 }
 
 .post > .all_content > .user .imgCont {
   width: 80px;
   height: 80px;
   border-radius: 100%;
-  margin: 15px;
 }
 
 .post > .all_content > .user .names {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: max-content;
   gap: 2px;
 }
 
 .post > .all_content > .user .name {
   font-size: 16pt;
+  color: var(--txt_color);
 }
 
 .post > .all_content > .user .url_name {
@@ -97,6 +104,7 @@ button {
 
 .post > .all_content > .user .date {
   font-size: 8pt;
+  color: var(--txt_color);
 }
 
 .post > .all_content > .content > .title {
@@ -153,6 +161,7 @@ button {
 }
 
 .err_cont > span {
+  color: var(--txt_color);
   -moz-user-select: none;
   -webkit-user-select: none;
   user-select: none;
@@ -160,5 +169,6 @@ button {
 }
 
 .err_cont > p {
+  color: var(--txt_color);
   font-size: 18pt;
 }

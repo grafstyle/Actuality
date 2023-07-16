@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Post, Posts } from '../controller/posts/posts';
 import { Cloudinary } from '../controller/cloudinary/cloudinary';
 import { Tools } from '../tools/tools';
@@ -18,6 +18,8 @@ export class PostInputComponent {
   toPost: Post = {} as Post;
   tools: Tools = new Tools();
   imgs: Image[] = [];
+
+  @Input('marginTop') marginTop: string = '';
 
   @ViewChild(AddImagesInputComponent) addImagesInput!: AddImagesInputComponent;
   @ViewChild('post_body') postBody!: ElementRef<HTMLDivElement>;
