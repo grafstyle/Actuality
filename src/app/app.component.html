@@ -28,14 +28,14 @@
           >
         </h1>
       </li>
-      <li class="link_elem">
+      <li class="link_elem" *ngIf="getUserIDByCookie() == undefined">
         <h1>
           <a href="" (click)="goProfile()"
             ><span class="material-symbols-outlined">login</span>Login</a
           >
         </h1>
       </li>
-      <li class="link_elem">
+      <li class="link_elem" *ngIf="getUserIDByCookie()! > 0">
         <h1>
           <a href="" (click)="logout()"
             ><span class="material-symbols-outlined">logout</span>Logout</a

@@ -62,6 +62,11 @@ export class AppComponent {
     Cookies.deleteUserID();
   }
 
+  getUserIDByCookie(): number | undefined {
+    if (isNaN(Cookies.getUserID())) return undefined;
+    return Cookies.getUserID();
+  }
+
   setLightMode(): void {
     this.s_color = '#fff';
     this.txt_color = '#222';

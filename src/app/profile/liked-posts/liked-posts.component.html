@@ -118,12 +118,28 @@
           *ngIf="canEditPost && user.id == cpost.user_of_post.id"
           class="actions"
         >
-          <button (click)="modalEditPost(true, i, cpost.post)">
-            <span class="material-symbols-outlined">edit</span>
-          </button>
-          <button (click)="deletePost(cpost.post.id)">
-            <span class="material-symbols-outlined">delete</span>
-          </button>
+          <div
+            #opt_post_to_click
+            class="toClick"
+            (click)="hideOptions(i)"
+          ></div>
+          <div class="more_btn_cont">
+            <button (click)="showOptions(i)">
+              <span class="material-symbols-outlined">more_horiz</span>
+            </button>
+          </div>
+          <ul #list_opt_post>
+            <li>
+              <button (click)="modalEditPost(true, i, cpost.post)">
+                <span class="material-symbols-outlined">edit</span> Edit
+              </button>
+            </li>
+            <li>
+              <button (click)="deletePost(cpost.post.id)">
+                <span class="material-symbols-outlined">delete</span> Delete
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
       <div class="content">

@@ -31,6 +31,12 @@ export class MultimediaPostsComponent {
   @ViewChildren('edit_post_imgs_btn') edit_post_imgs_btn!: QueryList<
     ElementRef<HTMLButtonElement>
   >;
+  @ViewChildren('opt_post_to_click') opt_post_to_click!: QueryList<
+    ElementRef<HTMLDivElement>
+  >;
+  @ViewChildren('list_opt_post') list_opt_post!: QueryList<
+    ElementRef<HTMLUListElement>
+  >;
   @ViewChild('edit_image_actions')
   edit_image_actions!: ElementRef<HTMLDivElement>;
   @ViewChild('imgs_input') add_images_input!: AddImagesInputComponent;
@@ -75,6 +81,7 @@ export class MultimediaPostsComponent {
     elemPos: number,
     cpostInfo: Post = {} as Post
   ): Promise<void> {
+    this.hideOptions(elemPos);
     this.selectedPost = elemPos;
     const elem: HTMLDivElement =
       this.edit_post.toArray()[elemPos].nativeElement;
@@ -195,5 +202,33 @@ export class MultimediaPostsComponent {
       this.showLoadScreen = false;
       this.refreshPosts();
     });
+  }
+
+  showOptions(pos: number): void {
+    const actualList: HTMLUListElement =
+      this.list_opt_post.toArray()[pos].nativeElement;
+    const actualToClick: HTMLDivElement =
+      this.opt_post_to_click.toArray()[pos].nativeElement;
+
+    actualList.style.paddingTop = '10px';
+    actualList.style.paddingBottom = '10px';
+    actualList.style.maxHeight = '80px'; // Change it if a new option is added in list
+
+    actualToClick.style.opacity = '1';
+    actualToClick.style.pointerEvents = 'all';
+  }
+
+  hideOptions(pos: number): void {
+    const actualList: HTMLUListElement =
+      this.list_opt_post.toArray()[pos].nativeElement;
+    const actualToClick: HTMLDivElement =
+      this.opt_post_to_click.toArray()[pos].nativeElement;
+
+    actualList.style.paddingTop = '0';
+    actualList.style.paddingBottom = '0';
+    actualList.style.maxHeight = '0';
+
+    actualToClick.style.opacity = '0';
+    actualToClick.style.pointerEvents = 'none';
   }
 }
