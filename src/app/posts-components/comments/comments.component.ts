@@ -75,9 +75,11 @@ export class CommentsComponent {
   }
 
   async ngOnInit(): Promise<void> {
-    this.user = await Users.get(Cookies.getUserID());
-    this.cpost = (await Posts.getCPosts(await Posts.get(this.idPost)))[0];
+    const actualUser: User = await Users.get(Cookies.getUserID());
 
+    if (actualUser != undefined) this.user = actualUser;
+
+    this.cpost = (await Posts.getCPosts(await Posts.get(this.idPost)))[0];
     this.actualComments = await Comments.getBy('id_post', this.idPost);
 
     this.refresh.getUpdate().subscribe({
