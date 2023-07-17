@@ -1,9 +1,9 @@
-<div class="noOnePost err_cont" *ngIf="cposts.length == 0">
+<div class="noOnePost err_cont" *ngIf="posts_to_show.length == 0">
   <span class="material-symbols-outlined">public_off</span>
   <p>{{ noOnePost }}</p>
 </div>
 <div class="allPosts">
-  <div class="post" *ngFor="let cpost of cposts; let i = index">
+  <div class="post" *ngFor="let cpost of posts_to_show; let i = index">
     <div class="all_content">
       <div class="editPost editContainer" #edit_post>
         <div class="content">

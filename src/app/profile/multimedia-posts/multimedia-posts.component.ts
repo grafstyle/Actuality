@@ -21,6 +21,7 @@ import { Tools } from 'src/app/tools/tools';
 export class MultimediaPostsComponent {
   user: User = {} as User;
   cposts: CPost[] = [];
+  posts_to_show: CPost[] = [];
 
   tools: Tools = new Tools();
 
@@ -71,7 +72,12 @@ export class MultimediaPostsComponent {
         await Posts.getBy('id_user', this.user.id)
       );
 
-      if (this.cposts.length == 0)
+      if (this.posts_to_show.length > 0) this.posts_to_show = [];
+
+      for (const cpost of this.cposts)
+        if (cpost.post.images.length > 0) this.posts_to_show.push(cpost);
+
+      if (this.posts_to_show.length == 0)
         this.noOnePost = "The user don't have posts with multimedia.";
     }
   }
