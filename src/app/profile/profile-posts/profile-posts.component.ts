@@ -86,6 +86,8 @@ export class ProfilePostsComponent {
     cpostInfo: Post = {} as Post
   ): Promise<void> {
     this.hideOptions(elemPos);
+    this.editImagesOfPost();
+    this.quitNewImgsOfPost(true);
     this.selectedPost = elemPos;
     const elem: HTMLDivElement =
       this.edit_post.toArray()[elemPos].nativeElement;
