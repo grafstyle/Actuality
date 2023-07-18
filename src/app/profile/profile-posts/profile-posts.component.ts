@@ -103,6 +103,8 @@ export class ProfilePostsComponent {
     elem.style.opacity = '0';
     elem.style.pointerEvents = 'none';
     this.quitNewImgsOfPost();
+    this.showLoadScreen = false;
+    this.cd.detectChanges();
   }
 
   async editPost(elemPos: number): Promise<boolean> {
