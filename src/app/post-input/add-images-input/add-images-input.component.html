@@ -22,10 +22,10 @@
         <img
           src="{{ img.url }}"
           alt=""
-          *ngIf="!img.url.includes('video/mp4')"
+          *ngIf="!img.url.includes('video/mp4') || !img.url.includes('.mp4')"
         />
         <video
-          *ngIf="img.url.includes('video/mp4')"
+          *ngIf="img.url.includes('video/mp4') || img.url.includes('.mp4')"
           controls
           autoplay
           loop
