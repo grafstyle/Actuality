@@ -44,15 +44,18 @@ export class LikedPostsComponent {
 
   noOnePost: string = '';
   selectedPost: number = 0;
-  showLoadScreen: boolean = false;
   postToEdit: Post = {} as Post;
   showImgsInputPost: boolean = false;
   canEditPost: boolean = false;
+
+  showLoadScreen: boolean = false;
 
   def_person_img: string =
     'https://res.cloudinary.com/dp5gpr5sc/image/upload/v1685629395/app_assets/person.svg';
 
   alertError: string = '';
+
+  cposts_imgs: string[][] = [];
 
   constructor(private refresh: RefreshService, private cd: ChangeDetectorRef) {}
 
@@ -77,6 +80,13 @@ export class LikedPostsComponent {
 
       this.cposts = await Posts.getCPosts(posts);
 
+      if (this.cposts_imgs.length > 0) this.cposts_imgs = [];
+
+      for (const cpost of this.cposts) {
+        const arr: string[] = [...cpost.post.images];
+        this.cposts_imgs.push(arr);
+      }
+
       if (this.cposts.length == 0)
         this.noOnePost = "The user don't has liked any post.";
     }
@@ -87,12 +97,14 @@ export class LikedPostsComponent {
     elemPos: number,
     cpostInfo: Post = {} as Post
   ): Promise<void> {
-    this.hideOptions(elemPos);
-    this.editImagesOfPost();
-    this.quitNewImgsOfPost(true);
     this.selectedPost = elemPos;
     const elem: HTMLDivElement =
       this.edit_post.toArray()[elemPos].nativeElement;
+
+    this.hideOptions(elemPos);
+
+    this.editImagesOfPost();
+    this.quitNewImgsOfPost(true);
 
     if (open && cpostInfo.id > 0) {
       elem.style.opacity = '1';
@@ -107,7 +119,9 @@ export class LikedPostsComponent {
     elem.style.opacity = '0';
     elem.style.pointerEvents = 'none';
     this.quitNewImgsOfPost();
+
     this.showLoadScreen = false;
+
     this.cd.detectChanges();
   }
 

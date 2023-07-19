@@ -44,15 +44,18 @@ export class MultimediaPostsComponent {
 
   noOnePost: string = '';
   selectedPost: number = 0;
-  showLoadScreen: boolean = false;
   postToEdit: Post = {} as Post;
   showImgsInputPost: boolean = false;
   canEditPost: boolean = false;
+
+  showLoadScreen: boolean = false;
 
   def_person_img: string =
     'https://res.cloudinary.com/dp5gpr5sc/image/upload/v1685629395/app_assets/person.svg';
 
   alertError: string = '';
+
+  cposts_imgs: string[][] = [];
 
   constructor(private refresh: RefreshService, private cd: ChangeDetectorRef) {}
 
@@ -77,6 +80,13 @@ export class MultimediaPostsComponent {
       for (const cpost of this.cposts)
         if (cpost.post.images.length > 0) this.posts_to_show.push(cpost);
 
+      if (this.cposts_imgs.length > 0) this.cposts_imgs = [];
+
+      for (const cpost of this.posts_to_show) {
+        const arr: string[] = [...cpost.post.images];
+        this.cposts_imgs.push(arr);
+      }
+
       if (this.posts_to_show.length == 0)
         this.noOnePost = "The user don't have posts with multimedia.";
     }
@@ -87,12 +97,14 @@ export class MultimediaPostsComponent {
     elemPos: number,
     cpostInfo: Post = {} as Post
   ): Promise<void> {
-    this.hideOptions(elemPos);
-    this.editImagesOfPost();
-    this.quitNewImgsOfPost(true);
     this.selectedPost = elemPos;
     const elem: HTMLDivElement =
       this.edit_post.toArray()[elemPos].nativeElement;
+
+    this.hideOptions(elemPos);
+
+    this.editImagesOfPost();
+    this.quitNewImgsOfPost(true);
 
     if (open && cpostInfo.id > 0) {
       elem.style.opacity = '1';
@@ -107,7 +119,9 @@ export class MultimediaPostsComponent {
     elem.style.opacity = '0';
     elem.style.pointerEvents = 'none';
     this.quitNewImgsOfPost();
+
     this.showLoadScreen = false;
+
     this.cd.detectChanges();
   }
 

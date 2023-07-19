@@ -143,13 +143,13 @@
         </div>
       </div>
       <div class="content">
-        <div class="media grid_media" *ngIf="cpost.post.images.length > 0">
+        <div class="media grid_media" *ngIf="cposts_imgs[i].length > 0">
           <div
             class="imgCont grid_elem"
-            *ngFor="let imgOrVideo of cpost.post.images; let img_i = index"
+            *ngFor="let imgOrVideo of cposts_imgs[i]; let img_i = index"
             [style.grid-row]="
-              img_i == 0 && cpost.post.images.length > 2
-                ? '1/' + cpost.post.images.length
+              img_i == 0 && cposts_imgs[i].length > 2
+                ? '1/' + cposts_imgs[i].length
                 : ''
             "
           >

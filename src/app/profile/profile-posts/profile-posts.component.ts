@@ -57,6 +57,8 @@ export class ProfilePostsComponent {
 
   alertError: string = '';
 
+  cposts_imgs: string[][] = [];
+
   constructor(private cd: ChangeDetectorRef, private refresh: RefreshService) {}
 
   ngOnInit(): void {
@@ -75,6 +77,13 @@ export class ProfilePostsComponent {
         await Posts.getBy('id_user', this.user.id)
       );
 
+      if (this.cposts_imgs.length > 0) this.cposts_imgs = [];
+
+      for (const cpost of this.cposts) {
+        const arr: string[] = [...cpost.post.images];
+        this.cposts_imgs.push(arr);
+      }
+
       if (this.cposts.length == 0)
         this.noOnePost = "The user don't have posts.";
     }
@@ -85,12 +94,14 @@ export class ProfilePostsComponent {
     elemPos: number,
     cpostInfo: Post = {} as Post
   ): Promise<void> {
-    this.hideOptions(elemPos);
-    this.editImagesOfPost();
-    this.quitNewImgsOfPost(true);
     this.selectedPost = elemPos;
     const elem: HTMLDivElement =
       this.edit_post.toArray()[elemPos].nativeElement;
+
+    this.hideOptions(elemPos);
+
+    this.editImagesOfPost();
+    this.quitNewImgsOfPost(true);
 
     if (open && cpostInfo.id > 0) {
       elem.style.opacity = '1';
@@ -105,7 +116,9 @@ export class ProfilePostsComponent {
     elem.style.opacity = '0';
     elem.style.pointerEvents = 'none';
     this.quitNewImgsOfPost();
+
     this.showLoadScreen = false;
+
     this.cd.detectChanges();
   }
 
