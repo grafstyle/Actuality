@@ -1,0 +1,37 @@
+.container {
+  padding: 10px;
+  border-radius: 15px;
+  background-color: #1e1e1e;
+  width: 50vh;
+}
+
+.container > .btnsCont > button,
+.container > p {
+  color: var(--p_color);
+}
+
+.container > .btnsCont {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.container > .btnsCont > button {
+  transition: all 0.3s ease-out;
+}
+
+.container > .btnsCont > button:hover {
+  color: #fff;
+}
+
+.container > .btnsCont > button > span {
+  font-size: 28pt;
+}
+
+.container > p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  font-size: 18pt;
+}

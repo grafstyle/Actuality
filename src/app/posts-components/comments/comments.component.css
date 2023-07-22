@@ -1,0 +1,173 @@
+.all_content,
+.userComment > .imgsOrVids,
+.addComment {
+  display: flex;
+}
+
+.sectionComments {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  gap: 5px;
+}
+
+.comments > h3 {
+  padding-top: 5px;
+  cursor: default;
+  text-align: center;
+  transition: all 0.3s ease-out;
+}
+
+.comments > h3:hover {
+  color: var(--p_color);
+}
+
+.all_comments {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 5px 20px;
+}
+
+.all_content {
+  width: 100%;
+  border-bottom: var(--contrast_dark) 2px solid;
+  padding-bottom: 5px;
+}
+
+.all_content > .imgUserCont {
+  width: max-content;
+}
+
+.all_content > .imgUserCont > .user {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+}
+
+.userComment {
+  padding-left: 5px;
+  width: 100%;
+}
+
+.userComment > .comment_body {
+  padding: 10px;
+  background: var(--contrast_dark);
+  border-radius: 15px;
+  outline: 0;
+}
+
+.userComment > .imgsOrVids {
+  display: flex;
+  gap: 3px;
+}
+
+.userComment .names {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.imgsOrVids {
+  padding-bottom: 5px;
+}
+
+.imgsOrVids > .imgs > img,
+.imgsOrVids > .imgs {
+  height: 120px;
+  width: auto;
+}
+
+.nameAndActions {
+  display: flex;
+  align-items: center;
+  padding-bottom: 5px;
+  width: 100%;
+}
+
+.nameAndActions > .names > h4 {
+  font-size: 14pt;
+  color: var(--txt_color);
+}
+
+.nameAndActions > .names > .url_name {
+  color: var(--p_color);
+  font-size: 12pt;
+}
+
+.nameAndActions > .names > .date {
+  color: var(--contrast_dark);
+  font-size: 8pt;
+}
+
+.nameAndActions,
+.actions {
+  display: flex;
+  gap: 3px;
+}
+
+.actions {
+  justify-content: flex-end;
+}
+
+.actions > .deleteBtn,
+.actions > .editBtn,
+.addImg {
+  color: var(--txt_color);
+  transition: all 0.3s ease-out;
+}
+
+.actions > .editBtn:hover,
+.actions > .deleteBtn:hover,
+.addImg:hover {
+  color: var(--p_color);
+}
+
+.viewMoreCont {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.viewMoreCont > button {
+  color: var(--txt_color);
+  transition: all 0.3s ease-out;
+}
+
+.viewMoreCont > button:hover {
+  color: var(--p_color);
+}
+
+.modalContainer > .content {
+  background-color: var(--s_color);
+  overflow: hidden;
+  border-radius: 15px;
+  padding: 5px;
+  width: 50%;
+}
+
+.modalContainer > .content > .commentsCont {
+  overflow-y: scroll;
+  height: 85vh;
+  margin-top: 5px;
+}
+
+.modalContainer > .content > .closeCont {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modalContainer > .content > .closeCont > span {
+  cursor: default;
+  font-size: 22pt;
+  transition: all 0.3s ease-out;
+  color: var(--txt_color);
+}
+
+.modalContainer > .content > .closeCont > span:hover {
+  color: var(--p_color);
+}
+
+.modalContainer > .content > .commentsCont {
+  padding: 0 55px;
+}

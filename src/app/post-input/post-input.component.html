@@ -1,0 +1,33 @@
+<div class="postInput" [style.margin-top]="marginTop">
+  <div
+    class="content"
+    placeholder="Something new?"
+    contentEditable="true"
+    ngModel
+    #post_body
+  ></div>
+  <div class="imgs-vids">
+    <div class="showImgs" *ngFor="let img of imgs; let i = index">
+      <img src="{{ img.url }}" alt="" *ngIf="!img.url.includes('video/mp4')" />
+      <video
+        *ngIf="img.url.includes('video/mp4')"
+        controls
+        loop
+        [muted]="'muted'"
+      >
+        <source src="{{ img.url }}" type="video/mp4" />
+      </video>
+    </div>
+  </div>
+  <div class="options">
+    <app-add-images-input></app-add-images-input>
+    <div class="upload">
+      <button class="postData" (click)="post()">Post</button>
+    </div>
+  </div>
+</div>
+<app-alert-component
+  *ngIf="alertError != ''"
+  [msg]="alertError"
+></app-alert-component>
+<app-load-screen *ngIf="showLoadScreen"></app-load-screen>

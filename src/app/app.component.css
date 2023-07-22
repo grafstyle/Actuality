@@ -1,0 +1,227 @@
+.all {
+  display: flex;
+
+  --menu-width: 250px;
+}
+
+.all_content,
+.all_content > .content {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.all_content {
+  width: 100%;
+  padding-left: var(--menu-width);
+}
+
+.content,
+.search_part > .contSearch {
+  width: 800px;
+}
+
+.search_part {
+  padding: 5px;
+  background-color: var(--p_color);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.search_part > .contSearch {
+  margin: 5px 0;
+  display: flex;
+  align-items: flex-end;
+  border-bottom: var(--p_color) 3px solid;
+  background-color: var(--contrast_light);
+  border-radius: 15px;
+  padding: 5px 10px;
+}
+
+.search_part > .contSearch > input {
+  outline: 0;
+  border: none;
+  font-size: 12pt;
+  height: 100%;
+  width: 100%;
+  background: none;
+}
+
+.search_part > .contSearch > span {
+  font-size: 22pt;
+  color: var(--contrast_dark);
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  position: fixed;
+  width: var(--menu-width);
+  height: 100vh;
+  border-right: solid 3px var(--p_color);
+}
+
+ul,
+ul > li,
+ul > li > h1,
+ul > li > h1 > a,
+nav > .logo_cont,
+nav > .icon {
+  display: flex;
+  width: 100%;
+}
+
+ul {
+  list-style: none;
+  flex-direction: column;
+  padding: 5px;
+  border: var(--p_color) 3px solid;
+  height: 100%;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+nav > .icon {
+  display: none;
+  width: 50px;
+  height: 50px;
+}
+
+nav > .icon > span {
+  font-size: 36pt;
+  color: var(--p_color);
+}
+
+nav > .logo_cont {
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+  padding-top: 15px;
+}
+
+nav > .logo_cont > .logo {
+  padding: 15px;
+  border-radius: 100%;
+  background-color: var(--p_color);
+}
+
+nav > .logo_cont > .logo > .logo_img {
+  height: 80px;
+  width: 80px;
+  mask: url("https://res.cloudinary.com/dp5gpr5sc/image/upload/v1687546639/app_assets/Logov.svg")
+    no-repeat center;
+  --webkit-mask: url("https://res.cloudinary.com/dp5gpr5sc/image/upload/v1687546639/app_assets/Logov.svg")
+    no-repeat center;
+  background-color: #fff;
+}
+
+ul > li > h1 {
+  gap: 5px;
+}
+
+ul > .link_elem {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  margin-bottom: 10px;
+  transition: all 0.3s ease-out;
+}
+
+ul > .link_elem:hover {
+  background-color: var(--p_color);
+}
+
+ul > li > h1 > a {
+  padding: 10px 15px;
+  align-items: center;
+  color: var(--txt_color);
+}
+
+ul > li > h1 > a {
+  color: var(--txt_color);
+  text-decoration: none;
+  transition: all 0.3s ease-out;
+}
+
+ul > li > h1 > a:hover {
+  color: var(--txt_s_color);
+}
+
+ul > li > h1 > a > span {
+  margin-right: 5px;
+  font-size: 24pt;
+}
+
+ul > li > .modes {
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: auto;
+  gap: 15px;
+  width: 80%;
+}
+
+ul > li > .modes > .m_conts > .m_cont > .mode {
+  border-radius: 100%;
+  color: var(--txt_s_color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+
+ul > li > .modes > .m_conts,
+ul > li > .modes > .m_conts > .m_cont {
+  display: flex;
+  width: 100%;
+}
+
+ul > li > .modes > .m_conts > .ofLight {
+  justify-content: flex-start;
+}
+
+ul > li > .modes > .m_conts > .ofDark {
+  justify-content: flex-end;
+}
+
+ul > li > .modes > .m_conts > .m_cont > .mode > span {
+  font-size: 32pt;
+}
+
+ul > li > .modes > .m_conts > .m_cont > .light {
+  background-color: var(--p_color);
+}
+
+ul > li > .modes > .m_conts > .m_cont > .dark {
+  background-color: var(--contrast_dark);
+}
+
+ul > li > .modes > .timeline {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+ul > li > .modes > .timeline > hr {
+  width: 100%;
+  background-color: var(--p_color);
+  height: 3px;
+  border: none;
+}
+
+ul > li > .modes > .timeline > .circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background-color: var(--p_color);
+  position: absolute;
+  left: 0;
+  transition: all 0.3s ease-out;
+}

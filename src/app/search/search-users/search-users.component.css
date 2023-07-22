@@ -1,0 +1,41 @@
+.allUsers {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.allUsers > h3 {
+  color: var(--txt_color);
+  margin-bottom: 5px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: default;
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: var(--contrast_dark) 3px solid;
+  transition: all 0.3s ease-out;
+}
+
+.user:hover {
+  border-color: var(--p_color);
+  transform: scale(1.02);
+}
+
+.user > .namesInfo > .name {
+  color: var(--txt_color);
+}
+
+.user > .namesInfo > .urlname {
+  color: var(--contrast_dark);
+}
+
+.imgUser {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+}

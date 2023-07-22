@@ -1,0 +1,122 @@
+.loadModal {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.load_element {
+  position: relative;
+  --timeOfAnims: 3s;
+  --sizeOfMegaphone: 130px;
+  --sizeOfSounds: calc(var(--sizeOfMegaphone) / 6);
+}
+
+.load_element > .megaphone {
+  width: var(--sizeOfMegaphone);
+  height: var(--sizeOfMegaphone);
+}
+
+.load_element > .sound {
+  position: absolute;
+
+  width: var(--sizeOfSounds);
+  height: var(--sizeOfSounds);
+}
+
+.load_element > .sound_one {
+  right: 5px;
+  top: -15px;
+
+  animation: animSOne var(--timeOfAnims) linear infinite;
+}
+
+.load_element > .sound_two {
+  right: -15px;
+  top: 15px;
+
+  animation: animSTwo var(--timeOfAnims) linear infinite;
+}
+
+.load_element > .sound_three {
+  right: -30px;
+  top: 50px;
+
+  animation: animSThree var(--timeOfAnims) linear infinite;
+}
+
+.load_element > .megaphone {
+  animation: animMegaphone var(--timeOfAnims) linear infinite;
+}
+
+/* Animations */
+
+@keyframes animMegaphone {
+  0%,
+  10%,
+  100% {
+    transform: scale(0);
+  }
+
+  15%,
+  30% {
+    transform: scale(1.2);
+  }
+
+  35%,
+  70% {
+    transform: scale(1);
+  }
+}
+
+@keyframes animSOne {
+  0%,
+  30%,
+  70%,
+  100% {
+    opacity: 0;
+    right: 40px;
+    top: 5px;
+  }
+
+  35%,
+  55% {
+    opacity: 1;
+    right: 5px;
+    top: -15px;
+  }
+}
+
+@keyframes animSTwo {
+  0%,
+  35%,
+  70%,
+  100% {
+    opacity: 0;
+    right: 25px;
+    top: 35px;
+  }
+
+  40%,
+  60% {
+    opacity: 1;
+    right: -15px;
+    top: 15px;
+  }
+}
+
+@keyframes animSThree {
+  0%,
+  40%,
+  70%,
+  100% {
+    opacity: 0;
+    right: 10px;
+    top: 65px;
+  }
+
+  45%,
+  65% {
+    opacity: 1;
+    right: -30px;
+    top: 50px;
+  }
+}

@@ -1,0 +1,4 @@
+.title > h3 {
+  color: var(--txt_color);
+  margin-bottom: 10px;
+}

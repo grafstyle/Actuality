@@ -1,0 +1,61 @@
+.display {
+  border-radius: 15px;
+  padding: 5px;
+  background-color: var(--p_color);
+  width: 450px;
+}
+
+.wait {
+  padding: 10px 0;
+  width: 100%;
+  text-align: center;
+}
+
+.allImgs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+
+.showImgs {
+  text-align: center;
+}
+
+.showImgs > img,
+.showImgs > video {
+  height: 120px;
+}
+
+.btnsCont {
+  display: flex;
+  justify-content: flex-end;
+  gap: 3px;
+}
+
+.btnsCont > button {
+  padding: 5px;
+}
+
+.addImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.addImg,
+.btnsCont > button {
+  color: var(--txt_color);
+  transition: all 0.3s ease-out;
+}
+
+.addImg:hover,
+.btnsCont > button:hover {
+  color: var(--txt_s_color);
+}
+
+.addBtn > label > input {
+  display: none;
+}
