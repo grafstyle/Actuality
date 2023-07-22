@@ -4,9 +4,12 @@
       [idPost]="idPost"
       *ngIf="user.id != undefined"
     ></app-add-comment>
-    <div class="all_comments">
+    <div class="all_comments" *ngIf="cpost.comments != undefined">
       <ng-container *ngFor="let comment of cpost.comments; let i = index">
-        <div class="comment" *ngIf="i < 5">
+        <div
+          class="comment"
+          *ngIf="i < 5 && cpost.user_of_comments[i] != undefined"
+        >
           <div class="all_content" *ngIf="comment.id_post == cpost.post.id">
             <div class="imgUserCont">
               <div class="imgCont user">
@@ -94,7 +97,13 @@
             class="comment"
             *ngFor="let comment of cpost.comments; let i = index"
           >
-            <div class="all_content" *ngIf="comment.id_post == cpost.post.id">
+            <div
+              class="all_content"
+              *ngIf="
+                cpost.user_of_comments[i] != undefined &&
+                comment.id_post == cpost.post.id
+              "
+            >
               <div class="imgUserCont">
                 <div class="imgCont user">
                   <img
@@ -158,9 +167,7 @@
                 <div
                   #imgs_cont_all
                   class="imgsOrVids"
-                  *ngIf="
-                    comment.images != undefined && comment.images.length > 0
-                  "
+                  *ngIf="actualComments[i] != undefined"
                 >
                   <div
                     class="imgs"
