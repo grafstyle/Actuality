@@ -265,6 +265,10 @@ nav > ul > li > .modes > .timeline > .circle {
     left: -100%;
   }
 
+  .search_part {
+    padding: 5px 55px;
+  }
+
   .all_content {
     padding-left: 0;
   }
@@ -273,5 +277,11 @@ nav > ul > li > .modes > .timeline > .circle {
   .open_menu_cont {
     display: block;
     z-index: 9999;
+  }
+}
+
+@media (max-width: 1070px) {
+  .content {
+    width: 95%;
   }
 }

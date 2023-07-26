@@ -147,16 +147,18 @@
           <div class="imgCont imgUser">
             <img src="{{ foll.image }}" alt="" />
           </div>
-          <div class="name">
-            <p>{{ foll.name }}</p>
-          </div>
-          <div class="btnCont">
-            <button
-              *ngIf="modalFollowedOpened"
-              (click)="unfollowAndRefresh(foll.id)"
-            >
-              Unfollow
-            </button>
+          <div class="info_and_options">
+            <div class="name">
+              <p>{{ foll.name }}</p>
+            </div>
+            <div class="btnCont">
+              <button
+                *ngIf="modalFollowedOpened"
+                (click)="unfollowAndRefresh(foll.id)"
+              >
+                Unfollow
+              </button>
+            </div>
           </div>
         </div>
       </div>

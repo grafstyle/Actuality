@@ -171,3 +171,33 @@
 .modalContainer > .content > .commentsCont {
   padding: 0 55px;
 }
+
+@media (max-width: 800px) {
+  .all_comments {
+    padding: 5px 2%;
+  }
+
+  .all_content > .imgUserCont > .user {
+    width: 25px;
+    height: 25px;
+  }
+
+  .nameAndActions > .names > h4,
+  .nameAndActions > .names > .url_name {
+    font-size: 90%;
+  }
+
+  .userComment {
+    padding-left: 2%;
+  }
+
+  .nameAndActions,
+  .actions {
+    gap: 2%;
+  }
+
+  .actions > .deleteBtn > span,
+  .actions > .editBtn > span {
+    font-size: 100%;
+  }
+}
