@@ -94,7 +94,7 @@ nav > ul {
   -moz-user-select: none;
   -webkit-user-select: none;
   user-select: none;
-  padding: 0 5px;
+  padding: 10px 8px;
   border-bottom-right-radius: 20px;
   background-color: var(--p_color);
   transition: all 0.3s ease-out;
@@ -106,7 +106,7 @@ nav > ul {
 }
 
 .open_menu_cont > span {
-  font-size: 32pt;
+  font-size: 28pt;
   color: var(--s_color);
 }
 
