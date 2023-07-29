@@ -1,4 +1,10 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 import { User, Users } from './controller/users/users';
 import { AuthService } from '@auth0/auth0-angular';
 import { Service } from './controller/services/services';
@@ -26,6 +32,38 @@ export class AppComponent {
   bgOfLight: string = 'var(--p_color)';
   bgOfDark: string = 'var(--contrast_dark)';
   title = 'Actuality';
+  screen_w: number = window.innerWidth;
+
+  @ViewChild('menu_open') menu_open!: ElementRef<HTMLDivElement>;
+  @ViewChild('menu_close') menu_close!: ElementRef<HTMLDivElement>;
+  @ViewChild('menu_open_icon') menu_open_icon!: ElementRef<HTMLSpanElement>;
+  @ViewChild('menu') menu!: ElementRef<HTMLElement>;
+
+  @HostListener('window:resize')
+  onResize() {
+    this.screen_w = window.innerWidth;
+    if (this.screen_w > 800) {
+      this.menu_open.nativeElement.style.left = '-100%';
+      this.menu.nativeElement.style.left = '0';
+    } else {
+      this.menu_open.nativeElement.style.left = '0';
+      this.menu.nativeElement.style.left = '-100%';
+    }
+  }
+
+  openMenu(): void {
+    if (this.screen_w <= 800) {
+      this.menu_open.nativeElement.style.left = '-100%';
+      this.menu.nativeElement.style.left = '0';
+    } else if (this.screen_w > 800) this.openMenu();
+  }
+
+  closeMenu(): void {
+    if (this.screen_w <= 800) {
+      this.menu_open.nativeElement.style.left = '0';
+      this.menu.nativeElement.style.left = '-100%';
+    } else if (this.screen_w > 800) this.openMenu();
+  }
 
   search(e: Event) {
     const elem = e.target as HTMLInputElement;
@@ -142,7 +180,8 @@ export class AppComponent {
     private apiService: Service,
     private routerLink: Router,
     private cookies: CookieService,
-    private refresh: RefreshService
+    private refresh: RefreshService,
+    private renderer: Renderer2
   ) {
     Users.apiService =
       Posts.apiService =
@@ -163,6 +202,16 @@ export class AppComponent {
           if (e.url == '/signup') this.signup();
         }
       },
+    });
+
+    renderer.listen('window', 'click', (e: Event) => {
+      if (
+        e.target !== this.menu_open.nativeElement &&
+        e.target !== this.menu_open_icon.nativeElement &&
+        e.target !== this.menu.nativeElement &&
+        this.screen_w <= 800
+      )
+        this.closeMenu();
     });
   }
 

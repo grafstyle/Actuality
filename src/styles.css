@@ -172,3 +172,27 @@ button {
   color: var(--txt_color);
   font-size: 18pt;
 }
+
+@media (max-width: 800px) {
+  .post > .all_content > .user .imgCont {
+    width: 50px;
+    height: 50px;
+  }
+
+  .post > .all_content > .user .url_name,
+  .post > .all_content > .user .name {
+    font-size: 100%;
+  }
+
+  .post > .all_content > .user > .imgAndName {
+    gap: 2%;
+  }
+
+  .post > .all_content > .user {
+    margin: 0 0 2% 0;
+  }
+
+  .post > .all_content {
+    padding: 2%;
+  }
+}
