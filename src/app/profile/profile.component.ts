@@ -19,6 +19,7 @@ import { ProfilePostsComponent } from './profile-posts/profile-posts.component';
 export class ProfileComponent {
   err: string = '';
   user: User = {} as User;
+  alert_msg = '';
   userRegistered: User = {} as User;
 
   userImgUpload: Image = {} as Image;
@@ -393,10 +394,20 @@ export class ProfileComponent {
     this.user_img_options.nativeElement.style.display = 'none';
   }
 
-  async changeUserImg(e: Event): Promise<void> {
+  async changeUserImg(e: Event, ...opts: string[]): Promise<void> {
     const input: HTMLInputElement = e.target as HTMLInputElement;
 
-    this.userImgUpload.file = input.files?.item(0) as File;
+    const file: File = input.files?.item(0) as File;
+
+    for (const opt of opts) {
+      if (!file.type.includes(opt)) {
+        this.alert_msg = 'This file not is supported.';
+        input.value = '';
+        return;
+      } else this.alert_msg = '';
+    }
+
+    this.userImgUpload.file = file;
     this.userImgUpload.name = this.userImgUpload.file.name;
     this.userImgUpload.url = await this.tools.getImage(this.userImgUpload.file);
 
@@ -422,8 +433,18 @@ export class ProfileComponent {
     this.portrait_options.nativeElement.style.display = 'none';
   }
 
-  async changePortrait(e: Event): Promise<void> {
+  async changePortrait(e: Event, ...opts: string[]): Promise<void> {
     const input: HTMLInputElement = e.target as HTMLInputElement;
+
+    const file: File = input.files?.item(0) as File;
+
+    for (const opt of opts) {
+      if (!file.type.includes(opt)) {
+        this.alert_msg = 'This file not is supported.';
+        input.value = '';
+        return;
+      } else this.alert_msg = '';
+    }
 
     this.portraitImgUpload.file = input.files?.item(0) as File;
     this.portraitImgUpload.name = this.portraitImgUpload.file.name;

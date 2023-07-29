@@ -42,8 +42,11 @@
           Add
           <input
             type="file"
+            accept="image/jpeg, image/png, video/mp4"
             id="addBtn"
-            (change)="changingImg($event)"
+            (change)="
+              changingImg($event, 'image/jpeg', 'image/png', 'video/mp4')
+            "
             ngModel
             #addBtn
           />

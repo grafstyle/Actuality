@@ -48,11 +48,20 @@ export class AddImagesInputComponent {
     }
   }
 
-  async changingImg(e: Event): Promise<void> {
+  async changingImg(e: Event, ...opts: string[]): Promise<void> {
     const elem: HTMLInputElement = e.target as HTMLInputElement;
     const newImg: Image = {} as Image;
 
     const file: File = elem.files?.item(0) as File;
+
+    for (const opt of opts) {
+      if (!file.type.includes(opt)) {
+        this.alertError = 'This file not is supported.';
+        elem.value = '';
+        return;
+      } else this.alertError = '';
+    }
+
     const url: string = await this.tools.getImage(file);
     const name: string = file.name;
 

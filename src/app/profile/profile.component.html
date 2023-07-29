@@ -15,8 +15,9 @@
         <div class="options" #portrait_options>
           <input
             #portrait_input
-            (change)="changePortrait($event)"
+            (change)="changePortrait($event, 'image/jpeg', 'image/png')"
             type="file"
+            accept="image/jpeg, image/png"
           />
           <div class="actions_btns">
             <button (click)="quitNewPortrait()">
@@ -38,7 +39,12 @@
           </button>
         </div>
         <div class="options" #user_img_options>
-          <input #user_img_input (change)="changeUserImg($event)" type="file" />
+          <input
+            #user_img_input
+            (change)="changeUserImg($event, 'image/jpeg', 'image/png')"
+            type="file"
+            accept="image/jpeg, image/png"
+          />
           <div class="actions_btns">
             <button (click)="quitNewUserImg()">
               <span class="material-symbols-outlined">delete</span>
@@ -180,3 +186,7 @@
   (activate)="elemLoaded($event)"
 ></router-outlet>
 <app-load-screen *ngIf="showLoadScreen"></app-load-screen>
+<app-alert-component
+  *ngIf="alert_msg != ''"
+  [msg]="alert_msg"
+></app-alert-component>
