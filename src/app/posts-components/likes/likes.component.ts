@@ -8,23 +8,23 @@ import { Cookies } from 'src/app/cookies/cookies';
   styleUrls: ['./likes.component.css'],
 })
 export class LikesComponent {
-  @Input() cantLikes: number = 0;
-  @Input() idPost: number = 0;
+  @Input() cant_likes: number = 0;
+  @Input() id_post: number = 0;
   @Output() disliked: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  touchLike: number = 0;
+  touch_like: number = 0;
 
   async ngOnInit(): Promise<void> {
-    const hasLike: boolean = await this.hasLike();
-    if (hasLike) this.touchLike++;
+    const has_like: boolean = await this.hasLike();
+    if (has_like) this.touch_like++;
   }
 
   async hasLike(): Promise<boolean> {
     try {
-      const likeID: undefined | number = (
-        await Likes.getOf(this.idPost, Cookies.getUserID())
+      const like_id: undefined | number = (
+        await Likes.getOf(this.id_post, Cookies.getUserID())
       )[0]?.id;
-      if (likeID != undefined) return true;
+      if (like_id != undefined) return true;
     } catch (err) {
       console.log('Something went wrong when get like.');
     }
@@ -32,25 +32,25 @@ export class LikesComponent {
   }
 
   setLike(): void {
-    this.touchLike++;
+    this.touch_like++;
 
-    if (this.touchLike == 1) this.addLike();
+    if (this.touch_like == 1) this.addLike();
 
-    if (this.touchLike == 2) {
-      this.touchLike = 0;
+    if (this.touch_like == 2) {
+      this.touch_like = 0;
       this.quitLike();
     }
   }
 
   async addLike(): Promise<void> {
     try {
-      const hasLike: boolean = await this.hasLike();
-      if (hasLike == false) {
+      const has_like: boolean = await this.hasLike();
+      if (has_like == false) {
         Likes.post({
           id_user: Cookies.getUserID(),
-          id_post: this.idPost,
+          id_post: this.id_post,
         });
-        this.cantLikes++;
+        this.cant_likes++;
       } else this.setLike();
     } catch (err) {
       console.log('Something went wrong when add like.');
@@ -59,10 +59,10 @@ export class LikesComponent {
 
   async quitLike(): Promise<void> {
     try {
-      const likeID: number =
-        (await Likes.getOf(this.idPost, Cookies.getUserID()))[0].id || 0;
-      await Likes.delete(likeID);
-      this.cantLikes--;
+      const like_id: number =
+        (await Likes.getOf(this.id_post, Cookies.getUserID()))[0].id || 0;
+      await Likes.delete(like_id);
+      this.cant_likes--;
       this.disliked.emit(true);
     } catch (err) {
       console.log('Something went wrong when quit like.');

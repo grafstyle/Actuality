@@ -3,9 +3,9 @@ import { Service } from '../services/services';
 
 export class Users {
   private static path: string = 'users';
-  private static getPath: string = 'users/get?';
+  private static get_path: string = 'users/get?';
   public static auth: AuthService;
-  public static apiService: Service;
+  public static api_service: Service;
 
   public static login(): void {
     this.auth.loginWithRedirect();
@@ -50,41 +50,41 @@ export class Users {
     });
   }
 
-  public static getIfContains(dataToGet: UserOfGetBy): Promise<User[]> {
+  public static getIfContains(data_to_get: UserOfGetBy): Promise<User[]> {
     return new Promise((res, rej) => {
-      const finalUser: User[] = [];
-      let otherLap: boolean = true;
+      const final_user: User[] = [];
+      let other_lap: boolean = true;
 
       Users.getAll()
         .then((data) => {
           data.forEach((user) => {
             let key: keyof typeof user;
             for (key in user) {
-              let keyGet: keyof typeof dataToGet;
-              for (keyGet in dataToGet) {
+              let keyGet: keyof typeof data_to_get;
+              for (keyGet in data_to_get) {
                 if (
-                  otherLap &&
+                  other_lap &&
                   key == keyGet &&
                   (user[key] as string)
                     .toLowerCase()
-                    .includes(dataToGet[keyGet]?.toLowerCase() as string)
+                    .includes(data_to_get[keyGet]?.toLowerCase() as string)
                 ) {
-                  otherLap = false;
-                  finalUser.push(user);
+                  other_lap = false;
+                  final_user.push(user);
                 }
               }
             }
-            otherLap = true;
+            other_lap = true;
           });
         })
         .catch(() => rej([]));
-      res(finalUser);
+      res(final_user);
     });
   }
 
   public static getBy(key: string, data: any): Promise<User[]> {
     return new Promise((res, rej) => {
-      Users.apiService.get(`${Users.getPath}${key}=${data}`).subscribe({
+      Users.api_service.get(`${Users.get_path}${key}=${data}`).subscribe({
         next: (user: any) => res(user as User[]),
         error: () => rej([]),
       });
@@ -93,7 +93,7 @@ export class Users {
 
   public static getAll(): Promise<User[]> {
     return new Promise((res, rej) => {
-      Users.apiService.get(this.path).subscribe({
+      Users.api_service.get(this.path).subscribe({
         next: (user: any) => res(user as User[]),
         error: () => rej('Something went wrong when get the user.'),
       });
@@ -102,7 +102,7 @@ export class Users {
 
   public static get(id: number): Promise<User> {
     return new Promise((res, rej) => {
-      Users.apiService.get(`${Users.getPath}id=${id}`).subscribe({
+      Users.api_service.get(`${Users.get_path}id=${id}`).subscribe({
         next: (user: any) => res(user[0] as User),
         error: () => rej('Something went wrong when get the user.'),
       });
@@ -111,7 +111,7 @@ export class Users {
 
   public static post(data: User): Promise<string> {
     return new Promise((res, rej) => {
-      Users.apiService.post(this.path, data).subscribe({
+      Users.api_service.post(this.path, data).subscribe({
         next: () => res('The user has been uplodaded.'),
         error: () => rej('Something went wrong when add the user.'),
       });
@@ -120,7 +120,7 @@ export class Users {
 
   public static put(data: User, id: number): Promise<string> {
     return new Promise((res, rej) => {
-      Users.apiService.put(this.path, id, data).subscribe({
+      Users.api_service.put(this.path, id, data).subscribe({
         next: () => res('The user has been uplodaded.'),
         error: () => rej('Something went wrong when add the user.'),
       });
@@ -129,7 +129,7 @@ export class Users {
 
   public static delete(id: number): Promise<string> {
     return new Promise((res, rej) => {
-      Users.apiService.delete(this.path, id).subscribe({
+      Users.api_service.delete(this.path, id).subscribe({
         next: () => res('The user has been uplodaded.'),
         error: () => rej('Something went wrong when add the user.'),
       });

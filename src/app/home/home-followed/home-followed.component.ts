@@ -13,7 +13,7 @@ import { Tools } from 'src/app/tools/tools';
 export class HomeFollowedComponent {
   tools: Tools = new Tools();
   err: string = '';
-  errFoll: string = '';
+  err_foll: string = '';
   cposts: CPost[] = [];
   def_person_img: string =
     'https://res.cloudinary.com/dp5gpr5sc/image/upload/v1685629395/app_assets/person.svg';
@@ -33,15 +33,15 @@ export class HomeFollowedComponent {
   async getCompletePosts(): Promise<void> {
     try {
       const user = (await Users.getBy('id', Cookies.getUserID()))[0];
-      const usersFollowed = user.followed;
-      if (usersFollowed.length == 0)
-        this.errFoll = "You don't follow people, be more sociable. :)";
-      for (const idUserFollowed of usersFollowed)
+      const users_followed = user.followed;
+      if (users_followed.length == 0)
+        this.err_foll = "You don't follow people, be more sociable. :)";
+      for (const id_user_followed of users_followed)
         this.cposts = this.cposts.concat(
-          await Posts.getCPosts(await Posts.getBy('id_user', idUserFollowed))
+          await Posts.getCPosts(await Posts.getBy('id_user', id_user_followed))
         );
       if (this.cposts.length == 0)
-        this.errFoll = 'The people than you follows, no posted nothing.';
+        this.err_foll = 'The people than you follows, no posted nothing.';
     } catch (e) {
       this.err = 'Something went wrong when get the data.';
     }

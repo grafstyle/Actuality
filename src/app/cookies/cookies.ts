@@ -9,13 +9,13 @@ export class Cookies {
   public static readonly MODE_DARK: number = 1;
 
   public static setUserID(userID: number) {
-    const nowDate: Date = new Date();
-    const expDate: Date = new Date(
-      nowDate.getFullYear(),
-      nowDate.getMonth(),
-      nowDate.getDate() + 7
+    const now_date: Date = new Date();
+    const exp_date: Date = new Date(
+      now_date.getFullYear(),
+      now_date.getMonth(),
+      now_date.getDate() + 7
     );
-    this.cookies.set('userID', `${userID}`, { expires: expDate });
+    this.cookies.set('userID', `${userID}`, { expires: exp_date });
     this.refresh.setUpdate(RefreshService.COOKIE_UPDATED);
   }
 
@@ -28,13 +28,13 @@ export class Cookies {
   }
 
   public static setMode(mode: number): void {
-    const nowDate: Date = new Date();
-    const expDate: Date = new Date(
-      nowDate.getFullYear(),
-      nowDate.getMonth(),
-      nowDate.getDate() + 7
+    const now_date: Date = new Date();
+    const exp_date: Date = new Date(
+      now_date.getFullYear(),
+      now_date.getMonth(),
+      now_date.getDate() + 7
     );
-    this.cookies.set('mode', `${mode}`, { expires: expDate });
+    this.cookies.set('mode', `${mode}`, { expires: exp_date });
   }
 
   public static getMode(): number {

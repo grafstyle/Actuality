@@ -141,7 +141,7 @@ export class MultimediaPostsComponent {
     this.showLoadScreen = true;
 
     if (this.add_images_input != undefined) {
-      for (const url of this.add_images_input.imgsToDelete)
+      for (const url of this.add_images_input.imgs_to_delete)
         Cloudinary.delete(url)
           .then(() => (somethingEdited = true))
           .catch(
@@ -168,7 +168,8 @@ export class MultimediaPostsComponent {
         }
       }
 
-      if (this.add_images_input.imgsToDelete.length > 0) somethingEdited = true;
+      if (this.add_images_input.imgs_to_delete.length > 0)
+        somethingEdited = true;
     }
 
     editedPost.images = imgsToDB;

@@ -20,19 +20,19 @@ export class ProfileComponent {
   err: string = '';
   user: User = {} as User;
   alert_msg = '';
-  userRegistered: User = {} as User;
+  user_registered: User = {} as User;
 
-  userImgUpload: Image = {} as Image;
-  portraitImgUpload: Image = {} as Image;
+  user_img_upload: Image = {} as Image;
+  portrait_img_upload: Image = {} as Image;
 
   tools: Tools = new Tools();
 
   @ViewChild('follow_btn') follow_btn!: ElementRef<HTMLButtonElement>;
 
-  canFollow: boolean = false;
-  clickFollow: number = 0;
-  followStr: string = 'Follow';
-  unfollowStr: string = 'Unfollow';
+  can_follow: boolean = false;
+  click_follow: number = 0;
+  follow_str: string = 'Follow';
+  unfollow_str: string = 'Unfollow';
 
   @ViewChild('edit_profile') edit_profile!: ElementRef<HTMLDivElement>;
 
@@ -54,34 +54,34 @@ export class ProfileComponent {
   @ViewChild('url_name') url_name_text!: ElementRef<HTMLDivElement>;
   @ViewChild('bio') bio_text!: ElementRef<HTMLDivElement>;
 
-  canEditProfile: boolean = false;
-  lastTextName: string = '';
-  lastTextUrlName: string = '';
-  lastBio: string = '';
-  lastUserImg: string = '';
-  lastPortraitImg: string = '';
-  nameError: string = '';
-  urlNameError: string = '';
-  bioError: string = '';
-  bioLetters: number = 0;
-  editProfileStr = 'Edit';
-  okStr = 'Ok';
+  can_edit_profile: boolean = false;
+  last_text_name: string = '';
+  last_text_url_name: string = '';
+  last_bio: string = '';
+  last_user_img: string = '';
+  last_portrait_img: string = '';
+  name_error: string = '';
+  url_name_error: string = '';
+  bio_error: string = '';
+  bio_letters: number = 0;
+  edit_profile_str = 'Edit';
+  ok_str = 'Ok';
   def_person_img: string =
     'https://res.cloudinary.com/dp5gpr5sc/image/upload/v1685629395/app_assets/person.svg';
 
   @ViewChild('followe_rs_d_view') frsd_view!: ElementRef<HTMLDivElement>;
   folls: User[] = [];
-  follsEmptyStr: string = '';
-  modalFollowedOpened: boolean = false;
+  folls_empty_str: string = '';
+  modal_followed_opened: boolean = false;
 
-  showLoadScreen: boolean = false;
+  show_load_screen: boolean = false;
 
   constructor(
     private router: ActivatedRoute,
-    private routerActions: Router,
+    private router_actions: Router,
     private cd: ChangeDetectorRef
   ) {
-    routerActions.events.subscribe({
+    router_actions.events.subscribe({
       next: (e) => {
         if (e instanceof NavigationEnd) this.ngOnInit();
       },
@@ -90,27 +90,27 @@ export class ProfileComponent {
 
   async ngOnInit() {
     try {
-      const paramByUrl = this.router.snapshot.paramMap.get('profile');
-      const intentGetUser: User | undefined = (
-        await Users.getBy('url_name', paramByUrl)
+      const param_by_url = this.router.snapshot.paramMap.get('profile');
+      const intent_get_user: User | undefined = (
+        await Users.getBy('url_name', param_by_url)
       )[0];
 
-      if (paramByUrl == 'profile') {
+      if (param_by_url == 'profile') {
         this.user = await Users.get(Cookies.getUserID());
-        this.routerActions.navigateByUrl('/' + this.user.url_name);
-      } else if (intentGetUser != undefined) {
-        this.user = intentGetUser;
-        if (Cookies.getUserID() == this.user.id) this.canEditProfile = true;
+        this.router_actions.navigateByUrl('/' + this.user.url_name);
+      } else if (intent_get_user != undefined) {
+        this.user = intent_get_user;
+        if (Cookies.getUserID() == this.user.id) this.can_edit_profile = true;
         else {
-          this.userRegistered = await Users.get(Cookies.getUserID());
-          this.canFollow = true;
+          this.user_registered = await Users.get(Cookies.getUserID());
+          this.can_follow = true;
           if (this.userFollowsUser()) {
-            this.follow_btn.nativeElement.textContent = this.unfollowStr;
-            this.clickFollow = 1;
+            this.follow_btn.nativeElement.textContent = this.unfollow_str;
+            this.click_follow = 1;
           }
         }
       } else {
-        if (this.user.id == undefined && this.userRegistered.id == undefined)
+        if (this.user.id == undefined && this.user_registered.id == undefined)
           this.err = "This user doesn't exist.";
         return;
       }
@@ -143,241 +143,242 @@ export class ProfileComponent {
 
     if (followers != undefined)
       for (const follower of followers)
-        if (follower == this.userRegistered.id) return true;
+        if (follower == this.user_registered.id) return true;
 
     return false;
   }
 
   async unfollowAndRefresh(
-    idToUnfollow: number | undefined = undefined
+    id_to_unfollow: number | undefined = undefined
   ): Promise<void> {
-    await this.unfollowUser(idToUnfollow).then(() => this.showAllFollowed());
+    await this.unfollowUser(id_to_unfollow).then(() => this.showAllFollowed());
   }
 
   async unfollowUser(
-    idToUnfollow: number | undefined = undefined
+    id_to_unfollow: number | undefined = undefined
   ): Promise<void> {
-    const editedFollowers: number[] = [];
-    const editedFollowed: number[] = [];
+    const edited_followers: number[] = [];
+    const edited_followed: number[] = [];
 
-    const editedProfileUser: User = {} as User;
-    const editedRegisteredUser: User = {} as User;
+    const edited_profile_user: User = {} as User;
+    const edited_registered_user: User = {} as User;
 
-    let userWithFd: User = {} as User;
+    let user_with_fd: User = {} as User;
 
-    if (idToUnfollow != undefined) userWithFd = await Users.get(idToUnfollow);
-    else userWithFd = this.userRegistered;
+    if (id_to_unfollow != undefined)
+      user_with_fd = await Users.get(id_to_unfollow);
+    else user_with_fd = this.user_registered;
 
-    if (this.user.id != undefined && userWithFd.id != undefined) {
-      if (idToUnfollow != undefined) {
+    if (this.user.id != undefined && user_with_fd.id != undefined) {
+      if (id_to_unfollow != undefined) {
         for (const followed of this.user.followed) {
-          if (followed == userWithFd.id) continue;
-          editedFollowed.push(followed);
+          if (followed == user_with_fd.id) continue;
+          edited_followed.push(followed);
         }
 
-        for (const followers of userWithFd.followers) {
+        for (const followers of user_with_fd.followers) {
           if (followers == this.user.id) continue;
-          editedFollowers.push(followers);
+          edited_followers.push(followers);
         }
 
-        editedProfileUser.followed = editedFollowed;
-        editedRegisteredUser.followers = editedFollowers;
+        edited_profile_user.followed = edited_followed;
+        edited_registered_user.followers = edited_followers;
       } else {
         for (const follower of this.user.followers) {
-          if (follower == userWithFd.id) continue;
-          editedFollowers.push(follower);
+          if (follower == user_with_fd.id) continue;
+          edited_followers.push(follower);
         }
 
-        for (const followed of userWithFd.followed) {
+        for (const followed of user_with_fd.followed) {
           if (followed == this.user.id) continue;
-          editedFollowed.push(followed);
+          edited_followed.push(followed);
         }
 
-        editedProfileUser.followers = editedFollowers;
-        editedRegisteredUser.followed = editedFollowed;
+        edited_profile_user.followers = edited_followers;
+        edited_registered_user.followed = edited_followed;
       }
 
-      await Users.put(editedProfileUser, this.user.id).then(async () => {
+      await Users.put(edited_profile_user, this.user.id).then(async () => {
         await this.refreshUserOfUrl();
         if (this.follow_btn != undefined)
-          this.follow_btn.nativeElement.textContent = this.followStr;
+          this.follow_btn.nativeElement.textContent = this.follow_str;
       });
 
-      await Users.put(editedRegisteredUser, userWithFd.id);
+      await Users.put(edited_registered_user, user_with_fd.id);
     }
   }
 
   async followClick(): Promise<void> {
-    this.clickFollow++;
+    this.click_follow++;
 
-    const editedProfileUser: User = {} as User;
-    const editedRegisteredUser: User = {} as User;
+    const edited_profile_user: User = {} as User;
+    const edited_registered_user: User = {} as User;
 
-    if (this.userRegistered == undefined)
-      this.routerActions.navigateByUrl('/signup');
+    if (this.user_registered == undefined)
+      this.router_actions.navigateByUrl('/signup');
 
-    if (this.clickFollow == 1) {
-      if (this.user.id != undefined && this.userRegistered.id != undefined) {
-        this.userRegistered = await Users.get(this.userRegistered.id);
+    if (this.click_follow == 1) {
+      if (this.user.id != undefined && this.user_registered.id != undefined) {
+        this.user_registered = await Users.get(this.user_registered.id);
 
         const followers: number[] = [...this.user.followers];
         const followed_of_registered: number[] = [
-          ...this.userRegistered.followed,
+          ...this.user_registered.followed,
         ];
 
-        if (this.userRegistered.id != undefined)
-          followers.push(this.userRegistered.id);
+        if (this.user_registered.id != undefined)
+          followers.push(this.user_registered.id);
         followed_of_registered.push(this.user.id);
 
-        editedProfileUser.followers = followers;
-        editedRegisteredUser.followed = followed_of_registered;
+        edited_profile_user.followers = followers;
+        edited_registered_user.followed = followed_of_registered;
 
-        await Users.put(editedProfileUser, this.user.id).then(async () => {
+        await Users.put(edited_profile_user, this.user.id).then(async () => {
           await this.refreshUserOfUrl();
-          this.follow_btn.nativeElement.textContent = this.unfollowStr;
+          this.follow_btn.nativeElement.textContent = this.unfollow_str;
         });
 
-        if (this.userRegistered.id != undefined)
-          await Users.put(editedRegisteredUser, this.userRegistered.id);
+        if (this.user_registered.id != undefined)
+          await Users.put(edited_registered_user, this.user_registered.id);
       }
     }
 
-    if (this.clickFollow == 2) {
+    if (this.click_follow == 2) {
       await this.unfollowUser();
-      this.clickFollow = 0;
+      this.click_follow = 0;
     }
   }
 
   async editProfile(): Promise<boolean> {
-    const editedUser: User = {} as User;
+    const edited_user: User = {} as User;
 
-    let editedName: string = this.name_text.nativeElement.innerText;
-    let editedUrlName: string = this.url_name_text.nativeElement.innerText;
-    let editedBio: string = this.bio_text.nativeElement.innerText;
+    let edited_name: string = this.name_text.nativeElement.innerText;
+    let edited_url_name: string = this.url_name_text.nativeElement.innerText;
+    let edited_bio: string = this.bio_text.nativeElement.innerText;
 
-    this.nameError = '';
-    this.urlNameError = '';
-    this.bioError = '';
+    this.name_error = '';
+    this.url_name_error = '';
+    this.bio_error = '';
 
-    let canEdit: boolean = true;
-    let isEditedUrlName: boolean = false;
+    let can_edit: boolean = true;
+    let is_edited_url_name: boolean = false;
 
-    if (this.lastTextName != editedName && editedName != '')
-      editedUser.name = editedName;
-    else this.name_text.nativeElement.innerText = this.lastTextName;
+    if (this.last_text_name != edited_name && edited_name != '')
+      edited_user.name = edited_name;
+    else this.name_text.nativeElement.innerText = this.last_text_name;
 
-    if (this.lastTextUrlName != editedName && editedName != '')
-      editedUser.url_name = editedUrlName;
-    else this.url_name_text.nativeElement.innerText = this.lastTextUrlName;
+    if (this.last_text_url_name != edited_name && edited_name != '')
+      edited_user.url_name = edited_url_name;
+    else this.url_name_text.nativeElement.innerText = this.last_text_url_name;
 
-    if (this.lastBio != editedName && editedName != '')
-      editedUser.bio = editedBio;
-    else this.bio_text.nativeElement.innerText = this.lastBio;
+    if (this.last_bio != edited_name && edited_name != '')
+      edited_user.bio = edited_bio;
+    else this.bio_text.nativeElement.innerText = this.last_bio;
 
-    editedName = this.name_text.nativeElement.innerText;
-    editedUrlName = this.url_name_text.nativeElement.innerText;
-    editedBio = this.bio_text.nativeElement.innerText;
+    edited_name = this.name_text.nativeElement.innerText;
+    edited_url_name = this.url_name_text.nativeElement.innerText;
+    edited_bio = this.bio_text.nativeElement.innerText;
 
-    if (editedName != this.lastTextName) {
-      if (editedName.match(/(?=[^a-z])\S/gi) || editedName.includes('\n')) {
-        this.nameError =
+    if (edited_name != this.last_text_name) {
+      if (edited_name.match(/(?=[^a-z])\S/gi) || edited_name.includes('\n')) {
+        this.name_error =
           "The name must don't have special caracters or numbers.";
-        canEdit = false;
-      } else if (editedName.length > 30) {
-        this.nameError = 'The name is so long.';
-        canEdit = false;
-      } else this.nameError = '';
+        can_edit = false;
+      } else if (edited_name.length > 30) {
+        this.name_error = 'The name is so long.';
+        can_edit = false;
+      } else this.name_error = '';
     }
 
-    if (editedUrlName != this.lastTextUrlName) {
-      const exist: User = (await Users.getBy('url_name', editedUrlName))[0];
+    if (edited_url_name != this.last_text_url_name) {
+      const exist: User = (await Users.getBy('url_name', edited_url_name))[0];
 
       if (exist != undefined) {
-        this.urlNameError = 'The url name exist.';
+        this.url_name_error = 'The url name exist.';
       } else if (
-        editedUrlName.match(/[^a-z0-9_]|\s/gi) ||
-        editedUrlName.includes('\n')
+        edited_url_name.match(/[^a-z0-9_]|\s/gi) ||
+        edited_url_name.includes('\n')
       ) {
-        this.urlNameError =
+        this.url_name_error =
           'The url name only accepts digits, underscore and letters.';
-        canEdit = false;
-      } else if (editedUrlName.length > 30) {
-        this.urlNameError = 'The url name is so long.';
-        canEdit = false;
+        can_edit = false;
+      } else if (edited_url_name.length > 30) {
+        this.url_name_error = 'The url name is so long.';
+        can_edit = false;
       } else {
-        isEditedUrlName = true;
-        this.urlNameError = '';
+        is_edited_url_name = true;
+        this.url_name_error = '';
       }
     }
 
-    if (editedBio != this.lastBio) {
-      if (editedBio.length > 300) {
-        this.bioError = 'The bio is so long.';
-        canEdit = false;
-      } else this.bioError = '';
+    if (edited_bio != this.last_bio) {
+      if (edited_bio.length > 300) {
+        this.bio_error = 'The bio is so long.';
+        can_edit = false;
+      } else this.bio_error = '';
     }
 
-    if (canEdit == false) return canEdit;
+    if (can_edit == false) return can_edit;
 
-    this.showLoadScreen = true;
+    this.show_load_screen = true;
 
     if (
-      this.userImgUpload.url != undefined &&
-      this.userImgUpload.url != this.lastUserImg
+      this.user_img_upload.url != undefined &&
+      this.user_img_upload.url != this.last_user_img
     ) {
       try {
-        if (this.lastUserImg.includes('https://res.cloudinary.com'))
-          await Cloudinary.delete(this.lastUserImg);
+        if (this.last_user_img.includes('https://res.cloudinary.com'))
+          await Cloudinary.delete(this.last_user_img);
 
-        const imageUploaded = await Cloudinary.post({
-          name: this.userImgUpload.name,
-          image: await this.tools.getImage(this.userImgUpload.file),
+        const image_uploaded = await Cloudinary.post({
+          name: this.user_img_upload.name,
+          image: await this.tools.getImage(this.user_img_upload.file),
           url: `users/${this.user.id}/image`,
         });
 
-        editedUser.image = await JSON.parse(imageUploaded)['secure_url'];
+        edited_user.image = await JSON.parse(image_uploaded)['secure_url'];
       } catch (err) {
         // Not empty
       }
     }
 
     if (
-      this.portraitImgUpload.url != undefined &&
-      this.portraitImgUpload.url != this.lastPortraitImg
+      this.portrait_img_upload.url != undefined &&
+      this.portrait_img_upload.url != this.last_portrait_img
     ) {
       try {
-        if (this.lastPortraitImg.includes('https://res.cloudinary.com'))
-          await Cloudinary.delete(this.lastPortraitImg);
+        if (this.last_portrait_img.includes('https://res.cloudinary.com'))
+          await Cloudinary.delete(this.last_portrait_img);
 
-        const imageUploaded = await Cloudinary.post({
-          name: this.portraitImgUpload.name,
-          image: await this.tools.getImage(this.portraitImgUpload.file),
+        const image_uploaded = await Cloudinary.post({
+          name: this.portrait_img_upload.name,
+          image: await this.tools.getImage(this.portrait_img_upload.file),
           url: `users/${this.user.id}/portrait`,
         });
 
-        editedUser.portrait = await JSON.parse(imageUploaded)['secure_url'];
+        edited_user.portrait = await JSON.parse(image_uploaded)['secure_url'];
       } catch (err) {
         // Not empty
       }
     }
 
-    editedUser.name = editedName;
-    editedUser.url_name = editedUrlName;
-    editedUser.bio = editedBio;
+    edited_user.name = edited_name;
+    edited_user.url_name = edited_url_name;
+    edited_user.bio = edited_bio;
 
     if (this.user.id != undefined)
-      Users.put(editedUser, this.user.id).then(() => {
-        this.showLoadScreen = false;
-        if (isEditedUrlName)
-          this.routerActions.navigateByUrl(editedUser.url_name);
+      Users.put(edited_user, this.user.id).then(() => {
+        this.show_load_screen = false;
+        if (is_edited_url_name)
+          this.router_actions.navigateByUrl(edited_user.url_name);
         this.ngOnInit();
       });
 
-    return canEdit;
+    return can_edit;
   }
 
   setBioLetters(): void {
-    this.bioLetters = this.bio_text.nativeElement.innerText.length;
+    this.bio_letters = this.bio_text.nativeElement.innerText.length;
   }
 
   editUserImg(open: boolean): void {
@@ -386,7 +387,7 @@ export class ProfileComponent {
       this.user_img_options.nativeElement.style.display = 'flex';
 
       if (this.user_img.nativeElement.src.includes('https://'))
-        this.lastUserImg = this.user_img.nativeElement.src;
+        this.last_user_img = this.user_img.nativeElement.src;
       return;
     }
 
@@ -407,15 +408,17 @@ export class ProfileComponent {
       } else this.alert_msg = '';
     }
 
-    this.userImgUpload.file = file;
-    this.userImgUpload.name = this.userImgUpload.file.name;
-    this.userImgUpload.url = await this.tools.getImage(this.userImgUpload.file);
+    this.user_img_upload.file = file;
+    this.user_img_upload.name = this.user_img_upload.file.name;
+    this.user_img_upload.url = await this.tools.getImage(
+      this.user_img_upload.file
+    );
 
-    this.user_img.nativeElement.src = this.userImgUpload.url;
+    this.user_img.nativeElement.src = this.user_img_upload.url;
   }
 
   quitNewUserImg(): void {
-    this.user_img.nativeElement.src = this.lastUserImg;
+    this.user_img.nativeElement.src = this.last_user_img;
     this.user_input.nativeElement.value = '';
   }
 
@@ -425,7 +428,7 @@ export class ProfileComponent {
       this.portrait_options.nativeElement.style.display = 'flex';
 
       if (this.portrait_img.nativeElement.src.includes('https://'))
-        this.lastPortraitImg = this.portrait_img.nativeElement.src;
+        this.last_portrait_img = this.portrait_img.nativeElement.src;
       return;
     }
 
@@ -446,17 +449,17 @@ export class ProfileComponent {
       } else this.alert_msg = '';
     }
 
-    this.portraitImgUpload.file = input.files?.item(0) as File;
-    this.portraitImgUpload.name = this.portraitImgUpload.file.name;
-    this.portraitImgUpload.url = await this.tools.getImage(
-      this.portraitImgUpload.file
+    this.portrait_img_upload.file = input.files?.item(0) as File;
+    this.portrait_img_upload.name = this.portrait_img_upload.file.name;
+    this.portrait_img_upload.url = await this.tools.getImage(
+      this.portrait_img_upload.file
     );
 
-    this.portrait_img.nativeElement.src = this.portraitImgUpload.url;
+    this.portrait_img.nativeElement.src = this.portrait_img_upload.url;
   }
 
   quitNewPortrait(): void {
-    this.portrait_img.nativeElement.src = this.lastPortraitImg;
+    this.portrait_img.nativeElement.src = this.last_portrait_img;
     this.portrait_input.nativeElement.value = '';
   }
 
@@ -467,9 +470,9 @@ export class ProfileComponent {
       this.edit_profile.nativeElement.style.opacity = '1';
       this.edit_profile.nativeElement.style.pointerEvents = 'all';
 
-      this.lastTextName = this.name_text.nativeElement.innerText;
-      this.lastTextUrlName = this.url_name_text.nativeElement.innerText;
-      this.lastBio = this.bio_text.nativeElement.innerText;
+      this.last_text_name = this.name_text.nativeElement.innerText;
+      this.last_text_url_name = this.url_name_text.nativeElement.innerText;
+      this.last_bio = this.bio_text.nativeElement.innerText;
 
       this.tools.setCursorToLast(this.name_text);
       return;
@@ -490,7 +493,7 @@ export class ProfileComponent {
       return;
     }
 
-    this.modalFollowedOpened = false;
+    this.modal_followed_opened = false;
     this.frsd_view.nativeElement.style.opacity = '0';
     this.frsd_view.nativeElement.style.pointerEvents = 'none';
   }
@@ -501,17 +504,17 @@ export class ProfileComponent {
     for (const id of this.user.followers) this.folls.push(await Users.get(id));
 
     if (this.folls.length == 0)
-      this.follsEmptyStr = "This user don't has followers.";
+      this.folls_empty_str = "This user don't has followers.";
   }
 
   async showAllFollowed(): Promise<void> {
     this.showContFoll();
-    this.modalFollowedOpened = true;
+    this.modal_followed_opened = true;
 
     for (const id of this.user.followed) this.folls.push(await Users.get(id));
 
     if (this.folls.length == 0)
-      this.follsEmptyStr = "This user don't follow anyone.";
+      this.folls_empty_str = "This user don't follow anyone.";
   }
 }
 

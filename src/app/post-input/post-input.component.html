@@ -1,4 +1,4 @@
-<div class="postInput" [style.margin-top]="marginTop">
+<div class="postInput" [style.margin-top]="margin_top">
   <div
     class="content"
     placeholder="Something new?"
@@ -27,7 +27,7 @@
   </div>
 </div>
 <app-alert-component
-  *ngIf="alertError != ''"
-  [msg]="alertError"
+  *ngIf="alert_error != ''"
+  [msg]="alert_error"
 ></app-alert-component>
-<app-load-screen *ngIf="showLoadScreen"></app-load-screen>
+<app-load-screen *ngIf="show_load_screen"></app-load-screen>

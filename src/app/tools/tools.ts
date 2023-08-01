@@ -36,14 +36,14 @@ export class Tools {
   private format12Time(hour24: string): string {
     if (!hour24.includes(':'))
       throw EvalError('The time not include semicolon.');
-    const timeSplit: string[] = hour24.split(':');
-    const hour: number = parseInt(timeSplit[0]);
+    const time_split: string[] = hour24.split(':');
+    const hour: number = parseInt(time_split[0]);
 
-    if (hour > 12) timeSplit[0] = (hour - 12).toString();
-    else if (hour == 0) timeSplit[0] = '12';
-    else timeSplit[0] = hour.toString();
+    if (hour > 12) time_split[0] = (hour - 12).toString();
+    else if (hour == 0) time_split[0] = '12';
+    else time_split[0] = hour.toString();
 
-    return `${timeSplit[0]}:${timeSplit[1]}`;
+    return `${time_split[0]}:${time_split[1]}`;
   }
 
   public getActualISODate(): string {
@@ -66,20 +66,20 @@ export class Tools {
       'November',
       'December',
     ];
-    const monthNumber: number = parseInt(numberStr);
-    return months[monthNumber];
+    const month_number: number = parseInt(numberStr);
+    return months[month_number];
   }
 
   formatDate(date: string): string {
-    const isoDate: string = date;
-    const splittedCDate: string[] = this.dateToString(isoDate).split(' ');
-    const splittedDate: string[] = splittedCDate[0].split('/');
+    const iso_date: string = date;
+    const splitted_c_date: string[] = this.dateToString(iso_date).split(' ');
+    const splitted_date: string[] = splitted_c_date[0].split('/');
 
-    const monthStr: string = this.getMonthOfNumber(splittedDate[1]);
+    const month_str: string = this.getMonthOfNumber(splitted_date[1]);
 
-    return `${monthStr} ${splittedDate[0]}, ${splittedDate[2]} ${
-      splittedCDate[1]
-    } ${splittedCDate[2].toLowerCase()}`;
+    return `${month_str} ${splitted_date[0]}, ${splitted_date[2]} ${
+      splitted_c_date[1]
+    } ${splitted_c_date[2].toLowerCase()}`;
   }
 
   public dateToString(dateStr: string): string {
@@ -89,19 +89,19 @@ export class Tools {
     const month: number = date.getMonth();
     const year: number = date.getFullYear();
 
-    const convDay: string = day < 10 ? `0${day}` : `${day}`;
-    const convMonth: string = month < 10 ? `0${month}` : `${month}`;
+    const conv_day: string = day < 10 ? `0${day}` : `${day}`;
+    const conv_month: string = month < 10 ? `0${month}` : `${month}`;
 
-    const onlyDate: string = `${convDay}/${convMonth}/${year}`;
+    const only_date: string = `${conv_day}/${conv_month}/${year}`;
 
     const hour: number = date.getHours();
     const minutes: number = date.getMinutes();
     const AM_or_PM: string = hour >= 12 ? 'PM' : 'AM';
 
-    const convMins: string = minutes < 10 ? `0${minutes}` : `${minutes}`;
+    const conv_mins: string = minutes < 10 ? `0${minutes}` : `${minutes}`;
 
-    const finalHour = this.format12Time(`${hour}:${convMins} ${AM_or_PM}`);
+    const final_hour = this.format12Time(`${hour}:${conv_mins} ${AM_or_PM}`);
 
-    return `${onlyDate} ${finalHour}`;
+    return `${only_date} ${final_hour}`;
   }
 }

@@ -26,7 +26,7 @@ export class CommentsComponent {
   def_person_img: string =
     'https://res.cloudinary.com/dp5gpr5sc/image/upload/v1685629395/app_assets/person.svg';
 
-  @Input() idPost: number = 0;
+  @Input() id_post: number = 0;
   cpost: CPost = {} as CPost;
 
   @ViewChildren('comment_body') comment_body!: QueryList<
@@ -37,16 +37,16 @@ export class CommentsComponent {
     ElementRef<HTMLButtonElement>
   >;
 
-  @ViewChild(AddImagesInputComponent) imgsToEdit!: AddImagesInputComponent;
+  @ViewChild(AddImagesInputComponent) imgs_to_edit!: AddImagesInputComponent;
 
   user: User = {} as User;
 
-  okStr: string = 'Done';
-  editStr: string = 'Edit';
-  bodyOfComment: string = '';
-  showImagesInput: boolean = false;
-  clickEdit: number = 0;
-  actualElem: number = 0;
+  ok_str: string = 'Done';
+  edit_str: string = 'Edit';
+  body_of_comment: string = '';
+  show_images_input: boolean = false;
+  click_edit: number = 0;
+  actual_elem: number = 0;
 
   @ViewChild('all_comments_cont')
   all_comments_cont!: ElementRef<HTMLDivElement>;
@@ -58,29 +58,29 @@ export class CommentsComponent {
     ElementRef<HTMLButtonElement>
   >;
 
-  showImagesInputAll: boolean = false;
-  actualComments: Comment[] = [];
+  show_images_input_all: boolean = false;
+  actual_comments: Comment[] = [];
 
-  showLoadScreen: boolean = false;
+  show_load_screen: boolean = false;
 
-  alertError: string = '';
+  alert_error: string = '';
 
   constructor(private refresh: RefreshService, private cd: ChangeDetectorRef) {}
 
   ngAfterViewInit(): void {
-    const commentBody = this.comment_body.toArray()[this.actualElem];
+    const comment_body = this.comment_body.toArray()[this.actual_elem];
 
-    if (commentBody != undefined)
-      this.bodyOfComment = commentBody.nativeElement.textContent as string;
+    if (comment_body != undefined)
+      this.body_of_comment = comment_body.nativeElement.textContent as string;
   }
 
   async ngOnInit(): Promise<void> {
-    const actualUser: User = await Users.get(Cookies.getUserID());
+    const actual_user: User = await Users.get(Cookies.getUserID());
 
-    if (actualUser != undefined) this.user = actualUser;
+    if (actual_user != undefined) this.user = actual_user;
 
-    this.cpost = (await Posts.getCPosts(await Posts.get(this.idPost)))[0];
-    this.actualComments = await Comments.getBy('id_post', this.idPost);
+    this.cpost = (await Posts.getCPosts(await Posts.get(this.id_post)))[0];
+    this.actual_comments = await Comments.getBy('id_post', this.id_post);
 
     this.refresh.getUpdate().subscribe({
       next: (subject: any) => {
@@ -101,101 +101,101 @@ export class CommentsComponent {
 
   async updateComment(
     id: number,
-    actualElem: number,
-    ofAllComments: boolean = false
+    actual_elem: number,
+    of_all_comments: boolean = false
   ): Promise<void> {
-    this.clickEdit++;
-    this.actualElem = actualElem;
-    const commentUpdated: Comment = {} as Comment;
-    let somethingEdited: boolean = false;
-    const imgsToDB: string[] = [];
+    this.click_edit++;
+    this.actual_elem = actual_elem;
+    const comment_updated: Comment = {} as Comment;
+    let something_edited: boolean = false;
+    const imgs_to_db: string[] = [];
 
-    let editBtn: ElementRef<HTMLButtonElement>;
-    let commentBody: ElementRef<HTMLDivElement>;
+    let edit_btn: ElementRef<HTMLButtonElement>;
+    let comment_body: ElementRef<HTMLDivElement>;
 
-    if (ofAllComments) {
-      editBtn = this.edit_btn_all.toArray()[this.actualElem];
-      commentBody = this.comment_body_all.toArray()[this.actualElem];
+    if (of_all_comments) {
+      edit_btn = this.edit_btn_all.toArray()[this.actual_elem];
+      comment_body = this.comment_body_all.toArray()[this.actual_elem];
     } else {
-      editBtn = this.edit_btn.toArray()[this.actualElem];
-      commentBody = this.comment_body.toArray()[this.actualElem];
+      edit_btn = this.edit_btn.toArray()[this.actual_elem];
+      comment_body = this.comment_body.toArray()[this.actual_elem];
     }
 
-    if (this.clickEdit == 1) {
-      editBtn.nativeElement.children[0].textContent = this.okStr;
-      commentBody.nativeElement.contentEditable = 'true';
-      commentBody.nativeElement.focus();
+    if (this.click_edit == 1) {
+      edit_btn.nativeElement.children[0].textContent = this.ok_str;
+      comment_body.nativeElement.contentEditable = 'true';
+      comment_body.nativeElement.focus();
 
-      if (ofAllComments) this.showImagesInputAll = true;
-      else this.showImagesInput = true;
+      if (of_all_comments) this.show_images_input_all = true;
+      else this.show_images_input = true;
 
-      this.tools.setCursorToLast(commentBody);
+      this.tools.setCursorToLast(comment_body);
     }
 
-    if (this.clickEdit == 2) {
-      editBtn.nativeElement.children[0].textContent = this.editStr;
-      commentBody.nativeElement.contentEditable = 'false';
+    if (this.click_edit == 2) {
+      edit_btn.nativeElement.children[0].textContent = this.edit_str;
+      comment_body.nativeElement.contentEditable = 'false';
 
-      this.showLoadScreen = true;
+      this.show_load_screen = true;
 
-      if (commentBody.nativeElement.textContent == '')
-        commentBody.nativeElement.textContent = this.bodyOfComment;
+      if (comment_body.nativeElement.textContent == '')
+        comment_body.nativeElement.textContent = this.body_of_comment;
       else {
-        this.bodyOfComment = commentBody.nativeElement.textContent as string;
-        commentUpdated.comment = this.bodyOfComment;
-        somethingEdited = true;
+        this.body_of_comment = comment_body.nativeElement.textContent as string;
+        comment_updated.comment = this.body_of_comment;
+        something_edited = true;
       }
 
-      if (this.imgsToEdit.imgsToDelete.length > 0) {
-        for (const url of this.imgsToEdit.imgsToDelete)
+      if (this.imgs_to_edit.imgs_to_delete.length > 0) {
+        for (const url of this.imgs_to_edit.imgs_to_delete)
           Cloudinary.delete(url).catch(
             () =>
-              (this.alertError =
+              (this.alert_error =
                 'Something went wrong at delete some image in server.')
           );
-        somethingEdited = true;
+        something_edited = true;
       }
 
-      for (const img of this.imgsToEdit.imgs) {
+      for (const img of this.imgs_to_edit.imgs) {
         if (img.url.includes('https://res.cloudinary.com'))
-          imgsToDB.push(img.url);
+          imgs_to_db.push(img.url);
 
         try {
-          const uploadImage = await Cloudinary.post({
+          const upload_image = await Cloudinary.post({
             name: img.name,
             image: await this.tools.getImage(img.file),
             url: `comments/${id}/`,
           });
 
-          imgsToDB.push(await JSON.parse(uploadImage)['secure_url']);
+          imgs_to_db.push(await JSON.parse(upload_image)['secure_url']);
 
-          somethingEdited = true;
+          something_edited = true;
         } catch (err) {
           /* Catch not empty, or yes? */
         }
       }
 
-      commentUpdated.images = imgsToDB;
+      comment_updated.images = imgs_to_db;
 
-      if (somethingEdited) {
-        commentUpdated.date_modified = this.tools.getActualISODate();
-        await Comments.put(id, commentUpdated).then(() => {
-          this.showLoadScreen = false;
+      if (something_edited) {
+        comment_updated.date_modified = this.tools.getActualISODate();
+        await Comments.put(id, comment_updated).then(() => {
+          this.show_load_screen = false;
           this.ngOnInit();
         });
       }
 
-      this.clickEdit = 0;
-      this.showImagesInput = this.showImagesInputAll = false;
+      this.click_edit = 0;
+      this.show_images_input = this.show_images_input_all = false;
     }
 
     this.cd.detectChanges(); // To avoid errors in develop mode.
   }
 
   async deleteComment(id: number): Promise<void> {
-    this.showLoadScreen = true;
+    this.show_load_screen = true;
     await Comments.delete(id).then(() => {
-      this.showLoadScreen = false;
+      this.show_load_screen = false;
       this.ngOnInit();
     });
   }

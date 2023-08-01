@@ -8,7 +8,7 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 export class AlertComponentComponent {
   @Input() msg: string = '';
 
-  @ViewChild('contError') modal!: ElementRef<HTMLDivElement>;
+  @ViewChild('cont_error') modal!: ElementRef<HTMLDivElement>;
 
   ngAfterViewInit(): void {
     this.show();

@@ -3,12 +3,12 @@
     <button (click)="setLike()">
       <span
         class="material-symbols-outlined"
-        [ngClass]="touchLike == 1 ? 'liked' : 'notLiked'"
+        [ngClass]="touch_like == 1 ? 'liked' : 'notLiked'"
         >favorite</span
       >
     </button>
     <p>
-      {{ cantLikes + (cantLikes == 1 ? " like" : " likes") }}
+      {{ cant_likes + (cant_likes == 1 ? " like" : " likes") }}
     </p>
   </div>
 </div>

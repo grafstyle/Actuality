@@ -56,7 +56,9 @@
       <div class="name_edit">
         <h2>Name:</h2>
         <div class="name" #name contenteditable="true">{{ user.name }}</div>
-        <h4 class="inputError" *ngIf="nameError != ''">{{ this.nameError }}</h4>
+        <h4 class="inputError" *ngIf="name_error != ''">
+          {{ this.name_error }}
+        </h4>
       </div>
       <div class="url_name_edit">
         <h2>Url name:</h2>
@@ -66,8 +68,8 @@
             {{ user.url_name }}
           </div>
         </div>
-        <h4 class="inputError" *ngIf="urlNameError != ''">
-          {{ this.urlNameError }}
+        <h4 class="inputError" *ngIf="url_name_error != ''">
+          {{ this.url_name_error }}
         </h4>
       </div>
       <div class="bio_edit">
@@ -82,10 +84,10 @@
           {{ user.bio }}
         </div>
         <div class="cont_count_letters">
-          <h3 class="count_letters">{{ this.bioLetters }}</h3>
+          <h3 class="count_letters">{{ this.bio_letters }}</h3>
         </div>
       </div>
-      <h4 class="inputError" *ngIf="bioError != ''">{{ this.bioError }}</h4>
+      <h4 class="inputError" *ngIf="bio_error != ''">{{ this.bio_error }}</h4>
       <div class="btns">
         <button (click)="modalEditProfile(false)">Ok</button>
       </div>
@@ -99,10 +101,14 @@
       <img src="{{ user.portrait }}" alt="" />
     </div>
     <div class="editProfCont">
-      <button #edit_btn *ngIf="canEditProfile" (click)="modalEditProfile(true)">
+      <button
+        #edit_btn
+        *ngIf="can_edit_profile"
+        (click)="modalEditProfile(true)"
+      >
         <span class="material-symbols-outlined">edit</span>
       </button>
-      <button #follow_btn *ngIf="canFollow" (click)="followClick()">
+      <button #follow_btn *ngIf="can_follow" (click)="followClick()">
         Follow
       </button>
     </div>
@@ -147,7 +153,7 @@
       </div>
       <div class="users">
         <div class="noUsers" *ngIf="this.folls.length == 0">
-          <p>{{ follsEmptyStr }}</p>
+          <p>{{ folls_empty_str }}</p>
         </div>
         <div class="user" *ngFor="let foll of this.folls">
           <div class="imgCont imgUser">
@@ -159,7 +165,7 @@
             </div>
             <div class="btnCont">
               <button
-                *ngIf="modalFollowedOpened"
+                *ngIf="modal_followed_opened"
                 (click)="unfollowAndRefresh(foll.id)"
               >
                 Unfollow
@@ -171,7 +177,7 @@
     </div>
   </div>
 </div>
-<app-post-input [marginTop]="'15px'"></app-post-input>
+<app-post-input [margin_top]="'15px'"></app-post-input>
 <div class="err_cont" *ngIf="user.id == undefined">
   <span class="material-symbols-outlined">no_accounts</span>
   <p>{{ err }}</p>
@@ -185,7 +191,7 @@
   *ngIf="user.id != undefined"
   (activate)="elemLoaded($event)"
 ></router-outlet>
-<app-load-screen *ngIf="showLoadScreen"></app-load-screen>
+<app-load-screen *ngIf="show_load_screen"></app-load-screen>
 <app-alert-component
   *ngIf="alert_msg != ''"
   [msg]="alert_msg"

@@ -1,5 +1,4 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-
 import {
   Image,
   AddImagesInputComponent,
@@ -17,9 +16,9 @@ import { User } from 'src/app/controller/users/users';
   styleUrls: ['./add-comment.component.css', '../comments.component.css'],
 })
 export class AddCommentComponent {
-  @Input() idPost: number = 0;
+  @Input() id_post: number = 0;
 
-  toComment: Comment = {} as Comment;
+  to_comment: Comment = {} as Comment;
   user: User = {} as User;
   tools: Tools = new Tools();
   imgs: Image[] = [];
@@ -27,12 +26,13 @@ export class AddCommentComponent {
   def_person_img: string =
     'https://res.cloudinary.com/dp5gpr5sc/image/upload/v1685629395/app_assets/person.svg';
 
-  @ViewChild(AddImagesInputComponent) addImagesInput!: AddImagesInputComponent;
-  @ViewChild('comment_body') commentBody!: ElementRef<HTMLDivElement>;
+  @ViewChild(AddImagesInputComponent)
+  add_images_input!: AddImagesInputComponent;
+  @ViewChild('comment_body') comment_body!: ElementRef<HTMLDivElement>;
 
-  showLoadScreen: boolean = false;
+  show_load_screen: boolean = false;
 
-  alertError: string = '';
+  alert_error: string = '';
 
   constructor(private refresh: RefreshService) {}
 
@@ -41,62 +41,62 @@ export class AddCommentComponent {
   }
 
   setImgsOfImgsComponent(): void {
-    this.imgs = this.addImagesInput.imgs;
+    this.imgs = this.add_images_input.imgs;
   }
 
   getBodyText(): string {
-    return this.commentBody.nativeElement.innerText;
+    return this.comment_body.nativeElement.innerText;
   }
 
   cleanAll(): void {
-    this.commentBody.nativeElement.innerText = '';
-    this.commentBody.nativeElement.innerHTML = '';
-    this.addImagesInput.imgs = [];
-    this.addImagesInput.addbtn.nativeElement.value = '';
+    this.comment_body.nativeElement.innerText = '';
+    this.comment_body.nativeElement.innerHTML = '';
+    this.add_images_input.imgs = [];
+    this.add_images_input.add_btn.nativeElement.value = '';
 
     this.setImgsOfImgsComponent();
   }
 
   async comment(): Promise<void> {
-    const idUser: number = Cookies.getUserID();
+    const id_user: number = Cookies.getUserID();
 
-    if (idUser == 0) {
-      this.alertError = 'Auth first';
+    if (id_user == 0) {
+      this.alert_error = 'Auth first';
       return;
     }
 
     if (this.getBodyText() == ('' || undefined)) {
-      this.alertError = 'Almost add an title to your post.';
+      this.alert_error = 'Almost add an title to your post.';
       return;
     }
 
-    this.showLoadScreen = true;
+    this.show_load_screen = true;
 
-    this.toComment.id_user = idUser;
-    this.toComment.id_post = this.idPost;
+    this.to_comment.id_user = id_user;
+    this.to_comment.id_post = this.id_post;
 
-    const newCommentID: number = (await Comments.getLastID()) + 1;
+    const new_comment_id: number = (await Comments.getLastID()) + 1;
 
-    this.toComment.comment = this.getBodyText();
-    this.toComment.images = [];
+    this.to_comment.comment = this.getBodyText();
+    this.to_comment.images = [];
 
-    for (const img of this.addImagesInput.imgs) {
-      const uploadImage = await Cloudinary.post({
+    for (const img of this.add_images_input.imgs) {
+      const upload_image = await Cloudinary.post({
         name: img.name,
         image: await this.tools.getImage(img.file),
-        url: `comments/${newCommentID}/`,
+        url: `comments/${new_comment_id}/`,
       });
 
-      this.toComment.images.push(await JSON.parse(uploadImage)['secure_url']);
+      this.to_comment.images.push(await JSON.parse(upload_image)['secure_url']);
     }
 
-    this.toComment.date_added = this.tools.getActualISODate();
-    this.toComment.date_modified = this.tools.getActualISODate();
+    this.to_comment.date_added = this.tools.getActualISODate();
+    this.to_comment.date_modified = this.tools.getActualISODate();
 
-    await Comments.post(this.toComment).then(() => {
+    await Comments.post(this.to_comment).then(() => {
       this.refresh.setUpdate('refresh_comments');
       this.cleanAll();
-      this.showLoadScreen = false;
+      this.show_load_screen = false;
     });
   }
 }

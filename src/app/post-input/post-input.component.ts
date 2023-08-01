@@ -15,17 +15,18 @@ import {
   styleUrls: ['./post-input.component.css'],
 })
 export class PostInputComponent {
-  toPost: Post = {} as Post;
+  to_post: Post = {} as Post;
   tools: Tools = new Tools();
   imgs: Image[] = [];
 
-  @Input('marginTop') marginTop: string = '';
+  @Input('margin_top') margin_top: string = '';
 
-  @ViewChild(AddImagesInputComponent) addImagesInput!: AddImagesInputComponent;
-  @ViewChild('post_body') postBody!: ElementRef<HTMLDivElement>;
+  @ViewChild(AddImagesInputComponent)
+  add_images_input!: AddImagesInputComponent;
+  @ViewChild('post_body') post_body!: ElementRef<HTMLDivElement>;
 
-  showLoadScreen: boolean = false;
-  alertError: string = '';
+  show_load_screen: boolean = false;
+  alert_error: string = '';
 
   constructor(private refresh: RefreshService) {}
 
@@ -34,61 +35,61 @@ export class PostInputComponent {
   }
 
   setImgsOfImgsComponent(): void {
-    this.imgs = this.addImagesInput.imgs;
+    this.imgs = this.add_images_input.imgs;
   }
 
   getBodyText(): string {
-    return this.postBody.nativeElement.innerText;
+    return this.post_body.nativeElement.innerText;
   }
 
   cleanAll(): void {
-    this.postBody.nativeElement.innerText = '';
-    this.postBody.nativeElement.innerHTML = '';
-    this.addImagesInput.imgs = [];
-    this.addImagesInput.addbtn.nativeElement.value = '';
+    this.post_body.nativeElement.innerText = '';
+    this.post_body.nativeElement.innerHTML = '';
+    this.add_images_input.imgs = [];
+    this.add_images_input.add_btn.nativeElement.value = '';
 
     this.setImgsOfImgsComponent();
   }
 
   async post(): Promise<void> {
-    const idUser: number = Cookies.getUserID();
+    const id_user: number = Cookies.getUserID();
 
-    if (idUser == 0) {
-      this.alertError = 'Auth first';
+    if (id_user == 0) {
+      this.alert_error = 'Auth first';
       return;
     }
 
     if (this.getBodyText() == '') {
-      this.alertError = 'Is necessary add a title to your post.';
+      this.alert_error = 'Is necessary add a title to your post.';
       return;
     }
 
-    this.showLoadScreen = true;
+    this.show_load_screen = true;
 
-    this.toPost.id_user = idUser;
+    this.to_post.id_user = id_user;
 
-    const newPostID: number = (await Posts.getLastID()) + 1;
+    const new_post_id: number = (await Posts.getLastID()) + 1;
 
-    this.toPost.title = this.getBodyText();
-    this.toPost.images = [];
+    this.to_post.title = this.getBodyText();
+    this.to_post.images = [];
 
-    for (const img of this.addImagesInput.imgs) {
-      const uploadImage = await Cloudinary.post({
+    for (const img of this.add_images_input.imgs) {
+      const upload_image = await Cloudinary.post({
         name: img.name,
         image: await this.tools.getImage(img.file),
-        url: `posts/${newPostID}/`,
+        url: `posts/${new_post_id}/`,
       });
 
-      this.toPost.images.push(await JSON.parse(uploadImage)['secure_url']);
+      this.to_post.images.push(await JSON.parse(upload_image)['secure_url']);
     }
 
-    this.toPost.date_added = this.tools.getActualISODate();
-    this.toPost.date_modified = this.tools.getActualISODate();
+    this.to_post.date_added = this.tools.getActualISODate();
+    this.to_post.date_modified = this.tools.getActualISODate();
 
-    await Posts.post(this.toPost).then(() => {
+    await Posts.post(this.to_post).then(() => {
       this.refresh.setUpdate('refresh_posts');
       this.cleanAll();
-      this.showLoadScreen = false;
+      this.show_load_screen = false;
     });
   }
 }

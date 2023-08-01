@@ -48,7 +48,7 @@
                   <div
                     class="imgCont grid_elem"
                     *ngFor="
-                      let imgOrVideo of cpost.post.images;
+                      let img_or_vid of cpost.post.images;
                       let img_i = index
                     "
                     [style.grid-row]="
@@ -58,18 +58,18 @@
                     "
                   >
                     <img
-                      src="{{ imgOrVideo }}"
+                      src="{{ img_or_vid }}"
                       alt=""
-                      *ngIf="!imgOrVideo.includes('.mp4')"
+                      *ngIf="!img_or_vid.includes('.mp4')"
                     />
                     <video
-                      *ngIf="imgOrVideo.includes('.mp4')"
+                      *ngIf="img_or_vid.includes('.mp4')"
                       controls
                       autoplay
                       loop
                       [muted]="'muted'"
                     >
-                      <source src="{{ imgOrVideo }}" type="video/mp4" />
+                      <source src="{{ img_or_vid }}" type="video/mp4" />
                     </video>
                   </div>
                 </div>
@@ -81,7 +81,7 @@
               >
                 <app-add-images-input
                   #imgs_input
-                  [imgsInCloud]="cpost.post.images || []"
+                  [imgs_in_cloud]="cpost.post.images || []"
                 ></app-add-images-input>
                 <div class="btn_ok">
                   <button (click)="quitNewImgsOfPost(true)">
@@ -146,7 +146,7 @@
         <div class="media grid_media" *ngIf="cposts_imgs[i].length > 0">
           <div
             class="imgCont grid_elem"
-            *ngFor="let imgOrVideo of cposts_imgs[i]; let img_i = index"
+            *ngFor="let img_or_vid of cposts_imgs[i]; let img_i = index"
             [style.grid-row]="
               img_i == 0 && cposts_imgs[i].length > 2
                 ? '1/' + cposts_imgs[i].length
@@ -154,18 +154,18 @@
             "
           >
             <img
-              src="{{ imgOrVideo }}"
+              src="{{ img_or_vid }}"
               alt=""
-              *ngIf="!imgOrVideo.includes('.mp4')"
+              *ngIf="!img_or_vid.includes('.mp4')"
             />
             <video
-              *ngIf="imgOrVideo.includes('.mp4')"
+              *ngIf="img_or_vid.includes('.mp4')"
               controls
               autoplay
               loop
               [muted]="'muted'"
             >
-              <source src="{{ imgOrVideo }}" type="video/mp4" />
+              <source src="{{ img_or_vid }}" type="video/mp4" />
             </video>
           </div>
         </div>
@@ -174,12 +174,12 @@
         </div>
       </div>
       <app-likes
-        [idPost]="cpost.post.id"
-        [cantLikes]="cpost.likes.length"
+        [id_post]="cpost.post.id"
+        [cant_likes]="cpost.likes.length"
         (disliked)="refreshPosts()"
       ></app-likes>
     </div>
-    <app-comments [idPost]="cpost.post.id"></app-comments>
+    <app-comments [id_post]="cpost.post.id"></app-comments>
   </div>
 </div>
 <app-alert-component

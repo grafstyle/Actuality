@@ -29,8 +29,8 @@ export class AppComponent {
   txt_color: string = '#000';
   txt_s_color: string = '#fff';
   left_of_circle: string = '0';
-  bgOfLight: string = 'var(--p_color)';
-  bgOfDark: string = 'var(--contrast_dark)';
+  bg_of_light: string = 'var(--p_color)';
+  bg_of_dark: string = 'var(--contrast_dark)';
   title = 'Actuality';
   screen_w: number = window.innerWidth;
 
@@ -67,15 +67,15 @@ export class AppComponent {
 
   search(e: Event) {
     const elem = e.target as HTMLInputElement;
-    this.routerLink.navigateByUrl('/search?by=' + elem.value);
+    this.router_link.navigateByUrl('/search?by=' + elem.value);
     elem.value = '';
   }
 
   async setCookies() {
     try {
-      const emailName: string | undefined = (await Users.getByAuth()).email;
+      const email_name: string | undefined = (await Users.getByAuth()).email;
       let id: number | undefined = undefined;
-      if (emailName != undefined) id = (await Users.getByEmail(emailName)).id;
+      if (email_name != undefined) id = (await Users.getByEmail(email_name)).id;
       if (isNaN(Cookies.getUserID()) && id != undefined) Cookies.setUserID(id);
     } catch (err) {
       // Catch empty? 🤨
@@ -110,8 +110,8 @@ export class AppComponent {
     this.txt_color = '#222';
     this.txt_s_color = '#fff';
     this.left_of_circle = '0px';
-    this.bgOfLight = 'var(--p_color)';
-    this.bgOfDark = 'var(--contrast_dark)';
+    this.bg_of_light = 'var(--p_color)';
+    this.bg_of_dark = 'var(--contrast_dark)';
 
     this.applyStyles();
 
@@ -123,8 +123,8 @@ export class AppComponent {
     this.txt_color = '#fff';
     this.txt_s_color = '#222';
     this.left_of_circle = '95%';
-    this.bgOfLight = 'var(--contrast_dark)';
-    this.bgOfDark = 'var(--p_color)';
+    this.bg_of_light = 'var(--contrast_dark)';
+    this.bg_of_dark = 'var(--p_color)';
 
     this.applyStyles();
 
@@ -151,21 +151,23 @@ export class AppComponent {
   async convUrlName(url_name: string): Promise<string> {
     await Users.getBy('url_name', url_name).then((user: User[]) => {
       if (user.length > 0) {
-        const lastUserSplitted: string[] =
+        const last_user_splitted: string[] =
           user[user.length - 1].url_name.split('_');
-        if (!isNaN(parseInt(lastUserSplitted[lastUserSplitted.length - 1]))) {
+        if (
+          !isNaN(parseInt(last_user_splitted[last_user_splitted.length - 1]))
+        ) {
           url_name = '';
-          const lastUserNumber: number = parseInt(
-            lastUserSplitted[lastUserSplitted.length - 1]
+          const last_user_number: number = parseInt(
+            last_user_splitted[last_user_splitted.length - 1]
           );
-          const newUserNumber: number = lastUserNumber + 1;
+          const new_user_number: number = last_user_number + 1;
 
-          for (let i: number = 0; i < lastUserSplitted.length - 1; i++)
-            if (i < lastUserSplitted.length - 2)
-              url_name += lastUserSplitted[i] + '_';
-            else url_name += lastUserSplitted[i];
+          for (let i: number = 0; i < last_user_splitted.length - 1; i++)
+            if (i < last_user_splitted.length - 2)
+              url_name += last_user_splitted[i] + '_';
+            else url_name += last_user_splitted[i];
 
-          url_name += `_${newUserNumber}`;
+          url_name += `_${new_user_number}`;
         } else {
           url_name = url_name + '_1';
         }
@@ -177,18 +179,18 @@ export class AppComponent {
   constructor(
     private router: Router,
     private auth: AuthService,
-    private apiService: Service,
-    private routerLink: Router,
+    private api_service: Service,
+    private router_link: Router,
     private cookies: CookieService,
     private refresh: RefreshService,
     private renderer: Renderer2
   ) {
-    Users.apiService =
-      Posts.apiService =
-      Comments.apiService =
-      Likes.apiService =
-      Cloudinary.apiService =
-        this.apiService;
+    Users.api_service =
+      Posts.api_service =
+      Comments.api_service =
+      Likes.api_service =
+      Cloudinary.api_service =
+        this.api_service;
     Cookies.cookies = this.cookies;
     Cookies.refresh = this.refresh;
     Users.auth = this.auth;
@@ -219,20 +221,20 @@ export class AppComponent {
     if (Cookies.getMode() == Cookies.MODE_LIGHT) this.setLightMode();
     else if (Cookies.getMode() == Cookies.MODE_DARK) this.setDarkMode();
 
-    const isAuth: boolean = await Users.isActualUserAuth();
-    if (isAuth)
+    const is_auth: boolean = await Users.isActualUserAuth();
+    if (is_auth)
       this.auth.user$.subscribe({
-        next: async (actualUser) => {
-          if (actualUser != undefined) {
-            const email: string = actualUser?.email || '';
+        next: async (actual_user) => {
+          if (actual_user != undefined) {
+            const email: string = actual_user?.email || '';
             const name: string =
-              actualUser?.given_name || this.tools.getNameMail(email);
+              actual_user?.given_name || this.tools.getNameMail(email);
 
             await Users.post({
               name: name,
               email: email,
               url_name: this.tools.createURLName(await this.convUrlName(name)),
-              image: actualUser?.picture || '',
+              image: actual_user?.picture || '',
               joined: this.tools.getActualISODate(),
               bio: '',
               portrait: '',

@@ -1,18 +1,18 @@
 <button
   class="addImg"
-  (mouseover)="hoverAddImg = true"
-  (mouseleave)="hoverAddImg = false"
-  [ngStyle]="{ color: hoverColor != '' && hoverAddImg ? hoverColor : '' }"
+  (mouseover)="hover_add_img = true"
+  (mouseleave)="hover_add_img = false"
+  [ngStyle]="{ color: hover_color != '' && hover_add_img ? hover_color : '' }"
   (click)="chooseImgModal(true)"
 >
   <span
     class="material-symbols-outlined"
-    [ngStyle]="{ fontSize: fontSize != '' ? fontSize : '' }"
+    [ngStyle]="{ font_size: font_size != '' ? font_size : '' }"
     >image</span
   >
 </button>
 
-<div class="modalContainer addImgCont" ngModel #addImgCont>
+<div class="modalContainer addImgCont" ngModel #add_img_cont>
   <div class="display">
     <div class="initialImg" *ngIf="imgs.length == 0">
       <div class="wait">Waiting for an image or video.</div>
@@ -48,7 +48,7 @@
               changingImg($event, 'image/jpeg', 'image/png', 'video/mp4')
             "
             ngModel
-            #addBtn
+            #add_btn
           />
         </label>
       </button>
@@ -58,6 +58,6 @@
   </div>
 </div>
 <app-alert-component
-  [msg]="alertError"
-  *ngIf="alertError != ''"
+  [msg]="alert_error"
+  *ngIf="alert_error != ''"
 ></app-alert-component>

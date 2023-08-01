@@ -36,7 +36,7 @@
         <div class="media grid_media" *ngIf="cpost.post.images.length > 0">
           <div
             class="imgCont grid_elem"
-            *ngFor="let imgOrVideo of cpost.post.images; let img_i = index"
+            *ngFor="let img_or_vid of cpost.post.images; let img_i = index"
             [style.grid-row]="
               img_i == 0 && cpost.post.images.length > 2
                 ? '1/' + cpost.post.images.length
@@ -44,18 +44,18 @@
             "
           >
             <img
-              src="{{ imgOrVideo }}"
+              src="{{ img_or_vid }}"
               alt=""
-              *ngIf="!imgOrVideo.includes('.mp4')"
+              *ngIf="!img_or_vid.includes('.mp4')"
             />
             <video
-              *ngIf="imgOrVideo.includes('.mp4')"
+              *ngIf="img_or_vid.includes('.mp4')"
               controls
               autoplay
               loop
               [muted]="'muted'"
             >
-              <source src="{{ imgOrVideo }}" type="video/mp4" />
+              <source src="{{ img_or_vid }}" type="video/mp4" />
             </video>
           </div>
         </div>
@@ -64,10 +64,10 @@
         </div>
       </div>
       <app-likes
-        [idPost]="cpost.post.id"
-        [cantLikes]="cpost.likes.length"
+        [id_post]="cpost.post.id"
+        [cant_likes]="cpost.likes.length"
       ></app-likes>
     </div>
-    <app-comments [idPost]="cpost.post.id"></app-comments>
+    <app-comments [id_post]="cpost.post.id"></app-comments>
   </div>
 </div>

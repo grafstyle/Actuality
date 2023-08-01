@@ -4,13 +4,13 @@ import { Service } from '../services/services';
 import { User, Users } from '../users/users';
 
 export class Posts {
-  private static getPath: string = 'posts/get?';
+  private static get_path: string = 'posts/get?';
   private static path: string = 'posts';
-  public static apiService: Service;
+  public static api_service: Service;
 
   public static get(id: number): Promise<Post[]> {
     return new Promise((res, rej) => {
-      Posts.apiService.get(`${Posts.getPath}id=${id}`).subscribe({
+      Posts.api_service.get(`${Posts.get_path}id=${id}`).subscribe({
         next: (e: any) => res(e as Post[]),
         error: () => rej([]),
       });
@@ -19,7 +19,7 @@ export class Posts {
 
   public static getAll(): Promise<Post[]> {
     return new Promise((res, rej) => {
-      Posts.apiService.get(Posts.path).subscribe({
+      Posts.api_service.get(Posts.path).subscribe({
         next: (e: any) => res(e as Post[]),
         error: () => rej([]),
       });
@@ -41,7 +41,7 @@ export class Posts {
 
   public static getBy(key: string, data: any): Promise<Post[]> {
     return new Promise((res, rej) => {
-      Posts.apiService.get(`${Posts.getPath}${key}=${data}`).subscribe({
+      Posts.api_service.get(`${Posts.get_path}${key}=${data}`).subscribe({
         next: (post: any) => res(post as Post[]),
         error: () => rej([] as Post[]),
       });
@@ -77,19 +77,19 @@ export class Posts {
 
   public static getIfContains(inTitle: string): Promise<CPost[]> {
     return new Promise((res, rej) => {
-      const allPosts: Post[] = [];
-      let finalPost: CPost[] = [];
+      const all_posts: Post[] = [];
+      let final_post: CPost[] = [];
 
       Posts.getAll()
         .then((data) => {
           data.forEach((post) => {
             if (post.title.toLowerCase().includes(inTitle.toLowerCase()))
-              allPosts.push(post);
+              all_posts.push(post);
           });
         })
         .then(async () => {
-          finalPost = await Posts.getCPosts(allPosts);
-          res(finalPost);
+          final_post = await Posts.getCPosts(all_posts);
+          res(final_post);
         })
         .catch(() => rej([]));
     });
@@ -97,7 +97,7 @@ export class Posts {
 
   public static post(data: Post): Promise<string> {
     return new Promise((res, rej) => {
-      Posts.apiService.post(Posts.path, data).subscribe({
+      Posts.api_service.post(Posts.path, data).subscribe({
         next: () => res('The data has been posted.'),
         error: () => rej('Something went wrong when post the data.'),
       });
@@ -106,7 +106,7 @@ export class Posts {
 
   public static put(id: number, data: Post): Promise<string> {
     return new Promise((res, rej) => {
-      Posts.apiService.put(Posts.path, id, data).subscribe({
+      Posts.api_service.put(Posts.path, id, data).subscribe({
         next: () => res('The data has been updated.'),
         error: () => rej('Something went wrong when update the data.'),
       });
@@ -115,7 +115,7 @@ export class Posts {
 
   public static delete(id: number): Promise<string> {
     return new Promise((res, rej) => {
-      Posts.apiService.delete(Posts.path, id).subscribe({
+      Posts.api_service.delete(Posts.path, id).subscribe({
         next: () => res('The data has been deleted.'),
         error: () => rej('Something went wrong when delete the data.'),
       });
