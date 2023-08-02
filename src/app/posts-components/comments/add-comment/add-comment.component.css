@@ -1,4 +1,4 @@
-.addComment {
+.add_comment {
   padding-bottom: 5px;
   border-bottom: var(--contrast_dark) 2px solid;
 }
@@ -10,12 +10,12 @@
   padding: 0 12px;
 }
 
-.commentInput,
+.comment_input,
 .options {
   gap: 15px;
 }
 
-.commentInput {
+.comment_input {
   display: flex;
   width: 100%;
 }
@@ -77,8 +77,8 @@
   color: var(--txt_s_color);
 }
 
-.imgOrVid,
-.imgOrVid > img,
-.imgOrVid > video {
+.img_or_vid,
+.img_or_vid > img,
+.img_or_vid > video {
   height: 100px;
 }

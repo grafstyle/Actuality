@@ -1,5 +1,5 @@
 <div class="comments">
-  <div class="sectionComments">
+  <div class="section_comments">
     <app-add-comment
       [id_post]="id_post"
       *ngIf="user.id != undefined"
@@ -11,8 +11,8 @@
           *ngIf="i < 5 && cpost.user_of_comments[i] != undefined"
         >
           <div class="all_content" *ngIf="comment.id_post == cpost.post.id">
-            <div class="imgUserCont">
-              <div class="imgCont user">
+            <div class="img_user_cont">
+              <div class="img_cont user">
                 <img
                   src="{{
                     cpost.user_of_post.image
@@ -24,8 +24,8 @@
                 />
               </div>
             </div>
-            <div class="userComment">
-              <div class="nameAndActions">
+            <div class="user_comment">
+              <div class="name_and_actions">
                 <div class="names">
                   <h4 [routerLink]="['/' + cpost.user_of_comments[i].url_name]">
                     {{ cpost.user_of_comments[i].name }}
@@ -48,7 +48,7 @@
                     *ngIf="show_images_input && actual_elem == i"
                   ></app-add-images-input>
                   <button
-                    class="editBtn"
+                    class="edit_btn"
                     (click)="updateComment(comment.id, i)"
                     #edit_comment_btn
                   >
@@ -56,14 +56,17 @@
                       edit_str
                     }}</span>
                   </button>
-                  <button class="deleteBtn" (click)="deleteComment(comment.id)">
+                  <button
+                    class="delete_btn"
+                    (click)="deleteComment(comment.id)"
+                  >
                     <span class="material-symbols-outlined">delete</span>
                   </button>
                 </div>
               </div>
               <div
                 #imgs_cont
-                class="imgsOrVids"
+                class="imgs_or_vids"
                 *ngIf="comment.images != undefined && comment.images.length > 0"
               >
                 <div class="imgs" *ngFor="let img of comment.images">
@@ -75,7 +78,7 @@
           </div>
         </div>
       </ng-container>
-      <div class="viewMoreCont" *ngIf="cpost.comments.length > 5">
+      <div class="view_more_cont" *ngIf="cpost.comments.length > 5">
         <button (click)="seeAllComments()">View more</button>
       </div>
     </div>
@@ -83,14 +86,14 @@
 
   <!-- All comments modal -->
 
-  <div class="allCommentsCont modalContainer" #all_comments_cont>
+  <div class="all_comments_cont modal_container" #all_comments_cont>
     <div class="content">
-      <div class="closeCont">
+      <div class="close_cont">
         <span (click)="hideAllComments()" class="material-symbols-outlined"
           >close</span
         >
       </div>
-      <div class="commentsCont">
+      <div class="comments_cont">
         <div class="all_comments">
           <app-add-comment
             [id_post]="id_post"
@@ -107,8 +110,8 @@
                 comment.id_post == cpost.post.id
               "
             >
-              <div class="imgUserCont">
-                <div class="imgCont user">
+              <div class="img_user_cont">
+                <div class="img_cont user">
                   <img
                     src="{{
                       cpost.user_of_post.image
@@ -120,8 +123,8 @@
                   />
                 </div>
               </div>
-              <div class="userComment">
-                <div class="nameAndActions">
+              <div class="user_comment">
+                <div class="name_and_actions">
                   <div class="names">
                     <h4
                       [routerLink]="['/' + cpost.user_of_comments[i].url_name]"
@@ -151,7 +154,7 @@
                       *ngIf="show_images_input_all && actual_elem == i"
                     ></app-add-images-input>
                     <button
-                      class="editBtn"
+                      class="edit_btn"
                       (click)="updateComment(comment.id, i, true)"
                       #edit_comment_btn_all
                     >
@@ -160,7 +163,7 @@
                       }}</span>
                     </button>
                     <button
-                      class="deleteBtn"
+                      class="delete_btn"
                       (click)="deleteComment(comment.id)"
                     >
                       <span class="material-symbols-outlined">delete</span>
@@ -169,7 +172,7 @@
                 </div>
                 <div
                   #imgs_cont_all
-                  class="imgsOrVids"
+                  class="imgs_or_vids"
                   *ngIf="actual_comments[i] != undefined"
                 >
                   <div

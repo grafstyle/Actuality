@@ -1,15 +1,15 @@
-<div class="noOnePost err_cont" *ngIf="cposts.length == 0">
+<div class="no_one_post err_cont" *ngIf="cposts.length == 0">
   <span class="material-symbols-outlined">public_off</span>
   <p>{{ noOnePost }}</p>
 </div>
-<div class="allPosts">
+<div class="all_posts">
   <div class="post" *ngFor="let cpost of cposts; let i = index">
     <div class="all_content">
-      <div class="editPost editContainer" #edit_post>
+      <div class="edit_post modal_container" #edit_post>
         <div class="content">
           <div class="post">
             <div class="user">
-              <div class="imgCont">
+              <div class="img_cont">
                 <img src="{{ user.image || def_person_img }}" alt="" />
               </div>
               <div class="names">
@@ -34,19 +34,19 @@
               <div class="media" #media>
                 <button
                   #edit_post_imgs_btn
-                  class="editBtn edit_post_imgs_btn"
+                  class="edit_btn edit_post_imgs_btn"
                   (click)="editImagesOfPost()"
                 >
                   <span class="material-symbols-outlined">edit</span>
                 </button>
                 <div class="grid_media">
-                  <div class="imgCont" *ngIf="cpost.post.images.length == 0">
+                  <div class="img_cont" *ngIf="cpost.post.images.length == 0">
                     <span class="material-symbols-outlined"
                       >image_not_supported</span
                     >
                   </div>
                   <div
-                    class="imgCont grid_elem"
+                    class="img_cont grid_elem"
                     *ngFor="
                       let img_or_vid of cpost.post.images;
                       let img_i = index
@@ -100,8 +100,8 @@
         </div>
       </div>
       <div class="user">
-        <div class="imgAndName">
-          <div class="imgCont">
+        <div class="img_and_name">
+          <div class="img_cont">
             <img src="{{ user.image || def_person_img }}" alt="" />
           </div>
           <div class="names">
@@ -120,7 +120,7 @@
         >
           <div
             #opt_post_to_click
-            class="toClick"
+            class="to_click"
             (click)="hideOptions(i)"
           ></div>
           <div class="more_btn_cont">
@@ -145,7 +145,7 @@
       <div class="content">
         <div class="media grid_media" *ngIf="cposts_imgs[i].length > 0">
           <div
-            class="imgCont grid_elem"
+            class="img_cont grid_elem"
             *ngFor="let img_or_vid of cposts_imgs[i]; let img_i = index"
             [style.grid-row]="
               img_i == 0 && cposts_imgs[i].length > 2

@@ -10,30 +10,15 @@
 
 /* Containers of modals */
 
-.editContainer {
-  z-index: 9999;
-  pointer-events: none;
-  opacity: 0;
-  left: 0;
-  top: 0;
-  position: fixed;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.editContainer > .content {
+.modal_container > .content {
   background-color: var(--s_color);
   width: 50%;
 }
 
-/* All imgCont */
+/* All img_cont */
 
-.imgCont > .editBtn,
-.media > .editBtn {
+.img_cont > .edit_btn,
+.media > .edit_btn {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -44,22 +29,22 @@
   z-index: 9999;
 }
 
-.media > .editBtn,
-.frontEdit > .editBtn,
-.userImgEdit > .editBtn {
+.media > .edit_btn,
+.front_edit > .edit_btn,
+.user_img_edit > .edit_btn {
   color: var(--txt_color);
   transition: all 0.3s ease-out;
 }
 
-.media > .editBtn:hover,
-.frontEdit > .editBtn:hover,
-.userImgEdit > .editBtn:hover {
+.media > .edit_btn:hover,
+.front_edit > .edit_btn:hover,
+.user_img_edit > .edit_btn:hover {
   color: var(--p_color);
 }
 
 /* Profile edit part */
 
-.editProfile > .content {
+.edit_profile > .content {
   display: flex;
   flex-direction: column;
   padding: 5px;
@@ -68,107 +53,107 @@
   overflow: hidden;
 }
 
-.editProfile > .content > .user_img_edit {
+.edit_profile > .content > .user_img_edit {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.editProfile > .content > .user_img_edit > .userImgEdit {
+.edit_profile > .content > .user_img_edit > .user_img_edit {
   width: 100px;
   height: 100px;
   border-radius: 100%;
   border: var(--p_color) 3px solid;
 }
 
-.editProfile > .content > .user_img_edit > .options {
+.edit_profile > .content > .user_img_edit > .options {
   flex-wrap: wrap;
 }
 
-.editProfile > .content > .name_edit > h2,
-.editProfile > .content > .name_edit > .name,
-.editProfile > .content > .url_name_edit > h2,
-.editProfile > .content > .url_name_edit > .editCont,
-.editProfile > .content > .bio_edit > h2,
-.editProfile > .content > .bio_edit > .bio,
-.editProfile > .content > .bio_edit > .cont_count_letters > h3 {
+.edit_profile > .content > .name_edit > h2,
+.edit_profile > .content > .name_edit > .name,
+.edit_profile > .content > .url_name_edit > h2,
+.edit_profile > .content > .url_name_edit > .editCont,
+.edit_profile > .content > .bio_edit > h2,
+.edit_profile > .content > .bio_edit > .bio,
+.edit_profile > .content > .bio_edit > .cont_count_letters > h3 {
   color: var(--txt_color);
 }
 
-.editProfile > .content > .url_name_edit > .editCont {
+.edit_profile > .content > .url_name_edit > .editCont {
   display: flex;
 }
 
-.editProfile > .content .portrait_edit > .options > input,
-.editProfile > .content .portrait_edit > .options > .actions_btns {
+.edit_profile > .content .portrait_edit > .options > input,
+.edit_profile > .content .portrait_edit > .options > .actions_btns {
   width: 100%;
 }
 
-.editProfile > .content .options,
-.editProfile > .content .options > input,
-.editProfile > .content .options > .actions_btns {
+.edit_profile > .content .options,
+.edit_profile > .content .options > input,
+.edit_profile > .content .options > .actions_btns {
   gap: 5px;
 }
 
-.editProfile > .content .options {
+.edit_profile > .content .options {
   display: none;
   align-items: center;
   justify-content: center;
   padding: 5px;
 }
 
-.editProfile > .content .options > .actions_btns {
+.edit_profile > .content .options > .actions_btns {
   display: flex;
   justify-content: flex-end;
 }
 
-.editProfile > .content .options > .actions_btns > button,
-.editProfile > .content > .btns > button {
+.edit_profile > .content .options > .actions_btns > button,
+.edit_profile > .content > .btns > button {
   color: var(--txt_color);
   transition: all 0.3s ease-out;
 }
 
-.editProfile > .content .options > .actions_btns > .btn_ok,
-.editProfile > .content > .btns > button {
+.edit_profile > .content .options > .actions_btns > .btn_ok,
+.edit_profile > .content > .btns > button {
   padding: 5px;
   border: var(--txt_color) 3px solid;
   border-radius: 15px;
 }
 
-.editProfile > .content .options > .actions_btns > button:hover,
-.editProfile > .content > .btns > button:hover {
+.edit_profile > .content .options > .actions_btns > button:hover,
+.edit_profile > .content > .btns > button:hover {
   border-color: var(--p_color);
   color: var(--p_color);
 }
 
-.editProfile > .content div[contenteditable="true"] {
+.edit_profile > .content div[contenteditable="true"] {
   outline: 0;
   border-bottom: var(--p_color) 3px solid;
   padding-bottom: 5px;
 }
 
-.editProfile > .content > .url_name_edit div[contenteditable="true"],
-.editProfile > .content > .name_edit div[contenteditable="true"] {
+.edit_profile > .content > .url_name_edit div[contenteditable="true"],
+.edit_profile > .content > .name_edit div[contenteditable="true"] {
   overflow-x: scroll;
   white-space: nowrap;
   overflow: hidden;
 }
 
-.editProfile > .content > .url_name_edit > .editCont > p {
+.edit_profile > .content > .url_name_edit > .editCont > p {
   padding-bottom: 5px;
 }
 
-.editProfile > .content > .bio_edit > .bio {
+.edit_profile > .content > .bio_edit > .bio {
   max-height: 100px;
   overflow-y: scroll;
 }
 
-.editProfile > .content > .bio_edit > .cont_count_letters {
+.edit_profile > .content > .bio_edit > .cont_count_letters {
   padding: 5px 0;
 }
 
-.editProfile > .content > .bio_edit > .cont_count_letters,
-.editProfile > .content > .btns {
+.edit_profile > .content > .bio_edit > .cont_count_letters,
+.edit_profile > .content > .btns {
   display: flex;
   justify-content: flex-end;
   width: 100%;
@@ -181,19 +166,19 @@
 }
 
 .portrait > .front,
-.editProfile > .content > .portrait_edit > .frontEdit {
+.edit_profile > .content > .portrait_edit > .front_edit {
   height: 250px;
   border-radius: 15px;
 }
 
-.editProfCont {
+.edit_prof_cont {
   padding: 5px;
   width: 100%;
   display: flex;
   flex-direction: row-reverse;
 }
 
-.editProfCont > button {
+.edit_prof_cont > button {
   padding: 3px;
   border: var(--txt_color) 3px solid;
   border-radius: 15px;
@@ -201,20 +186,20 @@
   color: var(--txt_color);
 }
 
-.editProfCont > button > span {
+.edit_prof_cont > button > span {
   transition: all 0.3s ease-out;
 }
 
-.editProfCont > button:hover {
+.edit_prof_cont > button:hover {
   border-color: var(--p_color);
 }
 
-.editProfCont > button:hover,
-.editProfCont > button:hover > span {
+.edit_prof_cont > button:hover,
+.edit_prof_cont > button:hover > span {
   color: var(--p_color);
 }
 
-.userImg {
+.user_img {
   position: absolute;
   bottom: var(--img-user-padding);
   height: 200px;
@@ -225,7 +210,7 @@
 
 .info,
 .info > .names,
-.info > .otherInfo {
+.info > .other_info {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -245,30 +230,30 @@
   color: var(--txt_color);
 }
 
-.info > .otherInfo > .folls_cont,
-.info > .otherInfo > .joined > p {
+.info > .other_info > .folls_cont,
+.info > .other_info > .joined > p {
   display: flex;
   gap: 5px;
 }
 
-.info > .otherInfo > .joined > p {
+.info > .other_info > .joined > p {
   align-items: center;
   color: var(--txt_color);
 }
 
-.info > .otherInfo > .joined > p > span {
+.info > .other_info > .joined > p > span {
   color: var(--p_color);
 }
 
-.info > .otherInfo > .folls_cont > .followed > p,
-.info > .otherInfo > .folls_cont > .followers > p {
+.info > .other_info > .folls_cont > .followed > p,
+.info > .other_info > .folls_cont > .followers > p {
   color: var(--txt_color);
   cursor: default;
   transition: all 0.3s ease-out;
 }
 
-.info > .otherInfo > .folls_cont > .followed > p:hover,
-.info > .otherInfo > .folls_cont > .followers > p:hover {
+.info > .other_info > .folls_cont > .followed > p:hover,
+.info > .other_info > .folls_cont > .followers > p:hover {
   color: var(--p_color);
 }
 
@@ -279,32 +264,32 @@
   overflow: hidden;
 }
 
-.folls_view > .content > .titleAndActions {
+.folls_view > .content > .title_and_actions {
   display: flex;
   padding: 5px;
 }
 
-.folls_view > .content > .titleAndActions > h2,
-.folls_view > .content > .users > .noUsers > p {
+.folls_view > .content > .title_and_actions > h2,
+.folls_view > .content > .users > .no_users > p {
   color: var(--txt_color);
 }
 
-.folls_view > .content > .titleAndActions > .action {
+.folls_view > .content > .title_and_actions > .action {
   display: flex;
   justify-content: flex-end;
   width: 100%;
 }
 
-.folls_view > .content > .titleAndActions > .action > button {
+.folls_view > .content > .title_and_actions > .action > button {
   transition: all 0.3s ease-out;
   color: var(--txt_color);
 }
 
-.folls_view > .content > .titleAndActions > .action > button:hover {
+.folls_view > .content > .title_and_actions > .action > button:hover {
   color: var(--txt_s_color);
 }
 
-.folls_view > .content > .titleAndActions > .action > button > span {
+.folls_view > .content > .title_and_actions > .action > button > span {
   font-size: 22pt;
 }
 
@@ -317,7 +302,7 @@
   padding: 0 5px;
 }
 
-.folls_view > .content > .users > .noUsers {
+.folls_view > .content > .users > .no_users {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -332,7 +317,7 @@
   align-items: center;
 }
 
-.folls_view > .content > .users > .user > .imgUser {
+.folls_view > .content > .users > .user > .img_user {
   width: 50px;
   height: 50px;
   border-radius: 100%;
@@ -350,7 +335,7 @@
   text-overflow: ellipsis;
 }
 
-.folls_view > .content > .users > .user > .info_and_options > .btnCont {
+.folls_view > .content > .users > .user > .info_and_options > .btn_cont {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -361,7 +346,7 @@
   > .users
   > .user
   > .info_and_options
-  > .btnCont
+  > .btn_cont
   > button {
   border: var(--txt_color) 2px solid;
   color: var(--txt_color);
@@ -370,66 +355,66 @@
   transition: all 0.3s ease-out;
 }
 
-.folls_view > .content > .users > .user > .btnCont > button:hover {
+.folls_view > .content > .users > .user > .btn_cont > button:hover {
   border-color: var(--txt_s_color);
   color: var(--txt_s_color);
 }
 
 /* Edit of post part */
 
-.editPost > .content {
+.edit_post > .content {
   overflow: hidden;
   border-radius: 15px;
 }
 
-.editPost > .content > .post > .user {
+.edit_post > .content > .post > .user {
   display: flex;
   align-items: center;
   padding: 5px;
   gap: 10px;
 }
 
-.editPost > .content > .post > .user > .names {
+.edit_post > .content > .post > .user > .names {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-.editPost > .content > .post > .user > .names > .name {
+.edit_post > .content > .post > .user > .names > .name {
   font-size: 16pt;
   color: var(--txt_color);
 }
 
-.editPost > .content > .post > .user > .names > .url_name {
+.edit_post > .content > .post > .user > .names > .url_name {
   font-size: 14pt;
   color: var(--p_color);
 }
 
-.editPost > .content > .post > .user > .names > .date {
+.edit_post > .content > .post > .user > .names > .date {
   font-size: 8pt;
   color: var(--contrast_dark);
 }
 
-.editPost > .content > .post > .user > .imgCont {
+.edit_post > .content > .post > .user > .img_cont {
   width: 60px;
   height: 60px;
   border-radius: 100%;
 }
 
-.editPost > .content > .post > .content_edit > .media {
+.edit_post > .content > .post > .content_edit > .media {
   min-height: 50px;
   min-width: 50px;
   position: relative;
   margin-bottom: 0;
 }
 
-.editPost
+.edit_post
   > .content
   > .post
   > .content_edit
   > .media
   > .grid_media
-  > .imgCont
+  > .img_cont
   > span {
   display: flex;
   justify-content: center;
@@ -440,7 +425,7 @@
   color: var(--txt_color);
 }
 
-.editPost > .content > .post > .content_edit > .title {
+.edit_post > .content > .post > .content_edit > .title {
   padding: 15px 10px;
   margin: 15px 5px;
   outline: 0;
@@ -450,24 +435,24 @@
   max-height: 100px;
 }
 
-.editPost > .content > .post > .content_edit > .edit_image_actions {
+.edit_post > .content > .post > .content_edit > .edit_image_actions {
   display: flex;
   align-items: center;
   padding: 5px 5px 0 5px;
 }
 
-.editPost > .content > .post > .content_edit > .edit_image_actions > .btn_ok {
+.edit_post > .content > .post > .content_edit > .edit_image_actions > .btn_ok {
   display: flex;
   justify-content: flex-end;
   width: 100%;
 }
 
-.editPost > .content > .post > .content_edit > .edit_image_actions button {
+.edit_post > .content > .post > .content_edit > .edit_image_actions button {
   color: var(--txt_color);
   transition: all 0.3s ease-out;
 }
 
-.editPost
+.edit_post
   > .content
   > .post
   > .content_edit
@@ -476,14 +461,14 @@
   color: var(--p_color);
 }
 
-.editPost > .content > .btns {
+.edit_post > .content > .btns {
   width: 100%;
   display: flex;
   justify-content: flex-end;
   padding: 0 5px 5px 5px;
 }
 
-.editPost > .content > .btns > button {
+.edit_post > .content > .btns > button {
   padding: 5px;
   color: var(--txt_color);
   transition: all 0.3s ease-out;
@@ -491,7 +476,7 @@
   border-radius: 15px;
 }
 
-.editPost > .content > .btns > button:hover {
+.edit_post > .content > .btns > button:hover {
   color: var(--p_color);
   border-color: var(--p_color);
 }
@@ -514,7 +499,7 @@
   color: var(--p_color);
 }
 
-.user > .imgAndName {
+.user > .img_and_name {
   width: 100%;
 }
 
@@ -525,7 +510,7 @@
   gap: 5px;
 }
 
-.actions > .toClick {
+.actions > .to_click {
   width: 100%;
   height: 100%;
   position: fixed;
@@ -580,7 +565,7 @@
 
 @media (max-width: 800px) {
   .portrait > .front,
-  .editProfile > .content > .portrait_edit > .frontEdit {
+  .edit_profile > .content > .portrait_edit > .front_edit {
     height: 120px;
   }
 
@@ -589,21 +574,21 @@
     gap: 3%;
   }
 
-  .editContainer > .content,
+  .modal_container > .content,
   .folls_view > .content {
     width: 90%;
   }
 
-  .editProfile > .content > .user_img_edit > .userImgEdit {
+  .edit_profile > .content > .user_img_edit > .user_img_edit {
     height: 60px;
     width: 60px;
   }
 
   .folls_view > .content > .users > .user > .info_and_options > .name > p,
-  .editContainer > .content > .post > .user > .names > .name,
-  .editContainer > .content > .post > .user > .names > .url_name,
-  .editContainer > .content > .post > .user > .names > .date,
-  .editProfile > .content > .bio_edit > .cont_count_letters > h3 {
+  .modal_container > .content > .post > .user > .names > .name,
+  .modal_container > .content > .post > .user > .names > .url_name,
+  .modal_container > .content > .post > .user > .names > .date,
+  .edit_profile > .content > .bio_edit > .cont_count_letters > h3 {
     font-size: 100%;
   }
 

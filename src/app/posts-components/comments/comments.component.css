@@ -1,10 +1,10 @@
 .all_content,
-.userComment > .imgsOrVids,
+.user_comment > .imgs_or_vids,
 .addComment {
   display: flex;
 }
 
-.sectionComments {
+.section_comments {
   display: flex;
   flex-direction: column;
   margin-top: 5px;
@@ -35,72 +35,72 @@
   padding-bottom: 5px;
 }
 
-.all_content > .imgUserCont {
+.all_content > .img_user_cont {
   width: max-content;
 }
 
-.all_content > .imgUserCont > .user {
+.all_content > .img_user_cont > .user {
   height: 50px;
   width: 50px;
   border-radius: 100%;
 }
 
-.userComment {
+.user_comment {
   padding-left: 5px;
   width: 100%;
 }
 
-.userComment > .comment_body {
+.user_comment > .comment_body {
   padding: 10px;
   background: var(--contrast_dark);
   border-radius: 15px;
   outline: 0;
 }
 
-.userComment > .imgsOrVids {
+.user_comment > .imgs_or_vids {
   display: flex;
   gap: 3px;
 }
 
-.userComment .names {
+.user_comment .names {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.imgsOrVids {
+.imgs_or_vids {
   padding-bottom: 5px;
 }
 
-.imgsOrVids > .imgs > img,
-.imgsOrVids > .imgs {
+.imgs_or_vids > .imgs > img,
+.imgs_or_vids > .imgs {
   height: 120px;
   width: auto;
 }
 
-.nameAndActions {
+.name_and_actions {
   display: flex;
   align-items: center;
   padding-bottom: 5px;
   width: 100%;
 }
 
-.nameAndActions > .names > h4 {
+.name_and_actions > .names > h4 {
   font-size: 14pt;
   color: var(--txt_color);
 }
 
-.nameAndActions > .names > .url_name {
+.name_and_actions > .names > .url_name {
   color: var(--p_color);
   font-size: 12pt;
 }
 
-.nameAndActions > .names > .date {
+.name_and_actions > .names > .date {
   color: var(--contrast_dark);
   font-size: 8pt;
 }
 
-.nameAndActions,
+.name_and_actions,
 .actions {
   display: flex;
   gap: 3px;
@@ -110,35 +110,35 @@
   justify-content: flex-end;
 }
 
-.actions > .deleteBtn,
-.actions > .editBtn,
+.actions > .delete_btn,
+.actions > .edit_btn,
 .addImg {
   color: var(--txt_color);
   transition: all 0.3s ease-out;
 }
 
-.actions > .editBtn:hover,
-.actions > .deleteBtn:hover,
+.actions > .edit_btn:hover,
+.actions > .delete_btn:hover,
 .addImg:hover {
   color: var(--p_color);
 }
 
-.viewMoreCont {
+.view_more_cont {
   display: flex;
   justify-content: center;
   width: 100%;
 }
 
-.viewMoreCont > button {
+.view_more_cont > button {
   color: var(--txt_color);
   transition: all 0.3s ease-out;
 }
 
-.viewMoreCont > button:hover {
+.view_more_cont > button:hover {
   color: var(--p_color);
 }
 
-.modalContainer > .content {
+.modal_container > .content {
   background-color: var(--s_color);
   overflow: hidden;
   border-radius: 15px;
@@ -146,29 +146,29 @@
   width: 50%;
 }
 
-.modalContainer > .content > .commentsCont {
+.modal_container > .content > .comments_cont {
   overflow-y: scroll;
   height: 85vh;
   margin-top: 5px;
 }
 
-.modalContainer > .content > .closeCont {
+.modal_container > .content > .close_cont {
   display: flex;
   justify-content: flex-end;
 }
 
-.modalContainer > .content > .closeCont > span {
+.modal_container > .content > .close_cont > span {
   cursor: default;
   font-size: 22pt;
   transition: all 0.3s ease-out;
   color: var(--txt_color);
 }
 
-.modalContainer > .content > .closeCont > span:hover {
+.modal_container > .content > .close_cont > span:hover {
   color: var(--p_color);
 }
 
-.modalContainer > .content > .commentsCont {
+.modal_container > .content > .comments_cont {
   padding: 0 55px;
 }
 
@@ -177,27 +177,27 @@
     padding: 5px 2%;
   }
 
-  .all_content > .imgUserCont > .user {
+  .all_content > .img_user_cont > .user {
     width: 25px;
     height: 25px;
   }
 
-  .nameAndActions > .names > h4,
-  .nameAndActions > .names > .url_name {
+  .name_and_actions > .names > h4,
+  .name_and_actions > .names > .url_name {
     font-size: 90%;
   }
 
-  .userComment {
+  .user_comment {
     padding-left: 2%;
   }
 
-  .nameAndActions,
+  .name_and_actions,
   .actions {
     gap: 2%;
   }
 
-  .actions > .deleteBtn > span,
-  .actions > .editBtn > span {
+  .actions > .delete_btn > span,
+  .actions > .edit_btn > span {
     font-size: 100%;
   }
 }

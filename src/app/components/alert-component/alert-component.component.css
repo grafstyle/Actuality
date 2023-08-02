@@ -5,26 +5,26 @@
   width: 50vh;
 }
 
-.container > .btnsCont > button,
+.container > .btns_cont > button,
 .container > p {
   color: var(--p_color);
 }
 
-.container > .btnsCont {
+.container > .btns_cont {
   display: flex;
   justify-content: flex-end;
   width: 100%;
 }
 
-.container > .btnsCont > button {
+.container > .btns_cont > button {
   transition: all 0.3s ease-out;
 }
 
-.container > .btnsCont > button:hover {
+.container > .btns_cont > button:hover {
   color: #fff;
 }
 
-.container > .btnsCont > button > span {
+.container > .btns_cont > button > span {
   font-size: 28pt;
 }
 

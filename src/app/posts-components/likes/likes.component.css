@@ -1,11 +1,11 @@
-.dateAndLikes {
+.date_and_likes {
   display: flex;
   gap: 5px;
   padding: 15px 15px 5px 15px;
 }
 
-.notLiked {
-  color: #999;
+.not_liked {
+  color: var(--contrast_dark);
 }
 
 .liked {

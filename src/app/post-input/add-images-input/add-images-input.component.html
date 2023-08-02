@@ -1,5 +1,5 @@
 <button
-  class="addImg"
+  class="add_img"
   (mouseover)="hover_add_img = true"
   (mouseleave)="hover_add_img = false"
   [ngStyle]="{ color: hover_color != '' && hover_add_img ? hover_color : '' }"
@@ -12,13 +12,13 @@
   >
 </button>
 
-<div class="modalContainer addImgCont" ngModel #add_img_cont>
+<div class="modal_container add_img_cont" ngModel #add_img_cont>
   <div class="display">
-    <div class="initialImg" *ngIf="imgs.length == 0">
+    <div class="initial_img" *ngIf="imgs.length == 0">
       <div class="wait">Waiting for an image or video.</div>
     </div>
-    <div class="allImgs">
-      <div class="showImgs" *ngFor="let img of imgs; let i = index">
+    <div class="all_imgs">
+      <div class="show_imgs" *ngFor="let img of imgs; let i = index">
         <img
           src="{{ img.url }}"
           alt=""
@@ -36,14 +36,14 @@
         <div class="name">{{ img.name.split(".")[0] }}</div>
       </div>
     </div>
-    <div class="btnsCont">
-      <button class="addBtn">
+    <div class="btns_cont">
+      <button class="add_btn">
         <label>
           Add
           <input
             type="file"
             accept="image/jpeg, image/png, video/mp4"
-            id="addBtn"
+            id="add_btn"
             (change)="
               changingImg($event, 'image/jpeg', 'image/png', 'video/mp4')
             "

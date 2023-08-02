@@ -1,4 +1,4 @@
-.postInput {
+.post_input {
   display: flex;
   flex-direction: column;
   border: var(--p_color) 3px solid;
@@ -31,7 +31,7 @@
   color: var(--txt_color);
 }
 
-.imgs-vids {
+.imgs_vids {
   display: flex;
   gap: 3px;
 }
@@ -60,8 +60,8 @@
   color: var(--txt_s_color);
 }
 
-.showImgs,
-.showImgs > img,
-.showImgs > video {
+.show_imgs,
+.show_imgs > img,
+.show_imgs > video {
   height: 100px;
 }

@@ -1,22 +1,22 @@
-<div *ngIf="err" class="errorSearchUsers err_cont">
+<div *ngIf="err" class="error_search_users err_cont">
   <span class="material-symbols-outlined">signal_disconnected</span>
   <p>{{ err }}</p>
 </div>
-<div class="allUsers">
+<div class="all_users">
   <h3>Users:</h3>
   <div
     class="user"
     [routerLink]="['/' + user['url_name']]"
     *ngFor="let user of users"
   >
-    <div class="imgCont imgUser">
+    <div class="img_cont img_user">
       <img src="{{ user['image'] }}" alt="" />
     </div>
-    <div class="namesInfo">
+    <div class="names_info">
       <div class="name">
         <p>{{ user.name }}</p>
       </div>
-      <div class="urlname">
+      <div class="url_name">
         <p>@{{ user["url_name"] }}</p>
       </div>
     </div>

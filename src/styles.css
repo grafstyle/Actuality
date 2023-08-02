@@ -30,15 +30,15 @@ button {
   outline: 0;
 }
 
-/* General class "imgCont" for organizate the images. */
+/* General class "img_cont" for organizate the images. */
 
-.imgCont {
+.img_cont {
   overflow: hidden;
   position: relative;
 }
 
-.imgCont > img,
-.imgCont > video {
+.img_cont > img,
+.img_cont > video {
   position: absolute;
   object-fit: cover;
   width: 100%;
@@ -47,7 +47,7 @@ button {
 
 /*General post and comments "class", to apply global styles*/
 
-.allPosts {
+.all_posts {
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -69,7 +69,7 @@ button {
 }
 
 .post > .all_content > .user,
-.post > .all_content > .user > .imgAndName {
+.post > .all_content > .user > .img_and_name {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -79,7 +79,7 @@ button {
   margin: 15px;
 }
 
-.post > .all_content > .user .imgCont {
+.post > .all_content > .user .img_cont {
   width: 80px;
   height: 80px;
   border-radius: 100%;
@@ -135,7 +135,7 @@ button {
 
 /* For modals */
 
-.modalContainer {
+.modal_container {
   z-index: 9999;
   pointer-events: none;
   opacity: 0;
@@ -174,7 +174,7 @@ button {
 }
 
 @media (max-width: 800px) {
-  .post > .all_content > .user .imgCont {
+  .post > .all_content > .user .img_cont {
     width: 50px;
     height: 50px;
   }
@@ -184,7 +184,7 @@ button {
     font-size: 100%;
   }
 
-  .post > .all_content > .user > .imgAndName {
+  .post > .all_content > .user > .img_and_name {
     gap: 2%;
   }
 

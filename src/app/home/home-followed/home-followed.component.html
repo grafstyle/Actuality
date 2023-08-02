@@ -1,16 +1,16 @@
-<div *ngIf="err" class="errorPosts err_cont">
+<div *ngIf="err" class="error_posts err_cont">
   <span class="material-symbols-outlined">signal_disconnected</span>
   <p>{{ err }}</p>
 </div>
-<div *ngIf="err_foll != ''" class="errNoFolls err_cont">
+<div *ngIf="err_foll != ''" class="err_no_folls err_cont">
   <span class="material-symbols-outlined">group_off</span>
   <p>{{ err_foll }}</p>
 </div>
-<div class="allPosts all_p_margin">
+<div class="all_posts all_p_margin">
   <div class="post" *ngFor="let cpost of cposts; let i = index">
     <div class="all_content">
       <div class="user">
-        <div class="imgCont">
+        <div class="img_cont">
           <img
             src="{{ cpost.user_of_post.image }}"
             alt=""
@@ -35,7 +35,7 @@
       <div class="content">
         <div class="media grid_media" *ngIf="cpost.post.images.length > 0">
           <div
-            class="imgCont grid_elem"
+            class="img_cont grid_elem"
             *ngFor="let img_or_vid of cpost.post.images; let img_i = index"
             [style.grid-row]="
               img_i == 0 && cpost.post.images.length > 2

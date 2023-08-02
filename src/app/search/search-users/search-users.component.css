@@ -1,11 +1,11 @@
-.allUsers {
+.all_users {
   display: flex;
   flex-direction: column;
   gap: 5px;
   margin-bottom: 5px;
 }
 
-.allUsers > h3 {
+.all_users > h3 {
   color: var(--txt_color);
   margin-bottom: 5px;
 }
@@ -26,15 +26,15 @@
   transform: scale(1.02);
 }
 
-.user > .namesInfo > .name {
+.user > .names_info > .name {
   color: var(--txt_color);
 }
 
-.user > .namesInfo > .urlname {
+.user > .names_info > .img_name {
   color: var(--contrast_dark);
 }
 
-.imgUser {
+.img_user {
   width: 60px;
   height: 60px;
   border-radius: 100%;

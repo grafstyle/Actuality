@@ -1,12 +1,12 @@
 <div class="user_profile" *ngIf="user.id != undefined">
-  <div class="editProfile editContainer" #edit_profile>
+  <div class="edit_profile modal_container" #edit_profile>
     <div class="content">
       <div class="portrait_edit">
-        <div class="imgCont frontEdit">
+        <div class="img_cont front_edit">
           <img #portrait_img src="{{ user.portrait }}" alt="" />
           <button
             #edit_portrait_img
-            class="editBtn edit_portrait_btn"
+            class="edit_btn edit_portrait_btn"
             (click)="editPortraitImg(true)"
           >
             <span class="material-symbols-outlined">edit</span>
@@ -28,11 +28,11 @@
         </div>
       </div>
       <div class="user_img_edit">
-        <div class="imgCont userImgEdit">
+        <div class="img_cont user_img_edit">
           <img #user_img src="{{ user.image || def_person_img }}" alt="" />
           <button
             #edit_user_img
-            class="editBtn edit_user_img_btn"
+            class="edit_btn edit_user_img_btn"
             (click)="editUserImg(true)"
           >
             <span class="material-symbols-outlined">edit</span>
@@ -56,7 +56,7 @@
       <div class="name_edit">
         <h2>Name:</h2>
         <div class="name" #name contenteditable="true">{{ user.name }}</div>
-        <h4 class="inputError" *ngIf="name_error != ''">
+        <h4 class="input_error" *ngIf="name_error != ''">
           {{ this.name_error }}
         </h4>
       </div>
@@ -68,7 +68,7 @@
             {{ user.url_name }}
           </div>
         </div>
-        <h4 class="inputError" *ngIf="url_name_error != ''">
+        <h4 class="input_error" *ngIf="url_name_error != ''">
           {{ this.url_name_error }}
         </h4>
       </div>
@@ -87,7 +87,7 @@
           <h3 class="count_letters">{{ this.bio_letters }}</h3>
         </div>
       </div>
-      <h4 class="inputError" *ngIf="bio_error != ''">{{ this.bio_error }}</h4>
+      <h4 class="input_error" *ngIf="bio_error != ''">{{ this.bio_error }}</h4>
       <div class="btns">
         <button (click)="modalEditProfile(false)">Ok</button>
       </div>
@@ -97,10 +97,10 @@
   <!-- Profile part -->
 
   <div class="portrait">
-    <div class="imgCont front">
+    <div class="img_cont front">
       <img src="{{ user.portrait }}" alt="" />
     </div>
-    <div class="editProfCont">
+    <div class="edit_prof_cont">
       <button
         #edit_btn
         *ngIf="can_edit_profile"
@@ -112,7 +112,7 @@
         Follow
       </button>
     </div>
-    <div class="imgCont userImg">
+    <div class="img_cont user_img">
       <img src="{{ user.image || def_person_img }}" alt="" />
     </div>
   </div>
@@ -124,7 +124,7 @@
     <div class="bio">
       <p>{{ user.bio }}</p>
     </div>
-    <div class="otherInfo">
+    <div class="other_info">
       <div class="folls_cont">
         <div class="followers" (click)="showAllFollowers()">
           <p>{{ user.followers.length }} Followers</p>
@@ -141,9 +141,9 @@
     </div>
   </div>
 
-  <div class="folls_view modalContainer" #followe_rs_d_view>
+  <div class="folls_view modal_container" #followe_rs_d_view>
     <div class="content">
-      <div class="titleAndActions">
+      <div class="title_and_actions">
         <h2>Followed:</h2>
         <div class="action">
           <button (click)="showContFoll(false)">
@@ -152,18 +152,18 @@
         </div>
       </div>
       <div class="users">
-        <div class="noUsers" *ngIf="this.folls.length == 0">
+        <div class="no_users" *ngIf="this.folls.length == 0">
           <p>{{ folls_empty_str }}</p>
         </div>
         <div class="user" *ngFor="let foll of this.folls">
-          <div class="imgCont imgUser">
+          <div class="img_cont img_user">
             <img src="{{ foll.image }}" alt="" />
           </div>
           <div class="info_and_options">
             <div class="name">
               <p>{{ foll.name }}</p>
             </div>
-            <div class="btnCont">
+            <div class="btn_cont">
               <button
                 *ngIf="modal_followed_opened"
                 (click)="unfollowAndRefresh(foll.id)"

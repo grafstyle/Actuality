@@ -1,7 +1,7 @@
-<div class="addComment">
+<div class="add_comment">
   <div class="add">
     <div class="comment_add">
-      <div class="commentInput">
+      <div class="comment_input">
         <div
           class="content"
           placeholder="Add a comment"
@@ -15,12 +15,12 @@
             [font_size]="'28pt'"
           ></app-add-images-input>
           <div class="upload">
-            <button class="postData" (click)="comment()">Comment</button>
+            <button class="post_data" (click)="comment()">Comment</button>
           </div>
         </div>
       </div>
       <div class="imgs-vids" *ngIf="imgs.length > 0">
-        <div class="imgOrVid" *ngFor="let img of imgs; let i = index">
+        <div class="img_or_vid" *ngFor="let img of imgs; let i = index">
           <img src="{{ img.url }}" alt="" />
         </div>
       </div>
