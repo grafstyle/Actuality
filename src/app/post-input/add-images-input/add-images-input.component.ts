@@ -53,13 +53,14 @@ export class AddImagesInputComponent {
     const new_img: Image = {} as Image;
 
     const file: File = elem.files?.item(0) as File;
+    let is_supported: boolean = false;
 
-    for (const opt of opts) {
-      if (!file.type.includes(opt)) {
-        this.alert_error = 'This file not is supported.';
-        elem.value = '';
-        return;
-      } else this.alert_error = '';
+    for (const opt of opts) if (file.type.includes(opt)) is_supported = true;
+
+    if (!is_supported) {
+      this.alert_error = 'This file not is supported.';
+      elem.value = '';
+      return;
     }
 
     const url: string = await this.tools.getImage(file);
@@ -85,9 +86,11 @@ export class AddImagesInputComponent {
   }
 
   async removeLastImage(): Promise<void> {
-    const lastImg = this.imgs[this.imgs.length - 1].url;
-    if (lastImg.includes('https://res.cloudinary.com'))
-      this.imgs_to_delete.push(lastImg);
+    if (this.imgs.length > 0) {
+      const lastImg = this.imgs[this.imgs.length - 1].url;
+      if (lastImg.includes('https://res.cloudinary.com'))
+        this.imgs_to_delete.push(lastImg);
+    }
     this.imgs.pop();
     this.imgs_in_cloud.pop();
     this.add_btn.nativeElement.value = '';
