@@ -10,7 +10,12 @@ import { Tools } from 'src/app/tools/tools';
 })
 export class HomeForYouComponent {
   tools: Tools = new Tools();
+
   err: string = '';
+  public static readonly ERR_NO_POSTS = 'The app dont has posts.';
+  public static readonly ERR_GET_POSTS =
+    'Something went wrong when get the data.';
+
   cposts: CPost[] = [];
   def_person_img: string =
     'https://res.cloudinary.com/dp5gpr5sc/image/upload/v1685629395/app_assets/person.svg';
@@ -30,10 +35,18 @@ export class HomeForYouComponent {
   async getCompletePosts(): Promise<void> {
     try {
       this.cposts = await Posts.getCPosts(await Posts.getAll());
-      if (this.cposts.length == 0) this.err = 'No posts yet.';
+      if (this.cposts.length == 0) this.err = this.ERR_NO_POSTS;
       else this.err = '';
     } catch (e) {
-      this.err = 'Something went wrong when get the data.';
+      this.err = this.ERR_GET_POSTS;
     }
+  }
+
+  get ERR_NO_POSTS(): string {
+    return HomeForYouComponent.ERR_NO_POSTS;
+  }
+
+  get ERR_GET_POSTS(): string {
+    return HomeForYouComponent.ERR_GET_POSTS;
   }
 }

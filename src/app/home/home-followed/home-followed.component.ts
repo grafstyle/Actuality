@@ -12,8 +12,15 @@ import { Tools } from 'src/app/tools/tools';
 })
 export class HomeFollowedComponent {
   tools: Tools = new Tools();
+
   err: string = '';
-  err_foll: string = '';
+  public static readonly ERR_GET_POSTS: string =
+    'Something went wrong when get the data.';
+  public static readonly ERR_NO_POSTS: string =
+    'The people than you follows, no posted nothing.';
+  public static readonly ERR_NO_USERS: string =
+    "You don't follow people, be more sociable. :)";
+
   cposts: CPost[] = [];
   def_person_img: string =
     'https://res.cloudinary.com/dp5gpr5sc/image/upload/v1685629395/app_assets/person.svg';
@@ -34,16 +41,27 @@ export class HomeFollowedComponent {
     try {
       const user = (await Users.getBy('id', Cookies.getUserID()))[0];
       const users_followed = user.followed;
-      if (users_followed.length == 0)
-        this.err_foll = "You don't follow people, be more sociable. :)";
+      if (users_followed.length == 0) this.err = this.ERR_NO_USERS;
       for (const id_user_followed of users_followed)
         this.cposts = this.cposts.concat(
           await Posts.getCPosts(await Posts.getBy('id_user', id_user_followed))
         );
-      if (this.cposts.length == 0)
-        this.err_foll = 'The people than you follows, no posted nothing.';
+      if (this.cposts.length == 0 && users_followed.length > 0)
+        this.err = this.ERR_NO_POSTS;
     } catch (e) {
-      this.err = 'Something went wrong when get the data.';
+      this.err = this.ERR_GET_POSTS;
     }
+  }
+
+  get ERR_NO_USERS(): string {
+    return HomeFollowedComponent.ERR_NO_USERS;
+  }
+
+  get ERR_NO_POSTS(): string {
+    return HomeFollowedComponent.ERR_NO_POSTS;
+  }
+
+  get ERR_GET_POSTS(): string {
+    return HomeFollowedComponent.ERR_GET_POSTS;
   }
 }

@@ -1,10 +1,14 @@
-<div *ngIf="err" class="error_posts err_cont">
-  <span class="material-symbols-outlined">signal_disconnected</span>
+<div *ngIf="err != ''" class="error_posts err_cont">
+  <span class="material-symbols-outlined" *ngIf="err == ERR_GET_POSTS"
+    >signal_disconnected</span
+  >
+  <span class="material-symbols-outlined" *ngIf="err == ERR_NO_POSTS"
+    >public_off</span
+  >
+  <span class="material-symbols-outlined" *ngIf="err == ERR_NO_USERS"
+    >group_off</span
+  >
   <p>{{ err }}</p>
-</div>
-<div *ngIf="err_foll != ''" class="err_no_folls err_cont">
-  <span class="material-symbols-outlined">group_off</span>
-  <p>{{ err_foll }}</p>
 </div>
 <div class="all_posts all_p_margin">
   <div class="post" *ngFor="let cpost of cposts; let i = index">
