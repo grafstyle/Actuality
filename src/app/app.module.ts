@@ -26,6 +26,7 @@ import { MultimediaPostsComponent } from './profile/multimedia-posts/multimedia-
 import { LikedPostsComponent } from './profile/liked-posts/liked-posts.component';
 import { AlertComponentComponent } from './components/alert-component/alert-component.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { EditablePostsComponent } from './posts-components/editable-posts/editable-posts.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     LikedPostsComponent,
     AlertComponentComponent,
     PageNotFoundComponent,
+    EditablePostsComponent,
   ],
   imports: [
     BrowserModule,

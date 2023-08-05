@@ -131,7 +131,7 @@ export class ProfileComponent {
 
   elemLoaded(component: ProfilePostsComponent) {
     component.user = this.user;
-    if (this.user.id == Cookies.getUserID()) component.canEditPost = true;
+    if (this.user.id == Cookies.getUserID()) component.can_edit_posts = true;
   }
 
   async refreshUserOfUrl(): Promise<void> {
