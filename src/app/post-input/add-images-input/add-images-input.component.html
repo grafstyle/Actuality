@@ -59,5 +59,6 @@
 </div>
 <app-alert-component
   [msg]="alert_error"
+  (is_closed)="alert_error = ''"
   *ngIf="alert_error != ''"
 ></app-alert-component>

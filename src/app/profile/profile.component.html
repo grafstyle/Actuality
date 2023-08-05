@@ -193,6 +193,7 @@
 ></router-outlet>
 <app-load-screen *ngIf="show_load_screen"></app-load-screen>
 <app-alert-component
-  *ngIf="alert_msg != ''"
   [msg]="alert_msg"
+  (is_closed)="alert_msg = ''"
+  *ngIf="alert_msg != ''"
 ></app-alert-component>
