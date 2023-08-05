@@ -1,4 +1,11 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-alert-component',
@@ -7,6 +14,7 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 })
 export class AlertComponentComponent {
   @Input() msg: string = '';
+  @Output() is_closed: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @ViewChild('cont_error') modal!: ElementRef<HTMLDivElement>;
 
@@ -24,5 +32,7 @@ export class AlertComponentComponent {
     this.modal.nativeElement.style.pointerEvents = 'none';
 
     this.msg = '';
+
+    this.is_closed.emit(true);
   }
 }
