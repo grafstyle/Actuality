@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -13,7 +14,7 @@ import { Tools } from 'src/app/tools/tools';
   templateUrl: './alert-component.component.html',
   styleUrls: ['./alert-component.component.css'],
 })
-export class AlertComponentComponent {
+export class AlertComponentComponent implements AfterViewInit {
   tools: Tools = new Tools();
 
   @Input() msg: string = '';

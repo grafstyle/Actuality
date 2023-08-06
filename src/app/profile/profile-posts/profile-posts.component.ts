@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/controller/users/users';
 import { EditablePostConfig } from 'src/app/posts-components/editable-posts/editable-posts.component';
 
@@ -7,7 +7,7 @@ import { EditablePostConfig } from 'src/app/posts-components/editable-posts/edit
   templateUrl: './profile-posts.component.html',
   styleUrls: ['./profile-posts.component.css', '../profile.component.css'],
 })
-export class ProfilePostsComponent {
+export class ProfilePostsComponent implements OnInit {
   config: EditablePostConfig = {} as EditablePostConfig;
   user: User = {} as User;
   can_edit_posts: boolean = false;

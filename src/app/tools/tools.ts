@@ -47,7 +47,7 @@ export class Tools {
   }
 
   public getActualISODate(): string {
-    const date = new Date().toISOString();
+    const date: string = new Date().toISOString();
     return date;
   }
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/controller/users/users';
 import {
   EditablePostConfig,
@@ -10,7 +10,7 @@ import {
   templateUrl: './multimedia-posts.component.html',
   styleUrls: ['./multimedia-posts.component.css', '../profile.component.css'],
 })
-export class MultimediaPostsComponent {
+export class MultimediaPostsComponent implements OnInit {
   config: EditablePostConfig = {} as EditablePostConfig;
   user: User = {} as User;
   can_edit_posts: boolean = false;

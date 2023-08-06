@@ -1,4 +1,10 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { Tools } from 'src/app/tools/tools';
 
 @Component({
@@ -6,7 +12,7 @@ import { Tools } from 'src/app/tools/tools';
   templateUrl: './add-images-input.component.html',
   styleUrls: ['./add-images-input.component.css'],
 })
-export class AddImagesInputComponent {
+export class AddImagesInputComponent implements AfterViewInit {
   imgs: Image[] = [];
   imgs_to_delete: string[] = [];
   tools: Tools = new Tools();
@@ -22,7 +28,7 @@ export class AddImagesInputComponent {
 
   alert_error: string = '';
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.setImgsOfCloud();
   }
 

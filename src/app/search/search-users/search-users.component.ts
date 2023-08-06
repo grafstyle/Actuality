@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '@auth0/auth0-angular';
 import { Users } from 'src/app/controller/users/users';
@@ -8,7 +8,7 @@ import { Users } from 'src/app/controller/users/users';
   templateUrl: './search-users.component.html',
   styleUrls: ['./search-users.component.css'],
 })
-export class SearchUsersComponent {
+export class SearchUsersComponent implements OnInit {
   err: string = '';
   users: User[] = [];
 

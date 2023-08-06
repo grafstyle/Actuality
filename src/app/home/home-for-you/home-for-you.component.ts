@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CPost, Posts } from 'src/app/controller/posts/posts';
 import { RefreshService } from 'src/app/tools/refresh-service/refresh-service';
 import { Tools } from 'src/app/tools/tools';
@@ -8,7 +8,7 @@ import { Tools } from 'src/app/tools/tools';
   templateUrl: './home-for-you.component.html',
   styleUrls: ['./home-for-you.component.css', '../home.component.css'],
 })
-export class HomeForYouComponent {
+export class HomeForYouComponent implements OnInit {
   tools: Tools = new Tools();
 
   err: string = '';
@@ -24,7 +24,7 @@ export class HomeForYouComponent {
 
   constructor(private refresh: RefreshService) {}
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     await this.getCompletePosts();
 
     this.refresh.getUpdate().subscribe({

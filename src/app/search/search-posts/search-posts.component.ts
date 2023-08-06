@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CPost, Posts } from 'src/app/controller/posts/posts';
 import { Tools } from 'src/app/tools/tools';
@@ -8,14 +8,14 @@ import { Tools } from 'src/app/tools/tools';
   templateUrl: './search-posts.component.html',
   styleUrls: ['./search-posts.component.css'],
 })
-export class SearchPostsComponent {
+export class SearchPostsComponent implements OnInit {
   tools: Tools = new Tools();
   err: string = '';
   cposts: CPost[] = [];
 
   constructor(private router: ActivatedRoute) {}
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     try {
       this.router.queryParams.subscribe({
         next: async (param) => {

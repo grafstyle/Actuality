@@ -89,9 +89,10 @@ export class ProfileComponent {
     });
   }
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     try {
-      const param_by_url = this.router.snapshot.paramMap.get('profile');
+      const param_by_url: string | null =
+        this.router.snapshot.paramMap.get('profile');
       const intent_get_user: User | undefined = (
         await Users.getBy('url_name', param_by_url)
       )[0];
@@ -123,7 +124,7 @@ export class ProfileComponent {
   }
 
   formatDate(): string {
-    const date = this.tools
+    const date: string[] = this.tools
       .dateToString(this.user.joined)
       .split(' ')[0]
       .split('/');
@@ -132,7 +133,7 @@ export class ProfileComponent {
       .toLowerCase()} of ${date[2]}`;
   }
 
-  elemLoaded(component: ProfilePostsComponent) {
+  elemLoaded(component: ProfilePostsComponent): void {
     component.user = this.user;
     if (this.user.id == Cookies.getUserID()) component.can_edit_posts = true;
   }

@@ -4,6 +4,7 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  OnInit,
   Output,
   QueryList,
   ViewChild,
@@ -32,7 +33,7 @@ export interface EditablePostConfig {
     '../../profile/profile.component.css',
   ],
 })
-export class EditablePostsComponent {
+export class EditablePostsComponent implements OnInit {
   public static readonly USER_MULTIMEDIA_POSTS = 0;
   public static readonly USER_LIKED_POSTS = 1;
 
@@ -181,7 +182,8 @@ export class EditablePostsComponent {
   }
 
   async editPost(elem_pos: number): Promise<boolean> {
-    const title = this.title_posts.toArray()[elem_pos].nativeElement;
+    const title: HTMLDivElement =
+      this.title_posts.toArray()[elem_pos].nativeElement;
     const edited_post: Post = {} as Post;
     const imgs_to_db: string[] = [];
     let something_edited: boolean = false;

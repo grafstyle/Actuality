@@ -1,4 +1,10 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { Post, Posts } from '../controller/posts/posts';
 import { Cloudinary } from '../controller/cloudinary/cloudinary';
 import { Tools } from '../tools/tools';
@@ -14,7 +20,7 @@ import {
   templateUrl: './post-input.component.html',
   styleUrls: ['./post-input.component.css'],
 })
-export class PostInputComponent {
+export class PostInputComponent implements AfterViewInit {
   to_post: Post = {} as Post;
   tools: Tools = new Tools();
   imgs: Image[] = [];
@@ -30,7 +36,7 @@ export class PostInputComponent {
 
   constructor(private refresh: RefreshService) {}
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.setImgsOfImgsComponent();
   }
 

@@ -68,7 +68,8 @@ export class CommentsComponent {
   constructor(private refresh: RefreshService, private cd: ChangeDetectorRef) {}
 
   ngAfterViewInit(): void {
-    const comment_body = this.comment_body.toArray()[this.actual_elem];
+    const comment_body: ElementRef<HTMLParagraphElement> =
+      this.comment_body.toArray()[this.actual_elem];
 
     if (comment_body != undefined)
       this.body_of_comment = comment_body.nativeElement.textContent as string;

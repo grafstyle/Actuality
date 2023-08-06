@@ -36,7 +36,7 @@ export class AddCommentComponent {
 
   constructor(private refresh: RefreshService) {}
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.setImgsOfImgsComponent();
   }
 

@@ -2,6 +2,7 @@ import {
   Component,
   ElementRef,
   HostListener,
+  OnInit,
   Renderer2,
   ViewChild,
 } from '@angular/core';
@@ -23,8 +24,9 @@ import { RefreshService } from './tools/refresh-service/refresh-service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   tools: Tools = new Tools();
+
   s_color: string = '#fff';
   txt_color: string = '#000';
   txt_s_color: string = '#fff';
@@ -50,6 +52,76 @@ export class AppComponent {
       this.menu.nativeElement.style.left = '-100%';
     }
   }
+  constructor(
+    private router: Router,
+    private auth: AuthService,
+    private api_service: Service,
+    private router_link: Router,
+    private cookies: CookieService,
+    private refresh: RefreshService,
+    private renderer: Renderer2
+  ) {
+    Users.api_service =
+      Posts.api_service =
+      Comments.api_service =
+      Likes.api_service =
+      Cloudinary.api_service =
+        this.api_service;
+    Cookies.cookies = this.cookies;
+    Cookies.refresh = this.refresh;
+    Users.auth = this.auth;
+
+    router.events.subscribe({
+      next: (e: any) => {
+        if (e instanceof NavigationEnd) {
+          if (e.url == '/profile')
+            if (isNaN(Cookies.getUserID())) router.navigateByUrl('/login');
+          if (e.url == '/login') this.login();
+          if (e.url == '/signup') this.signup();
+        }
+      },
+    });
+
+    renderer.listen('window', 'click', (e: Event) => {
+      if (
+        e.target !== this.menu_open.nativeElement &&
+        e.target !== this.menu_open_icon.nativeElement &&
+        e.target !== this.menu.nativeElement &&
+        this.screen_w <= 800
+      )
+        this.closeMenu();
+    });
+  }
+
+  async ngOnInit(): Promise<void> {
+    if (Cookies.getMode() == Cookies.MODE_LIGHT) this.setLightMode();
+    else if (Cookies.getMode() == Cookies.MODE_DARK) this.setDarkMode();
+
+    const is_auth: boolean = await Users.isActualUserAuth();
+    if (is_auth)
+      this.auth.user$.subscribe({
+        next: async (actual_user) => {
+          if (actual_user != undefined) {
+            const email: string = actual_user?.email || '';
+            const name: string =
+              actual_user?.given_name || this.tools.getNameMail(email);
+
+            await Users.post({
+              name: name,
+              email: email,
+              url_name: this.tools.createURLName(await this.convUrlName(name)),
+              image: actual_user?.picture || '',
+              joined: this.tools.getActualISODate(),
+              bio: '',
+              portrait: '',
+              followed: [],
+              followers: [],
+            });
+            this.setCookies();
+          }
+        },
+      });
+  }
 
   openMenu(): void {
     if (this.screen_w <= 800) {
@@ -65,13 +137,13 @@ export class AppComponent {
     } else if (this.screen_w > 800) this.openMenu();
   }
 
-  search(e: Event) {
+  search(e: Event): void {
     const elem = e.target as HTMLInputElement;
     this.router_link.navigateByUrl('/search?by=' + elem.value);
     elem.value = '';
   }
 
-  async setCookies() {
+  async setCookies(): Promise<void> {
     try {
       const email_name: string | undefined = (await Users.getByAuth()).email;
       let id: number | undefined = undefined;
@@ -82,20 +154,20 @@ export class AppComponent {
     }
   }
 
-  goProfile() {
+  goProfile(): void {
     if (isNaN(Cookies.getUserID())) this.router.navigateByUrl('/login');
     else this.router.navigateByUrl('/profile');
   }
 
-  login() {
+  login(): void {
     Users.login();
   }
 
-  signup() {
+  signup(): void {
     Users.signup();
   }
 
-  logout() {
+  logout(): void {
     Users.logout();
     Cookies.deleteUserID();
   }
@@ -174,76 +246,5 @@ export class AppComponent {
       }
     });
     return url_name;
-  }
-
-  constructor(
-    private router: Router,
-    private auth: AuthService,
-    private api_service: Service,
-    private router_link: Router,
-    private cookies: CookieService,
-    private refresh: RefreshService,
-    private renderer: Renderer2
-  ) {
-    Users.api_service =
-      Posts.api_service =
-      Comments.api_service =
-      Likes.api_service =
-      Cloudinary.api_service =
-        this.api_service;
-    Cookies.cookies = this.cookies;
-    Cookies.refresh = this.refresh;
-    Users.auth = this.auth;
-
-    router.events.subscribe({
-      next: (e: any) => {
-        if (e instanceof NavigationEnd) {
-          if (e.url == '/profile')
-            if (isNaN(Cookies.getUserID())) router.navigateByUrl('/login');
-          if (e.url == '/login') this.login();
-          if (e.url == '/signup') this.signup();
-        }
-      },
-    });
-
-    renderer.listen('window', 'click', (e: Event) => {
-      if (
-        e.target !== this.menu_open.nativeElement &&
-        e.target !== this.menu_open_icon.nativeElement &&
-        e.target !== this.menu.nativeElement &&
-        this.screen_w <= 800
-      )
-        this.closeMenu();
-    });
-  }
-
-  async ngOnInit(): Promise<void> {
-    if (Cookies.getMode() == Cookies.MODE_LIGHT) this.setLightMode();
-    else if (Cookies.getMode() == Cookies.MODE_DARK) this.setDarkMode();
-
-    const is_auth: boolean = await Users.isActualUserAuth();
-    if (is_auth)
-      this.auth.user$.subscribe({
-        next: async (actual_user) => {
-          if (actual_user != undefined) {
-            const email: string = actual_user?.email || '';
-            const name: string =
-              actual_user?.given_name || this.tools.getNameMail(email);
-
-            await Users.post({
-              name: name,
-              email: email,
-              url_name: this.tools.createURLName(await this.convUrlName(name)),
-              image: actual_user?.picture || '',
-              joined: this.tools.getActualISODate(),
-              bio: '',
-              portrait: '',
-              followed: [],
-              followers: [],
-            });
-            this.setCookies();
-          }
-        },
-      });
   }
 }

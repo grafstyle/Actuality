@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CPost, Posts } from 'src/app/controller/posts/posts';
-import { Users } from 'src/app/controller/users/users';
+import { User, Users } from 'src/app/controller/users/users';
 import { RefreshService } from 'src/app/tools/refresh-service/refresh-service';
 import { Cookies } from 'src/app/cookies/cookies';
 import { Tools } from 'src/app/tools/tools';
@@ -10,7 +10,7 @@ import { Tools } from 'src/app/tools/tools';
   templateUrl: './home-followed.component.html',
   styleUrls: ['./home-followed.component.css', '../home.component.css'],
 })
-export class HomeFollowedComponent {
+export class HomeFollowedComponent implements OnInit {
   tools: Tools = new Tools();
 
   err: string = '';
@@ -29,7 +29,7 @@ export class HomeFollowedComponent {
 
   constructor(private refresh: RefreshService) {}
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     await this.getCompletePosts();
 
     this.refresh.getUpdate().subscribe({
@@ -41,8 +41,8 @@ export class HomeFollowedComponent {
 
   async getCompletePosts(): Promise<void> {
     try {
-      const user = (await Users.getBy('id', Cookies.getUserID()))[0];
-      const users_followed = user.followed;
+      const user: User = (await Users.getBy('id', Cookies.getUserID()))[0];
+      const users_followed: number[] = user.followed;
       if (users_followed.length == 0) this.err = this.ERR_NO_USERS;
       for (const id_user_followed of users_followed)
         this.cposts = this.cposts.concat(

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,23 +10,23 @@ export class Service {
 
   constructor(private _http: HttpClient) {}
 
-  get(path: string) {
+  get(path: string): Observable<unknown> {
     return this._http.get(`${this.server}${path}`);
   }
 
-  post(path: string, data: object) {
+  post(path: string, data: object): Observable<unknown> {
     return this._http.post(`${this.server}${path}`, data);
   }
 
-  put(path: string, id: number, data: object) {
+  put(path: string, id: number, data: object): Observable<unknown> {
     return this._http.put(`${this.server}${path}/put?id=${id}`, data);
   }
 
-  delete(path: string, id: number) {
+  delete(path: string, id: number): Observable<unknown> {
     return this._http.delete(`${this.server}${path}/delete?id=${id}`);
   }
 
-  deleteFile(url: string) {
+  deleteFile(url: string): Observable<unknown> {
     return this._http.delete(`${this.server}delete/file?url=${url}`);
   }
 }

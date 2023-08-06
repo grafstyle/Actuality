@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Likes } from 'src/app/controller/likes/likes';
 import { Cookies } from 'src/app/cookies/cookies';
 
@@ -7,7 +7,7 @@ import { Cookies } from 'src/app/cookies/cookies';
   templateUrl: './likes.component.html',
   styleUrls: ['./likes.component.css'],
 })
-export class LikesComponent {
+export class LikesComponent implements OnInit {
   @Input() cant_likes: number = 0;
   @Input() id_post: number = 0;
   @Output() disliked: EventEmitter<boolean> = new EventEmitter<boolean>();
