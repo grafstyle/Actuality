@@ -27,6 +27,7 @@ import { LikedPostsComponent } from './profile/liked-posts/liked-posts.component
 import { AlertComponentComponent } from './components/alert-component/alert-component.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { EditablePostsComponent } from './posts-components/editable-posts/editable-posts.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { EditablePostsComponent } from './posts-components/editable-posts/editab
     AlertComponentComponent,
     PageNotFoundComponent,
     EditablePostsComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,

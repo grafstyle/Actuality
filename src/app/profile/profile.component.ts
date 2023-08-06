@@ -75,6 +75,7 @@ export class ProfileComponent {
   modal_followed_opened: boolean = false;
 
   show_load_screen: boolean = false;
+  show_loader: boolean = true;
 
   constructor(
     private router: ActivatedRoute,
@@ -117,6 +118,8 @@ export class ProfileComponent {
     } catch (e) {
       this.err = 'Something went wrong getting the user.';
     }
+
+    this.show_loader = false;
   }
 
   formatDate(): string {

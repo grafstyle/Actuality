@@ -20,6 +20,8 @@ export class HomeForYouComponent {
   def_person_img: string =
     'https://res.cloudinary.com/dp5gpr5sc/image/upload/v1685629395/app_assets/person.svg';
 
+  show_loader: boolean = true;
+
   constructor(private refresh: RefreshService) {}
 
   async ngOnInit() {
@@ -40,6 +42,8 @@ export class HomeForYouComponent {
     } catch (e) {
       this.err = this.ERR_GET_POSTS;
     }
+
+    this.show_loader = false;
   }
 
   get ERR_NO_POSTS(): string {

@@ -76,6 +76,8 @@ export class EditablePostsComponent {
 
   alert_error: string = '';
 
+  show_loader: boolean = true;
+
   cposts_imgs: string[][] = [];
 
   constructor(private cd: ChangeDetectorRef, private refresh: RefreshService) {}
@@ -143,6 +145,8 @@ export class EditablePostsComponent {
         else this.no_one_post = "The user don't have posts.";
       }
     }
+
+    this.show_loader = false;
   }
 
   async modalEditPost(

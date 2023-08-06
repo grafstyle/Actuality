@@ -1,3 +1,4 @@
+<app-loader *ngIf="show_loader"></app-loader>
 <div *ngIf="err != ''" class="error_posts err_cont">
   <span class="material-symbols-outlined" *ngIf="err == ERR_GET_POSTS"
     >signal_disconnected</span

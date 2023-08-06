@@ -178,6 +178,7 @@
   </div>
 </div>
 <app-post-input [margin_top]="'15px'"></app-post-input>
+<app-loader *ngIf="show_loader"></app-loader>
 <div class="err_cont" *ngIf="err != ''">
   <span class="material-symbols-outlined">no_accounts</span>
   <p>{{ err }}</p>
