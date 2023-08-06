@@ -6,6 +6,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
+import { Tools } from 'src/app/tools/tools';
 
 @Component({
   selector: 'app-alert-component',
@@ -13,6 +14,8 @@ import {
   styleUrls: ['./alert-component.component.css'],
 })
 export class AlertComponentComponent {
+  tools: Tools = new Tools();
+
   @Input() msg: string = '';
   @Output() is_closed: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -23,16 +26,12 @@ export class AlertComponentComponent {
   }
 
   show(): void {
-    this.modal.nativeElement.style.opacity = '1';
-    this.modal.nativeElement.style.pointerEvents = 'all';
+    this.tools.showComponent(this.modal.nativeElement);
   }
 
   close(): void {
-    this.modal.nativeElement.style.opacity = '0';
-    this.modal.nativeElement.style.pointerEvents = 'none';
-
+    this.tools.hideComponent(this.modal.nativeElement);
     this.msg = '';
-
     this.is_closed.emit(true);
   }
 }

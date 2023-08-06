@@ -28,13 +28,11 @@ export class AddImagesInputComponent {
 
   chooseImgModal(show: boolean): void {
     if (show) {
-      this.add_img_cont.nativeElement.style.opacity = '1';
-      this.add_img_cont.nativeElement.style.pointerEvents = 'all';
+      this.tools.showComponent(this.add_img_cont.nativeElement);
       return;
     }
 
-    this.add_img_cont.nativeElement.style.opacity = '0';
-    this.add_img_cont.nativeElement.style.pointerEvents = 'none';
+    this.tools.hideComponent(this.add_img_cont.nativeElement);
   }
 
   setImgsOfCloud(): void {

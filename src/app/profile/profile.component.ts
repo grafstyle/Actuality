@@ -470,8 +470,7 @@ export class ProfileComponent {
     if (open) {
       this.setBioLetters();
 
-      this.edit_profile.nativeElement.style.opacity = '1';
-      this.edit_profile.nativeElement.style.pointerEvents = 'all';
+      this.tools.showComponent(this.edit_profile.nativeElement);
 
       this.last_text_name = this.name_text.nativeElement.innerText;
       this.last_text_url_name = this.url_name_text.nativeElement.innerText;
@@ -481,24 +480,20 @@ export class ProfileComponent {
       return;
     }
 
-    if (await this.editProfile()) {
-      this.edit_profile.nativeElement.style.opacity = '0';
-      this.edit_profile.nativeElement.style.pointerEvents = 'none';
-    }
+    if (await this.editProfile())
+      this.tools.hideComponent(this.edit_profile.nativeElement);
   }
 
   async showContFoll(show: boolean = true): Promise<void> {
     this.folls = [];
 
     if (show) {
-      this.frsd_view.nativeElement.style.opacity = '1';
-      this.frsd_view.nativeElement.style.pointerEvents = 'all';
+      this.tools.showComponent(this.frsd_view.nativeElement);
       return;
     }
 
     this.modal_followed_opened = false;
-    this.frsd_view.nativeElement.style.opacity = '0';
-    this.frsd_view.nativeElement.style.pointerEvents = 'none';
+    this.tools.hideComponent(this.frsd_view.nativeElement);
   }
 
   async showAllFollowers(): Promise<void> {

@@ -164,8 +164,7 @@ export class EditablePostsComponent {
     this.quitNewImgsOfPost(true);
 
     if (open && cpost_info.id > 0) {
-      elem.style.opacity = '1';
-      elem.style.pointerEvents = 'all';
+      this.tools.showComponent(elem);
 
       this.post_to_edit = cpost_info;
       return;
@@ -173,8 +172,7 @@ export class EditablePostsComponent {
 
     await this.editPost(elem_pos);
 
-    elem.style.opacity = '0';
-    elem.style.pointerEvents = 'none';
+    this.tools.hideComponent(elem);
     this.quitNewImgsOfPost();
 
     this.show_load_screen = false;
@@ -250,29 +248,23 @@ export class EditablePostsComponent {
       this.edit_post_imgs_btn.toArray()[this.selected_post].nativeElement;
     const elem: HTMLDivElement = this.edit_image_actions.nativeElement;
 
-    edit_imgs_btn.style.opacity = '0';
-    edit_imgs_btn.style.pointerEvents = 'none';
+    this.tools.hideComponent(edit_imgs_btn);
 
     if (elem.style.opacity == '0') {
-      elem.style.opacity = '1';
+      this.tools.showComponent(elem, 'auto');
       elem.style.padding = '5px 5px 0 5px';
-      elem.style.pointerEvents = 'all';
-      elem.style.height = 'auto';
     }
   }
 
   quitNewImgsOfPost(only_hide: boolean = false): void {
     const edit_imgs_btn: HTMLButtonElement =
       this.edit_post_imgs_btn.toArray()[this.selected_post].nativeElement;
-    edit_imgs_btn.style.opacity = '1';
-    edit_imgs_btn.style.pointerEvents = 'all';
+    this.tools.showComponent(edit_imgs_btn);
 
     if (only_hide) {
       const elem: HTMLDivElement = this.edit_image_actions.nativeElement;
-      elem.style.opacity = '0';
+      this.tools.hideComponent(elem, true);
       elem.style.padding = '0';
-      elem.style.pointerEvents = 'none';
-      elem.style.height = '0';
       return;
     }
 
@@ -298,8 +290,7 @@ export class EditablePostsComponent {
     actual_list.style.paddingBottom = '10px';
     actual_list.style.maxHeight = '80px'; // Change it if a new option is added in list
 
-    actual_to_click.style.opacity = '1';
-    actual_to_click.style.pointerEvents = 'all';
+    this.tools.showComponent(actual_to_click);
   }
 
   hideOptions(pos: number): void {
@@ -312,7 +303,6 @@ export class EditablePostsComponent {
     actual_list.style.paddingBottom = '0';
     actual_list.style.maxHeight = '0';
 
-    actual_to_click.style.opacity = '0';
-    actual_to_click.style.pointerEvents = 'none';
+    this.tools.hideComponent(actual_to_click);
   }
 }

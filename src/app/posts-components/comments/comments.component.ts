@@ -90,13 +90,11 @@ export class CommentsComponent {
   }
 
   seeAllComments(): void {
-    this.all_comments_cont.nativeElement.style.opacity = '1';
-    this.all_comments_cont.nativeElement.style.pointerEvents = 'all';
+    this.tools.showComponent(this.all_comments_cont.nativeElement);
   }
 
   hideAllComments(): void {
-    this.all_comments_cont.nativeElement.style.opacity = '0';
-    this.all_comments_cont.nativeElement.style.pointerEvents = 'none';
+    this.tools.hideComponent(this.all_comments_cont.nativeElement);
   }
 
   async updateComment(

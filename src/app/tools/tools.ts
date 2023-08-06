@@ -104,4 +104,16 @@ export class Tools {
 
     return `${only_date} ${final_hour}`;
   }
+
+  showComponent(element: HTMLElement, height: string = ''): void {
+    element.style.opacity = '1';
+    element.style.pointerEvents = 'all';
+    if (height != '') element.style.height = height;
+  }
+
+  hideComponent(element: HTMLElement, height: boolean = false): void {
+    element.style.opacity = '0';
+    element.style.pointerEvents = 'none';
+    if (height) element.style.height = '0';
+  }
 }
