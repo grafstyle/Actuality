@@ -82,12 +82,15 @@
     <div class="search_part">
       <label class="cont_search">
         <input
+          #input_search
           class="search"
-          type="text"
+          type="search"
           placeholder="Search all you want!"
-          (keyup.enter)="search($event)"
+          (keyup.enter)="search(input_search)"
         />
-        <span class="material-symbols-outlined">search</span>
+        <span class="material-symbols-outlined" (click)="search(input_search)"
+          >search</span
+        >
       </label>
     </div>
     <div class="content">

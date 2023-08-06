@@ -50,6 +50,10 @@
   background: none;
 }
 
+.search_part > .cont_search > input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
 .search_part > .cont_search > span {
   font-size: 22pt;
   color: var(--contrast_dark);

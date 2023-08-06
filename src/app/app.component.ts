@@ -137,8 +137,7 @@ export class AppComponent implements OnInit {
     } else if (this.screen_w > 800) this.openMenu();
   }
 
-  search(e: Event): void {
-    const elem = e.target as HTMLInputElement;
+  search(elem: HTMLInputElement): void {
     this.router_link.navigateByUrl('/search?by=' + elem.value);
     elem.value = '';
   }
