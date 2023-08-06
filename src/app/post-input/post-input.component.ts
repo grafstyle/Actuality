@@ -14,6 +14,7 @@ import {
   AddImagesInputComponent,
   Image,
 } from './add-images-input/add-images-input.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-input',
@@ -34,7 +35,7 @@ export class PostInputComponent implements AfterViewInit {
   show_load_screen: boolean = false;
   alert_error: string = '';
 
-  constructor(private refresh: RefreshService) {}
+  constructor(private refresh: RefreshService, private router: Router) {}
 
   ngAfterViewInit(): void {
     this.setImgsOfImgsComponent();
@@ -60,8 +61,8 @@ export class PostInputComponent implements AfterViewInit {
   async post(): Promise<void> {
     const id_user: number = Cookies.getUserID();
 
-    if (id_user == 0) {
-      this.alert_error = 'Auth first';
+    if (isNaN(id_user)) {
+      this.router.navigateByUrl('/login');
       return;
     }
 

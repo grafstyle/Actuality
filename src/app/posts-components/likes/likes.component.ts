@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Likes } from 'src/app/controller/likes/likes';
 import { Cookies } from 'src/app/cookies/cookies';
 
@@ -13,6 +14,8 @@ export class LikesComponent implements OnInit {
   @Output() disliked: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   touch_like: number = 0;
+
+  constructor(private router: Router) {}
 
   async ngOnInit(): Promise<void> {
     const has_like: boolean = await this.hasLike();
@@ -32,6 +35,11 @@ export class LikesComponent implements OnInit {
   }
 
   setLike(): void {
+    if (isNaN(Cookies.getUserID())) {
+      this.router.navigateByUrl('/login');
+      return;
+    }
+
     this.touch_like++;
 
     if (this.touch_like == 1) this.addLike();
