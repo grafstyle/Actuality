@@ -27,7 +27,7 @@
           </div>
         </div>
       </div>
-      <div class="user_img_edit">
+      <div class="user_img_edit centered">
         <div class="img_cont user_img_edit">
           <img #user_img src="{{ user.image || def_person_img }}" alt="" />
           <button
@@ -54,15 +54,15 @@
         </div>
       </div>
       <div class="name_edit">
-        <h2>Name:</h2>
-        <div class="name" #name contenteditable="true">{{ user.name }}</div>
+        <h2 class="nc">Name:</h2>
+        <div class="name nc" #name contenteditable="true">{{ user.name }}</div>
         <h4 class="input_error" *ngIf="name_error != ''">
           {{ this.name_error }}
         </h4>
       </div>
       <div class="url_name_edit">
-        <h2>Url name:</h2>
-        <div class="editCont">
+        <h2 class="nc">Url name:</h2>
+        <div class="edit_cont nc">
           <p>@</p>
           <div class="url_name" #url_name contenteditable="true">
             {{ user.url_name }}
@@ -72,7 +72,7 @@
           {{ this.url_name_error }}
         </h4>
       </div>
-      <div class="bio_edit">
+      <div class="bio_edit nc">
         <h2>Bio:</h2>
         <div
           #bio
@@ -84,7 +84,7 @@
           {{ user.bio }}
         </div>
         <div class="cont_count_letters">
-          <h3 class="count_letters">{{ this.bio_letters }}</h3>
+          <h3 class="count_letters cfz">{{ this.bio_letters }}</h3>
         </div>
       </div>
       <h4 class="input_error" *ngIf="bio_error != ''">{{ this.bio_error }}</h4>
@@ -152,7 +152,7 @@
         </div>
       </div>
       <div class="users">
-        <div class="no_users" *ngIf="this.folls.length == 0">
+        <div class="centered" *ngIf="this.folls.length == 0">
           <p>{{ folls_empty_str }}</p>
         </div>
         <div class="user" *ngFor="let foll of this.folls">
@@ -161,9 +161,9 @@
           </div>
           <div class="info_and_options">
             <div class="name">
-              <p>{{ foll.name }}</p>
+              <p class="cfz">{{ foll.name }}</p>
             </div>
-            <div class="btn_cont">
+            <div class="btn_cont centered">
               <button
                 *ngIf="modal_followed_opened"
                 (click)="unfollowAndRefresh(foll.id)"

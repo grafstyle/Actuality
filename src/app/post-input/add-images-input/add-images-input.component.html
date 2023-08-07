@@ -1,5 +1,5 @@
 <button
-  class="add_img"
+  class="add_img centered"
   (mouseover)="hover_add_img = true"
   (mouseleave)="hover_add_img = false"
   [ngStyle]="{ color: hover_color != '' && hover_add_img ? hover_color : '' }"
@@ -17,7 +17,7 @@
     <div class="initial_img" *ngIf="imgs.length == 0">
       <div class="wait">Waiting for an image or video.</div>
     </div>
-    <div class="all_imgs">
+    <div class="all_imgs centered">
       <div class="show_imgs" *ngFor="let img of imgs; let i = index">
         <img
           src="{{ img.url }}"

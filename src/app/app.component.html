@@ -12,56 +12,56 @@
         <span class="material-symbols-outlined">chevron_left</span>
       </div>
     </div>
-    <div class="logo_cont">
+    <div class="logo_cont centered fw">
       <div class="logo" routerLink="/home">
         <div class="logo_img"></div>
       </div>
     </div>
-    <ul>
-      <li class="link_elem">
-        <h1>
-          <a routerLink="/home"
+    <ul class="fw">
+      <li class="link_elem fw">
+        <h1 class="fw">
+          <a routerLink="/home" class="fw"
             ><span class="material-symbols-outlined">home</span>Home</a
           >
         </h1>
       </li>
-      <li class="link_elem">
-        <h1>
-          <a routerLink="/profile"
+      <li class="link_elem fw">
+        <h1 class="fw">
+          <a routerLink="/profile" class="fw"
             ><span class="material-symbols-outlined">account_circle</span
             >Profile</a
           >
         </h1>
       </li>
-      <li class="link_elem" *ngIf="getUserIDByCookie() == undefined">
-        <h1>
-          <a href="" (click)="goProfile()"
+      <li class="link_elem fw" *ngIf="getUserIDByCookie() == undefined">
+        <h1 class="fw">
+          <a href="" (click)="goProfile()" class="fw"
             ><span class="material-symbols-outlined">login</span>Login</a
           >
         </h1>
       </li>
-      <li class="link_elem" *ngIf="getUserIDByCookie()! > 0">
-        <h1>
-          <a href="" (click)="logout()"
+      <li class="link_elem fw" *ngIf="getUserIDByCookie()! > 0">
+        <h1 class="fw">
+          <a href="" (click)="logout()" class="fw"
             ><span class="material-symbols-outlined">logout</span>Logout</a
           >
         </h1>
       </li>
-      <li>
-        <div class="modes">
-          <div class="m_conts">
-            <div class="m_cont of_light">
+      <li class="fw">
+        <div class="modes centered">
+          <div class="m_conts fw">
+            <div class="m_cont of_light fw">
               <div
-                class="mode light"
+                class="mode light centered"
                 (click)="setLightMode()"
                 [style.backgroundColor]="bg_of_light"
               >
                 <span class="material-symbols-outlined">light_mode</span>
               </div>
             </div>
-            <div class="m_cont of_dark">
+            <div class="m_cont of_dark fw">
               <div
-                class="mode dark"
+                class="mode dark centered"
                 (click)="setDarkMode()"
                 [style.backgroundColor]="bg_of_dark"
               >

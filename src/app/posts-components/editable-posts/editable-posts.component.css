@@ -54,11 +54,6 @@
   > .grid_media
   > .img_cont
   > span {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
   font-size: 52pt;
   color: var(--txt_color);
 }

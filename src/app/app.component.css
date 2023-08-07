@@ -1,8 +1,17 @@
+/* Generics */
+
 .all {
   display: flex;
 
   --menu-width: 250px;
 }
+
+.fw {
+  display: flex;
+  width: 100%;
+}
+
+/* All */
 
 .all_content,
 .all_content > .content {
@@ -59,29 +68,23 @@
   color: var(--contrast_dark);
 }
 
-nav {
+nav,
+.open_menu_cont {
   display: flex;
   flex-direction: column;
-  padding: 5px;
-  position: fixed;
   top: 0;
   left: 0;
+  position: fixed;
+}
+
+nav {
+  padding: 5px;
   width: var(--menu-width);
   height: 100%;
   z-index: 9999;
   border-right: solid 3px var(--p_color);
   background-color: var(--s_color);
   transition: all 0.3s ease-out;
-}
-
-nav > ul,
-nav > ul > li,
-nav > ul > li > h1,
-nav > ul > li > h1 > a,
-nav > .logo_cont,
-nav > .icon {
-  display: flex;
-  width: 100%;
 }
 
 nav > ul {
@@ -95,17 +98,11 @@ nav > ul {
 }
 
 .open_menu_cont {
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
   padding: 10px 8px;
   border-bottom-right-radius: 20px;
   background-color: var(--p_color);
   transition: all 0.3s ease-out;
   display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
   z-index: 9999;
 }
 
@@ -123,9 +120,6 @@ nav > .close_menu_cont {
 nav > .close_menu_cont > .icon {
   position: absolute;
   right: 0;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
 }
 
 nav > .close_menu_cont > .icon > span {
@@ -134,8 +128,6 @@ nav > .close_menu_cont > .icon > span {
 }
 
 nav > .logo_cont {
-  justify-content: center;
-  align-items: center;
   padding-bottom: 20px;
   padding-top: 15px;
 }
@@ -193,11 +185,8 @@ nav > ul > li > h1 > a > span {
 }
 
 nav > ul > li > .modes {
-  padding-top: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  padding-top: 10px;
   margin: auto;
   gap: 15px;
   width: 80%;
@@ -206,18 +195,9 @@ nav > ul > li > .modes {
 nav > ul > li > .modes > .m_conts > .m_cont > .mode {
   border-radius: 100%;
   color: var(--txt_s_color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 1px;
   cursor: pointer;
   transition: all 0.3s ease-out;
-}
-
-nav > ul > li > .modes > .m_conts,
-nav > ul > li > .modes > .m_conts > .m_cont {
-  display: flex;
-  width: 100%;
 }
 
 nav > ul > li > .modes > .m_conts > .of_light {

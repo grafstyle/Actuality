@@ -13,7 +13,7 @@
               <div class="img_cont">
                 <img src="{{ user.image || def_person_img }}" alt="" />
               </div>
-              <div class="names">
+              <div class="names cfz">
                 <p
                   class="name"
                   [routerLink]="['/' + cpost.user_of_post.url_name]"
@@ -41,7 +41,10 @@
                   <span class="material-symbols-outlined">edit</span>
                 </button>
                 <div class="grid_media">
-                  <div class="img_cont" *ngIf="cpost.post.images.length == 0">
+                  <div
+                    class="img_cont centered"
+                    *ngIf="cpost.post.images.length == 0"
+                  >
                     <span class="material-symbols-outlined"
                       >image_not_supported</span
                     >

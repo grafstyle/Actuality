@@ -30,6 +30,12 @@ button {
   outline: 0;
 }
 
+.material-symbols-outlined {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 /* General class "img_cont" for organizate the images. */
 
 .img_cont {
@@ -45,7 +51,21 @@ button {
   height: 100%;
 }
 
-/*General post and comments "class", to apply global styles*/
+/* General class for centered elements */
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cvc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* General post and comments "class", to apply global styles */
 
 .all_posts {
   display: flex;

@@ -12,10 +12,7 @@
 }
 
 .all_imgs {
-  display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
   gap: 3px;
 }
 
@@ -39,9 +36,6 @@
 }
 
 .add_img {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100%;
 }
 
