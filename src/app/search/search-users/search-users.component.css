@@ -26,7 +26,8 @@
   transform: scale(1.02);
 }
 
-.user > .names_info > .name {
+.user > .names_info > .name,
+.user > .names_info > .url_name {
   color: var(--txt_color);
 }
 
