@@ -23,8 +23,7 @@ import { RefreshService } from 'src/app/tools/refresh-service/refresh-service';
 })
 export class CommentsComponent {
   tools: Tools = new Tools();
-  def_person_img: string =
-    'https://res.cloudinary.com/dp5gpr5sc/image/upload/v1685629395/app_assets/person.svg';
+  def_person_img: string = '../../assets/person.svg';
 
   @Input() id_post: number = 0;
   cpost: CPost = {} as CPost;

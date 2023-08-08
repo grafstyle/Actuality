@@ -11,6 +11,7 @@ import { Users } from 'src/app/controller/users/users';
 export class SearchUsersComponent implements OnInit {
   err: string = '';
   users: User[] = [];
+  def_person_img: string = '../../assets/person.svg';
 
   constructor(private router: ActivatedRoute) {}
 

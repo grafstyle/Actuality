@@ -141,10 +141,8 @@ nav > .logo_cont > .logo {
 nav > .logo_cont > .logo > .logo_img {
   height: 80px;
   width: 80px;
-  mask: url("https://res.cloudinary.com/dp5gpr5sc/image/upload/v1687546639/app_assets/Logov.svg")
-    no-repeat center;
-  --webkit-mask: url("https://res.cloudinary.com/dp5gpr5sc/image/upload/v1687546639/app_assets/Logov.svg")
-    no-repeat center;
+  mask: url("../assets/logo.svg") no-repeat center;
+  --webkit-mask: url("../assets/logo.svg") no-repeat center;
   background-color: #fff;
 }
 

@@ -17,8 +17,7 @@ export class HomeForYouComponent implements OnInit {
     'Something went wrong when get the data.';
 
   cposts: CPost[] = [];
-  def_person_img: string =
-    'https://res.cloudinary.com/dp5gpr5sc/image/upload/v1685629395/app_assets/person.svg';
+  def_person_img: string = '../../assets/person.svg';
 
   show_loader: boolean = true;
 

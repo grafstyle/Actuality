@@ -10,7 +10,7 @@
     *ngFor="let user of users"
   >
     <div class="img_cont img_user">
-      <img src="{{ user['image'] }}" alt="" />
+      <img src="{{ user['image'] || def_person_img }}" alt="" />
     </div>
     <div class="names_info">
       <div class="name">

@@ -3,7 +3,11 @@
     <div class="content">
       <div class="portrait_edit">
         <div class="img_cont front_edit">
-          <img #portrait_img src="{{ user.portrait }}" alt="" />
+          <img
+            #portrait_img
+            src="{{ user.portrait || '../../../assets/portrait.png' }}"
+            alt=""
+          />
           <button
             #edit_portrait_img
             class="edit_btn edit_portrait_btn"
@@ -98,7 +102,7 @@
 
   <div class="portrait">
     <div class="img_cont front">
-      <img src="{{ user.portrait }}" alt="" />
+      <img src="{{ user.portrait || '../../../assets/portrait.png' }}" alt="" />
     </div>
     <div class="edit_prof_cont">
       <button

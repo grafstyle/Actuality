@@ -66,8 +66,7 @@ export class ProfileComponent {
   bio_letters: number = 0;
   edit_profile_str = 'Edit';
   ok_str = 'Ok';
-  def_person_img: string =
-    'https://res.cloudinary.com/dp5gpr5sc/image/upload/v1685629395/app_assets/person.svg';
+  def_person_img: string = '../../assets/person.svg';
 
   @ViewChild('followe_rs_d_view') frsd_view!: ElementRef<HTMLDivElement>;
   folls: User[] = [];

@@ -11,7 +11,7 @@
       <div class="user">
         <div class="img_cont">
           <img
-            src="{{ cpost.user_of_post.image }}"
+            src="{{ cpost.user_of_post.image || def_person_img }}"
             alt=""
             [routerLink]="['/' + cpost.user_of_post.url_name]"
           />

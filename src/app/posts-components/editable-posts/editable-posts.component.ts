@@ -72,8 +72,7 @@ export class EditablePostsComponent implements OnInit {
 
   show_load_screen: boolean = false;
 
-  def_person_img: string =
-    'https://res.cloudinary.com/dp5gpr5sc/image/upload/v1685629395/app_assets/person.svg';
+  def_person_img: string = '../../assets/person.svg';
 
   alert_error: string = '';
 

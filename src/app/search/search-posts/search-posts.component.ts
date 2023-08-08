@@ -12,6 +12,7 @@ export class SearchPostsComponent implements OnInit {
   tools: Tools = new Tools();
   err: string = '';
   cposts: CPost[] = [];
+  def_person_img: string = '../../assets/person.svg';
 
   constructor(private router: ActivatedRoute) {}
 
