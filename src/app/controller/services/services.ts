@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class Service {
-  server: string = 'http://localhost:3500/';
+  server: string = 'https://api.comsier.com/';
 
   constructor(private _http: HttpClient) {}
 
