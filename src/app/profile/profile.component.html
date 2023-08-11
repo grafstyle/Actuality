@@ -125,7 +125,7 @@
       <h3>{{ user.name }}</h3>
       <p>@{{ user.url_name }}</p>
     </div>
-    <div class="bio">
+    <div class="bio" *ngIf="bio.innerText != ''">
       <p>{{ user.bio }}</p>
     </div>
     <div class="other_info">
