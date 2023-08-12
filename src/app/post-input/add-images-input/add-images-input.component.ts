@@ -57,15 +57,12 @@ export class AddImagesInputComponent implements AfterViewInit {
     const new_img: Image = {} as Image;
 
     const file: File = elem.files?.item(0) as File;
-    let is_supported: boolean = false;
 
-    for (const opt of opts) if (file.type.includes(opt)) is_supported = true;
-
-    if (!is_supported) {
+    if (!this.tools.acceptSomeFileBy(file, opts)) {
       this.alert_error = 'This file not is supported.';
       elem.value = '';
       return;
-    }
+    } else this.alert_error = '';
 
     const url: string = await this.tools.getImage(file);
     const name: string = file.name;

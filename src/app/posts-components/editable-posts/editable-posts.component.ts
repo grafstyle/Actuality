@@ -10,13 +10,14 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
-import { User } from 'src/app/controller/users/users';
+import { User, Users } from 'src/app/controller/users/users';
 import { Cloudinary } from 'src/app/controller/cloudinary/cloudinary';
 import { CPost, Post, Posts } from 'src/app/controller/posts/posts';
 import { AddImagesInputComponent } from 'src/app/post-input/add-images-input/add-images-input.component';
 import { RefreshService } from 'src/app/tools/refresh-service/refresh-service';
 import { Tools } from 'src/app/tools/tools';
 import { Like, Likes } from 'src/app/controller/likes/likes';
+import { Cookies } from 'src/app/cookies/cookies';
 
 export interface EditablePostConfig {
   user: User;
@@ -90,6 +91,8 @@ export class EditablePostsComponent implements OnInit {
     this.refresh.getUpdate().subscribe({
       next: async (subject: any) => {
         if (subject.text == 'refresh_posts') await this.refreshPosts();
+        else if (subject.text == 'refresh_user')
+          this.user = await Users.get(Cookies.getUserID());
       },
     });
   }

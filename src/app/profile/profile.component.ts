@@ -10,6 +10,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Tools } from '../tools/tools';
 import { Cloudinary } from '../controller/cloudinary/cloudinary';
 import { ProfilePostsComponent } from './profile-posts/profile-posts.component';
+import { RefreshService } from '../tools/refresh-service/refresh-service';
 
 @Component({
   selector: 'app-profile',
@@ -79,7 +80,8 @@ export class ProfileComponent {
   constructor(
     private router: ActivatedRoute,
     private router_actions: Router,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private refresh: RefreshService
   ) {
     router_actions.events.subscribe({
       next: (e) => {
@@ -375,6 +377,7 @@ export class ProfileComponent {
         if (is_edited_url_name)
           this.router_actions.navigateByUrl(edited_user.url_name);
         this.ngOnInit();
+        this.refresh.setUpdate('refresh_user');
       });
 
     return can_edit;
@@ -403,13 +406,11 @@ export class ProfileComponent {
 
     const file: File = input.files?.item(0) as File;
 
-    for (const opt of opts) {
-      if (!file.type.includes(opt)) {
-        this.alert_msg = 'This file not is supported.';
-        input.value = '';
-        return;
-      } else this.alert_msg = '';
-    }
+    if (!this.tools.acceptSomeFileBy(file, opts)) {
+      this.alert_msg = 'This file not is supported.';
+      input.value = '';
+      return;
+    } else this.alert_msg = '';
 
     this.user_img_upload.file = file;
     this.user_img_upload.name = this.user_img_upload.file.name;
@@ -444,13 +445,11 @@ export class ProfileComponent {
 
     const file: File = input.files?.item(0) as File;
 
-    for (const opt of opts) {
-      if (!file.type.includes(opt)) {
-        this.alert_msg = 'This file not is supported.';
-        input.value = '';
-        return;
-      } else this.alert_msg = '';
-    }
+    if (!this.tools.acceptSomeFileBy(file, opts)) {
+      this.alert_msg = 'This file not is supported.';
+      input.value = '';
+      return;
+    } else this.alert_msg = '';
 
     this.portrait_img_upload.file = input.files?.item(0) as File;
     this.portrait_img_upload.name = this.portrait_img_upload.file.name;

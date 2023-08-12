@@ -105,6 +105,14 @@ export class Tools {
     return `${only_date} ${final_hour}`;
   }
 
+  acceptSomeFileBy(file: File, opts: string[], ...someOpts: string[]): boolean {
+    if (file != null) {
+      if (opts.length > 0 && opts.length > 0) opts = opts.concat(someOpts);
+      for (const opt of opts) if (file.type == opt) return true;
+    }
+    return false;
+  }
+
   showComponent(element: HTMLElement, height: string = ''): void {
     element.style.opacity = '1';
     element.style.pointerEvents = 'all';
