@@ -33,7 +33,8 @@ export class HomeFollowedComponent implements OnInit {
 
     this.refresh.getUpdate().subscribe({
       next: async (subject: any) => {
-        if (subject.text == 'refresh_posts') await this.getCompletePosts();
+        if (subject.text == RefreshService.REFRESH_POSTS)
+          await this.getCompletePosts();
       },
     });
   }

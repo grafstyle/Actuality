@@ -90,8 +90,9 @@ export class EditablePostsComponent implements OnInit {
 
     this.refresh.getUpdate().subscribe({
       next: async (subject: any) => {
-        if (subject.text == 'refresh_posts') await this.refreshPosts();
-        else if (subject.text == 'refresh_user')
+        if (subject.text == RefreshService.REFRESH_POSTS)
+          await this.refreshPosts();
+        else if (subject.text == RefreshService.REFRESH_USER)
           this.user = await Users.get(Cookies.getUserID());
       },
     });

@@ -84,7 +84,7 @@ export class CommentsComponent {
 
     this.refresh.getUpdate().subscribe({
       next: (subject: any) => {
-        if (subject.text == 'refresh_comments') this.ngOnInit();
+        if (subject.text == RefreshService.REFRESH_COMMENTS) this.ngOnInit();
       },
     });
   }

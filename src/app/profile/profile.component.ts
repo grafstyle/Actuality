@@ -377,7 +377,7 @@ export class ProfileComponent {
         if (is_edited_url_name)
           this.router_actions.navigateByUrl(edited_user.url_name);
         this.ngOnInit();
-        this.refresh.setUpdate('refresh_user');
+        this.refresh.setUpdate(RefreshService.REFRESH_POSTS);
       });
 
     return can_edit;

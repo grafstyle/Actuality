@@ -94,7 +94,7 @@ export class PostInputComponent implements AfterViewInit {
     this.to_post.date_modified = this.tools.getActualISODate();
 
     await Posts.post(this.to_post).then(() => {
-      this.refresh.setUpdate('refresh_posts');
+      this.refresh.setUpdate(RefreshService.REFRESH_POSTS);
       this.cleanAll();
       this.show_load_screen = false;
     });

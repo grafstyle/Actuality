@@ -91,7 +91,7 @@ export class AddCommentComponent {
     this.to_comment.date_modified = this.tools.getActualISODate();
 
     await Comments.post(this.to_comment).then(() => {
-      this.refresh.setUpdate('refresh_comments');
+      this.refresh.setUpdate(RefreshService.REFRESH_COMMENTS);
       this.cleanAll();
       this.show_load_screen = false;
     });
