@@ -97,6 +97,8 @@ export class AppComponent implements OnInit {
     if (Cookies.getMode() == Cookies.MODE_LIGHT) this.setLightMode();
     else if (Cookies.getMode() == Cookies.MODE_DARK) this.setDarkMode();
 
+    // this.logout()
+
     const is_auth: boolean = await Users.isActualUserAuth();
     if (is_auth)
       this.auth.user$.subscribe({
@@ -117,7 +119,8 @@ export class AppComponent implements OnInit {
               followed: [],
               followers: [],
             });
-            this.setCookies();
+
+            await this.setCookies();
           }
         },
       });

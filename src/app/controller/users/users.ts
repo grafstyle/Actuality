@@ -41,11 +41,9 @@ export class Users {
 
   public static getByEmail(email: string): Promise<User> {
     return new Promise((res, rej) => {
-      this.getAll().then((data) => {
-        data.forEach((user) => {
-          if (user.email == email) res(user as User);
-          rej("Don't find the user.");
-        });
+      this.getBy('email', email).then((data) => {
+        if (data.length > 0) res(data[0] as User);
+        rej("Don't find the user.");
       });
     });
   }
