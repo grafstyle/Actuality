@@ -30,6 +30,7 @@ button {
   outline: 0;
 }
 
+.ns,
 .material-symbols-outlined {
   -moz-user-select: none;
   -webkit-user-select: none;

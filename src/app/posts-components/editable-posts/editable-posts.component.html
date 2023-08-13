@@ -14,18 +14,10 @@
                 <img src="{{ user.image || def_person_img }}" alt="" />
               </div>
               <div class="names cfz">
-                <p
-                  class="name"
-                  [routerLink]="['/' + cpost.user_of_post.url_name]"
-                >
+                <p class="name">
                   {{ cpost.user_of_post.name }}
                 </p>
-                <p
-                  class="url_name"
-                  [routerLink]="['/' + cpost.user_of_post.url_name]"
-                >
-                  @{{ cpost.user_of_post.url_name }}
-                </p>
+                <p class="url_name">@{{ cpost.user_of_post.url_name }}</p>
                 <p class="date">
                   {{ tools.formatDate(cpost.post.date_added) }}
                 </p>
@@ -109,7 +101,7 @@
           </div>
         </div>
       </div>
-      <div class="user">
+      <div class="user ns">
         <div class="img_and_name">
           <div class="img_cont">
             <img src="{{ user.image || def_person_img }}" alt="" />
