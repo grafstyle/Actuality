@@ -513,6 +513,11 @@ export class ProfileComponent {
     if (this.folls.length == 0)
       this.folls_empty_str = "This user don't follow anyone.";
   }
+
+  goToUser(url_name: string): void {
+    this.showContFoll(false);
+    this.router_actions.navigateByUrl('/' + url_name);
+  }
 }
 
 interface Image {

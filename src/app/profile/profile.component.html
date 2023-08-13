@@ -159,29 +159,31 @@
         <div class="centered" *ngIf="this.folls.length == 0">
           <p>{{ folls_empty_str }}</p>
         </div>
-        <div class="user" *ngFor="let foll of this.folls">
-          <div class="img_cont img_user">
-            <img src="{{ foll.image }}" alt="" />
-          </div>
-          <div class="info_and_options">
-            <div class="name">
-              <p class="cfz">{{ foll.name }}</p>
+        <ng-container *ngFor="let foll of this.folls">
+          <div class="user" (click)="goToUser(foll.url_name)">
+            <div class="img_cont img_user">
+              <img src="{{ foll.image }}" alt="" />
             </div>
-            <div class="btn_cont centered">
-              <button
-                *ngIf="modal_followed_opened"
-                (click)="unfollowAndRefresh(foll.id)"
-              >
-                Unfollow
-              </button>
+            <div class="info_and_options">
+              <div class="name">
+                <p class="cfz">{{ foll.name }}</p>
+              </div>
+              <div class="btn_cont centered">
+                <button
+                  *ngIf="modal_followed_opened && !can_follow"
+                  (click)="unfollowAndRefresh(foll.id)"
+                >
+                  Unfollow
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        </ng-container>
       </div>
     </div>
   </div>
 </div>
-<app-post-input [margin_top]="'15px'"></app-post-input>
+<app-post-input [margin_top]="'15px'" *ngIf="!can_follow"></app-post-input>
 <app-loader *ngIf="show_loader"></app-loader>
 <div class="err_cont" *ngIf="err != ''">
   <span class="material-symbols-outlined">no_accounts</span>
