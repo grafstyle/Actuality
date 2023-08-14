@@ -1,0 +1,6 @@
+{
+  "rules": {
+    "string-no-newline": null,
+    "no-descending-specificity": null
+  }
+}
