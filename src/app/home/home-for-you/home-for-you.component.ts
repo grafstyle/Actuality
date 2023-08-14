@@ -36,7 +36,7 @@ export class HomeForYouComponent implements OnInit {
 
   async getCompletePosts(): Promise<void> {
     try {
-      this.cposts = await Posts.getCPosts(await Posts.getAll());
+      this.cposts = (await Posts.getCPosts(await Posts.getAll())).reverse();
       if (this.cposts.length == 0) this.err = this.ERR_NO_POSTS;
       else this.err = '';
     } catch (e) {

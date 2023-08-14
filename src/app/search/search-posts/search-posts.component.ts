@@ -21,7 +21,7 @@ export class SearchPostsComponent implements OnInit {
       this.router.queryParams.subscribe({
         next: async (param) => {
           if (param['by'] != undefined)
-            this.cposts = await Posts.getIfContains(param['by']);
+            this.cposts = (await Posts.getIfContains(param['by'])).reverse();
         },
       });
     } catch (e) {

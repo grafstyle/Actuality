@@ -45,9 +45,13 @@ export class HomeFollowedComponent implements OnInit {
       const users_followed: number[] = user.followed;
       if (users_followed.length == 0) this.err = this.ERR_NO_USERS;
       for (const id_user_followed of users_followed)
-        this.cposts = this.cposts.concat(
-          await Posts.getCPosts(await Posts.getBy('id_user', id_user_followed))
-        );
+        this.cposts = this.cposts
+          .concat(
+            await Posts.getCPosts(
+              await Posts.getBy('id_user', id_user_followed)
+            )
+          )
+          .reverse();
       if (this.cposts.length == 0 && users_followed.length > 0)
         this.err = this.ERR_NO_POSTS;
     } catch (e) {

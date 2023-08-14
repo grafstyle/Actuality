@@ -96,11 +96,11 @@ export class Tools {
 
     const hour: number = date.getHours();
     const minutes: number = date.getMinutes();
-    const AM_or_PM: string = hour >= 12 ? 'PM' : 'AM';
+    const am_or_pm: string = hour >= 12 ? 'PM' : 'AM';
 
     const conv_mins: string = minutes < 10 ? `0${minutes}` : `${minutes}`;
 
-    const final_hour = this.format12Time(`${hour}:${conv_mins} ${AM_or_PM}`);
+    const final_hour = this.format12Time(`${hour}:${conv_mins} ${am_or_pm}`);
 
     return `${only_date} ${final_hour}`;
   }
