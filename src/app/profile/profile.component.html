@@ -112,7 +112,7 @@
       >
         <span class="material-symbols-outlined">edit</span>
       </button>
-      <button #follow_btn *ngIf="can_follow" (click)="followClick()">
+      <button #follow_btn *ngIf="!can_edit_profile" (click)="followClick()">
         Follow
       </button>
     </div>
