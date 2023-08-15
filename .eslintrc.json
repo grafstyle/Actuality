@@ -14,14 +14,17 @@
   "plugins": ["@typescript-eslint"],
   "rules": {
     "@typescript-eslint/no-inferrable-types": "off",
-    "@typescript-eslint/naming-convention": [
-      "error",
-      {
-        "selector": "default",
-        "format": ["snake_case", "camelCase", "PascalCase", "kebab-case"],
-        "leadingUnderscore": "allow",
-        "trailingUnderscore": "allow"
-      }
-    ]
+    // "@typescript-eslint/naming-convention": [
+    //   "error",
+    //   {
+    //     "selector": "default",
+    //     "format": ["snake_case", "camelCase", "PascalCase", "kebab-case"],
+    //     "leadingUnderscore": "allow",
+    //     "trailingUnderscore": "allow"
+    //   }
+    // ]
+   
+      "@typescript-eslint/kebab-case": "off"
+    }
   }
-}
+
