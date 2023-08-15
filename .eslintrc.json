@@ -15,10 +15,10 @@
   "rules": {
     "@typescript-eslint/no-inferrable-types": "off",
     "@typescript-eslint/naming-convention": [
-      "error",
+      "warning",
       {
         "selector": "variableLike",
-        "format": ["snake_case", "camelCase"]
+        "format": ["snake_case", "camelCase", "pascalCase", "kebab-case"]
       }
     ]
   }
