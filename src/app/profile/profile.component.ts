@@ -6,7 +6,12 @@ import {
 } from '@angular/core';
 import { User, Users } from '../controller/users/users';
 import { Cookies } from '../cookies/cookies';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  ChildActivationEnd,
+  NavigationEnd,
+  Router,
+} from '@angular/router';
 import { Tools } from '../tools/tools';
 import { Cloudinary } from '../controller/cloudinary/cloudinary';
 import { ProfilePostsComponent } from './profile-posts/profile-posts.component';
@@ -107,8 +112,10 @@ export class ProfileComponent {
         else {
           this.user_registered = await Users.get(Cookies.getUserID());
           this.can_follow = true;
+          this.can_edit_profile = false;
           if (this.userFollowsUser()) {
-            this.follow_btn.nativeElement.textContent = this.unfollow_str;
+            if (this.follow_btn != undefined)
+              this.follow_btn.nativeElement.textContent = this.unfollow_str;
             this.click_follow = 1;
           }
         }
@@ -124,6 +131,10 @@ export class ProfileComponent {
     this.show_loader = false;
   }
 
+  /**
+   * Method to format the date passed by tag
+   * @returns { string }
+   */
   formatDate(): string {
     const date: string[] = this.tools
       .dateToString(this.user.joined)
@@ -516,7 +527,9 @@ export class ProfileComponent {
 
   goToUser(url_name: string): void {
     this.showContFoll(false);
-    this.router_actions.navigateByUrl('/' + url_name);
+    this.router_actions
+      .navigateByUrl('/', { skipLocationChange: true })
+      .then(() => this.router_actions.navigate(['/' + url_name]));
   }
 }
 
