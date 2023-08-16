@@ -2,6 +2,7 @@
   "name": "actuality",
   "version": "0.0.0",
   "scripts": {
+    "lint:css": "stylelint src/**/*.css",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
@@ -49,4 +50,7 @@
     "**/*.{json,js,ts,html,css}": "prettier --write",
     "**/*.{js,ts}": "eslint"
   }
+
+
+
 }
