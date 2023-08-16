@@ -1,12 +1,7 @@
 {
   "rules": {
     "string-no-newline": null,
-<<<<<<< HEAD
-    "no-descending-specificity": null
-=======
     "no-descending-specificity": null,
     "selector-class-pattern": null
-    
->>>>>>> 718cdf4 (update stylelintrc)
   }
 }

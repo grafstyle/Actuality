@@ -52,12 +52,16 @@
 
 .upload > button {
   font-size: 12pt;
+  padding: 5px;
+  border-radius: 15px;
+  border: solid 3px var(--txt_color);
   color: var(--txt_color);
   transition: all 0.3s ease-out;
 }
 
 .upload > button:hover {
   color: var(--txt_s_color);
+  border-color: var(--txt_s_color);
 }
 
 .show_imgs,

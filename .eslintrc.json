@@ -15,7 +15,7 @@
   "rules": {
     "@typescript-eslint/no-inferrable-types": "off",
     "@typescript-eslint/naming-convention": [
-      "warning",
+      "warn",
       {
         "selector": "default",
         "format": ["snake_case", "camelCase", "PascalCase", "kebab-case"],
