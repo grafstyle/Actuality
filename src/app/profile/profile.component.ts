@@ -283,11 +283,11 @@ export class ProfileComponent {
       edited_user.name = edited_name;
     else this.name_text.nativeElement.innerText = this.last_text_name;
 
-    if (this.last_text_url_name != edited_name && edited_name != '')
+    if (this.last_text_url_name != edited_url_name && edited_url_name != '')
       edited_user.url_name = edited_url_name;
     else this.url_name_text.nativeElement.innerText = this.last_text_url_name;
 
-    if (this.last_bio != edited_name && edited_name != '')
+    if (this.last_bio != edited_bio && edited_bio != '')
       edited_user.bio = edited_bio;
     else this.bio_text.nativeElement.innerText = this.last_bio;
 

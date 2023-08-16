@@ -72,6 +72,10 @@
   display: flex;
 }
 
+.edit_profile > .content > .url_name_edit div[contenteditable="true"] {
+  width: 150px;
+}
+
 .edit_profile > .content .portrait_edit > .options > input,
 .edit_profile > .content .portrait_edit > .options > .actions_btns {
   width: 100%;
