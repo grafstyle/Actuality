@@ -151,6 +151,7 @@ export class EditablePostsComponent implements OnInit {
       }
 
       this.cposts = this.cposts.reverse();
+      this.cposts_imgs = this.cposts_imgs.map((row) => row).reverse();
     }
 
     this.show_loader = false;
