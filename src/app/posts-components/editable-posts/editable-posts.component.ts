@@ -94,6 +94,7 @@ export class EditablePostsComponent implements OnInit {
           await this.refreshPosts();
         else if (subject.text == RefreshService.REFRESH_USER)
           this.user = await Users.get(Cookies.getUserID());
+        this.refreshPosts();
       },
     });
   }

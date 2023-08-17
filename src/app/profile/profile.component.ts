@@ -2,6 +2,7 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  EventEmitter,
   ViewChild,
 } from '@angular/core';
 import { User, Users } from '../controller/users/users';
@@ -105,6 +106,7 @@ export class ProfileComponent {
 
       if (param_by_url == 'profile') {
         this.user = await Users.get(Cookies.getUserID());
+        this.refresh.setUpdate(RefreshService.REFRESH_USER);
         this.router_actions.navigateByUrl('/' + this.user.url_name);
       } else if (intent_get_user != undefined) {
         this.user = intent_get_user;
