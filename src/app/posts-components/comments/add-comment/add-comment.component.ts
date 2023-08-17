@@ -62,8 +62,8 @@ export class AddCommentComponent {
       return;
     }
 
-    if (this.getBodyText() == ('' || undefined)) {
-      this.alert_error = 'Almost add an title to your post.';
+    if (/^\s*$/.test(this.getBodyText())) {
+      this.alert_error = 'Al least add an something to say.';
       return;
     }
 

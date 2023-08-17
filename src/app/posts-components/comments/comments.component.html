@@ -15,8 +15,8 @@
               <div class="img_cont user">
                 <img
                   src="{{
-                    cpost.user_of_post.image
-                      ? cpost.user_of_post.image
+                    cpost.user_of_comments[i].image
+                      ? cpost.user_of_comments[i].image
                       : def_person_img
                   }}"
                   alt=""
@@ -114,8 +114,8 @@
                 <div class="img_cont user">
                   <img
                     src="{{
-                      cpost.user_of_post.image
-                        ? cpost.user_of_post.image
+                      cpost.user_of_comments[i].image
+                        ? cpost.user_of_comments[i].image
                         : def_person_img
                     }}"
                     alt=""
