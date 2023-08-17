@@ -15,6 +15,7 @@ import { Tools } from 'src/app/tools/tools';
 import { AddImagesInputComponent } from 'src/app/post-input/add-images-input/add-images-input.component';
 import { Cloudinary } from 'src/app/controller/cloudinary/cloudinary';
 import { RefreshService } from 'src/app/tools/refresh-service/refresh-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-comments',
@@ -64,7 +65,11 @@ export class CommentsComponent {
 
   alert_error: string = '';
 
-  constructor(private refresh: RefreshService, private cd: ChangeDetectorRef) {}
+  constructor(
+    private refresh: RefreshService,
+    private cd: ChangeDetectorRef,
+    private router: Router
+  ) {}
 
   ngAfterViewInit(): void {
     const comment_body: ElementRef<HTMLParagraphElement> =
@@ -196,5 +201,10 @@ export class CommentsComponent {
       this.show_load_screen = false;
       this.ngOnInit();
     });
+  }
+
+  setProfile(user: User): void {
+    this.refresh.setUpdate(RefreshService.REFRESH_USER, user);
+    this.router.navigate(['/' + user.url_name]);
   }
 }
