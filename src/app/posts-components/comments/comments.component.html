@@ -20,19 +20,19 @@
                       : def_person_img
                   }}"
                   alt=""
-                  [routerLink]="['/' + cpost.user_of_comments[i].url_name]"
+                  (click)="setProfile(cpost.user_of_comments[i])"
                 />
               </div>
             </div>
             <div class="user_comment">
               <div class="name_and_actions">
                 <div class="names">
-                  <h4 [routerLink]="['/' + cpost.user_of_comments[i].url_name]">
+                  <h4 (click)="setProfile(cpost.user_of_comments[i])">
                     {{ cpost.user_of_comments[i].name }}
                   </h4>
                   <p
                     class="url_name"
-                    [routerLink]="['/' + cpost.user_of_comments[i].url_name]"
+                    (click)="setProfile(cpost.user_of_comments[i])"
                   >
                     @{{ cpost.user_of_comments[i].url_name }}
                   </p>
@@ -119,27 +119,25 @@
                         : def_person_img
                     }}"
                     alt=""
-                    [routerLink]="['/' + cpost.user_of_comments[i].url_name]"
+                    (click)="setProfile(cpost.user_of_comments[i])"
                   />
                 </div>
               </div>
               <div class="user_comment">
                 <div class="name_and_actions">
                   <div class="names">
-                    <h4
-                      [routerLink]="['/' + cpost.user_of_comments[i].url_name]"
-                    >
+                    <h4 (click)="setProfile(cpost.user_of_comments[i])">
                       {{ cpost.user_of_comments[i].name }}
                     </h4>
                     <p
                       class="url_name"
-                      [routerLink]="['/' + cpost.user_of_comments[i].url_name]"
+                      (click)="setProfile(cpost.user_of_comments[i])"
                     >
                       @{{ cpost.user_of_comments[i].url_name }}
                     </p>
                     <p
                       class="date"
-                      [routerLink]="['/' + cpost.user_of_comments[i].url_name]"
+                      (click)="setProfile(cpost.user_of_comments[i])"
                     >
                       {{ tools.formatDate(comment.date_added) }}
                     </p>

@@ -10,8 +10,8 @@ export class RefreshService {
 
   private subject: Subject<RefreshData> = new Subject<RefreshData>();
 
-  setUpdate(msg: string): void {
-    this.subject.next({ text: msg });
+  setUpdate(msg: string, data: any = undefined): void {
+    this.subject.next({ text: msg, data: data });
   }
 
   getUpdate(): Observable<RefreshData> {
@@ -21,4 +21,5 @@ export class RefreshService {
 
 interface RefreshData {
   text: string;
+  data: any;
 }

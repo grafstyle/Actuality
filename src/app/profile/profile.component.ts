@@ -113,6 +113,7 @@ export class ProfileComponent {
         if (Cookies.getUserID() == this.user.id) this.can_edit_profile = true;
         else {
           this.user_registered = await Users.get(Cookies.getUserID());
+          this.refresh.setUpdate(RefreshService.REFRESH_USER, this.user);
           this.can_follow = true;
           this.can_edit_profile = false;
           if (this.userFollowsUser()) {
