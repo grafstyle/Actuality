@@ -93,17 +93,21 @@ export class EditablePostsComponent implements OnInit {
         if (subject.text == RefreshService.REFRESH_POSTS)
           await this.refreshPosts();
         else if (subject.text == RefreshService.REFRESH_USER) {
-          this.no_one_post = '';
           if (subject.data != undefined) this.user = subject.data;
           else this.user = await Users.get(Cookies.getUserID());
+          this.refreshPosts();
+          subject.text = {} as User;
         }
-        this.refreshPosts();
       },
     });
   }
 
   async refreshPosts(): Promise<void> {
     if (this.user != undefined) {
+      this.no_one_post = '';
+      this.cposts = [];
+      this.show_loader = true;
+
       if (this.config.user != undefined) {
         if (this.config.get_by != undefined)
           this.cposts = await Posts.getCPosts(
