@@ -54,6 +54,7 @@
   > .grid_media
   > .img_cont
   > span {
+  padding: 190px 0;
   font-size: 52pt;
   color: var(--txt_color);
 }
