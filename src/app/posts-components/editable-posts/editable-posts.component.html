@@ -32,7 +32,11 @@
                 >
                   <span class="material-symbols-outlined">edit</span>
                 </button>
-                <div class="grid_media">
+                <div
+                  class="grid_media"
+                  [class.media]="cpost.post.images.length == 1"
+                  [class.media_mul]="cpost.post.images.length > 1"
+                >
                   <div
                     class="img_cont centered"
                     *ngIf="cpost.post.images.length == 0"
@@ -42,7 +46,8 @@
                     >
                   </div>
                   <div
-                    class="img_cont grid_elem"
+                    class="grid_elem"
+                    [class.img_cont]="cpost.post.images.length > 1"
                     *ngFor="
                       let img_or_vid of cpost.post.images;
                       let img_i = index
@@ -142,10 +147,16 @@
         </div>
       </div>
       <div class="content">
-        <div class="media grid_media" *ngIf="cposts_imgs[i].length > 0">
+        <div
+          class="grid_media"
+          [class.media]="cpost.post.images.length == 1"
+          [class.media_mul]="cpost.post.images.length > 1"
+          *ngIf="cposts_imgs[i].length > 0"
+        >
           <div
-            class="img_cont grid_elem"
+            class="grid_elem"
             *ngFor="let img_or_vid of cposts_imgs[i]; let img_i = index"
+            [class.img_cont]="cpost.post.images.length > 1"
             [style.grid-row]="
               img_i == 0 && cposts_imgs[i].length > 2
                 ? '1/' + cposts_imgs[i].length

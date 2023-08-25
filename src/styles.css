@@ -134,23 +134,32 @@ button {
   border-bottom: var(--contrast_dark) 3px solid;
 }
 
-.post .media {
+.post .media_mul {
   height: 400px;
-  margin-bottom: 10px;
 }
 
-.post .media > .grid_media {
+.post .media img {
+  width: 100%;
+}
+
+.post .media > .grid_elem {
+  max-height: 800px;
+  overflow: hidden;
+}
+
+.post .media_mul > .grid_elem {
   width: 100%;
   height: 100%;
 }
 
-.grid_media {
+.post .grid_media {
+  margin-bottom: 10px;
   display: grid;
   gap: 5px;
   grid-template-rows: repeat(auto-fill);
 }
 
-.grid_media > .grid_elem:nth-child(n + 2) {
+.post .grid_media > .grid_elem:nth-child(n + 2) {
   grid-column: right;
 }
 

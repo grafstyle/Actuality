@@ -38,10 +38,16 @@
         </div>
       </div>
       <div class="content">
-        <div class="media grid_media" *ngIf="cpost.post.images.length > 0">
+        <div
+          class="grid_media"
+          [class.media]="cpost.post.images.length == 1"
+          [class.media_mul]="cpost.post.images.length > 1"
+          *ngIf="cpost.post.images.length > 0"
+        >
           <div
-            class="img_cont grid_elem"
+            class="grid_elem"
             *ngFor="let img_or_vid of cpost.post.images; let img_i = index"
+            [class.img_cont]="cpost.post.images.length > 1"
             [style.grid-row]="
               img_i == 0 && cpost.post.images.length > 2
                 ? '1/' + cpost.post.images.length
