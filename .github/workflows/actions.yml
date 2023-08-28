@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
         with:
           fetch-depth: 0
 
@@ -22,15 +22,16 @@ jobs:
         uses: github/super-linter@v4
         env:
           VALIDATE_ALL_CODEBASE: true
-          DEFAULT_BRANCH: Refactoring
+          DEFAULT_BRANCH: master
           FILTER_REGEX_EXCLUDE: (
             .husky/ , .dockerignore,
             .editorconfig, .gitignore)
           LINTER_RULES_PATH: /
           CSS_FILE_NAME: .stylelintrc
           JAVASCRIPT_ES_CONFIG_FILE: .eslintrc.json
+          TYPESCRIPT_ES_CONFIG_FILE: .eslintrc.json
+          VALIDATE_TYPESCRIPT_ES: true
           VALIDATE_CSS: true
-          DISABLE_ERRORS: true
           VALIDATE_JAVASCRIPT_STANDARD: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

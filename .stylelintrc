@@ -1,11 +1,21 @@
 {
-  "extends": [
-    "stylelint-config-standard"
-  ],
+  "extends": "stylelint-config-standard",
   "rules": {
-    "at-rule-no-unknown": null,
-    "at-rule-empty-line-before": null,
-    "declaration-empty-line-before": null,
-    "selector-class-pattern": null
+      "selector-class-pattern": [ null, { "severity": "warning" }],
+      "no-descending-specificity" : [ null, { "severity": "warning" }],
+      "custom-property-pattern" : [ null, { "severity": "warning" }],
+      "selector-combinator-space-before" : [ null, { "severity": "warning" }],
+      "property-no-vendor-prefix" : [ null, { "severity": "warning" }],
+      "declaration-empty-line-before" : [ null, { "severity": "warning" }],
+      "no-duplicate-selectors" : [ null, { "severity": "warning" }],
+      "custom-property-empty-line-before" : [ null, { "severity": "warning" }],
+      "keyframes-name-pattern" : [ null, { "severity": "warning" }],
+      "no-empty-source" : [ null, { "severity": "warning" }],
+      "selector-pseudo-element-colon-notation" : [ null, { "severity": "warning" }],
+      "shorthand-property-no-redundant-values" : [ null, { "severity": "warning" }],
+      "indentation" : [ null, { "severity": "warning" }],
+      "alpha-value-notation" : [ null, { "severity": "warning" }],
+      "color-function-notation" : [ null, { "severity": "warning" }],
+      "selector-descendant-combinator-no-non-space" : [ null, { "severity": "warning" }]
   }
 }
