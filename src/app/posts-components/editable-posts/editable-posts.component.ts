@@ -18,6 +18,7 @@ import { RefreshService } from 'src/app/tools/refresh-service/refresh-service';
 import { Tools } from 'src/app/tools/tools';
 import { Like, Likes } from 'src/app/controller/likes/likes';
 import { Cookies } from 'src/app/cookies/cookies';
+import { CarrouselMediaComponent } from '../carrousel-media/carrousel-media.component';
 
 export interface EditablePostConfig {
   user: User;
@@ -80,6 +81,11 @@ export class EditablePostsComponent implements OnInit {
   show_loader: boolean = true;
 
   cposts_imgs: string[][] = [];
+
+  open_media_carrousel: boolean = false;
+
+  actual_media_carrousel = 0;
+  carrousel_media!: CarrouselMediaComponent;
 
   constructor(private cd: ChangeDetectorRef, private refresh: RefreshService) {}
 
@@ -320,5 +326,12 @@ export class EditablePostsComponent implements OnInit {
     actual_list.style.maxHeight = '0';
 
     this.tools.hideComponent(actual_to_click);
+  }
+
+  openMediaCarrousel(pos: number, carrousel: CarrouselMediaComponent): void {
+    this.open_media_carrousel = true;
+    this.actual_media_carrousel = pos;
+    if (carrousel != undefined) carrousel.open();
+    this.cd.detectChanges();
   }
 }

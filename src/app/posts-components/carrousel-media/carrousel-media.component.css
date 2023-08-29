@@ -1,0 +1,60 @@
+.media_carrousel {
+  pointer-events: all;
+  opacity: 1;
+}
+
+.media_carrousel > .container {
+  align-items: center;
+  border-radius: 15px;
+  background-color: var(--p_color);
+  padding: 15px 15px 25px 15px;
+}
+
+.media_carrousel > .container > .close_cont {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 15px;
+}
+
+.media_carrousel > .container > .content > .btn_action > span,
+.media_carrousel > .container > .close_cont > span {
+  color: var(--txt_s_color);
+  transition: all 0.3s ease-out;
+}
+
+.media_carrousel > .container > .content > .btn_action > span:hover,
+.media_carrousel > .container > .close_cont > span:hover {
+  color: var(--txt_color);
+}
+
+.media_carrousel > .container > .close_cont > span {
+  font-size: 28pt;
+}
+
+.media_carrousel > .container > .content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.media_carrousel > .container > .content > .btn_action > span {
+  border-radius: 100%;
+  font-size: 32pt;
+  border: solid 2px var(--txt_p_color);
+}
+
+.media_carrousel > .container > .content > .all_media {
+  display: flex;
+  overflow: hidden;
+}
+
+.media_carrousel > .container > .content > .all_media > .img_or_vid {
+  height: 300px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.media_carrousel > .container > .content > .all_media > .img_or_vid > img {
+  height: 100%;
+}
