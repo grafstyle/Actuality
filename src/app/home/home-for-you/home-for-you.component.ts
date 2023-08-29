@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CPost, Posts } from 'src/app/controller/posts/posts';
+import { CarrouselMediaComponent } from 'src/app/posts-components/carrousel-media/carrousel-media.component';
 import { RefreshService } from 'src/app/tools/refresh-service/refresh-service';
 import { Tools } from 'src/app/tools/tools';
 
@@ -20,8 +21,12 @@ export class HomeForYouComponent implements OnInit {
   def_person_img: string = '../../assets/person.svg';
 
   show_loader: boolean = true;
+  open_media_carrousel: boolean = false;
 
-  constructor(private refresh: RefreshService) {}
+  actual_media_carrousel = 0;
+  carrousel_media!: CarrouselMediaComponent;
+
+  constructor(private refresh: RefreshService, private cd: ChangeDetectorRef) {}
 
   async ngOnInit(): Promise<void> {
     await this.getCompletePosts();
@@ -44,6 +49,13 @@ export class HomeForYouComponent implements OnInit {
     }
 
     this.show_loader = false;
+  }
+
+  openMediaCarrousel(pos: number, carrousel: CarrouselMediaComponent): void {
+    this.open_media_carrousel = true;
+    this.actual_media_carrousel = pos;
+    if (carrousel != undefined) carrousel.open();
+    this.cd.detectChanges();
   }
 
   get ERR_NO_POSTS(): string {

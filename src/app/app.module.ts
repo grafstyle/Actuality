@@ -28,6 +28,7 @@ import { AlertComponentComponent } from './components/alert-component/alert-comp
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { EditablePostsComponent } from './posts-components/editable-posts/editable-posts.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { CarrouselMediaComponent } from './posts-components/carrousel-media/carrousel-media.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { LoaderComponent } from './components/loader/loader.component';
     PageNotFoundComponent,
     EditablePostsComponent,
     LoaderComponent,
+    CarrouselMediaComponent,
   ],
   imports: [
     BrowserModule,

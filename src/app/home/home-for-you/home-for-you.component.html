@@ -35,11 +35,23 @@
         </div>
       </div>
       <div class="content">
+        <app-carrousel-media
+          [media]="cpost.post.images"
+          *ngIf="
+            cpost.post.images.length > 0 &&
+            open_media_carrousel &&
+            actual_media_carrousel == i
+          "
+          (closed)="open_media_carrousel = false"
+          #carrousel_media
+        >
+        </app-carrousel-media>
         <div
           class="grid_media"
           [class.media]="cpost.post.images.length == 1"
           [class.media_mul]="cpost.post.images.length > 1"
           *ngIf="cpost.post.images.length > 0"
+          (click)="openMediaCarrousel(i, carrousel_media)"
         >
           <div
             class="grid_elem"
