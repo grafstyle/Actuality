@@ -11,7 +11,10 @@
           <div class="post">
             <div class="user">
               <div class="img_cont">
-                <img src="{{ user.image || def_person_img }}" alt="" />
+                <img
+                  src="{{ cpost.user_of_post.image || def_person_img }}"
+                  alt=""
+                />
               </div>
               <div class="names cfz">
                 <p class="name">
@@ -109,7 +112,10 @@
       <div class="user ns">
         <div class="img_and_name">
           <div class="img_cont">
-            <img src="{{ user.image || def_person_img }}" alt="" />
+            <img
+              src="{{ cpost.user_of_post.image || def_person_img }}"
+              alt=""
+            />
           </div>
           <div class="names">
             <p class="name">
@@ -121,7 +127,7 @@
             </p>
           </div>
         </div>
-        <div *ngIf="can_edit_posts" class="actions">
+        <div *ngIf="cpost.user_of_post.id == getUserID()" class="actions">
           <div
             #opt_post_to_click
             class="to_click"
@@ -162,7 +168,7 @@
           class="grid_media"
           [class.media]="cpost.post.images.length == 1"
           [class.media_mul]="cpost.post.images.length > 1"
-          *ngIf="cposts_imgs[i].length > 0"
+          *ngIf="cposts_imgs != undefined && cposts_imgs[i].length > 0"
           (click)="openMediaCarrousel(i, carrousel_media)"
         >
           <div
