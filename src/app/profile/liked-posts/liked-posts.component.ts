@@ -18,7 +18,7 @@ export class LikedPostsComponent implements OnInit {
   ngOnInit(): void {
     this.config.user = this.user;
     this.config.show_of = EditablePostsComponent.USER_LIKED_POSTS;
-    this.config.msg_if_not_posts = "The user don't has liked any post.";
+    this.config.msg_if_not_posts = 'This user hates everything and everyone.';
   }
 
   setCanEditPost(e: boolean): void {

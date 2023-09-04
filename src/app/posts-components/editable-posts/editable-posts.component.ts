@@ -165,7 +165,7 @@ export class EditablePostsComponent implements OnInit {
       if (this.cposts.length == 0) {
         if (this.config.msg_if_not_posts != undefined)
           this.no_one_post = this.config.msg_if_not_posts;
-        else this.no_one_post = "The user don't have posts.";
+        else this.no_one_post = "This user doesn't have any post.";
       }
 
       this.cposts = this.cposts.reverse();
