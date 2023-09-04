@@ -108,6 +108,11 @@ export class EditablePostsComponent implements OnInit {
     });
   }
 
+  getUserID(): number {
+    if (isNaN(Cookies.getUserID())) return 0;
+    return Cookies.getUserID();
+  }
+
   async refreshPosts(): Promise<void> {
     if (this.user != undefined) {
       this.no_one_post = '';

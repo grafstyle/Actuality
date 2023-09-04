@@ -105,6 +105,7 @@ export class ProfileComponent {
       )[0];
 
       if (param_by_url == 'profile') {
+        this.can_follow = false;
         this.user = await Users.get(Cookies.getUserID());
         this.refresh.setUpdate(RefreshService.REFRESH_USER);
         this.router_actions.navigateByUrl('/' + this.user.url_name);
