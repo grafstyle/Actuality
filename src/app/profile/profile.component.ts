@@ -129,6 +129,8 @@ export class ProfileComponent {
         return;
       }
     } catch (e) {
+      console.log(e);
+
       this.err = 'Something went wrong getting the user.';
     }
 
@@ -163,7 +165,11 @@ export class ProfileComponent {
 
     if (followers != undefined)
       for (const follower of followers)
-        if (follower == this.user_registered.id) return true;
+        if (
+          this.user_registered != undefined &&
+          follower == this.user_registered.id
+        )
+          return true;
 
     return false;
   }
