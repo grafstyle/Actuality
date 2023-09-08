@@ -55,6 +55,7 @@
   overflow: hidden;
 }
 
-.media_carrousel > .container > .content > .all_media > .img_or_vid > img {
+.media_carrousel > .container > .content > .all_media > .img_or_vid > img,
+.media_carrousel > .container > .content > .all_media > .img_or_vid > video {
   height: 100%;
 }

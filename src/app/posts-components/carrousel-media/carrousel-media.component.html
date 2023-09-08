@@ -13,7 +13,20 @@
       </div>
       <div class="all_media">
         <div class="img_or_vid" *ngFor="let img_or_vid of media; let i = index">
-          <img *ngIf="i == showIndex" src="{{ img_or_vid }}" alt="" />
+          <img
+            *ngIf="!img_or_vid.includes('.mp4') && i == showIndex"
+            src="{{ img_or_vid }}"
+            alt=""
+          />
+          <video
+            *ngIf="img_or_vid.includes('.mp4') && i == showIndex"
+            controls
+            autoplay
+            loop
+            [muted]="'muted'"
+          >
+            <source src="{{ img_or_vid }}" type="video/mp4" />
+          </video>
         </div>
       </div>
       <div

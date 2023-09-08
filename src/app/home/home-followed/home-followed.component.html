@@ -43,7 +43,10 @@
           *ngIf="
             cpost.post.images.length > 0 &&
             open_media_carrousel &&
-            actual_media_carrousel == i
+            actual_media_carrousel == i &&
+            (cpost.post.images.length > 1 ||
+              (cpost.post.images.length == 1 &&
+                !cpost.post.images[0].includes('.mp4')))
           "
           (closed)="open_media_carrousel = false"
           #carrousel_media
@@ -52,6 +55,10 @@
         <div
           class="grid_media"
           [class.media]="cpost.post.images.length == 1"
+          [class.only_vid_media]="
+            cpost.post.images.length == 1 &&
+            cpost.post.images[0].includes('.mp4')
+          "
           [class.media_mul]="cpost.post.images.length > 1"
           *ngIf="cpost.post.images.length > 0"
           (click)="openMediaCarrousel(i, carrousel_media)"
@@ -74,7 +81,9 @@
             <video
               *ngIf="img_or_vid.includes('.mp4')"
               controls
-              autoplay
+              [class.not_play_video]="cpost.post.images.length > 1"
+              [autoplay]="cpost.post.images.length == 1"
+              [preload]="cpost.post.images.length == 1 ? 'none' : ''"
               loop
               [muted]="'muted'"
             >
