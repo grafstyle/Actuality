@@ -2,7 +2,9 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  EventEmitter,
   Input,
+  Output,
   ViewChild,
 } from '@angular/core';
 import { Tools } from 'src/app/tools/tools';
@@ -25,6 +27,10 @@ export class AddImagesInputComponent implements AfterViewInit {
 
   @ViewChild('add_img_cont') add_img_cont!: ElementRef<HTMLDivElement>;
   @ViewChild('add_btn') add_btn!: ElementRef<HTMLInputElement>;
+
+  @Output() imgsIsChanged: EventEmitter<string[]> = new EventEmitter<
+    string[]
+  >();
 
   alert_error: string = '';
 
@@ -81,6 +87,7 @@ export class AddImagesInputComponent implements AfterViewInit {
 
       this.imgs.push(new_img);
       this.imgs_in_cloud.push(new_img.url);
+      this.imgsIsChanged.emit(this.imgs_in_cloud);
       return;
     }
     this.alert_error = 'Sorry only accept three images and/or videos. :(';
@@ -95,6 +102,7 @@ export class AddImagesInputComponent implements AfterViewInit {
     this.imgs.pop();
     this.imgs_in_cloud.pop();
     this.add_btn.nativeElement.value = '';
+    this.imgsIsChanged.emit(this.imgs_in_cloud);
   }
 }
 

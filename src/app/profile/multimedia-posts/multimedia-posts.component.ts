@@ -18,7 +18,7 @@ export class MultimediaPostsComponent implements OnInit {
   ngOnInit(): void {
     this.config.user = this.user;
     this.config.show_of = EditablePostsComponent.USER_MULTIMEDIA_POSTS;
-    this.config.msg_if_not_posts = "The user don't have posts with multimedia.";
+    this.config.msg_if_not_posts = "This user doesn't have any post.";
   }
 
   setCanEditPost(e: boolean): void {

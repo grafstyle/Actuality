@@ -22,7 +22,7 @@
 /* All img_cont */
 
 .img_cont > .edit_btn,
-.media > .edit_btn {
+.all_media > .edit_btn {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -33,14 +33,14 @@
   z-index: 9999;
 }
 
-.media > .edit_btn,
+.all_media > .edit_btn,
 .front_edit > .edit_btn,
 .user_img_edit > .edit_btn {
   color: var(--txt_color);
   transition: all 0.3s ease-out;
 }
 
-.media > .edit_btn:hover,
+.all_media > .edit_btn:hover,
 .front_edit > .edit_btn:hover,
 .user_img_edit > .edit_btn:hover {
   color: var(--p_color);

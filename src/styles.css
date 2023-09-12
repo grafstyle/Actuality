@@ -37,6 +37,10 @@ button {
   user-select: none;
 }
 
+.not_play_video::-webkit-media-controls {
+  pointer-events: none;
+}
+
 /* General class "img_cont" for organizate the images. */
 
 .img_cont {
@@ -142,9 +146,15 @@ button {
   width: 100%;
 }
 
-.post .media > .grid_elem {
+.post .media > .grid_elem,
+.post .only_vid_media > .grid_elem > video {
   max-height: 800px;
   overflow: hidden;
+}
+
+.post .only_vid_media > .grid_elem > video,
+.post .only_vid_media > .grid_elem > video > source {
+  width: 100%;
 }
 
 .post .media_mul > .grid_elem {

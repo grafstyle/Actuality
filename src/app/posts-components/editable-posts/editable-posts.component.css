@@ -39,18 +39,37 @@
   border-radius: 100%;
 }
 
-.edit_post > .content > .post > .content_edit > .media {
+.edit_post > .content > .post > .content_edit > .all_media {
   min-height: 50px;
   min-width: 50px;
   position: relative;
   margin-bottom: 0;
 }
 
+.edit_post > .content > .post > .content_edit > .all_media,
 .edit_post
   > .content
   > .post
   > .content_edit
-  > .media
+  > .all_media
+  > .only_vid_media
+  > .grid_elem,
+.edit_post
+  > .content
+  > .post
+  > .content_edit
+  > .all_media
+  > .only_vid_media
+  > .grid_elem
+  > video {
+  max-height: 400px;
+}
+
+.edit_post
+  > .content
+  > .post
+  > .content_edit
+  > .all_media
   > .grid_media
   > .img_cont
   > span {

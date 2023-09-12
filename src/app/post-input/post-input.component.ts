@@ -67,7 +67,7 @@ export class PostInputComponent implements AfterViewInit {
     }
 
     if (/^\s*$/.test(this.getBodyText())) {
-      this.alert_error = 'Is necessary add a title to your post.';
+      this.alert_error = 'You need to say one word at least.';
       return;
     }
 

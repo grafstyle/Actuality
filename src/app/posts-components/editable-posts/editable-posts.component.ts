@@ -165,7 +165,7 @@ export class EditablePostsComponent implements OnInit {
       if (this.cposts.length == 0) {
         if (this.config.msg_if_not_posts != undefined)
           this.no_one_post = this.config.msg_if_not_posts;
-        else this.no_one_post = "The user don't have posts.";
+        else this.no_one_post = "This user doesn't have any post.";
       }
 
       this.cposts = this.cposts.reverse();
@@ -180,6 +180,7 @@ export class EditablePostsComponent implements OnInit {
     elem_pos: number,
     cpost_info: Post = {} as Post
   ): Promise<void> {
+    this.changeImgsAgain = true;
     this.selected_post = elem_pos;
     const elem: HTMLDivElement =
       this.edit_post.toArray()[elem_pos].nativeElement;
@@ -338,5 +339,16 @@ export class EditablePostsComponent implements OnInit {
     this.actual_media_carrousel = pos;
     if (carrousel != undefined) carrousel.open();
     this.cd.detectChanges();
+  }
+
+  imgsToEdit: string[] = [];
+  changeImgsAgain: boolean = true;
+
+  setImgs(imgs: string[], changeImgsAgain: boolean = true): boolean {
+    if (this.changeImgsAgain) {
+      this.imgsToEdit = imgs;
+      this.changeImgsAgain = changeImgsAgain;
+    }
+    return true;
   }
 }

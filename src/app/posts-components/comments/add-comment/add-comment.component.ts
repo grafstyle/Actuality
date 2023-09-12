@@ -63,7 +63,7 @@ export class AddCommentComponent {
     }
 
     if (/^\s*$/.test(this.getBodyText())) {
-      this.alert_error = 'Al least add an something to say.';
+      this.alert_error = 'Please use words or keep silence.';
       return;
     }
 
