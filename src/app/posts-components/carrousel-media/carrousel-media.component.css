@@ -8,6 +8,8 @@
   border-radius: 15px;
   background-color: var(--p_color);
   padding: 15px 15px 25px 15px;
+  position: relative;
+  margin: 0 15px;
 }
 
 .media_carrousel > .container > .close_cont {
@@ -50,12 +52,14 @@
 }
 
 .media_carrousel > .container > .content > .all_media > .img_or_vid {
-  height: 300px;
+  max-height: 600px;
+  max-width: 500px;
   border-radius: 15px;
   overflow: hidden;
 }
 
 .media_carrousel > .container > .content > .all_media > .img_or_vid > img,
 .media_carrousel > .container > .content > .all_media > .img_or_vid > video {
-  height: 100%;
+  width: 100%;
+  height: auto;
 }
