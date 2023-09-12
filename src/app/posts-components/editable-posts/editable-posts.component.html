@@ -1,0 +1,227 @@
+<app-loader *ngIf="show_loader"></app-loader>
+<div class="no_one_post err_cont" *ngIf="no_one_post != ''">
+  <span class="material-symbols-outlined">public_off</span>
+  <p>{{ no_one_post }}</p>
+</div>
+<div class="all_posts">
+  <div class="post" *ngFor="let cpost of cposts; let i = index">
+    <div class="all_content">
+      <div class="edit_post modal_container" #edit_post>
+        <div class="content">
+          <div class="post">
+            <div class="user">
+              <div class="img_cont">
+                <img
+                  src="{{ cpost.user_of_post.image || def_person_img }}"
+                  alt=""
+                />
+              </div>
+              <div class="names cfz">
+                <p class="name">
+                  {{ cpost.user_of_post.name }}
+                </p>
+                <p class="url_name">@{{ cpost.user_of_post.url_name }}</p>
+                <p class="date">
+                  {{ tools.formatDate(cpost.post.date_added) }}
+                </p>
+              </div>
+            </div>
+            <div
+              class="content_edit"
+              *ngIf="setImgs(cpost.post.images.slice())"
+            >
+              <div class="all_media" #media>
+                <button
+                  #edit_post_imgs_btn
+                  class="edit_btn edit_post_imgs_btn"
+                  (click)="editImagesOfPost()"
+                >
+                  <span class="material-symbols-outlined">edit</span>
+                </button>
+                <div
+                  class="grid_media"
+                  [class.media]="imgsToEdit.length == 1"
+                  [class.only_vid_media]="
+                    imgsToEdit.length == 1 && imgsToEdit[0].includes('.mp4')
+                  "
+                  [class.media_mul]="imgsToEdit.length > 1"
+                >
+                  <div class="img_cont centered" *ngIf="imgsToEdit.length == 0">
+                    <span class="material-symbols-outlined"
+                      >image_not_supported</span
+                    >
+                  </div>
+                  <div
+                    class="grid_elem"
+                    [class.img_cont]="imgsToEdit.length > 1"
+                    *ngFor="let img_or_vid of imgsToEdit; let img_i = index"
+                    [style.grid-row]="
+                      img_i == 0 && imgsToEdit.length > 2
+                        ? '1/' + imgsToEdit.length
+                        : ''
+                    "
+                  >
+                    <img
+                      src="{{ img_or_vid }}"
+                      alt=""
+                      *ngIf="
+                        !img_or_vid.includes('.mp4') &&
+                        !img_or_vid.includes('video/mp4')
+                      "
+                    />
+                    <video
+                      *ngIf="
+                        img_or_vid.includes('.mp4') ||
+                        img_or_vid.includes('video/mp4')
+                      "
+                      controls
+                      loop
+                      [muted]="'muted'"
+                    >
+                      <source src="{{ img_or_vid }}" type="video/mp4" />
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="edit_image_actions"
+                #edit_image_actions
+                *ngIf="show_imgs_input_post && selected_post == i"
+              >
+                <app-add-images-input
+                  #imgs_input
+                  [hover_color]="'var(--p_color)'"
+                  [imgs_in_cloud]="imgsToEdit"
+                  (imgsIsChanged)="setImgs($event, false)"
+                ></app-add-images-input>
+                <div class="btn_ok">
+                  <button (click)="quitNewImgsOfPost(true)">
+                    <span class="material-symbols-outlined">done</span>
+                  </button>
+                </div>
+              </div>
+              <div class="title" contenteditable="true" #title_posts>
+                {{ cpost.post.title }}
+              </div>
+            </div>
+          </div>
+          <div class="btns">
+            <button (click)="modalEditPost(false, i)">Ok</button>
+          </div>
+        </div>
+      </div>
+      <div class="user ns">
+        <div class="img_and_name">
+          <div class="img_cont">
+            <img
+              src="{{ cpost.user_of_post.image || def_person_img }}"
+              alt=""
+            />
+          </div>
+          <div class="names">
+            <p class="name">
+              {{ cpost.user_of_post.name }}
+            </p>
+            <p class="url_name">@{{ cpost.user_of_post.url_name }}</p>
+            <p class="date">
+              {{ tools.formatDate(cpost.post.date_added) }}
+            </p>
+          </div>
+        </div>
+        <div *ngIf="cpost.user_of_post.id == getUserID()" class="actions">
+          <div
+            #opt_post_to_click
+            class="to_click"
+            (click)="hideOptions(i)"
+          ></div>
+          <div class="more_btn_cont">
+            <button (click)="showOptions(i)">
+              <span class="material-symbols-outlined">more_horiz</span>
+            </button>
+          </div>
+          <ul #list_opt_post>
+            <li>
+              <button (click)="modalEditPost(true, i, cpost.post)">
+                <span class="material-symbols-outlined">edit</span> Edit
+              </button>
+            </li>
+            <li>
+              <button (click)="deletePost(cpost.post.id)">
+                <span class="material-symbols-outlined">delete</span> Delete
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="content">
+        <app-carrousel-media
+          [media]="cpost.post.images.slice()"
+          *ngIf="
+            cpost.post.images.length > 0 &&
+            open_media_carrousel &&
+            actual_media_carrousel == i &&
+            (cpost.post.images.length > 1 ||
+              (cpost.post.images.length == 1 &&
+                !cpost.post.images[0].includes('.mp4')))
+          "
+          (closed)="open_media_carrousel = false"
+          #carrousel_media
+        >
+        </app-carrousel-media>
+        <div
+          class="grid_media"
+          [class.media]="cpost.post.images.length == 1"
+          [class.only_vid_media]="
+            cpost.post.images.length == 1 &&
+            cpost.post.images[0].includes('.mp4')
+          "
+          [class.media_mul]="cpost.post.images.length > 1"
+          *ngIf="cposts_imgs != undefined && cposts_imgs[i].length > 0"
+          (click)="openMediaCarrousel(i, carrousel_media)"
+        >
+          <div
+            class="grid_elem"
+            *ngFor="let img_or_vid of cposts_imgs[i]; let img_i = index"
+            [class.img_cont]="cpost.post.images.length > 1"
+            [style.grid-row]="
+              img_i == 0 && cposts_imgs[i].length > 2
+                ? '1/' + cposts_imgs[i].length
+                : ''
+            "
+          >
+            <img
+              src="{{ img_or_vid }}"
+              alt=""
+              *ngIf="!img_or_vid.includes('.mp4')"
+            />
+            <video
+              *ngIf="img_or_vid.includes('.mp4')"
+              controls
+              [class.not_play_video]="cpost.post.images.length > 1"
+              [autoplay]="cpost.post.images.length == 1"
+              [preload]="cpost.post.images.length == 1 ? 'none' : ''"
+              loop
+              [muted]="'muted'"
+            >
+              <source src="{{ img_or_vid }}" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+        <div class="title">
+          <p>{{ cpost.post.title }}</p>
+        </div>
+      </div>
+      <app-likes
+        [id_post]="cpost.post.id"
+        [cant_likes]="cpost.likes.length"
+      ></app-likes>
+    </div>
+    <app-comments [id_post]="cpost.post.id"></app-comments>
+  </div>
+</div>
+<app-alert-component
+  [msg]="alert_error"
+  (if_closed)="alert_error = ''"
+  *ngIf="alert_error != ''"
+></app-alert-component>
+<app-load-screen *ngIf="show_load_screen"></app-load-screen>

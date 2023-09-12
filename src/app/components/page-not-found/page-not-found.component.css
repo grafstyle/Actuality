@@ -1,0 +1,46 @@
+.error_cont {
+  width: 100%;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.error_cont > .wdys {
+  color: var(--txt_color);
+  padding: 35px 0;
+}
+
+.error_cont > .logo_cont {
+  width: 100%;
+}
+
+.error_cont > .logo_cont > .logo {
+  background-color: var(--p_color);
+  border-radius: 100%;
+  padding: 35px;
+}
+
+.error_cont > .logo_cont > .logo img {
+  height: 250px;
+}
+
+.error_cont > .error_spec > h2 {
+  font-size: 38pt;
+  color: var(--p_color);
+}
+
+.error_cont > .error_spec > h3 {
+  color: var(--txt_color);
+}
+
+.error_cont > p {
+  font-size: 18pt;
+}
+
+.error_cont > p > a {
+  color: var(--txt_color);
+  transition: all 0.3s ease-out;
+}
+
+.error_cont > p > a:hover {
+  color: var(--p_color);
+}

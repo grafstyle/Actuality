@@ -1,0 +1,199 @@
+<div class="comments">
+  <div class="section_comments">
+    <app-add-comment
+      [id_post]="id_post"
+      *ngIf="user.id != undefined"
+    ></app-add-comment>
+    <div class="all_comments" *ngIf="cpost.comments != undefined">
+      <ng-container *ngFor="let comment of cpost.comments; let i = index">
+        <div
+          class="comment"
+          *ngIf="i < 5 && cpost.user_of_comments[i] != undefined"
+        >
+          <div class="all_content" *ngIf="comment.id_post == cpost.post.id">
+            <div class="img_user_cont">
+              <div class="img_cont user">
+                <img
+                  src="{{
+                    cpost.user_of_comments[i].image
+                      ? cpost.user_of_comments[i].image
+                      : def_person_img
+                  }}"
+                  alt=""
+                  (click)="setProfile(cpost.user_of_comments[i])"
+                />
+              </div>
+            </div>
+            <div class="user_comment">
+              <div class="name_and_actions">
+                <div class="names">
+                  <h4 (click)="setProfile(cpost.user_of_comments[i])">
+                    {{ cpost.user_of_comments[i].name }}
+                  </h4>
+                  <p
+                    class="url_name"
+                    (click)="setProfile(cpost.user_of_comments[i])"
+                  >
+                    @{{ cpost.user_of_comments[i].url_name }}
+                  </p>
+                </div>
+                <div
+                  class="actions"
+                  *ngIf="cpost.user_of_comments[i].id == user.id"
+                >
+                  <app-add-images-input
+                    [hover_color]="'var(--p_color)'"
+                    [imgs_in_cloud]="comment.images || []"
+                    [font_size]="'100%'"
+                    *ngIf="show_images_input && actual_elem == i"
+                  ></app-add-images-input>
+                  <button
+                    class="edit_btn"
+                    (click)="updateComment(comment.id, i)"
+                    #edit_comment_btn
+                  >
+                    <span class="material-symbols-outlined">{{
+                      edit_str
+                    }}</span>
+                  </button>
+                  <button
+                    class="delete_btn"
+                    (click)="deleteComment(comment.id)"
+                  >
+                    <span class="material-symbols-outlined">delete</span>
+                  </button>
+                </div>
+              </div>
+              <div
+                #imgs_cont
+                class="imgs_or_vids"
+                *ngIf="comment.images != undefined && comment.images.length > 0"
+              >
+                <div class="imgs" *ngFor="let img of comment.images">
+                  <img *ngIf="img != undefined" src="{{ img }}" alt="" />
+                </div>
+              </div>
+              <p class="comment_body" #comment_body>{{ comment.comment }}</p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <div class="view_more_cont" *ngIf="cpost.comments.length > 5">
+        <button (click)="seeAllComments()">View more</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- All comments modal -->
+
+  <div class="all_comments_cont modal_container" #all_comments_cont>
+    <div class="content">
+      <div class="close_cont">
+        <span (click)="hideAllComments()" class="material-symbols-outlined"
+          >close</span
+        >
+      </div>
+      <div class="comments_cont">
+        <div class="all_comments">
+          <app-add-comment
+            [id_post]="id_post"
+            *ngIf="user.id != undefined"
+          ></app-add-comment>
+          <div
+            class="comment"
+            *ngFor="let comment of cpost.comments; let i = index"
+          >
+            <div
+              class="all_content"
+              *ngIf="
+                cpost.user_of_comments[i] != undefined &&
+                comment.id_post == cpost.post.id
+              "
+            >
+              <div class="img_user_cont">
+                <div class="img_cont user">
+                  <img
+                    src="{{
+                      cpost.user_of_comments[i].image
+                        ? cpost.user_of_comments[i].image
+                        : def_person_img
+                    }}"
+                    alt=""
+                    (click)="setProfile(cpost.user_of_comments[i])"
+                  />
+                </div>
+              </div>
+              <div class="user_comment">
+                <div class="name_and_actions">
+                  <div class="names">
+                    <h4 (click)="setProfile(cpost.user_of_comments[i])">
+                      {{ cpost.user_of_comments[i].name }}
+                    </h4>
+                    <p
+                      class="url_name"
+                      (click)="setProfile(cpost.user_of_comments[i])"
+                    >
+                      @{{ cpost.user_of_comments[i].url_name }}
+                    </p>
+                    <p
+                      class="date"
+                      (click)="setProfile(cpost.user_of_comments[i])"
+                    >
+                      {{ tools.formatDate(comment.date_added) }}
+                    </p>
+                  </div>
+                  <div
+                    class="actions"
+                    *ngIf="cpost.user_of_comments[i].id == user.id"
+                  >
+                    <app-add-images-input
+                      [hover_color]="'var(--p_color)'"
+                      [imgs_in_cloud]="actual_comments[i].images || []"
+                      *ngIf="show_images_input_all && actual_elem == i"
+                    ></app-add-images-input>
+                    <button
+                      class="edit_btn"
+                      (click)="updateComment(comment.id, i, true)"
+                      #edit_comment_btn_all
+                    >
+                      <span class="material-symbols-outlined">{{
+                        edit_str
+                      }}</span>
+                    </button>
+                    <button
+                      class="delete_btn"
+                      (click)="deleteComment(comment.id)"
+                    >
+                      <span class="material-symbols-outlined">delete</span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  #imgs_cont_all
+                  class="imgs_or_vids"
+                  *ngIf="actual_comments[i] != undefined"
+                >
+                  <div
+                    class="imgs"
+                    *ngFor="let img of actual_comments[i].images"
+                  >
+                    <img *ngIf="img != undefined" src="{{ img }}" alt="" />
+                  </div>
+                </div>
+                <p class="comment_body" #comment_body_all>
+                  {{ comment.comment }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-alert-component
+  [msg]="alert_error"
+  (is_closed)="alert_error = ''"
+  *ngIf="alert_error != ''"
+></app-alert-component>
+<app-load-screen *ngIf="show_load_screen"></app-load-screen>

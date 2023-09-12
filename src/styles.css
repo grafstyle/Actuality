@@ -1,0 +1,238 @@
+/* All */
+
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+  --p_color: #258343;
+  --s_color: #fff;
+  --txt_color: #000;
+  --txt_s_color: #fff;
+  --contrast_light: #e4e4e4;
+  --contrast_dark: #999;
+
+  transition: all 0.3s ease-out;
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background: none;
+  outline: 0;
+}
+
+.ns,
+.material-symbols-outlined {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.not_play_video::-webkit-media-controls {
+  pointer-events: none;
+}
+
+/* General class "img_cont" for organizate the images. */
+
+.img_cont {
+  overflow: hidden;
+  position: relative;
+}
+
+.img_cont > img,
+.img_cont > video {
+  position: absolute;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* General class for centered elements */
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cvc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* General post and comments "class", to apply global styles */
+
+.all_posts {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.all_p_margin {
+  margin-top: 20px;
+}
+
+.post {
+  width: 100%;
+}
+
+.post > .all_content {
+  border-radius: 25px;
+  padding: 10px;
+  border: var(--contrast_dark) solid 3px;
+  overflow: hidden;
+}
+
+.post > .all_content > .user,
+.post > .all_content > .user > .img_and_name {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.post > .all_content > .user {
+  margin: 15px;
+}
+
+.post > .all_content > .user .img_cont {
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+}
+
+.post > .all_content > .user .names {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  gap: 2px;
+}
+
+.post > .all_content > .user .name {
+  font-size: 16pt;
+  color: var(--txt_color);
+}
+
+.post > .all_content > .user .url_name {
+  font-size: 14pt;
+  color: var(--p_color);
+}
+
+.post > .all_content > .user .date {
+  font-size: 8pt;
+  color: var(--txt_color);
+}
+
+.post > .all_content > .content > .title {
+  padding: 15px 10px;
+  background-color: var(--contrast_light);
+  border-bottom: var(--contrast_dark) 3px solid;
+}
+
+.post .media_mul {
+  height: 400px;
+}
+
+.post .media img {
+  width: 100%;
+}
+
+.post .media > .grid_elem,
+.post .only_vid_media > .grid_elem > video {
+  max-height: 800px;
+  overflow: hidden;
+}
+
+.post .only_vid_media > .grid_elem > video,
+.post .only_vid_media > .grid_elem > video > source {
+  width: 100%;
+}
+
+.post .media_mul > .grid_elem {
+  width: 100%;
+  height: 100%;
+}
+
+.post .grid_media {
+  margin-bottom: 10px;
+  display: grid;
+  gap: 5px;
+  grid-template-rows: repeat(auto-fill);
+}
+
+.post .grid_media > .grid_elem:nth-child(n + 2) {
+  grid-column: right;
+}
+
+/* For modals */
+
+.modal_container {
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  left: 0;
+  top: 0;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.err_cont {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+  padding-bottom: 5px;
+}
+
+.err_cont > span {
+  color: var(--txt_color);
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  font-size: 148pt;
+}
+
+.err_cont > p {
+  color: var(--txt_color);
+  font-size: 18pt;
+}
+
+@media (max-width: 800px) {
+  .post > .all_content > .user .img_cont {
+    width: 50px;
+    height: 50px;
+  }
+
+  .post > .all_content > .user .url_name,
+  .post > .all_content > .user .name {
+    font-size: 100%;
+  }
+
+  .post > .all_content > .user > .img_and_name {
+    gap: 2%;
+  }
+
+  .post > .all_content > .user {
+    margin: 0 0 2% 0;
+  }
+
+  .post > .all_content {
+    padding: 2%;
+  }
+}

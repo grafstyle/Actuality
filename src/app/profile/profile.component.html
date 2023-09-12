@@ -1,0 +1,206 @@
+<div class="user_profile" *ngIf="user.id != undefined">
+  <div class="edit_profile modal_container" #edit_profile>
+    <div class="content">
+      <div class="portrait_edit">
+        <div class="img_cont front_edit">
+          <img
+            #portrait_img
+            src="{{ user.portrait || '../../../assets/portrait.png' }}"
+            alt=""
+          />
+          <button
+            #edit_portrait_img
+            class="edit_btn edit_portrait_btn"
+            (click)="editPortraitImg(true)"
+          >
+            <span class="material-symbols-outlined">edit</span>
+          </button>
+        </div>
+        <div class="options" #portrait_options>
+          <input
+            #portrait_input
+            (change)="changePortrait($event, 'image/jpeg', 'image/png')"
+            type="file"
+            accept="image/jpeg, image/png"
+          />
+          <div class="actions_btns">
+            <button (click)="quitNewPortrait()">
+              <span class="material-symbols-outlined">delete</span>
+            </button>
+            <button class="btn_ok" (click)="editPortraitImg(false)">Ok</button>
+          </div>
+        </div>
+      </div>
+      <div class="user_img_edit centered">
+        <div class="img_cont user_img_edit">
+          <img #user_img src="{{ user.image || def_person_img }}" alt="" />
+          <button
+            #edit_user_img
+            class="edit_btn edit_user_img_btn"
+            (click)="editUserImg(true)"
+          >
+            <span class="material-symbols-outlined">edit</span>
+          </button>
+        </div>
+        <div class="options" #user_img_options>
+          <input
+            #user_img_input
+            (change)="changeUserImg($event, 'image/jpeg', 'image/png')"
+            type="file"
+            accept="image/jpeg, image/png"
+          />
+          <div class="actions_btns">
+            <button (click)="quitNewUserImg()">
+              <span class="material-symbols-outlined">delete</span>
+            </button>
+            <button class="btn_ok" (click)="editUserImg(false)">Ok</button>
+          </div>
+        </div>
+      </div>
+      <div class="name_edit">
+        <h2 class="nc">Name:</h2>
+        <div class="name nc" #name contenteditable="true">{{ user.name }}</div>
+        <h4 class="input_error" *ngIf="name_error != ''">
+          {{ this.name_error }}
+        </h4>
+      </div>
+      <div class="url_name_edit">
+        <h2 class="nc">Url name:</h2>
+        <div class="edit_cont nc">
+          <p>@</p>
+          <div class="url_name" #url_name contenteditable="true">
+            {{ user.url_name }}
+          </div>
+        </div>
+        <h4 class="input_error" *ngIf="url_name_error != ''">
+          {{ this.url_name_error }}
+        </h4>
+      </div>
+      <div class="bio_edit nc">
+        <h2>Bio:</h2>
+        <div
+          #bio
+          class="bio"
+          contenteditable="true"
+          (keydown)="setBioLetters()"
+          (keyup)="setBioLetters()"
+        >
+          {{ user.bio }}
+        </div>
+        <div class="cont_count_letters">
+          <h3 class="count_letters cfz">{{ this.bio_letters }}</h3>
+        </div>
+      </div>
+      <h4 class="input_error" *ngIf="bio_error != ''">{{ this.bio_error }}</h4>
+      <div class="btns">
+        <button (click)="modalEditProfile(false)">Ok</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile part -->
+
+  <div class="portrait">
+    <div class="img_cont front">
+      <img src="{{ user.portrait || '../../../assets/portrait.png' }}" alt="" />
+    </div>
+    <div class="edit_prof_cont">
+      <button
+        #edit_btn
+        *ngIf="can_edit_profile"
+        (click)="modalEditProfile(true)"
+      >
+        <span class="material-symbols-outlined">edit</span>
+      </button>
+      <button #follow_btn *ngIf="!can_edit_profile" (click)="followClick()">
+        Follow
+      </button>
+    </div>
+    <div class="img_cont user_img">
+      <img src="{{ user.image || def_person_img }}" alt="" />
+    </div>
+  </div>
+  <div class="info">
+    <div class="names">
+      <h3>{{ user.name }}</h3>
+      <p>@{{ user.url_name }}</p>
+    </div>
+    <div class="bio" *ngIf="bio.innerText != ''">
+      <p>{{ user.bio }}</p>
+    </div>
+    <div class="other_info">
+      <div class="folls_cont">
+        <div class="followers" (click)="showAllFollowers()">
+          <p>{{ user.followers.length }} Followers</p>
+        </div>
+        <div class="followed" (click)="showAllFollowed()">
+          <p>{{ user.followed.length }} Followed</p>
+        </div>
+      </div>
+      <div class="joined">
+        <p>
+          <span class="material-symbols-outlined">event</span>{{ formatDate() }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="folls_view modal_container" #followe_rs_d_view>
+    <div class="content">
+      <div class="title_and_actions">
+        <h2>Followed:</h2>
+        <div class="action">
+          <button (click)="showContFoll(false)">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+      </div>
+      <div class="users">
+        <div class="centered" *ngIf="this.folls.length == 0">
+          <p>{{ folls_empty_str }}</p>
+        </div>
+        <ng-container *ngFor="let foll of this.folls">
+          <div class="user ns" (click)="goToUser(foll.url_name)">
+            <div class="img_cont img_user">
+              <img src="{{ foll.image }}" alt="" />
+            </div>
+            <div class="info_and_options">
+              <div class="name">
+                <p class="cfz">{{ foll.name }}</p>
+              </div>
+              <div class="btn_cont centered">
+                <button
+                  *ngIf="modal_followed_opened && !can_follow"
+                  (click)="unfollowAndRefresh(foll.id)"
+                >
+                  Unfollow
+                </button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+<app-post-input [margin_top]="'15px'" *ngIf="!can_follow"></app-post-input>
+<app-loader *ngIf="show_loader"></app-loader>
+<div class="err_cont" *ngIf="err != ''">
+  <span class="material-symbols-outlined">no_accounts</span>
+  <p>{{ err }}</p>
+</div>
+<div class="opts_profile" *ngIf="user.id != undefined">
+  <a [routerLink]="['/' + user.url_name]">Posts</a>
+  <a [routerLink]="['/' + user.url_name + '/multimedia']">Multimedia</a>
+  <a [routerLink]="['/' + user.url_name + '/liked']">Liked</a>
+</div>
+<router-outlet
+  *ngIf="user.id != undefined"
+  (activate)="elemLoaded($event)"
+></router-outlet>
+<app-load-screen *ngIf="show_load_screen"></app-load-screen>
+<app-alert-component
+  [msg]="alert_msg"
+  (is_closed)="alert_msg = ''"
+  *ngIf="alert_msg != ''"
+></app-alert-component>

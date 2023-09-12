@@ -1,0 +1,100 @@
+<div class="all">
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+  />
+  <div class="open_menu_cont" (click)="openMenu()" #menu_open>
+    <span class="material-symbols-outlined" #menu_open_icon>menu</span>
+  </div>
+  <nav #menu>
+    <div class="close_menu_cont">
+      <div class="icon" (click)="closeMenu()" #menu_close>
+        <span class="material-symbols-outlined">chevron_left</span>
+      </div>
+    </div>
+    <div class="logo_cont centered fw">
+      <div class="logo" routerLink="/home">
+        <div class="logo_img"></div>
+      </div>
+    </div>
+    <ul class="fw">
+      <li class="link_elem fw">
+        <h1 class="fw">
+          <a routerLink="/home" class="fw"
+            ><span class="material-symbols-outlined">home</span>Home</a
+          >
+        </h1>
+      </li>
+      <li class="link_elem fw">
+        <h1 class="fw">
+          <a routerLink="/profile" class="fw"
+            ><span class="material-symbols-outlined">account_circle</span
+            >Profile</a
+          >
+        </h1>
+      </li>
+      <li class="link_elem fw" *ngIf="getUserIDByCookie() == undefined">
+        <h1 class="fw">
+          <a href="" (click)="goProfile()" class="fw"
+            ><span class="material-symbols-outlined">login</span>Login</a
+          >
+        </h1>
+      </li>
+      <li class="link_elem fw" *ngIf="getUserIDByCookie()! > 0">
+        <h1 class="fw">
+          <a href="" (click)="logout()" class="fw"
+            ><span class="material-symbols-outlined">logout</span>Logout</a
+          >
+        </h1>
+      </li>
+      <li class="fw">
+        <div class="modes centered">
+          <div class="m_conts fw">
+            <div class="m_cont of_light fw">
+              <div
+                class="mode light centered"
+                (click)="setLightMode()"
+                [style.backgroundColor]="bg_of_light"
+              >
+                <span class="material-symbols-outlined">light_mode</span>
+              </div>
+            </div>
+            <div class="m_cont of_dark fw">
+              <div
+                class="mode dark centered"
+                (click)="setDarkMode()"
+                [style.backgroundColor]="bg_of_dark"
+              >
+                <span class="material-symbols-outlined">dark_mode</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline">
+            <hr />
+            <div class="circle" [style.left]="left_of_circle"></div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="all_content">
+    <div class="search_part">
+      <label class="cont_search">
+        <input
+          #input_search
+          class="search"
+          type="search"
+          placeholder="Search all you want!"
+          (keyup.enter)="search(input_search)"
+        />
+        <span class="material-symbols-outlined" (click)="search(input_search)"
+          >search</span
+        >
+      </label>
+    </div>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

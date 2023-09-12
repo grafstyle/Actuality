@@ -1,0 +1,102 @@
+<app-loader *ngIf="show_loader"></app-loader>
+<div *ngIf="err" class="error_posts err_cont">
+  <span class="material-symbols-outlined" *ngIf="err == ERR_GET_POSTS"
+    >signal_disconnected</span
+  >
+  <span class="material-symbols-outlined" *ngIf="err != ERR_GET_POSTS"
+    >public_off</span
+  >
+  <p>{{ err }}</p>
+</div>
+<div class="all_posts all_p_margin">
+  <div class="post" *ngFor="let cpost of cposts; let i = index">
+    <div class="all_content">
+      <div class="user ns">
+        <div class="img_cont">
+          <img
+            src="{{ cpost.user_of_post.image || def_person_img }}"
+            alt=""
+            [routerLink]="['/' + cpost.user_of_post.url_name]"
+          />
+        </div>
+        <div class="names">
+          <p class="name" [routerLink]="['/' + cpost.user_of_post.url_name]">
+            {{ cpost.user_of_post.name }}
+          </p>
+          <p
+            class="url_name"
+            [routerLink]="['/' + cpost.user_of_post.url_name]"
+          >
+            @{{ cpost.user_of_post.url_name }}
+          </p>
+          <p class="date" [routerLink]="['/' + cpost.user_of_post.url_name]">
+            {{ tools.formatDate(cpost.post.date_added) }}
+          </p>
+        </div>
+      </div>
+      <div class="content">
+        <app-carrousel-media
+          [media]="cpost.post.images"
+          *ngIf="
+            cpost.post.images.length > 0 &&
+            open_media_carrousel &&
+            actual_media_carrousel == i &&
+            (cpost.post.images.length > 1 ||
+              (cpost.post.images.length == 1 &&
+                !cpost.post.images[0].includes('.mp4')))
+          "
+          (closed)="open_media_carrousel = false"
+          #carrousel_media
+        >
+        </app-carrousel-media>
+        <div
+          class="grid_media"
+          [class.media]="cpost.post.images.length == 1"
+          [class.only_vid_media]="
+            cpost.post.images.length == 1 &&
+            cpost.post.images[0].includes('.mp4')
+          "
+          [class.media_mul]="cpost.post.images.length > 1"
+          *ngIf="cpost.post.images.length > 0"
+          (click)="openMediaCarrousel(i, carrousel_media)"
+        >
+          <div
+            class="grid_elem"
+            *ngFor="let img_or_vid of cpost.post.images; let img_i = index"
+            [class.img_cont]="cpost.post.images.length > 1"
+            [style.grid-row]="
+              img_i == 0 && cpost.post.images.length > 2
+                ? '1/' + cpost.post.images.length
+                : ''
+            "
+          >
+            <img
+              src="{{ img_or_vid }}"
+              alt=""
+              *ngIf="!img_or_vid.includes('.mp4')"
+            />
+            <video
+              *ngIf="img_or_vid.includes('.mp4')"
+              controls
+              [class.not_play_video]="cpost.post.images.length > 1"
+              [autoplay]="cpost.post.images.length == 1"
+              [preload]="cpost.post.images.length == 1 ? 'none' : ''"
+              loop
+              [muted]="'muted'"
+            >
+              <source src="{{ img_or_vid }}" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+        <div class="title">
+          <p>{{ cpost.post.title }}</p>
+        </div>
+      </div>
+      <app-likes
+        [id_post]="cpost.post.id"
+        [cant_likes]="cpost.likes.length"
+      ></app-likes>
+    </div>
+    <app-comments [id_post]="cpost.post.id"></app-comments>
+  </div>
+</div>

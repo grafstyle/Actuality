@@ -1,0 +1,24 @@
+.date_and_likes {
+  display: flex;
+  gap: 5px;
+  padding: 15px 15px 5px 15px;
+}
+
+.not_liked {
+  color: var(--contrast_dark);
+}
+
+.liked {
+  color: var(--p_color);
+}
+
+.likes {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+}
+
+.likes > p {
+  color: var(--txt_color);
+}

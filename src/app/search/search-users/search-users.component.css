@@ -1,0 +1,42 @@
+.all_users {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.all_users > h3 {
+  color: var(--txt_color);
+  margin-bottom: 5px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: default;
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: var(--contrast_dark) 3px solid;
+  transition: all 0.3s ease-out;
+}
+
+.user:hover {
+  border-color: var(--p_color);
+  transform: scale(1.02);
+}
+
+.user > .names_info > .name,
+.user > .names_info > .url_name {
+  color: var(--txt_color);
+}
+
+.user > .names_info > .img_name {
+  color: var(--contrast_dark);
+}
+
+.img_user {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+}

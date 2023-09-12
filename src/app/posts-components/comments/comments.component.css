@@ -1,0 +1,203 @@
+.all_content,
+.user_comment > .imgs_or_vids,
+.addComment {
+  display: flex;
+}
+
+.section_comments {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  gap: 5px;
+}
+
+.comments > h3 {
+  padding-top: 5px;
+  cursor: default;
+  text-align: center;
+  transition: all 0.3s ease-out;
+}
+
+.comments > h3:hover {
+  color: var(--p_color);
+}
+
+.all_comments {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 5px 20px;
+}
+
+.all_content {
+  width: 100%;
+  border-bottom: var(--contrast_dark) 2px solid;
+  padding-bottom: 5px;
+}
+
+.all_content > .img_user_cont {
+  width: max-content;
+}
+
+.all_content > .img_user_cont > .user {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+}
+
+.user_comment {
+  padding-left: 5px;
+  width: 100%;
+}
+
+.user_comment > .comment_body {
+  padding: 10px;
+  background: var(--contrast_dark);
+  border-radius: 15px;
+  outline: 0;
+}
+
+.user_comment > .imgs_or_vids {
+  display: flex;
+  gap: 3px;
+}
+
+.user_comment .names {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.imgs_or_vids {
+  padding-bottom: 5px;
+}
+
+.imgs_or_vids > .imgs > img,
+.imgs_or_vids > .imgs {
+  height: 120px;
+  width: auto;
+}
+
+.name_and_actions {
+  display: flex;
+  align-items: center;
+  padding-bottom: 5px;
+  width: 100%;
+}
+
+.name_and_actions > .names > h4 {
+  font-size: 14pt;
+  color: var(--txt_color);
+}
+
+.name_and_actions > .names > .url_name {
+  color: var(--p_color);
+  font-size: 12pt;
+}
+
+.name_and_actions > .names > .date {
+  color: var(--contrast_dark);
+  font-size: 8pt;
+}
+
+.name_and_actions,
+.actions {
+  display: flex;
+  gap: 3px;
+}
+
+.actions {
+  justify-content: flex-end;
+}
+
+.actions > .delete_btn,
+.actions > .edit_btn,
+.addImg {
+  color: var(--txt_color);
+  transition: all 0.3s ease-out;
+}
+
+.actions > .edit_btn:hover,
+.actions > .delete_btn:hover,
+.addImg:hover {
+  color: var(--p_color);
+}
+
+.view_more_cont {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.view_more_cont > button {
+  color: var(--txt_color);
+  transition: all 0.3s ease-out;
+}
+
+.view_more_cont > button:hover {
+  color: var(--p_color);
+}
+
+.modal_container > .content {
+  background-color: var(--s_color);
+  overflow: hidden;
+  border-radius: 15px;
+  padding: 5px;
+  width: 50%;
+}
+
+.modal_container > .content > .comments_cont {
+  overflow-y: scroll;
+  height: 85vh;
+  margin-top: 5px;
+}
+
+.modal_container > .content > .close_cont {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal_container > .content > .close_cont > span {
+  cursor: default;
+  font-size: 22pt;
+  transition: all 0.3s ease-out;
+  color: var(--txt_color);
+}
+
+.modal_container > .content > .close_cont > span:hover {
+  color: var(--p_color);
+}
+
+.modal_container > .content > .comments_cont {
+  padding: 0 55px;
+}
+
+@media (max-width: 800px) {
+  .all_comments {
+    padding: 5px 2%;
+  }
+
+  .all_content > .img_user_cont > .user {
+    width: 25px;
+    height: 25px;
+  }
+
+  .name_and_actions > .names > h4,
+  .name_and_actions > .names > .url_name {
+    font-size: 90%;
+  }
+
+  .user_comment {
+    padding-left: 2%;
+  }
+
+  .name_and_actions,
+  .actions {
+    gap: 2%;
+  }
+
+  .actions > .delete_btn > span,
+  .actions > .edit_btn > span {
+    font-size: 100%;
+  }
+}

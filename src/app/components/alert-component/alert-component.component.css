@@ -1,0 +1,34 @@
+.container {
+  padding: 10px;
+  border-radius: 15px;
+  background-color: #1e1e1e;
+  width: 50vh;
+}
+
+.container > .btns_cont > button,
+.container > p {
+  color: var(--p_color);
+}
+
+.container > .btns_cont {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.container > .btns_cont > button {
+  transition: all 0.3s ease-out;
+}
+
+.container > .btns_cont > button:hover {
+  color: #fff;
+}
+
+.container > .btns_cont > button > span {
+  font-size: 28pt;
+}
+
+.container > p {
+  padding: 25px;
+  font-size: 18pt;
+}

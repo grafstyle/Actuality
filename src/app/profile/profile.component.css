@@ -1,0 +1,392 @@
+/* Generics */
+
+.user_profile {
+  --img-user-padding: -60px;
+  --margin_of_names: 5px;
+
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.nc {
+  color: var(--txt_color);
+}
+
+/* Containers of modals */
+
+.modal_container > .content {
+  background-color: var(--s_color);
+  width: 50%;
+}
+
+/* All img_cont */
+
+.img_cont > .edit_btn,
+.all_media > .edit_btn {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border: 0;
+  outline: 0;
+  background: rgba(0, 0, 0, 0.6);
+  color: var(--txt_s_color);
+  z-index: 9999;
+}
+
+.all_media > .edit_btn,
+.front_edit > .edit_btn,
+.user_img_edit > .edit_btn {
+  color: var(--txt_color);
+  transition: all 0.3s ease-out;
+}
+
+.all_media > .edit_btn:hover,
+.front_edit > .edit_btn:hover,
+.user_img_edit > .edit_btn:hover {
+  color: var(--p_color);
+}
+
+/* Profile edit part */
+
+.edit_profile > .content {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  gap: 5px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.edit_profile > .content > .user_img_edit > .user_img_edit {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  border: var(--p_color) 3px solid;
+}
+
+.edit_profile > .content > .user_img_edit > .options {
+  flex-wrap: wrap;
+}
+
+.edit_profile > .content > .url_name_edit > .edit_cont {
+  display: flex;
+}
+
+.edit_profile > .content > .url_name_edit div[contenteditable="true"] {
+  width: 150px;
+}
+
+.edit_profile > .content .portrait_edit > .options > input,
+.edit_profile > .content .portrait_edit > .options > .actions_btns {
+  width: 100%;
+}
+
+.edit_profile > .content .options,
+.edit_profile > .content .options > input,
+.edit_profile > .content .options > .actions_btns {
+  gap: 5px;
+}
+
+.edit_profile > .content .options {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+.edit_profile > .content .options > .actions_btns {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.edit_profile > .content .options > .actions_btns > button,
+.edit_profile > .content > .btns > button {
+  color: var(--txt_color);
+  transition: all 0.3s ease-out;
+}
+
+.edit_profile > .content .options > .actions_btns > .btn_ok,
+.edit_profile > .content > .btns > button {
+  padding: 5px;
+  border: var(--txt_color) 3px solid;
+  border-radius: 15px;
+}
+
+.edit_profile > .content .options > .actions_btns > button:hover,
+.edit_profile > .content > .btns > button:hover {
+  border-color: var(--p_color);
+  color: var(--p_color);
+}
+
+.edit_profile > .content div[contenteditable="true"] {
+  outline: 0;
+  border-bottom: var(--p_color) 3px solid;
+  padding-bottom: 5px;
+}
+
+.edit_profile > .content > .url_name_edit div[contenteditable="true"],
+.edit_profile > .content > .name_edit div[contenteditable="true"] {
+  overflow-x: scroll;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.edit_profile > .content > .url_name_edit > .edit_cont > p {
+  padding-bottom: 5px;
+}
+
+.edit_profile > .content > .bio_edit > .bio {
+  max-height: 100px;
+  overflow-y: scroll;
+}
+
+.edit_profile > .content > .bio_edit > .cont_count_letters {
+  padding: 5px 0;
+}
+
+.edit_profile > .content > .bio_edit > .cont_count_letters,
+.edit_profile > .content > .btns {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+/* Profile part */
+
+.portrait {
+  position: relative;
+}
+
+.portrait > .front,
+.edit_profile > .content > .portrait_edit > .front_edit {
+  height: 250px;
+  border-radius: 15px;
+}
+
+.edit_prof_cont {
+  padding: 5px;
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.edit_prof_cont > button {
+  padding: 3px;
+  border: var(--txt_color) 3px solid;
+  border-radius: 15px;
+  transition: all 0.3s ease-out;
+  color: var(--txt_color);
+}
+
+.edit_prof_cont > button > span {
+  transition: all 0.3s ease-out;
+}
+
+.edit_prof_cont > button:hover {
+  border-color: var(--p_color);
+}
+
+.edit_prof_cont > button:hover,
+.edit_prof_cont > button:hover > span {
+  color: var(--p_color);
+}
+
+.user_img {
+  position: absolute;
+  bottom: var(--img-user-padding);
+  height: 200px;
+  width: 200px;
+  background-color: var(--txt_s_color);
+  border-radius: 100%;
+}
+
+.info,
+.info > .names,
+.info > .other_info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info {
+  margin-top: calc((var(--img-user-padding) + var(--margin_of_names)) * -1);
+  margin-bottom: 5px;
+}
+
+.info > .names {
+  margin-top: var(--margin_of_names);
+  color: var(--txt_color);
+}
+
+.info > .bio {
+  color: var(--txt_color);
+}
+
+.info > .other_info > .folls_cont,
+.info > .other_info > .joined > p {
+  display: flex;
+  gap: 5px;
+}
+
+.info > .other_info > .joined > p {
+  align-items: center;
+  color: var(--txt_color);
+}
+
+.info > .other_info > .joined > p > span {
+  color: var(--p_color);
+}
+
+.info > .other_info > .folls_cont > .followed > p,
+.info > .other_info > .folls_cont > .followers > p {
+  color: var(--txt_color);
+  cursor: default;
+  transition: all 0.3s ease-out;
+}
+
+.info > .other_info > .folls_cont > .followed > p:hover,
+.info > .other_info > .folls_cont > .followers > p:hover {
+  color: var(--p_color);
+}
+
+.folls_view > .content {
+  width: 350px;
+  background-color: var(--p_color);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.folls_view > .content > .title_and_actions {
+  display: flex;
+  padding: 5px;
+}
+
+.folls_view > .content > .title_and_actions > h2,
+.folls_view > .content > .users > .no_users > p {
+  color: var(--txt_color);
+}
+
+.folls_view > .content > .title_and_actions > .action {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.folls_view > .content > .title_and_actions > .action > button {
+  transition: all 0.3s ease-out;
+  color: var(--txt_color);
+}
+
+.folls_view > .content > .title_and_actions > .action > button:hover {
+  color: var(--txt_s_color);
+}
+
+.folls_view > .content > .title_and_actions > .action > button > span {
+  font-size: 22pt;
+}
+
+.folls_view > .content > .users {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  height: 350px;
+  overflow-y: scroll;
+  padding: 0 5px;
+}
+
+.folls_view > .content > .users > .no_users {
+  width: 100%;
+  height: 100%;
+}
+
+.folls_view > .content > .users > .user,
+.folls_view > .content > .users > .user > .info_and_options {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.folls_view > .content > .users > .user > .img_user {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+}
+
+.folls_view > .content > .users > .user > .info_and_options {
+  flex-wrap: wrap;
+  width: min-content;
+}
+
+.folls_view > .content > .users > .user > .info_and_options > .name > p {
+  width: 130px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.folls_view
+  > .content
+  > .users
+  > .user
+  > .info_and_options
+  > .btn_cont
+  > button {
+  border: var(--txt_color) 2px solid;
+  color: var(--txt_color);
+  border-radius: 15px;
+  padding: 5px;
+  transition: all 0.3s ease-out;
+}
+
+.folls_view > .content > .users > .user > .btn_cont > button:hover {
+  border-color: var(--txt_s_color);
+  color: var(--txt_s_color);
+}
+
+.opts_profile,
+.opts_profile > a {
+  display: flex;
+  width: 100%;
+}
+
+.opts_profile > a {
+  text-decoration: none;
+  justify-content: center;
+  padding: 25px 0;
+  color: var(--txt_color);
+  transition: all 0.3s ease-out;
+}
+
+.opts_profile > a:hover {
+  color: var(--p_color);
+}
+
+@media (max-width: 800px) {
+  .portrait > .front,
+  .edit_profile > .content > .portrait_edit > .front_edit {
+    height: 120px;
+  }
+
+  .folls_view > .content > .users > .user,
+  .folls_view > .content > .users > .user > .info_and_options {
+    gap: 3%;
+  }
+
+  .modal_container > .content,
+  .folls_view > .content {
+    width: 90%;
+  }
+
+  .edit_profile > .content > .user_img_edit > .user_img_edit {
+    height: 60px;
+    width: 60px;
+  }
+
+  .cfz {
+    font-size: 100%;
+  }
+
+  .actions > .more_btn_cont > button > span {
+    font-size: 150%;
+  }
+}

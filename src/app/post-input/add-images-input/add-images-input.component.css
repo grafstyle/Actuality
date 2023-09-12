@@ -1,0 +1,55 @@
+.display {
+  border-radius: 15px;
+  padding: 5px;
+  background-color: var(--p_color);
+  width: 450px;
+}
+
+.wait {
+  padding: 10px 0;
+  width: 100%;
+  text-align: center;
+}
+
+.all_imgs {
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.show_imgs {
+  text-align: center;
+}
+
+.show_imgs > img,
+.show_imgs > video {
+  height: 120px;
+}
+
+.btns_cont {
+  display: flex;
+  justify-content: flex-end;
+  gap: 3px;
+}
+
+.btns_cont > button {
+  padding: 5px;
+}
+
+.add_img {
+  height: 100%;
+}
+
+.add_img,
+.btns_cont > button {
+  color: var(--txt_color);
+  transition: all 0.3s ease-out;
+}
+
+.add_img:hover,
+.btns_cont > button:hover {
+  color: var(--txt_s_color);
+}
+
+.add_btn > label > input {
+  display: none;
+}

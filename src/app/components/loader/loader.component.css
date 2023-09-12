@@ -1,0 +1,20 @@
+.loader {
+  width: 100%;
+  padding-top: 15px;
+}
+
+.loader > img {
+  height: 150px;
+  animation: load 1s ease-out infinite;
+}
+
+@keyframes load {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}

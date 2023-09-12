@@ -1,0 +1,64 @@
+<button
+  class="add_img centered"
+  (mouseover)="hover_add_img = true"
+  (mouseleave)="hover_add_img = false"
+  [ngStyle]="{ color: hover_color != '' && hover_add_img ? hover_color : '' }"
+  (click)="chooseImgModal(true)"
+>
+  <span
+    class="material-symbols-outlined"
+    [ngStyle]="{ font_size: font_size != '' ? font_size : '' }"
+    >image</span
+  >
+</button>
+
+<div class="modal_container add_img_cont" ngModel #add_img_cont>
+  <div class="display">
+    <div class="initial_img" *ngIf="imgs.length == 0">
+      <div class="wait">Waiting for an image or video.</div>
+    </div>
+    <div class="all_imgs centered">
+      <div class="show_imgs" *ngFor="let img of imgs; let i = index">
+        <img
+          src="{{ img.url }}"
+          alt=""
+          *ngIf="!img.url.includes('video/mp4') || !img.url.includes('.mp4')"
+        />
+        <video
+          *ngIf="img.url.includes('video/mp4') || img.url.includes('.mp4')"
+          controls
+          autoplay
+          loop
+          [muted]="'muted'"
+        >
+          <source src="{{ img.url }}" type="video/mp4" />
+        </video>
+        <div class="name">{{ img.name.split(".")[0] }}</div>
+      </div>
+    </div>
+    <div class="btns_cont">
+      <button class="add_btn">
+        <label>
+          Add
+          <input
+            type="file"
+            accept="image/jpeg, image/png, video/mp4"
+            id="add_btn"
+            (change)="
+              changingImg($event, 'image/jpeg', 'image/png', 'video/mp4')
+            "
+            ngModel
+            #add_btn
+          />
+        </label>
+      </button>
+      <button (click)="removeLastImage()">Delete last</button>
+      <button (click)="chooseImgModal(false)">Ok</button>
+    </div>
+  </div>
+</div>
+<app-alert-component
+  [msg]="alert_error"
+  (is_closed)="alert_error = ''"
+  *ngIf="alert_error != ''"
+></app-alert-component>
