@@ -176,7 +176,7 @@
             cpost.post.images[0].includes('.mp4')
           "
           [class.media_mul]="cpost.post.images.length > 1"
-          *ngIf="cposts_imgs != undefined && cposts_imgs[i].length > 0"
+          *ngIf="cposts_imgs[i] != undefined && cposts_imgs[i].length > 0"
           (click)="openMediaCarrousel(i, carrousel_media)"
         >
           <div
