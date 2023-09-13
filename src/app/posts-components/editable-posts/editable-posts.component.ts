@@ -197,9 +197,10 @@ export class EditablePostsComponent implements OnInit {
       return;
     }
 
+    this.tools.hideComponent(elem);
+
     await this.editPost(elem_pos);
 
-    this.tools.hideComponent(elem);
     this.quitNewImgsOfPost();
 
     this.show_load_screen = false;

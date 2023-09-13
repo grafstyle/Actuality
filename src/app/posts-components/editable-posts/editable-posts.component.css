@@ -46,22 +46,14 @@
   margin-bottom: 0;
 }
 
-.edit_post > .content > .post > .content_edit > .all_media,
+.mhce,
 .edit_post
   > .content
   > .post
   > .content_edit
   > .all_media
-  > .only_vid_media
-  > .grid_elem,
-.edit_post
-  > .content
-  > .post
-  > .content_edit
-  > .all_media
-  > .only_vid_media
-  > .grid_elem
-  > video {
+  > .media
+  > .grid_elem {
   max-height: 400px;
 }
 

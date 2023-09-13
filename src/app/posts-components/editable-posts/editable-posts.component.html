@@ -30,7 +30,7 @@
               class="content_edit"
               *ngIf="setImgs(cpost.post.images.slice())"
             >
-              <div class="all_media" #media>
+              <div class="all_media mhce" #media>
                 <button
                   #edit_post_imgs_btn
                   class="edit_btn edit_post_imgs_btn"
@@ -40,13 +40,23 @@
                 </button>
                 <div
                   class="grid_media"
-                  [class.media]="imgsToEdit.length == 1"
+                  [class.mhce]="imgsToEdit.length == 1"
+                  [class.media]="
+                    imgsToEdit.length == 1 &&
+                    !imgsToEdit[0].includes('.mp4') &&
+                    !imgsToEdit[0].includes('video/mp4')
+                  "
                   [class.only_vid_media]="
-                    imgsToEdit.length == 1 && imgsToEdit[0].includes('.mp4')
+                    imgsToEdit.length == 1 &&
+                    imgsToEdit[0].includes('.mp4') &&
+                    imgsToEdit[0].includes('video/mp4')
                   "
                   [class.media_mul]="imgsToEdit.length > 1"
                 >
-                  <div class="img_cont centered" *ngIf="imgsToEdit.length == 0">
+                  <div
+                    class="img_cont centered mhce"
+                    *ngIf="imgsToEdit.length == 0"
+                  >
                     <span class="material-symbols-outlined"
                       >image_not_supported</span
                     >
@@ -70,6 +80,7 @@
                       "
                     />
                     <video
+                      class="mhce"
                       *ngIf="
                         img_or_vid.includes('.mp4') ||
                         img_or_vid.includes('video/mp4')
