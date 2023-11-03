@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class Service {
-  server: string = 'https://master--cool-bunny-fd74e8.netlify.app/';
+  server: string = 'http://actuality-backend-env.eba-rz9cqmj5.us-east-1.elasticbeanstalk.com/';
 
   constructor(private _http: HttpClient) {}
 
