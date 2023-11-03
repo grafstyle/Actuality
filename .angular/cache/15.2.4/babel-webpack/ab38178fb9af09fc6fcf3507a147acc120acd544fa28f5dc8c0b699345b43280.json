@@ -1,0 +1,8 @@
+{
+  "ast": null,
+  "code": "import * as i0 from \"@angular/core\";\nimport * as i1 from \"@angular/router\";\nexport let SearchComponent = /*#__PURE__*/(() => {\n  class SearchComponent {}\n  SearchComponent.ɵfac = function SearchComponent_Factory(t) {\n    return new (t || SearchComponent)();\n  };\n  SearchComponent.ɵcmp = /*@__PURE__*/i0.ɵɵdefineComponent({\n    type: SearchComponent,\n    selectors: [[\"app-search\"]],\n    decls: 8,\n    vars: 0,\n    consts: [[1, \"links\", \"centered\"], [\"routerLink\", \"/search\", \"queryParamsHandling\", \"merge\"], [\"routerLink\", \"/search/users\", \"queryParamsHandling\", \"merge\"], [\"routerLink\", \"/search/posts\", \"queryParamsHandling\", \"merge\"]],\n    template: function SearchComponent_Template(rf, ctx) {\n      if (rf & 1) {\n        i0.ɵɵelementStart(0, \"div\", 0)(1, \"a\", 1);\n        i0.ɵɵtext(2, \"All\");\n        i0.ɵɵelementEnd();\n        i0.ɵɵelementStart(3, \"a\", 2);\n        i0.ɵɵtext(4, \"Users\");\n        i0.ɵɵelementEnd();\n        i0.ɵɵelementStart(5, \"a\", 3);\n        i0.ɵɵtext(6, \"Posts\");\n        i0.ɵɵelementEnd()();\n        i0.ɵɵelement(7, \"router-outlet\");\n      }\n    },\n    dependencies: [i1.RouterOutlet, i1.RouterLink],\n    styles: [\".links[_ngcontent-%COMP%], .links[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]{width:100%}.links[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]{padding:20px 0;color:var(--txt_color);text-decoration:none;transition:all .3s ease-out}.links[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:hover{color:var(--p_color)}\"]\n  });\n  return SearchComponent;\n})();",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module",
+  "externalDependencies": []
+}

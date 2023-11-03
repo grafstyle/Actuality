@@ -1,0 +1,8 @@
+{
+  "ast": null,
+  "code": "import * as i0 from \"@angular/core\";\nimport * as i1 from \"@angular/common/http\";\nexport let Service = /*#__PURE__*/(() => {\n  class Service {\n    constructor(_http) {\n      this._http = _http;\n      this.server = 'https://api.comsier.com/';\n    }\n    get(path) {\n      return this._http.get(`${this.server}${path}`);\n    }\n    post(path, data) {\n      return this._http.post(`${this.server}${path}`, data);\n    }\n    put(path, id, data) {\n      return this._http.put(`${this.server}${path}/put?id=${id}`, data);\n    }\n    delete(path, id) {\n      return this._http.delete(`${this.server}${path}/delete?id=${id}`);\n    }\n    deleteFile(url) {\n      return this._http.delete(`${this.server}delete/file?url=${url}`);\n    }\n  }\n  Service.ɵfac = function Service_Factory(t) {\n    return new (t || Service)(i0.ɵɵinject(i1.HttpClient));\n  };\n  Service.ɵprov = /*@__PURE__*/i0.ɵɵdefineInjectable({\n    token: Service,\n    factory: Service.ɵfac,\n    providedIn: 'root'\n  });\n  return Service;\n})();",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module",
+  "externalDependencies": []
+}

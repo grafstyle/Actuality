@@ -1,0 +1,8 @@
+{
+  "ast": null,
+  "code": "import { BrowserModule } from '@angular/platform-browser';\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { HttpClientModule } from '@angular/common/http';\nimport { AuthModule } from '@auth0/auth0-angular';\nimport * as i0 from \"@angular/core\";\nimport * as i1 from \"@auth0/auth0-angular\";\nexport let AppModule = /*#__PURE__*/(() => {\n  class AppModule {}\n  AppModule.ɵfac = function AppModule_Factory(t) {\n    return new (t || AppModule)();\n  };\n  AppModule.ɵmod = /*@__PURE__*/i0.ɵɵdefineNgModule({\n    type: AppModule,\n    bootstrap: [AppComponent]\n  });\n  AppModule.ɵinj = /*@__PURE__*/i0.ɵɵdefineInjector({\n    imports: [BrowserModule, AppRoutingModule, HttpClientModule, AuthModule.forRoot({\n      domain: 'actuality-social.us.auth0.com',\n      clientId: 'vVks5NbSd8KdAD9P7ILxI84b4Mdup09a',\n      authorizationParams: {\n        redirect_uri: window.location.origin\n      }\n    })]\n  });\n  return AppModule;\n})();",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module",
+  "externalDependencies": []
+}

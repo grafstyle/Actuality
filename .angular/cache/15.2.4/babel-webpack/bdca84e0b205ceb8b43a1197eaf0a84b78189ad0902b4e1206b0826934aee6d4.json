@@ -1,0 +1,8 @@
+{
+  "ast": null,
+  "code": "import { Subject } from 'rxjs';\nimport * as i0 from \"@angular/core\";\nexport let RefreshService = /*#__PURE__*/(() => {\n  class RefreshService {\n    constructor() {\n      this.subject = new Subject();\n    }\n    setUpdate(msg, data = undefined) {\n      this.subject.next({\n        text: msg,\n        data: data\n      });\n    }\n    getUpdate() {\n      return this.subject.asObservable();\n    }\n  }\n  RefreshService.COOKIE_UPDATED = 'cookie_updated';\n  RefreshService.REFRESH_COMMENTS = 'refresh_comments';\n  RefreshService.REFRESH_POSTS = 'refresh_posts';\n  RefreshService.REFRESH_USER = 'refresh_user';\n  RefreshService.ɵfac = function RefreshService_Factory(t) {\n    return new (t || RefreshService)();\n  };\n  RefreshService.ɵprov = /*@__PURE__*/i0.ɵɵdefineInjectable({\n    token: RefreshService,\n    factory: RefreshService.ɵfac,\n    providedIn: 'root'\n  });\n  return RefreshService;\n})();",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module",
+  "externalDependencies": []
+}

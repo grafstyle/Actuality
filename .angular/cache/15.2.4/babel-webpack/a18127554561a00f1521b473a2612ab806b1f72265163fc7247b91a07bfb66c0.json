@@ -1,0 +1,8 @@
+{
+  "ast": null,
+  "code": "import * as i0 from \"@angular/core\";\nimport * as i1 from \"../search-posts/search-posts.component\";\nimport * as i2 from \"../search-users/search-users.component\";\nexport let SearchAllComponent = /*#__PURE__*/(() => {\n  class SearchAllComponent {}\n  SearchAllComponent.ɵfac = function SearchAllComponent_Factory(t) {\n    return new (t || SearchAllComponent)();\n  };\n  SearchAllComponent.ɵcmp = /*@__PURE__*/i0.ɵɵdefineComponent({\n    type: SearchAllComponent,\n    selectors: [[\"app-search-all\"]],\n    decls: 2,\n    vars: 0,\n    template: function SearchAllComponent_Template(rf, ctx) {\n      if (rf & 1) {\n        i0.ɵɵelement(0, \"app-search-users\")(1, \"app-search-posts\");\n      }\n    },\n    dependencies: [i1.SearchPostsComponent, i2.SearchUsersComponent]\n  });\n  return SearchAllComponent;\n})();",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module",
+  "externalDependencies": []
+}

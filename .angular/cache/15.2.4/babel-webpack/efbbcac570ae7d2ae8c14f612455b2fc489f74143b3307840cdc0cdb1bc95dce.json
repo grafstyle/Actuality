@@ -1,0 +1,8 @@
+{
+  "ast": null,
+  "code": "export let Cloudinary = /*#__PURE__*/(() => {\n  class Cloudinary {\n    static post(data) {\n      return new Promise((res, rej) => {\n        this.api_service.post(this.post_path, data).subscribe({\n          next: cloud_res => res(JSON.stringify(cloud_res)),\n          error: () => rej('Something went wrong when post the data.')\n        });\n      });\n    }\n    static delete(url) {\n      return new Promise((res, rej) => {\n        this.api_service.deleteFile(url).subscribe({\n          next: cloud_res => res(JSON.stringify(cloud_res)),\n          error: () => rej('Something went wrong when delete the data.')\n        });\n      });\n    }\n  }\n  Cloudinary.post_path = 'new/file';\n  return Cloudinary;\n})();",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module",
+  "externalDependencies": []
+}

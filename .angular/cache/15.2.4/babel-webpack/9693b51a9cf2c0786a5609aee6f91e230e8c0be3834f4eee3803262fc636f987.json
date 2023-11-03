@@ -1,0 +1,8 @@
+{
+  "ast": null,
+  "code": "import { RefreshService } from '../tools/refresh-service/refresh-service';\nexport let Cookies = /*#__PURE__*/(() => {\n  class Cookies {\n    static setUserID(userID) {\n      const now_date = new Date();\n      const exp_date = new Date(now_date.getFullYear(), now_date.getMonth(), now_date.getDate() + 7);\n      this.cookies.set('userID', `${userID}`, {\n        expires: exp_date\n      });\n      this.refresh.setUpdate(RefreshService.COOKIE_UPDATED);\n    }\n    static getUserID() {\n      return parseInt(this.cookies.get('userID'));\n    }\n    static deleteUserID() {\n      this.cookies.delete('userID');\n    }\n    static setMode(mode) {\n      const now_date = new Date();\n      const exp_date = new Date(now_date.getFullYear(), now_date.getMonth(), now_date.getDate() + 7);\n      this.cookies.set('mode', `${mode}`, {\n        expires: exp_date\n      });\n    }\n    static getMode() {\n      return parseInt(this.cookies.get('mode'));\n    }\n    static deleteActualMode() {\n      this.cookies.delete('mode');\n    }\n  }\n  Cookies.MODE_LIGHT = 0;\n  Cookies.MODE_DARK = 1;\n  return Cookies;\n})();",
+  "map": null,
+  "metadata": {},
+  "sourceType": "module",
+  "externalDependencies": []
+}
