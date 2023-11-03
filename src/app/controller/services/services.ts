@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class Service {
-  server: string = 'https://api.comsier.com/';
+  server: string = 'https://master--cool-bunny-fd74e8.netlify.app/';
 
   constructor(private _http: HttpClient) {}
 
