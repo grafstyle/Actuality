@@ -3,7 +3,7 @@
 <img align="right" alt="actuality-logo" src="https://actuality.netlify.app/favicon.ico" width="150" height="150" />
 <p align="left" ><b>Actuality</b> is a social network where people can upload moments, memes, opinions and all you can imagine. You can comment, leave a like in your favorite post and much more.</p>
 </div>
-<h2></h2>
+<b>Overview</b>
 Actuality is a social networking application that allows users to connect with friends, share updates, and interact with others in a fun and interactive way.
 
 ## Features
