@@ -59,12 +59,7 @@ Happy networking!
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 
 <img align="right" alt="actuality-logo" src="https://cdni.iconscout.com/illustration/premium/thumb/social-media-marketing-strategy-5255673-4396182.png"/>
 
