@@ -5,7 +5,7 @@
 </div>
 <b>Overview</b>
 Actuality is a social networking application that allows users to connect with friends, share updates, and interact with others in a fun and interactive way.
-
+<p>Don't be shy and give it a try! <a href="https://actuality.comsier.com/">ACTUALITY</a></p>
 ## Features
 
 ### User Registration
