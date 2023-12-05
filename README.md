@@ -6,6 +6,7 @@
 Actuality is a social networking application that allows users to connect with friends, share updates, upload moments, memes, opinions and interact with others in a fun and interactive way. You can comment, leave a like in your favorite post and much more.
 <p>Don't be shy and give it a try ➡ <a href="https://actuality.comsier.com/">Actuality App</a></p>
 <br>
+
 ## Features
 
 ### User Registration
