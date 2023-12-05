@@ -1,10 +1,9 @@
 <h1>Actuality</h1>
 <div style="display:inline-block">
 <img align="right" alt="actuality-logo" src="https://actuality.netlify.app/favicon.ico" width="150" height="150" />
-<p align="left" ><b>Actuality</b> is a social network where people can upload moments, memes, opinions and all you can imagine. You can comment, leave a like in your favorite post and much more.</p>
 </div>
 <b>Overview</b>
-Actuality is a social networking application that allows users to connect with friends, share updates, and interact with others in a fun and interactive way.
+Actuality is a social networking application that allows users to connect with friends, share updates, upload moments, memes, opinions and interact with others in a fun and interactive way. You can comment, leave a like in your favorite post and much more.
 <p>Don't be shy and give it a try ➡ <a href="https://actuality.comsier.com/">Actuality App</a></p>
 
 ## Features
