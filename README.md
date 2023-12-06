@@ -29,10 +29,10 @@ Actuality is a social networking application that allows users to connect with f
 
 ## Installation
 
-1. Clone the repository: git clone https://github.com/grafstyle/Actuality.git
-2. Install dependencies: npm install 
+1. Clone the repository: `git clone https://github.com/grafstyle/Actuality.git`
+2. Install dependencies: `npm install` 
 3. Configure the database and environment variables.
-4. Start the server: npm start 
+4. Start the server: `npm start` 
 5. Open the app in your browser at http://localhost:4200
 
 ## Stack
