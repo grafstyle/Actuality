@@ -35,7 +35,7 @@ Actuality is a social networking application that allows users to connect with f
 4. Start the server: npm start or yarn start
 5. Open the app in your browser at http://localhost:4200
 
-## Dependencies
+## Stack
 
 - JavaScript
 - Node.js
