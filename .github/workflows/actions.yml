@@ -3,9 +3,9 @@ name: verification & deploy
 
 on:
   push:
-    branches: [Develop]
+    branches: [master, Refactoring, Develop]
   pull_request:
-    branches: [Develop]
+    branches: [master]
 
 jobs:
   verification:
