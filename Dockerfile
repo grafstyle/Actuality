@@ -11,7 +11,7 @@ npm run build --force
 
 ## Stage 2: Run ###
 
-FROM nginx:1.17.1-alpine AS prod-stage
+FROM nginx:1.31.3-alpine AS prod-stage
 COPY --from=build /app/actuality/default.config /etc/nginx/conf.d/default.conf
 COPY --from=build /app/actuality/dist/actuality /usr/share/nginx/html
 EXPOSE 80
